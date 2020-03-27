@@ -31,18 +31,20 @@ public class CarInfoService {
 	}
 	
 	// ----------------------------- 민기 Service
-	public int adminAddCar(CarInfo ci, ArrayList<Attachment> list) {
+	public int adminAddCar(CarInfo ci, ArrayList<CarInfo> list) {
 		Connection conn = getConnection();
 		
 		// 차량 정보 등록하는 Dao 호출
 		int result = new CarInfoDao().adminAddCar(conn, ci, list);
 		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
+		System.out.println(ci);
+		
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
+//		close(conn);
 		
 		return result;
 	}

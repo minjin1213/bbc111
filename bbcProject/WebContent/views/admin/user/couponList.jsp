@@ -46,6 +46,17 @@
 	    height: 35px;
 	    margin-bottom: 0.75rem;
 	}
+	button.completeBtn{
+		border-radius: 5px;
+	    outline: 0;
+	    border: 0;
+	    background-color: rgba(90, 92, 105, 0.5);
+	    color: white;
+	    width: 60px;
+	    height: 35px;
+	    margin-bottom: 0.75rem;
+	}
+	
 	.btnList {
 	    text-align: end;
 	    margin-left: 6.5rem;
@@ -149,17 +160,6 @@
 	/* 기본 틀 스타일 */
 	.modal-content{height: 430px !important;}	/* 쿠폰창은 조금 다름 */
 	.modal-footer {display: table-cell !important;}
-	button.completeBtn {
-	    position: relative;
-	    border-radius: 5px;
-	    outline: 0;
-	    border: 0;
-	    background-color: orange;
-	    color: white;
-	    width: 80px;
-	    height: 35px;
-	    margin-bottom: 0.75rem;
-	}
 	button.cancelBtn{
 		border-radius: 5px;
 	    outline: 0;
@@ -329,8 +329,6 @@
 		      				</td>
 		      				<td data-toggle="modal" data-target="#couponDetail<%=i %>"><%=c.getMemberId()%></td>
 		      			</tr>
-		      			
-						
 		      		<% } %>
 		      	<% } %>
 		      </tbody>
@@ -353,7 +351,7 @@
 			      	<table id="coupon-detail-table">
 			      		<tr>
 			      			<th>등록자</th>
-			      			<td><%=c.getMemberId()%>
+			      			<td><%=c.getMemberId()%></td>
 			      		</tr>
 						<tr>
 							<th>쿠폰명</th>
@@ -371,7 +369,7 @@
 						</tr>
 						<tr>
 							<th>쿠폰등록일</th>
-							<td><%=c.getCouponCreateDate()%>
+							<td><%=c.getCouponCreateDate()%></td>
 						</tr>
 						<tr>
 							<th>할인율</th>
@@ -383,6 +381,64 @@
 			      <div style="display:none;"></div>
 			      
 			      <div class="modal-footer">
+			      	<button type="button" class="enrollBtn" data-toggle="modal" data-target="#couponUpdate<%=i%>">수정</button>
+			        <button type="button" class="completeBtn" data-dismiss="modal">닫기</button>
+			      </div>
+			      
+			    </div>
+			  </div>
+			</div>
+		      				
+		<%} %>
+		
+		<% for(int i=0; i<list.size(); i++){ 
+	      				Coupon c = list.get(i); %>
+		<!-- 쿠폰 정보 수정 Modal -->
+		<form action="<%=contextPath%>/update.t.co" method="post">
+			<div class="modal fade" id="couponUpdate<%=i%>" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      
+			      <div class="modal-body">
+			      	<br>
+					<div id="couponHeader"><h5>쿠폰 정보</h5></div>	
+					<hr>      	
+			      	<table id="coupon-detail-table">
+			      		<input type="hidden" name="couponNo" value="<%=c.getCouponNo()%>">
+			      		<tr>
+			      			<th>등록자</th>
+			      			<td><%=c.getMemberId()%></td>
+			      		</tr>
+						<tr>
+							<th>쿠폰명</th>
+							<td><input type="text" class="tableIn" id="coupon-title" name="coupon-title" value="<%=c.getCouponName()%>"></td>
+						</tr>
+						<tr>
+							<th>발급조건</th>
+							<td>
+								<select class="tableIn" name="couponV">
+									<option>선택하세요</option>
+									<option value="1">회원가입 축하 쿠폰</option>
+									<option value="2">차량 첫 이용 쿠폰</option>
+									<option value="3">차량 3회 이용 쿠폰</option>
+								</select>						
+							</td>
+						</tr>
+						<tr>
+							<th>할인율</th>
+							<td><input class="tableIn" type="text" name="couponDc" value="<%=c.getCouponDc()%>"> %</td>
+						</tr>
+						<tr>
+							<th>등록일</th>
+							<td><%=c.getCouponCreateDate()%></td>
+						</tr>					
+			      	</table>
+			      </div>
+			      
+			      <div style="display:none;"></div>
+			      
+			      <div class="modal-footer">
+			      	<button type="submit" class="enrollBtn">저장</button>
 			        <button type="button" class="completeBtn" data-dismiss="modal">닫기</button>
 			      </div>
 			      
@@ -390,8 +446,9 @@
 			    </div>
 			  </div>
 			</div>
-		      				
-		<%} %>
+		
+		</form>
+		<% } %>
 		
 		<script>
 			<!-- 전체 선택 스크립트 -->
@@ -416,16 +473,12 @@
 		    	$(".deleteBtn").click(function(){
 		    		if(confirm("정말로 삭제하시겠습니까?")){
 		    			console.log(deleteNo);
-		    			location.href = "<%=contextPath%>/deleteC.t.co?no="+deleteNo;
+		    			location.href = "<%=contextPath%>/deleteC.t.co?deleteNo="+deleteNo;
 		    		}else{
 		    			alert("삭제를 취소하셧습니다.")
 		    		}
 		    	});
-		    	
-		    	
 		    });
-		    
-		
 		</script>
             
             

@@ -121,5 +121,27 @@ public class CouponDao {
 		
 		return result;
 	}
+	
+	public int adminUpdateCoupon(Connection conn, Coupon c) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminUpdateCoupon");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getCouponName());
+			pstmt.setInt(2, c.getCouponGive());
+			pstmt.setInt(3, c.getCouponDc());
+			pstmt.setInt(4, c.getCouponNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bbc.coupon.model.service.CouponService;
+import com.bbc.coupon.model.vo.Coupon;
 
 /**
- * Servlet implementation class AdminCouponDeleteServlet
+ * Servlet implementation class AdminCouponUpdateServlet
  */
-@WebServlet("/deleteC.t.co")
-public class AdminCouponDeleteServlet extends HttpServlet {
+@WebServlet("/update.t.co")
+public class AdminCouponUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCouponDeleteServlet() {
+    public AdminCouponUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +31,24 @@ public class AdminCouponDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no = Integer.parseInt(request.getParameter("deleteNo"));
+		String title = request.getParameter("coupon-title");
+		int couponV = Integer.parseInt(request.getParameter("couponV"));
+		int couponDc = Integer.parseInt(request.getParameter("couponDc"));
+		int conponNo = Integer.parseInt(request.getParameter("couponNo"));
 		
-		int result = new CouponService().adminCouponDelete(no);
+		Coupon c = new Coupon();
+		c.setCouponName(title);
+		c.setCouponGive(couponV);
+		c.setCouponDc(couponDc);
+		c.setCouponNo(conponNo);
+		
+		int result = new CouponService().adminUPdateCoupon(c);
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("deleteCom", "쿠폰삭제가 완료되었습니다");
+			session.setAttribute("updateC", "쿠폰 수정이 완료되었습니다");
 			response.sendRedirect("list.t.co");
 		}else {
-			request.setAttribute("msg", "쿠폰 삭제에 실패했습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}

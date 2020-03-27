@@ -93,7 +93,7 @@ public class CarInfoDao {
 	}
 	
 	// -------------------------------------- 민기 Dao
-	public int adminAddCar(Connection conn, CarInfo ci, ArrayList<Attachment> list) {
+	public int adminAddCar(Connection conn, CarInfo ci, ArrayList<CarInfo> list) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;

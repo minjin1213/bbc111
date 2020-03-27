@@ -80,5 +80,25 @@ public class CouponService {
 		
 		return result;
 	}
+	
+	/**
+	 * 5. 쿠폰 정보 수정하는 서비스
+	 * @param c	수정할 쿠폰정보가 담긴 객체
+	 * @return	처리 결과 리턴
+	 */
+	public int adminUPdateCoupon(Coupon c) {
+		Connection conn = getConnection();
+		
+		int result = new CouponDao().adminUpdateCoupon(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 
 }

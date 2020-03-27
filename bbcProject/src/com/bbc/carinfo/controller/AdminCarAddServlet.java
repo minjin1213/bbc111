@@ -15,6 +15,7 @@ import com.bbc.attachment.model.vo.Attachment;
 import com.bbc.carinfo.model.service.CarInfoService;
 import com.bbc.carinfo.model.vo.CarInfo;
 import com.bbc.common.MyFileRenamePolicy;
+import com.bbc.coupon.model.vo.Coupon;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -58,7 +59,7 @@ public class AdminCarAddServlet extends HttpServlet {
 			String year = multiRequest.getParameter("year");
 			String carValue = multiRequest.getParameter("carValue");
 			String naviEn = multiRequest.getParameter("naviEn");
-			String baby = multiRequest.getParameter("baby");
+			String baby = multiRequest.getParameter("baby");			
 			
 			// 차량유형번호는 int형으로 바꿔줘야한다 
 			int carTypeNo = 0;
@@ -90,40 +91,44 @@ public class AdminCarAddServlet extends HttpServlet {
 			ci.setCarColor(carColor);
 			ci.setCarLunchYear(year);
 			ci.setCarTypeNo(carTypeNo);
-			if(naviEn.equals("영문 네비게이션") && baby.equals("베이비 시터")) {
+			if(naviEn != null && baby != null) {
 				ci.setCarOption(naviEn + " " + baby);
-			}else if(naviEn.equals("영문 네비게이션")) {
+			}else if(naviEn != null) {
 				ci.setCarOption(naviEn);
-			}else if(baby.equals("베이비 시터")) {
+			}else if(baby != null) {
 				ci.setCarOption(baby);
-			}else {
-				ci.setCarOption(" ");
 			}
 			
 			// 전송된 파일의 원본명, 수정명, 저장경로를 담른 Attachment 객체 --> ArrayList에 담기
-			ArrayList<Attachment> list = new ArrayList<>();
+			ArrayList<CarInfo> list = new ArrayList<>();
+			
+			String name = "fileUpload";
+			
+			
+			
+			
+			
+			
 			
 			for(int i=1; i<=4; i++) {
-				String name = "file" + i;
+				// 
+				String name = "fileUpload" + i;
 				
 				// 첨부파일이 있을 경우만 ArrayList에 담기게끔
 				if(multiRequest.getOriginalFileName(name) != null) {
-					// 첨부파일의 원본명
-					String originName = multiRequest.getOriginalFileName(name);
 					// 첨부파일의 수정명
+					// 이부분에서 jsp파일에 파일을 뽑아온다.(나)
 					String changeName = multiRequest.getFilesystemName(name);
 					
-					Attachment at = new Attachment();
-					at.setFileName(originName);
-					at.setRename(changeName);
-					at.setFilePath(savePath);
+					ci.setCarModifyName(changeName);
 					
-					list.add(at);
+					list.add(ci);
 				}
 			}
+			System.out.println(ci);
 			
 			// 차량 정보 등록용 서비스 요청(CarInfo객체, 첨부파일전달)
-			int result = new CarInfoService().adminAddCar(ci, list);
+			//int result = new CarInfoService().adminAddCar(ci, list);
 		}
 	}
 
