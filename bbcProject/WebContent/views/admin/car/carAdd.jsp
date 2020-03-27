@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String addC = (String)session.getAttribute("addC");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -211,6 +214,15 @@
 </head>
 <body>
 	<%@ include file="../common/adminBase.jsp" %>
+	<script>
+		var addC = "<%=addC%>"
+		
+		if(addC != "null"){
+			alert(addC);
+			
+			<%session.removeAttribute("addC");%>
+		}
+	</script>
 	
 	<!-- 차량 등록 시작 -->
 	<div class="outer">
@@ -263,11 +275,15 @@
 							<td><input type="text" id="year" name="year" placeholder="내용을 입력해주세요"></td>
 						</tr>
 						<tr>
+							<th><li>인원수</li></th>
+							<td><input type="text" id="people" name="people" placeholder="내용을 입력해주세요"></td>
+						</tr>
+						<tr>
 							<th><li>차량유형</li></th>
 							<td>
 								<select name="carValue">
 									<option>선택하세요</option>
-									<option value="경자">경차</option>
+									<option value="경차">경차</option>
 									<option value="소형">소형</option>
 									<option value="중형">중형</option>
 									<option value="준대형">준대형</option>

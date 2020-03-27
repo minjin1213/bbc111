@@ -93,12 +93,34 @@ public class CarInfoDao {
 	}
 	
 	// -------------------------------------- 민기 Dao
-	public int adminAddCar(Connection conn, CarInfo ci, ArrayList<CarInfo> list) {
+	public int adminAddCar(Connection conn, CarInfo ci) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("adminAddCar");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ci.getCarTypeName());
+			pstmt.setString(2, ci.getCarNum());
+			pstmt.setString(3, ci.getCarFuel());
+			pstmt.setString(4, ci.getCarColor());
+			pstmt.setString(5, ci.getCarLunchYear());
+			pstmt.setString(6, ci.getCarOption());
+			pstmt.setInt(7, ci.getCarRidePeople());
+			pstmt.setString(8, ci.getCarModifyName());
+			pstmt.setInt(9, ci.getCarTypeNo());
+			
+			System.out.println(ci.getCarTypeNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
+		return result;
 	}
 
 }
