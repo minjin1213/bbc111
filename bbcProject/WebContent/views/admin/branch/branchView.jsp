@@ -152,7 +152,6 @@
 	.dropright .dropdown-toggle::after {
 	  vertical-align: 0;
 	}
-	#addressBtn{float:right;}	
 	
 	
 	/* Modal 스타일 */
@@ -250,10 +249,9 @@
 		      	<br>
 				<div id="couponHeader"><h5>지도</h5></div>	
 				<hr>      
-				<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+				<div id="map" class="map" style="width:500px;height:500px;margin-top:10px;"></div>
 				
-					
-		      
+	
 		      </div>
 		      
 		      <div style="display:none;"></div>
@@ -268,6 +266,7 @@
 		</div>
 		
 		
+		
         <div class="tab-content">
           <div id="home" class="container tab-pane active"><br>
             
@@ -278,24 +277,24 @@
                     <th>지역</th>
                     <th>지점</th>
                     <th>전화번호</th>
-                    <th>주소</th>
+                    <th colspan="2">주소</th>
                 </tr>
               </thead>
               
               <tbody>
 	              <% if(list != null){ %>
-	              	<% for(BranchManagement b : list){ %>
+	              	<% for(int i=0; i<list.size(); i++){ BranchManagement b = list.get(i); %>
 	              		<tr>
 	              			<td><%=b.getBranchNo()%></td>
 	              			<td><%=b.getAreaName()%></td>
 	              			<td><%=b.getBranchName()%></td>
-	              			<td class="infoDe"><%=b.getBranchPhone()%></td>
-	              			<td>
-	              				<%=b.getBranchAddress()%>
+	              			<td><%=b.getBranchPhone()%></td>
+	              			<td><%=b.getBranchAddress()%></td>
+	              			<th>
 	              				<button type="button" id="addressBtn" class="addressBtn" data-toggle="modal" data-target="#detailInfo">위치보기</button>
 	              				<input type="hidden" value="<%=b.getMapX()%>">
 	              				<input type="hidden" value="<%=b.getMapY()%>">
-	              			</td>
+	              			</th>
 	              		</tr>
 	              	<% } %>
 	              <% }else { %>
@@ -323,18 +322,16 @@
              function goAdd(){
             	 location.href="<%=contextPath%>/addBranch.t.br";
              }
-        		 /* var x = $(this).next().val();
-        		 var y = $(this).next().next().val(); */
              /* 지도 script */
              /* x, y 축 값 추출 부분 */
              
              $(function(){
+        		 var x = $(this).next().val();
+        		 var y = $(this).next().next().val();
 	             $(".addressBtn").click(function(){
-            
-            	 
 	            	var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	     	        mapOption = {
-	     	            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+	            		 center: new daum.maps.LatLng(y, x), // 지도의 중심좌표
 	     	            level: 5 // 지도의 확대 레벨
 	     	        };
 	     	
@@ -344,12 +341,12 @@
 	     		    var geocoder = new daum.maps.services.Geocoder();
 	     		    //마커를 미리 생성
 	     		    var marker = new daum.maps.Marker({
-	     		        position: new daum.maps.LatLng(37.537187, 127.005476),
+	     		    	position: new daum.maps.LatLng(37.537187, 127.005476),
 	     		        map: map
 	     		    });
 	     		
 	     		
-	     		    function sample5_execDaumPostcode() {
+	     		    /* function sample5_execDaumPostcode() {
 	     		        new daum.Postcode({
 	     		            oncomplete: function(data) {
 	     		                var addr = data.address; // 최종 주소 변수
@@ -384,12 +381,18 @@
 	     		                });
 	     		            }
 	     		        }).open();
-	     		    }
+	     		    } */
 	             });
 	             
-	             $(".infoDe").prevAll(function(){
-	            	location.href = "" 
+	             $(function(){
+	            	 $("td").click(function(){
+	            		var no = $(this).siblings().eq(0).text();
+	            		//console.log(no);
+	            		
+	            		location.href = "<%=contextPath%>/detail.t.br?no="+no;
+	            	 });
 	             });
+	             
 	             
 	             
              });

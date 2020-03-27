@@ -138,4 +138,36 @@ public class BranchManagementDao {
 		
 		return result;
 	}
+	
+	public BranchManagement adminBranchDetail(Connection conn, int no){
+		BranchManagement b = new BranchManagement();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminBranchDetail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				b.setAreaName(rset.getString("area_name"));
+				b.setBranchName(rset.getString("branch_name"));
+				b.setBranchAddress(rset.getString("branch_address"));
+				b.setBranchPhone(rset.getString("branch_phone"));
+				b.setBranchHrs(rset.getString("branch_hrs"));
+				b.setBranchDir(rset.getString("branch_dir"));
+				b.setAreaName(rset.getString("mapx"));
+				b.setAreaName(rset.getString("mapy"));				
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
 }

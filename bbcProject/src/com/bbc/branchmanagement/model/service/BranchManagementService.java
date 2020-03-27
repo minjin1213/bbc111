@@ -68,5 +68,20 @@ public class BranchManagementService {
 		
 		return result;
 	}
+	
+	/**
+	 * 4. 지점 상세 조회용 서비스
+	 * @param no	조회할 지점 번호
+	 * @return		지점 정보  리턴
+	 */
+	public BranchManagement adminBranchDetail(int no){
+		Connection conn = getConnection();
+		
+		BranchManagement b = new BranchManagementDao().adminBranchDetail(conn, no);
+		
+		close(conn);
+		
+		return b;
+	}
 
 }

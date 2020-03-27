@@ -50,21 +50,37 @@ public class BranchManagement {
 	}
 	
 	// 지점 리스트 조회용 매개변수(민기)
-		public BranchManagement(int branchNo, String areaName, String branchName, String branchPhone, String branchAddress
-				,String mapX, String mapY) {
-			super();
-			this.branchNo = branchNo;
-			this.areaName = areaName;
-			this.branchName = branchName;
-			this.branchPhone = branchPhone;
-			this.branchAddress = branchAddress;
-			this.mapX = mapX;
-			this.mapY = mapY;
-		}
+	public BranchManagement(int branchNo, String areaName, String branchName, String branchPhone, String branchAddress
+			,String mapX, String mapY) {
+		super();
+		this.branchNo = branchNo;
+		this.areaName = areaName;
+		this.branchName = branchName;
+		this.branchPhone = branchPhone;
+		this.branchAddress = branchAddress;
+		this.mapX = mapX;
+		this.mapY = mapY;
+	}
+	
+	// 지점 상세 조회용 매개변수 (민기)
+	public BranchManagement(String areaName, String branchName, String branchAddress, String branchPhone,  String branchHrs,
+			String branchDir,  String mapX, String mapY) {
+		super();
+		this.areaName = areaName;
+		this.branchName = branchName;
+		this.branchAddress = branchAddress;
+		this.branchPhone = branchPhone;
+		this.branchHrs = branchHrs;
+		this.branchDir = branchDir;
+		this.mapX = mapX;
+		this.mapY = mapY;
+	}
+	
 
 	public int getBranchNo() {
 		return branchNo;
 	}
+
 
 	public void setBranchNo(int branchNo) {
 		this.branchNo = branchNo;
@@ -179,8 +195,12 @@ public class BranchManagement {
 	public String toString() {
 		return "BranchManagement [branchNo=" + branchNo + ", branchName=" + branchName + ", branchPhone=" + branchPhone
 				+ ", branchZipcode=" + branchZipcode + ", branchAddress=" + branchAddress + ", branchHrs=" + branchHrs
-				+ ", branchDir=" + branchDir + ", areaCode=" + areaCode + ", memberNo=" + memberNo + "]";
+				+ ", branchDir=" + branchDir + ", areaCode=" + areaCode + ", memberNo=" + memberNo + ", noticeContent="
+				+ noticeContent + ", eventContent=" + eventContent + ", areaName=" + areaName + ", mapX=" + mapX
+				+ ", mapY=" + mapY + "]";
 	}
+
+	
 	
 
 }

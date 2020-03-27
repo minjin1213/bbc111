@@ -134,103 +134,108 @@
 		
 	    <article class="tabs">
 			<!-- 첫번째 탭 내용 -->
-	        <section id="carPrice-tab">
-	            <h2><a href="#carPrice-tab">차량금액</a></h2>
-	            <h5 id="price-title">기간별 대여료</h5>
-	            <br><br>
-	            <table id="day-price">
-	                <tr height="40px;">
-	                    <th width="50px;">비고</th>
-	                    <th width="350px;">차종</th>
-	                    <th>1일</th>
-	                    <th>3~6일</th>
-	                    <th>7일+</th>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>경차, 준중형, 중형(2000cc미만)</td>
-	                    <td><input type="text" id="s-day1" name="s-day1" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="s-day6" name="s-day6" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="s-day7" name="s-day7" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-	                    <td><input type="text" id="m-day1" name="m-day1" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="m-day6" name="m-day6" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="m-day7" name="m-day7" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-	                    <td><input type="text" id="l-day1" name="l-day1" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="l-day6" name="l-day6" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="l-day7" name="l-day7" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	            </table>
-	            
-	            <br>
-	            
-	            <h5 id="price-title">초과 시간당 요금</h5>
-	            <br><br>
-	            <table id="over-price">
-	                <tr height="40px;">
-	                    <th width="50px;">비고</th>
-	                    <th width="350px;">차종</th>
-	                    <th>+6시간</th>
-	                    <th>+9시간</th>
-	                    <th>+12시간</th>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>경차, 준중형, 중형(2000cc미만)</td>
-	                    <td><input type="text" id="s-over1" name="s-over1" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="s-over6" name="s-over6" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="s-over7" name="s-over7" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-	                    <td><input type="text" id="m-over1" name="m-over1" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="m-over6" name="m-over6" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="m-over7" name="m-over7" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-	                    <td><input type="text" id="l-over1" name="l-over1" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="l-over6" name="l-over6" placeholder="금액을입력해주세요"></td>
-	                    <td><input type="text" id="l-over7" name="l-over7" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	            </table>
-	            
-	            <br>
-	            
-	            <h5 id="price-title">알뜰카 대여료</h5>
-	            <br><br>
-	            <table id="car-price">
-	                <tr height="40px;">
-	                    <th width="50px;">비고</th>
-	                    <th width="350px;">차종</th>
-	                    <th>1일</th>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>경차, 준중형, 중형(2000cc미만)</td>
-	                    <td><input type="text" id="s-car1" name="s-car1" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-	                    <td><input type="text" id="m-car1" name="m-car1" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	                <tr>
-	                    <td><input type="checkbox" name="checkRow"></td>
-	                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-	                    <td><input type="text" id="l-car1" name="l-car1" placeholder="금액을입력해주세요"></td>
-	                </tr>
-	            </table>
-	        </section>
+			<form>
+		        <section id="carPrice-tab">
+		            <h2><a href="#carPrice-tab">차량금액</a></h2>
+		            <h5 id="price-title">기간별 대여료</h5>
+		            <br><br>
+		            <table id="day-price">
+		                <tr height="40px;">
+		                    <th width="50px;">비고</th>
+		                    <th width="350px;">차종</th>
+		                    <th>1일</th>
+		                    <th>3~6일</th>
+		                    <th>7일+</th>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>경차, 준중형, 중형(2000cc미만)</td>
+		                    <td><input type="text" id="s-day1" name="s-day1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="s-day6" name="s-day6" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="s-day7" name="s-day7" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+		                    <td><input type="text" id="m-day1" name="m-day1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="m-day6" name="m-day6" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="m-day7" name="m-day7" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+		                    <td><input type="text" id="l-day1" name="l-day1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="l-day6" name="l-day6" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="l-day7" name="l-day7" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		            </table>
+		            
+		            <br>
+		            
+		            <h5 id="price-title">초과 시간당 요금</h5>
+		            <br><br>
+		            <table id="over-price">
+		                <tr height="40px;">
+		                    <th width="50px;">비고</th>
+		                    <th width="350px;">차종</th>
+		                    <th>+6시간</th>
+		                    <th>+9시간</th>
+		                    <th>+12시간</th>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>경차, 준중형, 중형(2000cc미만)</td>
+		                    <td><input type="text" id="s-over1" name="s-over1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="s-over6" name="s-over6" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="s-over7" name="s-over7" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+		                    <td><input type="text" id="m-over1" name="m-over1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="m-over6" name="m-over6" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="m-over7" name="m-over7" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+		                    <td><input type="text" id="l-over1" name="l-over1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="l-over6" name="l-over6" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="l-over7" name="l-over7" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		            </table>
+		            
+		            <br>
+		            
+		            <h5 id="price-title">알뜰카 대여료</h5>
+		            <br><br>
+		            <table id="car-price">
+		                <tr height="40px;">
+		                    <th width="50px;">비고</th>
+		                    <th width="350px;">차종</th>
+		                    <th>1일</th>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>경차, 준중형, 중형(2000cc미만)</td>
+		                    <td><input type="text" id="s-car1" name="s-car1" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+		                    <td><input type="text" id="m-car1" name="m-car1" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		                <tr>
+		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+		                    <td><input type="text" id="l-car1" name="l-car1" placeholder="금액을입력해주세요"></td>
+		                </tr>
+		            </table>
+		            
+		            <br>
+		            <button type="button" id="completeBtn">등록하기</button>
+		        </section>
+			</form>
 	        
 	        
 	        <!-- 두번째 탭 내용 -->

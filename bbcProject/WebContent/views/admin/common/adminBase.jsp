@@ -133,7 +133,7 @@
         <div id="test" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="py-2 collapse-inner rounded">
             <a class="collapse-item" onclick="carAdd();">차량등록</a>
-            <a class="collapse-item" href="<%=contextPath%>/views/admin/car/priceInfo.jsp">금액정보</a>
+            <a class="collapse-item" onclick="priceInfo();">금액정보</a>
           </div>
         </div>
       </li>
@@ -173,6 +173,10 @@
     	
     	function carAdd(){
     		location.href = "<%=contextPath%>/carAdd.t.ci";
+    	}
+    	
+    	function priceInfo(){
+    		location.href = "<%=contextPath%>/price.t.ct";
     	}
     </script>
 
