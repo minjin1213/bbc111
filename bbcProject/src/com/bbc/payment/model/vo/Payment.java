@@ -44,21 +44,20 @@ public class Payment {
 		this.payDate = payDate;
 	}
 	
-	// 예약회원 상세 결제 조회 매개변수(selectRentDetailReserv)
-	public Payment(int rowNum, Date payDate, int payAmount, String payMethod, String refundStatus, Date refundDate, String carName,
-			int carNo, int reservationNo, Date rentDate, Date returnDate) {
+	// 예약회원 상세 결제 조회 매개변수(reservClientDetailPay)
+	public Payment(int reservationNo, Date rentDate, Date returnDate, int carNo, String carName, int payAmount,
+			Date payDate, String payMethod, String refundStatus, Date refundDate) {
 		super();
-		this.rowNum = rowNum;
-		this.payDate = payDate;
-		this.payAmount = payAmount;
-		this.payMethod = payMethod;
-		this.refundStatus = refundStatus;
-		this.refundDate = refundDate;
-		this.carName = carName;
-		this.carNo = carNo;
 		this.reservationNo = reservationNo;
 		this.rentDate = rentDate;
 		this.returnDate = returnDate;
+		this.carNo = carNo;
+		this.carName = carName;
+		this.payAmount = payAmount;
+		this.payDate = payDate;
+		this.payMethod = payMethod;
+		this.refundStatus = refundStatus;
+		this.refundDate = refundDate;
 	}
 
 	public int getPayNo() {

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.bbc.userInfo.model.vo.UserInfo, com.bbc.reservation.model.vo.Reservation, com.bbc.payment.model.vo.Payment" %>
+<%
+	UserInfo ui = (UserInfo)request.getAttribute("ui");
+	Reservation r = (Reservation)request.getAttribute("r");
+	Payment p = (Payment)request.getAttribute("p");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,65 +54,47 @@
             <!-- 예약자 정보 div -->
             <div>
               <table class="table info-client-table">
-                  <tr>
-                      <th scope="row">이름</th>
-                      <td>임용환</td>
-                      <th scope="row">유형</th>
-                      <td>비회원</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">연락처</th>
-                      <td>010 - 1234 - 5678</td>
-                      <th scope="row">이메일</th>
-                      <td>asd123@google.com</td>
-                  </tr>
-                  <tr>
-                      <th scope="row">주소</th>
-                      <td colspan="3">서울특별시 송파구 삼전동 59-12</td>
-                  </tr>
+                  	<tr>
+                  		<th scope="row">이름</th>
+                  		<td><%= ui.getMemberName() %></td>
+                  	</tr>
+					<tr>
+						<th scope="row">주소</th>
+						<td><%= ui.getMemberZipcode() %> <%= ui.getMemberAddress() %></td>
+					</tr>
+					<tr>
+						<th scope="row">주민등록번호</th>
+						<td><%= ui.getRrn() %></td>
+					</tr>
+					<tr>
+						<th scope="row">연락처</th>
+						<td><%= ui.getPhone() %></td>
+					</tr>
+					<tr>
+						<th scope="row">이메일</th>
+						<td><%= ui.getMemberEmail() %></td>
+					</tr>
               </table>
             </div>
 
-            <h5 id="info-client">예약 정보 <hr id="info-client-hr"></h5>
+            <h5 id="info-client">대여 정보 <hr id="info-client-hr"></h5>
 
-            <!-- 예약 정보 div-->
+            <!-- 대여 정보 div-->
             <div>
                 <table class="table info-client-table info-table">
                     <tr>
-                        <th>예약 번호</th>
-                        <th>대여 기간</th>
-                        <th>대여 지점</th>
-                        <th>반납 지점</th>
-                        <th>차종</th>
-                        <th>대여금액 정보</th>
-                        <th>총 금액</th>
+                    	<th>대여 번호</th>
+                    	<th>차량 번호</th>
+                    	<th>차종</th>
+                    	<th>대여 기간</th>
+                    	<th>대여 지점</th>
                     </tr>
                     <tr>
-                        <td rowspan="3">1</td>
-                        <td>2020.02.05 ~ 2020.02.07</td>
-                        <td>강남점</td>
-                        <td>강남점</td>
-                        <td>아반떼 AD</td>
-                        <td>
-                           	 대여 금액 : 52.520원<br>
-                           	 보험료 : 15,000원 <br>
-                           	 쿠폰/이벤트 : -0원
-                        </td>
-                        <td>67,520원</td>
-                    </tr>
-                    <tr>
-                    	<th>결제 일시</th>
-                    	<th>결제 금액</th>
-                    	<th colspan="2">결제 방식</th>
-                    	<th>환불 여부</th>
-                    	<th>환불 일시</th>
-                    </tr>
-                    <tr>
-                    	<td>2018.01.24</td>
-                    	<td>52,520원</td>
-                    	<td colspan="2">신용카드</td>
-                    	<td>진행중</td>
-                    	<td>2018.02.04</td>
+                    	<td><%= r.getReservationNo() %></td>
+                    	<td><%= r.getCarNo() %></td>
+                    	<td><%= r.getCarName() %></td>
+                    	<td><%= r.getRentDate() %> ~ <%= r.getReturnDate() %></td>
+                    	<td><%= r.getBranchName() %></td>
                     </tr>
                 </table>
             </div>

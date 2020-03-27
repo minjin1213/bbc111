@@ -306,17 +306,16 @@ public class ReservationDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				Payment p = new Payment(rset.getInt(1),
-										rset.getDate("pay_no"),
-										rset.getInt("pay_method"),
-										rset.getString("pay_date"),
-										rset.getString("pay_amount"),
-										rset.getDate("refund_date"),
-										rset.getString("car_name"),
-										rset.getInt("car_no"),
-										rset.getInt("reservation_no"),
+				Payment p = new Payment(rset.getInt("reservation_no"),
 										rset.getDate("rent_date"),
-										rset.getDate("return_date"));
+										rset.getDate("return_date"),
+										rset.getInt("car_no"),
+										rset.getString("car_name"),
+										rset.getInt("pay_amount"),
+										rset.getDate("pay_date"),
+										rset.getString("pay_method"),
+										rset.getString("refund_statement"),
+										rset.getDate("refund_date"));
 				
 				list.add(p);
 			}

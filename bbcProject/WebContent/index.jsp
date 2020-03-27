@@ -13,7 +13,7 @@
 <% 
 	UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
 %>
-dduddjdjdjdjdjdj
+
 <!DOCTYPE html>
 <html lang="zxx">
 

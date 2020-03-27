@@ -182,7 +182,6 @@
 		$("#reserv-user-table>tbody>tr>td").click(function(){
 			var nno = $(this).parent().children().eq(0).text();
 			location.href="<%= request.getContextPath() %>/reservClientDetail.b.rv?nno=" + nno;
-			console.log(nno);
 		});
 	</script>
 </body>

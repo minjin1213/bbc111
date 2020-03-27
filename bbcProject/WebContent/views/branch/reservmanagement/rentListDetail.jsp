@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.bbc.userInfo.model.vo.UserInfo, com.bbc.payment.model.vo.Payment" %>
+<%@ page import="com.bbc.userInfo.model.vo.UserInfo, com.bbc.reservation.model.vo.Reservation, com.bbc.payment.model.vo.Payment" %>
 <%
 	UserInfo ui = (UserInfo)request.getAttribute("ui");
+	Reservation r = (Reservation)request.getAttribute("r");
 	Payment p = (Payment)request.getAttribute("p");
 %>
 <!DOCTYPE html>
@@ -95,22 +96,18 @@
 						<div>
 							<table class="table info-client-table info-table rent-table">
 								<tr>
-									<th>차종</th>
-									<th>차량 번호</th>
 									<th>대여 번호</th>
+									<th>차량 번호</th>
+									<th>차종</th>
 									<th>대여 기간</th>
-									<th>결제 금액</th>
-									<th>결제 일시</th>
-									<th>결제 방식</th>
+									<th>대여 지점</th>
 								</tr>
 								<tr>
-									<td><%= p.getCarName() %></td>
-									<td><%= p.getCarNo() %></td>
-									<td><%= p.getReservationNo() %></td>
-									<td><%= p.getRentDate() %> ~ <%= p.getReturnDate() %></td>
-									<td><%= p.getPayAmount() %>원</td>
-									<td><%= p.getPayDate() %></td>
-									<td><%= p.getPayMethod() %></td>
+									<td><%= r.getReservationNo() %></td>
+									<td><%= r.getCarNo() %></td>
+									<td><%= r.getCarName() %></td>
+									<td><%= r.getRentDate() %> ~ <%= r.getReturnDate() %></td>
+									<td><%= r.getBranchName() %></td>
 								</tr>
 							</table>
 						</div>

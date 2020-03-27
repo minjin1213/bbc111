@@ -33,17 +33,21 @@ public class ReservRentListDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int no = Integer.parseInt(request.getParameter("no"));
+		String fr = request.getParameter("fr");
+		int no = Integer.parseInt(request.getParameter("nno"));
 		
-		UserInfo ui = new ReservationService().selectRentDetailMember(no);
-		Reservation r = new ReservationService().selectRentDetailReserv(no);
-		Payment p = new ReservationService().selectRentDetailPay(no);
-		
-		request.setAttribute("ui", ui);
-		request.setAttribute("r", r);
-		request.setAttribute("p", p);
-		
-		request.getRequestDispatcher("views/branch/reservmanagement/rentListDetail.jsp").forward(request, response);;
+		if(fr.equals("tab")) {
+			
+			UserInfo ui = new ReservationService().selectRentDetailMember(no);
+			Reservation r = new ReservationService().selectRentDetailReserv(no);
+			Payment p = new ReservationService().selectRentDetailPay(no);
+			
+			request.setAttribute("ui", ui);
+			request.setAttribute("r", r);
+			request.setAttribute("p", p);
+			
+			request.getRequestDispatcher("views/branch/reservmanagement/returnDetail.jsp").forward(request, response);
+		}
 	}
 
 	/**

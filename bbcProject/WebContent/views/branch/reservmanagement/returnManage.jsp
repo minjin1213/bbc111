@@ -181,7 +181,7 @@
 
 	<script>
 	
-	/* $(".nav-item").click(function(){
+	 $(".nav-item").click(function(){
 		
 		var st =  $(this).attr("id");
 		var result = "";
@@ -212,9 +212,9 @@
 				console.log("tab menu ajax 통신 실패");
 			}
 		});
-	}); */
+	}); 
 	
-	$(".nav-item").click(function(){
+/* 	$(".nav-item").click(function(){
 		
 		var st =  $(this).attr("id");
 		var result = "";
@@ -248,12 +248,11 @@
 				console.log("tab menu ajax 통신 실패");
 			}
 		});
-	});
+	}); */
 	
 	$("#return-user-table>tbody>tr>td").click(function(){
 		var nno = $(this).parent().children().eq(1).text();
-		location.href="<%= request.getContextPath() %>/reservClientDetail.b.rv?nno=" + nno;
-		console.log(nno);
+		location.href="<%= request.getContextPath() %>/detailRent.b.rv?nno=" + nno + "&&fr=tab";
 	});
 </script>
 </body>

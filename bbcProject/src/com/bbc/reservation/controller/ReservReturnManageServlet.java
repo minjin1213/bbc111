@@ -64,13 +64,13 @@ public class ReservReturnManageServlet extends HttpServlet {
 			
 			response.setContentType("application/json; charset=utf-8"); 
 			
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("rentList", rentList);
-			map.put("pi", pi);
+//			HashMap<String, Object> map = new HashMap<>();
+//			map.put("rentList", rentList);
+//			map.put("pi", pi);
 			
 			Gson gson = new Gson();
 			//gson.toJson(rentList, response.getWriter());
-			gson.toJson(map, response.getWriter());
+			gson.toJson(rentList, response.getWriter());
 		}
 	}
 
