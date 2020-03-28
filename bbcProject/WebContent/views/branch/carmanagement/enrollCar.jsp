@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page
+	import="com.bbc.carinfo.model.vo.CarInfo, com.bbc.common.page.vo.PageInfo, java.util.ArrayList"%>
+<%
+	ArrayList<CarInfo> list = (ArrayList<CarInfo>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,221 +79,82 @@
 								<div class="col-md-4">
 									<div class="car-card">
 										<div class="card-image">
-										
-												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-												<span class="card-notify-year">New</span>
-												<img class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262"
-												alt="Alternate Text">
-										</div>
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda Accord LX</h5>
-												</a>
-											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="car-card second-car">
-										<div class="card-image">
+											<% for(CarInfo ci : list) { %>
+											<table>
+												<tr>
+													<td>
+														<% if(ci.getCarLunchYear().equals("2020")) { %> 
+															<span class="card-notify-badge"></span>
+															<span class="card-notify-year">New</span> 
+														<% } %> 
+														
+														<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
+														<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= ci.getCarModifyName() %>" style="width:300px; height:200px">
+														<div class="card-body text-center">
+															<div class="ad-title m-auto">
+																<a href="#" data-toggle="modal" data-target="#carModal"><h5><%= ci.getCarTypeName() %></h5></a>
+															</div>
+														</div>
+														<div class="card-exp card-image-overlay m-auto">
+															<span>- 색상 : <%= ci.getCarColor() %></span>
+															<span>- 연료 : <%= ci.getCarFuel() %></span>
+															<span>- 연식 : <%= ci.getCarLunchYear() %></span>
+														</div>
+													</td>
+												</tr>
+											</table>
 											
-												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-												<span class="card-notify-year">New</span>
-												<img class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=CAC80HOC021B121001.jpg&width=440&height=262"
-												alt="Alternate Text">
-										</div>
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal"><h5>Honda CIVIC HATCHBACK</h5></a>
-											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span> <span>- 연료 : gasoline</span> <span>-
-												연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-4">
-									<div class="car-card third-car">
-										<div class="card-image">
 											
-												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-												<span class="card-notify-year">New</span>
-												<img class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC091A021001.jpg&width=440&height=262"
-												alt="Alternate Text">
-										</div>
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda Accord Hybrid</h5>
-												</a>
-											</div>
-										</div>
-										
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="car-card">
-										<div class="card-image">
 											
-												<span class="card-notify-badge"><input
-													type="checkbox" name="chk-car"></span> <img
-												class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262"
-												alt="Alternate Text" />
-										</div>
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda Accord LX</h5>
-												</a>
+											<!-- car Modal -->
+											<div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document" id="car-modal-dialog">
+													<div class="modal-content" id="car-modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel"><%= ci.getCarTypeName() %></h5>
+															<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+														<div class="modal-body" id="car-modal-body">
+															<table class="car-exp-table">
+																<tr>
+																	<th>차종</th>
+																	<td><%= ci.getCarType() %></td>
+																</tr>
+																<tr>
+																	<th>차량 번호</th>
+																	<td><%= ci.getCarNum() %></td>
+																</tr>
+																<tr>
+																	<th>색상</th>
+																	<td><%= ci.getCarColor() %></td>
+																</tr>
+																<tr>
+																	<th>연료</th>
+																	<td><%= ci.getCarFuel() %></td>
+																</tr>
+																<tr>
+																	<th>연식</th>
+																	<td><%= ci.getCarLunchYear() %></td>
+																</tr>
+																<tr>
+																	<th>옵션</th>
+																	<td><%= ci.getCarOption() %></td>
+																</tr>
+															</table>
+															<div class="modal-footer">
+																<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+															</div>
+														</div>
+													</div>
+												</div>
 											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-4">
-									<div class="car-card second-car">
-										<div class="card-image">
-											
-												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-												<img class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=CAC80HOC021B121001.jpg&width=440&height=262"
-												alt="Alternate Text">
-										</div>
-										
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda CIVIC HATCHBACK</h5>
-												</a>
-											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-4">
-									<div class="car-card third-car">
-										<div class="card-image">
-											
-												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-												<img class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC091A021001.jpg&width=440&height=262"
-												alt="Alternate Text">
+											<% } %>
 										</div>
 
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda Accord Hybrid</h5>
-												</a>
-											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
 									</div>
 								</div>
-
-								<div class="col-md-4">
-									<div class="car-card">
-										<div class="card-image">
-											
-												<span class="card-notify-badge"><input
-													type="checkbox" name="chk-car"></span> <img
-												class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262"
-												alt="Alternate Text" />
-										</div>
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda Accord LX</h5>
-												</a>
-											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="car-card second-car">
-										<div class="card-image">
-											
-												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-												<img class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=CAC80HOC021B121001.jpg&width=440&height=262"
-												alt="Alternate Text">
-										</div>
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda CIVIC HATCHBACK</h5>
-												</a>
-											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-4">
-									<div class="car-card third-car">
-										<div class="card-image">
-											
-												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-												<img class="img-fluid"
-												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC091A021001.jpg&width=440&height=262"
-												alt="Alternate Text">
-										</div>
-										<div class="card-body text-center">
-											<div class="ad-title m-auto">
-												<a href="#" data-toggle="modal" data-target="#carModal">
-													<h5>Honda Accord Hybrid</h5>
-												</a>
-											</div>
-										</div>
-										<div class="card-exp card-image-overlay m-auto">
-											<span>- 색상 : white</span>
-											<span>- 연료 : gasoline</span>
-											<span>- 연식 : 2019/07</span>
-										</div>
-									</div>
-								</div>
-
 
 							</div>
 
@@ -332,19 +205,35 @@
 							</form>
 
 							<div class="pagination">
-								<a href="#"> &lt;&lt; </a>
-								<a href="#"> &lt; </a>
-								<li><a href="#home">1</a></li>
-								<li><a href="#home">2</a></li>
-								<li><a href="#home">3</a></li>
-								<li><a href="#home">4</a></li>
-								<li><a href="#home">5</a></li>
-								<a href="#"> &gt; </a>
-								<a href="#"> &gt;&gt; </a>
-							</div>
-
+						
+							<!-- (<<) -->
+							<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/enrollCar.b.ci';"> &lt;&lt; </button>
+							
+							<!-- (<) -->
+							<% if(currentPage == 1) { %>
+								<button class="page-bt" disabled> &lt; </button>
+							<% } else { %>
+								<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/enrollCar.b.ci?currentPage=<%= currentPage - 1 %>';"> &lt; </button>
+							<% } %>
+							
+							<% for(int p=startPage; p<=endPage; p++) { %>
+								<% if(currentPage == p) { %>
+									<button class="page-bt" style="background:orange; color:white;" disabled><%= p %></button>
+								<% } else { %>
+									<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/enrollCar.b.ci?currentPage=<%= p %>';"><%= p %></button>
+								<% } %>
+							<% } %>
+							
+							<!-- (>) -->
+							<% if(currentPage == maxPage) { %>
+								<button class="page-bt" disabled> &gt; </button>
+							<% } else { %>
+								<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/enrollCar.b.ci?currentPage=<%= currentPage + 1 %>';"> &gt; </button>
+							<% } %>
+							
+							<!-- (>>) -->
+							<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/enrollCar.b.ci?currentPage=<%= maxPage %>';"> &gt;&gt; </button>
 						</div>
-
 						<!-- 끝 -->
 
 
@@ -358,64 +247,6 @@
 
 		</div>
 		<!-- End of Page Wrapper -->
-	</div>
-
-
-
-	<!-- car Modal -->
-	<div class="modal fade" id="carModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document" id="car-modal-dialog">
-			<div class="modal-content" id="car-modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Honda Accord Hybrid</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body" id="car-modal-body">
-					<table class="car-exp-table">
-						<tr>
-							<th>차종</th>
-							<td>중형</td>
-						</tr>
-						<tr>
-							<th>차량 번호</th>
-							<td>143하 5497</td>
-						</tr>
-						<tr>
-							<th>색상</th>
-							<td>white</td>
-						</tr>
-						<tr>
-							<th>유종</th>
-							<td>휘발유</td>
-						</tr>
-						<tr>
-							<th>변속기</th>
-							<td>오토</td>
-						</tr>
-						<tr>
-							<th>연식</th>
-							<td>2019/07</td>
-						</tr>
-						<tr>
-							<th>옵션</th>
-							<td>
-								<ul>
-									<li>하이패스</li>
-									<li>네비게이션</li>
-									<li>베이비 시트</li>
-								</ul>
-							</td>
-						</tr>
-					</table>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<!-- enroll car Modal-->

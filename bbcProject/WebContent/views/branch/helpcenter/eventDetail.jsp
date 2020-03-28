@@ -73,30 +73,15 @@
 						</div>
 						<!-- End of wrap-event-->
 
+						<hr class="tab-content-divider">
+						
 						<div class="view-list">
 							<table class="tb_col">
-								<colgroup>
-									<col>
-									<col>
-									<col>
-								</colgroup>
-								<tbody>
-									<tr class="next">
-										<td>다음</td>
-										<td class="left"><a href="<%= request.getContextPath() %>/detail.b.ev?eno=<%= eList.getNext() %>">멤버십 서비스 이용 불가 안내</a></td>
-										<td>2020-02-26</td>
-									</tr>
-									<tr class="current">
-										<td>-</td>
-										<td class="left">현대카드 시스템 점검으로 인해 서비스 중단 공지</td>
-										<td>2020-02-24</td>
-									</tr>
-									<tr class="prev">
-										<td>이전</td>
-										<td><a href="<%= request.getContextPath() %>/detail.b.ev?eno=<%= eList.getPrev() %>">브라우저 시스템 점검 안내</a></td>
-										<td>2020-02-18</td>
-									</tr>
-								</tbody>
+								<tr>
+									<td><a href="<%= request.getContextPath() %>/detail.b.ev?eno=<%= eList.getNext() %>"> &lt; 다음</a></td>
+									<td>-</td>
+									<td><a href="<%= request.getContextPath() %>/detail.b.ev?eno=<%= eList.getPrev() %>">이전 &gt;</a></td>
+								</tr>
 
 							</table>
 

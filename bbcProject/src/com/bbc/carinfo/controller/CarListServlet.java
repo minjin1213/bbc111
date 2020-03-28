@@ -13,7 +13,6 @@ import com.bbc.carinfo.model.service.CarInfoService;
 import com.bbc.carinfo.model.vo.CarInfo;
 import com.bbc.common.PageTemplate;
 import com.bbc.common.page.vo.PageInfo;
-import com.bbc.notice.model.service.NoticeService;
 
 /**
  * Servlet implementation class CarListServlet
@@ -35,10 +34,12 @@ public class CarListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int branch=31;
+
 		int listCount;			// 총 게시글 갯수
 		int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 		
-		listCount = new NoticeService().getNoticeCount();
+		listCount = new CarInfoService().getCarListCount(branch);
 		
 		currentPage = 1;
 		
@@ -48,7 +49,6 @@ public class CarListServlet extends HttpServlet {
 
 		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
 		
-		int branch=31;
 		
 		ArrayList<CarInfo> list = new CarInfoService().branchCarList(pi, branch); 
 	

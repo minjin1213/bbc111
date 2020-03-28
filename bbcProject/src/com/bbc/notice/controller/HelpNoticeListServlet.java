@@ -37,7 +37,7 @@ public class HelpNoticeListServlet extends HttpServlet {
 		int listCount;			// 총 게시글 갯수
 		int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 		
-		listCount = new NoticeService().getNoticeCount();
+		listCount = new NoticeService().getMainNoticeCount();
 		
 		currentPage = 1;
 		

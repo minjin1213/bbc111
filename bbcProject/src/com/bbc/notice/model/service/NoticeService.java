@@ -174,6 +174,17 @@ public class NoticeService {
 		return result;
 	}
 	
+	public int getMainNoticeCount() {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().getMainNoticeCount(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	public int branchDeleteChkNotice(String[] arr) {
 		
 		Connection conn = getConnection();
@@ -195,6 +206,19 @@ public class NoticeService {
 		
 		return result;
 	}
+	
+	public ArrayList<Notice> branchMainNoticeList(int memNo, PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new NoticeDao().branchMainNoticeList(conn, memNo, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
 	/**
 	 * 9. 차랑예약시 지점선택시 선택한 지점의 공지사항 리스트 조회
 	 * @param branchNo	조회할 지점 번호

@@ -6,7 +6,7 @@
 	ArrayList<CarInfo> list = (ArrayList<CarInfo>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
-	int noticeCount = pi.getListCount();
+	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
@@ -57,7 +57,13 @@
 						<hr class="tab-divider">
 
 						<div>
-							<h5 id="info-client">보유 차량</h5>
+							<h5 id="info-client">보유 차량
+								<div class="bt-div">
+									<a href="#" data-toggle="modal" data-target="#deletecarModal">
+										<button class="bt-style" id="car-delete-bt">차량 삭제</button>
+									</a>
+								</div>
+							</h5>
 						</div>
 						<hr id="info-client-hr">
 
@@ -73,7 +79,7 @@
 									<div class="car-card">
 										<div class="card-image">
 											<% for(CarInfo ci : list) { %>
-											<table border="1">
+											<table>
 												<tr>
 													<td>
 														<% if(ci.getCarLunchYear().equals("2020")) { %> 
@@ -81,7 +87,8 @@
 															<span class="card-notify-year">New</span> 
 														<% } %> 
 														
-														<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= ci.getCarModifyName() %>">
+														<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
+														<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= ci.getCarModifyName() %>"  style="width:300px; height:200px">
 														<div class="card-body text-center">
 															<div class="ad-title m-auto">
 																<a href="#" data-toggle="modal" data-target="#carModal"><h5><%= ci.getCarTypeName() %></h5></a>
@@ -95,6 +102,8 @@
 													</td>
 												</tr>
 											</table>
+											
+											
 											
 											<!-- car Modal -->
 											<div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -220,8 +229,6 @@
 							<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/carList.b.ci?currentPage=<%= maxPage %>';"> &gt;&gt; </button>
 						</div>
 
-						</div>
-
 						<!-- 끝 -->
 
 
@@ -235,6 +242,26 @@
 
 		</div>
 		<!-- End of Page Wrapper -->
+	</div>
+	
+	<!-- delete car Modal -->
+	<div class="modal fade" id="deletecarModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">삭제하기</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">선택된 차량을 삭제하시겠습니까 ?</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">삭제</a>
+				</div>
+			</div>
+		</div>
 	</div>
 
 

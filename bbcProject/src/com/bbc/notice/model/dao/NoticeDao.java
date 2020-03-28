@@ -75,6 +75,46 @@ public class NoticeDao {
 		return list;
 	}
 	
+	public ArrayList<Notice> branchMainNoticeList(Connection conn, int memNo, PageInfo pi) {
+		
+		ArrayList<Notice> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("mainNoticeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
+			int endRow = startRow + pi.getTableLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt(1),
+									rset.getInt("notice_no"),
+									rset.getString("notice_title"),
+									rset.getString("member_name"),
+									rset.getDate("notice_date"),
+									rset.getInt("notice_readcnt")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
 	public int increaseCount(Connection conn, int nno) {
 		
 		int result = 0;
@@ -285,6 +325,34 @@ public class NoticeDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getNoticeCount");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				noticeCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return noticeCount;
+	}
+	
+	public int getMainNoticeCount(Connection conn) {
+		
+		int noticeCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getMainNoticeCount");
 		
 		try {
 			stmt = conn.createStatement();

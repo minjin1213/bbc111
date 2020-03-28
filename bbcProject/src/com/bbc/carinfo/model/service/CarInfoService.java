@@ -1,9 +1,6 @@
 package com.bbc.carinfo.model.service;
 
-import static com.bbc.common.JDBCTemplate.close;
-import static com.bbc.common.JDBCTemplate.commit;
-import static com.bbc.common.JDBCTemplate.getConnection;
-import static com.bbc.common.JDBCTemplate.rollback;
+import static com.bbc.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -48,6 +45,29 @@ public class CarInfoService {
 	
 	
 	// --------- 민진
+	
+	public int getCarEnrollCount() {
+		
+		Connection conn = getConnection();
+		
+		int result = new CarInfoDao().getCarEnrollCount(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int getCarListCount(int branch) {
+		
+		Connection conn = getConnection();
+		
+		int result = new CarInfoDao().getCarListCount(conn, branch);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	/**
 	 * 보유차량 조회
 	 * @param pi	페이지 객체
@@ -58,6 +78,17 @@ public class CarInfoService {
 		Connection conn = getConnection();
 		
 		ArrayList<CarInfo> list = new CarInfoDao().branchCarList(conn, pi, branch);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<CarInfo> branchCarEnroll(PageInfo pi){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<CarInfo> list = new CarInfoDao().branchCarEnroll(conn, pi);
 		
 		close(conn);
 		

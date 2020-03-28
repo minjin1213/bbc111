@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
@@ -124,6 +125,64 @@ public class CarInfoDao {
 	}
 	
 	// --- 민진
+	public int getCarEnrollCount(Connection conn) {
+		
+		int carEnrollCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getCarEnrollCount");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				carEnrollCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return carEnrollCount;
+	}
+	
+	public int getCarListCount(Connection conn, int branch) {
+		
+		int carListCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getCarListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, branch);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				carListCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return carListCount;
+	}
+	
+
 	public ArrayList<CarInfo> branchCarList(Connection conn, PageInfo pi, int branch){
 		
 		ArrayList<CarInfo> list = new ArrayList<>();
@@ -169,5 +228,50 @@ public class CarInfoDao {
 		
 		return list;
 	}
-
+	
+	public ArrayList<CarInfo> branchCarEnroll(Connection conn, PageInfo pi){
+		
+		ArrayList<CarInfo> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("carEnroll");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
+			int endRow = startRow + pi.getTableLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CarInfo ci = new CarInfo(rset.getInt("car_no"),
+										rset.getString("car_name"),
+										rset.getString("car_num"),
+										rset.getString("car_fuel"),
+										rset.getString("car_color"),
+										rset.getString("car_lunch_year"),
+										rset.getString("car_option"),
+										rset.getInt("car_ride_people"),
+										rset.getString("car_modify_name"),
+										rset.getString("car_type_name"));
+				
+				list.add(ci);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 }

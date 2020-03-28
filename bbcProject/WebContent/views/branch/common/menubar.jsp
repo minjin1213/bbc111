@@ -21,10 +21,8 @@
 		id="accordionSidebar">
 
 		<!-- Sidebar - Home -->
-		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%= request.getContextPath() %>/views/branch/common/branchmain.jsp">
-			<div class="sidebar-brand-text mx-3">
-				BBC <i class="fa fa-home fa-fw home-icon"></i>
-			</div>
+		<a class="sidebar-brand d-flex align-items-center justify-content-center" style="color:orange" onclick="goMain();" href="#">
+			BBC <i class="fa fa-home fa-fw home-icon"></i>
 		</a>
 
 		<!-- Divider -->
@@ -82,7 +80,6 @@
 				<div class="py-2 collapse-inner rounded">
 					<a class="collapse-item" href="#" onclick="goCurrentCar();">보유 차량 </a>
 					<a class="collapse-item" href="#" onclick="goEnrollCar();">차량 등록 </a>
-					<a class="collapse-item" href="#" onclick="goDeleteCar();">차량 삭제 </a>
 				</div>
 			</div>
 		</li>
@@ -90,6 +87,11 @@
 	</ul>
 	
 	<script>
+
+		function goMain(){
+			location.href="<%= request.getContextPath() %>/mainNotice.b.no";
+		}
+		
 		function goWholeList(){
 			location.href="<%= request.getContextPath() %>/wholeList.b.rv?st=1&&fr=menu";
 		}

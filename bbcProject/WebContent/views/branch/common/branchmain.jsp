@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.bbc.notice.model.vo.Notice, java.util.ArrayList, com.bbc.common.page.vo.PageInfo" %>
+<%
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int noticeCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,26 +70,16 @@
 
 					<!-- Area Table -->
 					<div class="col-xl-8 col-lg-7">
-						<nav>
-							<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-								<a class="nav-item nav-link active" id="nav-home-tab"
-									data-toggle="tab" href="#nav-home" role="tab"
-									aria-controls="nav-home" aria-selected="true">회원 공지사항
-								</a>
-								<a class="nav-item nav-link" id="nav-profile-tab"
-									data-toggle="tab" href="#nav-profile" role="tab"
-									aria-controls="nav-profile" aria-selected="false">지점 공지사항
-								</a>
-							</div>
-						</nav>
-						<div class="card shadow mb-4" id="main-notice-body">
+						<div class="card shadow mb-4">
 							<!-- Card Header -->
+							<div
+								class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+								<h6 class="m-0 font-weight-bold">지점 공지사항</h6>
+							</div>
 							<div>
 								<div class="col-md-12">
 
 									<div class="tab-content" id="nav-tabContent">
-										<div class="tab-pane fade show active" id="nav-home"
-											role="tabpanel" aria-labelledby="nav-home-tab">
 											<table class="table">
 												<thead>
 													<tr>
@@ -88,91 +90,40 @@
 													</tr>
 												</thead>
 												<tbody>
+													<% for(Notice n : list) { %>
 													<tr>
-														<td>1</td>
-														<td>Integration Specialist</td>
-														<td>New York</td>
-														<td>2012/12/02</td>
+														<td><%= n.getRowNum() %></td>
+														<td><%= n.getNoticeTitle() %></td>
+														<td><%= n.getMemberName() %></td>
+														<td><%= n.getEnrollDate() %></td>
 													</tr>
-													<tr>
-														<td>2</td>
-														<td>Sales Assistant</td>
-														<td>San Francisco</td>
-														<td>2012/08/06</td>
-													</tr>
-													<tr>
-														<td>3</td>
-														<td>Integration Specialist</td>
-														<td>Tokyo</td>
-														<td>2010/10/14</td>
-													</tr>
-													<tr>
-														<td>4</td>
-														<td>Javascript Developer</td>
-														<td>San Francisco</td>
-														<td>2009/09/15</td>
-													</tr>
-													<tr>
-														<td>5</td>
-														<td>Software Engineer</td>
-														<td>Edinburgh</td>
-														<td>2008/12/13</td>
-													</tr>
+													<% } %>
 												</tbody>
 											</table>
-										</div>
-										<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-											aria-labelledby="nav-profile-tab">
-											<table class="table" cellspacing="0">
-												<thead>
-													<tr>
-														<th>No</th>
-														<th>제목</th>
-														<th>글쓴이</th>
-														<th>작성 일자</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>1</td>
-														<td>System Architect</td>
-														<td>Edinburgh</td>
-														<td>2011/04/25</td>
-													</tr>
-													<tr>
-														<td>2</td>
-														<td>Accountant</td>
-														<td>Tokyo</td>
-														<td>2011/07/25</td>
-													</tr>
-													<tr>
-														<td>3</td>
-														<td>Junior Technical Author</td>
-														<td>San Francisco</td>
-														<td>2009/01/12</td>
-													</tr>
-													<tr>
-														<td>4</td>
-														<td>Senior Javascript Developer</td>
-														<td>Edinburgh</td>
-														<td>2012/03/29</td>
-													</tr>
-													<tr>
-														<td>5</td>
-														<td>Accountant</td>
-														<td>Tokyo</td>
-														<td>2008/11/28</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
 
 
-										<div class="main-pagination">
-											<a href="#"> &lt;&lt; </a>
-											<a href="#"> &lt; </a>
-											<a href="#"> &gt; </a>
-											<a href="#"> &gt;&gt; </a>
+										<!-- 페이징 바 영역 -->
+										<div class="pagination">
+										
+											<!-- (<<) -->
+											<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/mainNotice.b.no';"> &lt;&lt; </button>
+											
+											<!-- (<) -->
+											<% if(currentPage == 1) { %>
+												<button class="page-bt" disabled> &lt; </button>
+											<% } else { %>
+												<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/mainNotice.b.no=<%= currentPage - 1 %>';"> &lt; </button>
+											<% } %>
+											
+											<!-- (>) -->
+											<% if(currentPage == maxPage) { %>
+												<button class="page-bt" disabled> &gt; </button>
+											<% } else { %>
+												<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/mainNotice.b.no?currentPage=<%= currentPage + 1 %>';"> &gt; </button>
+											<% } %>
+											
+											<!-- (>>) -->
+											<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/mainNotice.b.no?currentPage=<%= maxPage %>';"> &gt;&gt; </button>
 										</div>
 									</div>
 								</div>
