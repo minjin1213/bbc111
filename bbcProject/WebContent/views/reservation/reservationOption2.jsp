@@ -21,9 +21,9 @@
 		<div class="option-left">	
 			<div class="option-left-top">	
 				<div class="box-schd">
-					<span id="rentInfo"><strong>강남</strong><strong>2020-03-07 10시 00분</strong></span>
+					<span id="rentInfo"><strong id="rentBr">강남</strong><strong id="rentDt">2020-03-07 10시 00분</strong></span>
 						<em class="ico-to">to</em>
-					<span id="returnInfo"><strong>강남</strong><strong>2020-03-08 10시 00분</strong></span>
+					<span id="returnInfo"><strong id="returnBr">강남</strong><strong id="returnDt">2020-03-08 10시 00분</strong></span>
 				</div>
 				<div id="carInfo" class="box-car">아반떼 AD (D) F/L
 					<div class="img-car"><img src="<%=contextPath%>/resources/images/car/newavante.png"></div>

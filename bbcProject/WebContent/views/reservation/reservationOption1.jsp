@@ -53,7 +53,7 @@
                     </li>
 					<!-- 할인금액 -->
                     <li>
-	                	<span class="tit">할인금액</span><span class="price" id="totalDiscountFeeView"><strong id="discountPay">0</strong><em>원</em></span>
+	                	<span class="tit">할인금액</span><span class="price"><strong>-</strong><strong id="discountPay">0</strong><em>원</em></span>
 						<ul class="detail">
 							<li>
 								<span id="eventShow"></span><span class="price"></span>
@@ -62,13 +62,13 @@
                      </li>
 					<!-- 보험및기타옵션 -->
 					<li>
-	                	<span class="tit">보험 및 기타 옵션</span><span class="price" id="totalOptionFeeView"><strong>0</strong><em>원</em></span>
+	                	<span class="tit">보험 및 기타 옵션</span><span class="price"><strong id="totalOptionFeeView">0</strong><em>원</em></span>
 						<ul class="detail">
 							<li>
-								<span class="tit" id="cdwNameShow">보험 미적용</span><span class="price" id="cdwFee">0원</span>
+								<span class="tit" id="cdwNameShow">보험 미적용</span><span class="price"><strong id="cdwFee">0</strong>원</span>
 							</li>	
 							<li>
-								<span class="tit" id="babySeatShow">베이비 시트</span><span class="price" id="babySeatFee">0원</span>
+								<span class="tit" id="babySeatShow">베이비 시트</span><span class="price"><strong id="babySeatFee">0</strong>원</span>
 							</li>					
 						</ul>
                      </li>
@@ -117,19 +117,19 @@
 			</label>			
 			<ul class="f14">
 				<li>
-					<input type="radio" id="rdoNoCDW1" name="rdoCDW" onclick="">
+					<input type="radio" id="rdoNoCDW1" name="rdoCDW" value="0" onclick="setCDWPrice(this.value)" checked>
 					<label for="rdoNoCDW1">보험 미적용 (0원)</label>
 				</li>
 				<li>
-					<input type="radio" id="rdoCDW2" name="rdoCDW" onclick="">
+					<input type="radio" id="rdoCDW2" name="rdoCDW" value="20000" onclick="setCDWPrice(this.value)">
 					<label for="rdoCDW2">고객부담금 면제&nbsp;(20,000원)</label>
 				</li>
 				<li>
-					<input type="radio" id="rdoCDW3" name="rdoCDW" onclick="">
+					<input type="radio" id="rdoCDW3" name="rdoCDW" value="12000" onclick="setCDWPrice(this.value)">
 					<label for="rdoCDW3">사고시 면책금 5만원&nbsp;(12,000원)</label>
 				</li>
 				<li>
-					<input type="radio" id="rdoCDW4" name="rdoCDW" onclick="">
+					<input type="radio" id="rdoCDW4" name="rdoCDW" value="10000" onclick="setCDWPrice(this.value)">
 					<label for="rdoCDW4">사고시 면책금 30만원&nbsp;(10,000원)</label>
 				</li>
 			</ul>
@@ -144,13 +144,13 @@
 			<span class="f14">베이비 시트(1회 2,000원 추가)</span>
 			<span class="ml5"><a data-toggle="modal" href="#babyseatInfo" data-backdrop="static" class="btn-tooltip"></a></span>
 			<span class="ml10 mt5 ds-block f14">
-				<input type="checkbox" name="babyseat" id="babyseat" style="vertical-align:-2px;">
+				<input type="checkbox" name="babyseat" value="2000" id="babyseat" style="vertical-align:-2px;" onclick="setBaybyPrice(this)">
 				<label for="babyseat" class="txt-gray2 fontwt-normal pl5">베이비 시트</label>
 			</span>
 			<p class="hg-50"></p>
 			<div class="optionBtn">
 				<button class="btn-default-cancel btn-prev" onclick="goLinkPage('<%=contextPath%>/carSearch.rv');">이전</button>
-				<button class="btn-default-ok btn-next" onclick="goLinkPage('<%=contextPath%>/carInfo.rv');">다음</button>
+				<button class="btn-default-ok btn-next" onclick="goInfoPage();">다음</button>
 			</div>
 		</div>
 		<!-- /div car-info-right -->
@@ -243,6 +243,18 @@
     	</div>
   	</div>
 
+	<script>
+		var rentBrCode = "<%=rent_branch%>";
+		var returnBrCode = "<%=return_branch%>";
+		var rentBrName = "<%=rent_branchnm%>";
+		var returnBrName = "<%=return_branchnm%>";
+		var rentDate = "<%=rentDate%>";
+		var returnDate = "<%=returnDate%>";
+		var price =  "<%=carpay%>";
+		var carNo = "<%=carno%>";
+		var carName = "<%=carname%>";
+		var carImg = "<%=carimg%>";	
+	</script>
 	<script type="text/javascript" src="<%=contextPath%>/resources/js/reservation/reservation.js"></script>  	
   	
 </body>	

@@ -1,18 +1,17 @@
 /**
  * 차량예약관련 스크립트 파일
  */
-// 대여일 및 반납일 지정 
-// 전역변수 선언
-var rent_branch;		// 대여지점 코드
-var return_branch;		// 반납지점 코드
-var rent_branchnm;		// 대여지짐 이름
-var return_branchnm;	// 반납지점 이름
-var carType;			// 차량유형
-var rentDate;			// 대여일시
-var returnDate;			// 반납일시
 
 // 대여일시/반납일시 선택시 기본시간을 10시로 셋팅(차량선택 페이지에서만 사용)
 if(currentJSMenu == "차량선택") {
+	var rent_branch;		// 대여지점 코드
+	var return_branch;		// 반납지점 코드
+	var rent_branchnm;		// 대여지짐 이름
+	var return_branchnm;	// 반납지점 이름
+	var carType;			// 차량유형
+	var rentDate;			// 대여일시
+	var returnDate;			// 반납일시
+	
 	var d = new Date();
 	d.setHours(10);
 	d.setMinutes(00);
@@ -173,35 +172,12 @@ function setBranch() {
 	}
 }
 	
-
 // 이전/다음 클릭시 페이지 이동
 function goLinkPage(pageName) {
 	location.href = pageName;	
 }
 
-// 예약버튼 클릭시 수행
-function goOptionPage1(obj) {
-	
-	var carname				// 차명 
-	var carimg				// 차이미지
-	var carpay				// 대여금액(기본)
-	var carno				// 차량등록번호(차량정보테이블 FK)
-		
-	carname = $(obj).attr('carname');
-	carimg = $(obj).attr('carimg');
-	carpay = $(obj).attr('carpay');
-	carno = $(obj).attr('carno');	
-	
-	param = "rentbr=" + rent_branch + "&returnbr=" + return_branch + "&rentbrn=" + rent_branchnm 
-			+ "&returnbrn=" + return_branchnm + "&rentd=" + rentDate + "&returnd=" + returnDate
-			+ "&cname=" + carname + "&cimg=" + carimg + "&cpay=" + carpay + "&cno=" + carno;
-	
-	console.log("rvCarOption.rv?" + param);
-	
-	location.href = "rvCarOption.rv?" + param;
-
-}
-
+// 옵션선택 페이지로 이동
 function goOptionPage(obj) {
 	
 	var carname				// 차명 
@@ -229,6 +205,85 @@ function goOptionPage(obj) {
 	$newForm.append($("<input/>", {type:"hidden", name:"carimg", value:carimg}));
 	$newForm.append($("<input/>", {type:"hidden", name:"carpay", value:carpay}));
 	$newForm.append($("<input/>", {type:"hidden", name:"carno", value:carno}));
+		
+	$newForm.submit();
+}
+
+// 정보입력 페이지로 이동
+function goInfoPage(obj) {
+	
+	//var rentBrCode		// 대여지점코드(Branch_Reservation_No):지점정보테이블 FK	
+	//var returnBrCode	// 반납지점코드(Branch_Return_No):지점정보테이블 FK
+	//var rentDate		// 대여일시(Rent_Date)
+	//var returnDate		// 반납일시(Return_Date)
+	var optionInfo = ""		// 옵션정보(ROption):영문네비게이션,베이비시트
+	//var price			// 대여금액(Price)
+	var discountCate = ""	// 할인분류(Discount_Category):쿠폰,이벤트,회원할인
+	var discountNo = 3		// 할인번호(Discount_No):0-쿠폰,1-이벤트,2-회원할인
+	var discountPrice = 0	// 할인금액(Discount_Price)
+	var cwdTotalPrice = 0	// 보험금액(CWD_Price)
+	var totalPrice = 0		// 총대여금액(Total_Price)
+	//var carNo			// 차량등록번호(Car_No):차량정보테이블 FK
+	
+	//var rentBrName		// 대여지점명
+	//var returnBrName	// 반납지점명
+	//var carName			// 차명 
+	//var carImg			// 차이미지
+	var cwdPrice = 0		// 보험 적용 금액
+	var babySeatPrice = 0	// 베이비시트 금액
+		
+	// 네이게이션 체크여부
+	if($('input[name="navigation"]').is(":checked")) {	
+		optionInfo = "네비게이션";
+	}	
+	// 베이비시트 체크여부
+	if($('input[name="babyseat"]').is(":checked")) {	
+		optionInfo += "babyseat";
+	}
+		
+	if($("input[id='rdoSale']").is(":checked")) {	
+		discountCate = "회원 할인";
+		discountNo = 2;
+	}else if($("input[id='rdoEvent']").is(":checked")){
+		discountCate = "이벤트 할인";
+		discountNo = 1;
+	}else if($("input[id='rdoCoupon']").is(":checked")){
+		discountCate = "쿠폰 할인";
+		discountNo = 0;
+	}
+		
+	discountPrice = stringNumberToInt($("#discountPay").text());
+	cwdTotalPrice = stringNumberToInt($("#totalOptionFeeView").text());
+	totalPrice = stringNumberToInt($("#totalPay").text());
+	
+	cwdPrice = stringNumberToInt($("#cdwFee").text());
+	babySeatPrice = stringNumberToInt($("#cdwFee").text());
+		
+	var $newForm = $('<form></form>');	
+	$newForm.attr("method", "post");
+	$newForm.attr("action", "rvCarInfo.rv");
+	$newForm.appendTo('body');
+		
+	$newForm.append($("<input/>", {type:"hidden", name:"rentBrCode", value:rentBrCode}));
+	$newForm.append($("<input/>", {type:"hidden", name:"returnBrCode", value:returnBrCode}));
+	$newForm.append($("<input/>", {type:"hidden", name:"rentDate", value:rentDate}));
+	$newForm.append($("<input/>", {type:"hidden", name:"returnDate", value:returnDate}));
+	$newForm.append($("<input/>", {type:"hidden", name:"price", value:price}));
+	$newForm.append($("<input/>", {type:"hidden", name:"carNo", value:carNo}));
+	
+	$newForm.append($("<input/>", {type:"hidden", name:"optionInfo", value:optionInfo}));
+	$newForm.append($("<input/>", {type:"hidden", name:"discountCate", value:discountCate}));
+	$newForm.append($("<input/>", {type:"hidden", name:"discountNo", value:discountNo}));
+	$newForm.append($("<input/>", {type:"hidden", name:"discountPrice", value:discountPrice}));
+	$newForm.append($("<input/>", {type:"hidden", name:"cwdTotalPrice", value:cwdTotalPrice}));
+	$newForm.append($("<input/>", {type:"hidden", name:"totalPrice", value:totalPrice}));
+	
+	$newForm.append($("<input/>", {type:"hidden", name:"rentBrName", value:rentBrName}));
+	$newForm.append($("<input/>", {type:"hidden", name:"returnBrName", value:returnBrName}));
+	$newForm.append($("<input/>", {type:"hidden", name:"carName", value:carName}));
+	$newForm.append($("<input/>", {type:"hidden", name:"carImg", value:carImg}));
+	$newForm.append($("<input/>", {type:"hidden", name:"cwdPrice", value:cwdPrice}));
+	$newForm.append($("<input/>", {type:"hidden", name:"babySeatPrice", value:babySeatPrice}));
 		
 	$newForm.submit();
 }	
@@ -411,16 +466,51 @@ function numberFormat(inputNumber) {
 	return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// 할인항목 선택시 할인금액정보 변경
-//function setDiscountPrice(obj, disval) {
-function setDiscountPrice(discountRate) {
-	console.log("discountRate : " + discountRate);
-	//discount = $(obj).attr('discount');
-	rentalPay = $("#rentalFee").attr("price");
-	discountPay = rentalPay * (discountRate/100);
-	totalPay = rentalPay - discountPay
+//컴마제거 후 리턴
+function stringNumberToInt(stringNumber){
+	if(typeof(stringNumber) == "string") {
+		if(stringNumber.indexOf(",") != -1) {
+			return parseInt(stringNumber.replace(/,/g , ''));
+		}else {
+			return parseInt(stringNumber);
+		}
+	}else {
+		return stringNumber
+	}
+}
+
+//할인항목 선택시 할인금액정보 변경
+function setDiscountPrice(discountRate) {	
+	rentalPay = parseInt($("#rentalFee").attr("price"));
+	discountPay = rentalPay * (discountRate/100);	
 	$("#discountPay").text(numberFormat(discountPay));
-	$("#totalPay").text(numberFormat(totalPay));
+	setTotalPrice();	
+}
+
+// 보험금 선택시 금액정보 변경
+function setCDWPrice(cdwPay) {	
+	$("#cdwFee").text(numberFormat(cdwPay));
+	setTotalPrice();	
+} 
+
+// 베이이시트 선택시 금액정보 변경
+function setBaybyPrice(obj) {
+	if(obj.checked){
+		$("#babySeatFee").text(numberFormat(obj.value));
+		setTotalPrice();	
+	}else{
+		$("#babySeatFee").text("0");
+		setTotalPrice();	
+	}
+}
+
+// 총금액정보 변경
+function setTotalPrice() {
+	rentalPay = parseInt($("#rentalFee").attr("price"));		// 	대여금액
+	discountPay = stringNumberToInt($("#discountPay").text());	// 	할인금액(-)	
+	otherPay = stringNumberToInt($("#cdwFee").text()) + stringNumberToInt($("#babySeatFee").text());	//	보험및기타금액(+)
+	$("#totalOptionFeeView").text(numberFormat(otherPay));
+	$("#totalPay").text(numberFormat(rentalPay + otherPay - discountPay));
 }
 
 
