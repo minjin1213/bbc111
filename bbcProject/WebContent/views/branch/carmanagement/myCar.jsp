@@ -44,9 +44,10 @@
 						<div>
 							<h5 id="info-client">
 								보유 차량
-								<hr id="info-client-hr">
+								
 							</h5>
 						</div>
+						<hr id="info-client-hr">
 
 						<!-- 전체 차량 div -->
 

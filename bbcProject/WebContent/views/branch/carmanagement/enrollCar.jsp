@@ -52,9 +52,9 @@
 										<button class="bt-style" id="car-enroll-bt">차량 등록</button>
 									</a>
 								</div>
-								<hr id="info-client-hr">
 							</h5>
 						</div>
+						<hr id="info-client-hr">
 
 						<!-- 전체 차량 div -->
 
@@ -67,7 +67,7 @@
 								<div class="col-md-4">
 									<div class="car-card">
 										<div class="card-image">
-										<a href="#" data-toggle="modal" data-target="#carModal">
+										
 												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
 												<span class="card-notify-year">New</span>
 												<img class="img-fluid"
@@ -76,10 +76,11 @@
 										</div>
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda Accord LX</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda Accord LX</h5>
+												</a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>
@@ -90,7 +91,7 @@
 								<div class="col-md-4">
 									<div class="car-card second-car">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
 												<span class="card-notify-year">New</span>
 												<img class="img-fluid"
@@ -99,10 +100,9 @@
 										</div>
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda CIVIC HATCHBACK</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal"><h5>Honda CIVIC HATCHBACK</h5></a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span> <span>- 연료 : gasoline</span> <span>-
 												연식 : 2019/07</span>
@@ -113,7 +113,7 @@
 								<div class="col-md-4">
 									<div class="car-card third-car">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
 												<span class="card-notify-year">New</span>
 												<img class="img-fluid"
@@ -122,10 +122,12 @@
 										</div>
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda Accord Hybrid</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda Accord Hybrid</h5>
+												</a>
 											</div>
 										</div>
-										</a>
+										
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>
@@ -136,7 +138,7 @@
 								<div class="col-md-4">
 									<div class="car-card">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input
 													type="checkbox" name="chk-car"></span> <img
 												class="img-fluid"
@@ -145,10 +147,11 @@
 										</div>
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda Accord LX</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda Accord LX</h5>
+												</a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>
@@ -160,18 +163,20 @@
 								<div class="col-md-4">
 									<div class="car-card second-car">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
 												<img class="img-fluid"
 												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=CAC80HOC021B121001.jpg&width=440&height=262"
 												alt="Alternate Text">
 										</div>
+										
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda CIVIC HATCHBACK</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda CIVIC HATCHBACK</h5>
+												</a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>
@@ -183,7 +188,7 @@
 								<div class="col-md-4">
 									<div class="car-card third-car">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
 												<img class="img-fluid"
 												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC091A021001.jpg&width=440&height=262"
@@ -192,10 +197,11 @@
 
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda Accord Hybrid</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda Accord Hybrid</h5>
+												</a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>
@@ -207,7 +213,7 @@
 								<div class="col-md-4">
 									<div class="car-card">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input
 													type="checkbox" name="chk-car"></span> <img
 												class="img-fluid"
@@ -216,10 +222,11 @@
 										</div>
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda Accord LX</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda Accord LX</h5>
+												</a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>
@@ -230,7 +237,7 @@
 								<div class="col-md-4">
 									<div class="car-card second-car">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
 												<img class="img-fluid"
 												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=CAC80HOC021B121001.jpg&width=440&height=262"
@@ -238,10 +245,11 @@
 										</div>
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda CIVIC HATCHBACK</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda CIVIC HATCHBACK</h5>
+												</a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>
@@ -253,7 +261,7 @@
 								<div class="col-md-4">
 									<div class="car-card third-car">
 										<div class="card-image">
-											<a href="#" data-toggle="modal" data-target="#carModal">
+											
 												<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
 												<img class="img-fluid"
 												src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC091A021001.jpg&width=440&height=262"
@@ -261,10 +269,11 @@
 										</div>
 										<div class="card-body text-center">
 											<div class="ad-title m-auto">
-												<h5>Honda Accord Hybrid</h5>
+												<a href="#" data-toggle="modal" data-target="#carModal">
+													<h5>Honda Accord Hybrid</h5>
+												</a>
 											</div>
 										</div>
-										</a>
 										<div class="card-exp card-image-overlay m-auto">
 											<span>- 색상 : white</span>
 											<span>- 연료 : gasoline</span>

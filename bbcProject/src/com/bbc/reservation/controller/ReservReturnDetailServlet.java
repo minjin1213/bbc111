@@ -17,13 +17,13 @@ import com.bbc.userInfo.model.vo.UserInfo;
  * Servlet implementation class ReservRentListDetailServlet
  */
 @WebServlet("/detailRent.b.rv")
-public class ReservRentListDetailServlet extends HttpServlet {
+public class ReservReturnDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservRentListDetailServlet() {
+    public ReservReturnDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

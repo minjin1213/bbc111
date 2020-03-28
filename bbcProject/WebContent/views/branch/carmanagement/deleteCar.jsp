@@ -51,10 +51,10 @@
 										<button class="bt-style" id="car-delete-bt">차량 삭제</button>
 									</a>
 								</div>
-								<hr id="info-client-hr">
+								
 							</h5>
 						</div>
-
+						<hr id="info-client-hr">
 						<!-- 전체 차량 div -->
 
 
