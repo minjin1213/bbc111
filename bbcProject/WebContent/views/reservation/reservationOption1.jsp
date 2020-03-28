@@ -250,7 +250,7 @@
 		var returnBrName = "<%=return_branchnm%>";
 		var rentDate = "<%=rentDate%>";
 		var returnDate = "<%=returnDate%>";
-		var price =  "<%=carpay%>";
+		var carPrice =  "<%=carpay%>";
 		var carNo = "<%=carno%>";
 		var carName = "<%=carname%>";
 		var carImg = "<%=carimg%>";	

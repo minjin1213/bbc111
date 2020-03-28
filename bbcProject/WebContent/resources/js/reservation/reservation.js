@@ -192,7 +192,7 @@ function goOptionPage(obj) {
 	
 	var $newForm = $('<form></form>');	
 	$newForm.attr("method", "post");
-	$newForm.attr("action", "rvCarOption.rv");
+	$newForm.attr("action", "carOption.rv");
 	$newForm.appendTo('body');
 		
 	$newForm.append($("<input/>", {type:"hidden", name:"rent_branch", value:rent_branch}));
@@ -210,35 +210,28 @@ function goOptionPage(obj) {
 }
 
 // 정보입력 페이지로 이동
-function goInfoPage(obj) {
+function goInfoPage() {
 	
-	//var rentBrCode		// 대여지점코드(Branch_Reservation_No):지점정보테이블 FK	
-	//var returnBrCode	// 반납지점코드(Branch_Return_No):지점정보테이블 FK
-	//var rentDate		// 대여일시(Rent_Date)
-	//var returnDate		// 반납일시(Return_Date)
-	var optionInfo = ""		// 옵션정보(ROption):영문네비게이션,베이비시트
-	//var price			// 대여금액(Price)
+	var optionInfo = ""		// 옵션정보(ROption):영문네비게이션,베이비시트	
 	var discountCate = ""	// 할인분류(Discount_Category):쿠폰,이벤트,회원할인
 	var discountNo = 3		// 할인번호(Discount_No):0-쿠폰,1-이벤트,2-회원할인
 	var discountPrice = 0	// 할인금액(Discount_Price)
 	var cwdTotalPrice = 0	// 보험금액(CWD_Price)
-	var totalPrice = 0		// 총대여금액(Total_Price)
-	//var carNo			// 차량등록번호(Car_No):차량정보테이블 FK
-	
-	//var rentBrName		// 대여지점명
-	//var returnBrName	// 반납지점명
-	//var carName			// 차명 
-	//var carImg			// 차이미지
+	var totalPrice = 0		// 총대여금액(Total_Price)	
 	var cwdPrice = 0		// 보험 적용 금액
 	var babySeatPrice = 0	// 베이비시트 금액
 		
 	// 네이게이션 체크여부
 	if($('input[name="navigation"]').is(":checked")) {	
-		optionInfo = "네비게이션";
+		optionInfo = "내비게이션";
 	}	
 	// 베이비시트 체크여부
 	if($('input[name="babyseat"]').is(":checked")) {	
-		optionInfo += "babyseat";
+		if(optionInfo == ""){
+			optionInfo += "베이비 시트";
+		}else{
+			optionInfo += ", 베이비 시트";
+		}		
 	}
 		
 	if($("input[id='rdoSale']").is(":checked")) {	
@@ -257,18 +250,18 @@ function goInfoPage(obj) {
 	totalPrice = stringNumberToInt($("#totalPay").text());
 	
 	cwdPrice = stringNumberToInt($("#cdwFee").text());
-	babySeatPrice = stringNumberToInt($("#cdwFee").text());
-		
+	babySeatPrice = stringNumberToInt($("#babySeatFee").text());
+			
 	var $newForm = $('<form></form>');	
 	$newForm.attr("method", "post");
-	$newForm.attr("action", "rvCarInfo.rv");
+	$newForm.attr("action", "carInfo.rv");
 	$newForm.appendTo('body');
 		
 	$newForm.append($("<input/>", {type:"hidden", name:"rentBrCode", value:rentBrCode}));
 	$newForm.append($("<input/>", {type:"hidden", name:"returnBrCode", value:returnBrCode}));
 	$newForm.append($("<input/>", {type:"hidden", name:"rentDate", value:rentDate}));
 	$newForm.append($("<input/>", {type:"hidden", name:"returnDate", value:returnDate}));
-	$newForm.append($("<input/>", {type:"hidden", name:"price", value:price}));
+	$newForm.append($("<input/>", {type:"hidden", name:"carPrice", value:carPrice}));
 	$newForm.append($("<input/>", {type:"hidden", name:"carNo", value:carNo}));
 	
 	$newForm.append($("<input/>", {type:"hidden", name:"optionInfo", value:optionInfo}));
@@ -287,6 +280,45 @@ function goInfoPage(obj) {
 		
 	$newForm.submit();
 }	
+
+// 결제 페이지로 이동
+function goPaymentPage() {
+	
+	// 이용약관 동의 확인	
+	if($('input[name="agreeChk1"]').is(":checked") && $('input[name="agreeChk2"]').is(":checked") && $('input[name="agreeChk3"]').is(":checked")) {	
+		var $newForm = $('<form></form>');	
+		$newForm.attr("method", "post");
+		$newForm.attr("action", "carPayment.rv");
+		$newForm.appendTo('body');
+			
+		$newForm.append($("<input/>", {type:"hidden", name:"rentBrCode", value:rentBrCode}));
+		$newForm.append($("<input/>", {type:"hidden", name:"returnBrCode", value:returnBrCode}));
+		$newForm.append($("<input/>", {type:"hidden", name:"rentDate", value:rentDate}));
+		$newForm.append($("<input/>", {type:"hidden", name:"returnDate", value:returnDate}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carPrice", value:carPrice}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carNo", value:carNo}));		
+		$newForm.append($("<input/>", {type:"hidden", name:"optionInfo", value:optionInfo}));
+		$newForm.append($("<input/>", {type:"hidden", name:"discountCate", value:discountCate}));
+		$newForm.append($("<input/>", {type:"hidden", name:"discountNo", value:discountNo}));
+		$newForm.append($("<input/>", {type:"hidden", name:"discountPrice", value:discountPrice}));
+		$newForm.append($("<input/>", {type:"hidden", name:"cwdTotalPrice", value:cwdTotalPrice}));
+		$newForm.append($("<input/>", {type:"hidden", name:"totalPrice", value:totalPrice}));
+		
+		$newForm.append($("<input/>", {type:"hidden", name:"rentBrName", value:rentBrName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"returnBrName", value:returnBrName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carName", value:carName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carImg", value:carImg}));
+		$newForm.append($("<input/>", {type:"hidden", name:"cwdPrice", value:cwdPrice}));
+		$newForm.append($("<input/>", {type:"hidden", name:"babySeatPrice", value:babySeatPrice}));
+			
+		$newForm.submit();
+		
+	}else {
+		alert("약완료를 위한 이용자 동의 사항에 모두 체크하셔야 예약 가능합니다.");
+		return;
+	}		
+
+}
 
 // 지점선택시 지역선택에 따른 지점리스트 표시
 function displayBranchList(areaNo) {
@@ -347,7 +379,7 @@ function displayBranchList(areaNo) {
 function displayCarInfo() {
 	
 	$.ajax({
-  		url:"rvCarInfoSearch.rv",
+  		url:"carInfoSearch.rv",
   		type:"get",
   		success:function(list){  
   			var listcnt = 0;
@@ -418,7 +450,7 @@ function serachCarList(){
 		}	
   		
   		$.ajax({
-  	  		url:"rvSearchCar.rv?carType=" + carType + "&rent_branch=" + rent_branch + "&rent_date=" + rent_date + "&return_date=" + return_date,
+  	  		url:"searchCar.rv?carType=" + carType + "&rent_branch=" + rent_branch + "&rent_date=" + rent_date + "&return_date=" + return_date,
   	  		type:"get",
   	  		success:function(list){  
   	  			

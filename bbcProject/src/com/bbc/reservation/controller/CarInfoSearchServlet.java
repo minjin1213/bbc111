@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class CarInfoSearchServlet
  */
-@WebServlet("/rvCarInfoSearch.rv")
+@WebServlet("/carInfoSearch.rv")
 public class CarInfoSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

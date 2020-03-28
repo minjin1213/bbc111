@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CarOptionServlet
  */
-@WebServlet("/rvCarOption.rv")
+@WebServlet("/carOption.rv")
 public class CarOptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
