@@ -1,7 +1,5 @@
 package com.bbc.carinfo.model.vo;
 
-import java.sql.Date;
-
 // 차량 정보 테이블	.ci
 public class CarInfo {
 	
@@ -18,6 +16,9 @@ public class CarInfo {
 	private String carModifyName;	// 수정 파일명
 	private int carTypeNo;			// 차량 유형 번호
 	private int branchNo;			// 지점 번호
+	
+	// 추가
+	private String carType;
 	
 	public CarInfo() {
 		
@@ -40,6 +41,21 @@ public class CarInfo {
 		this.carModifyName = carModifyName;
 		this.carTypeNo = carTypeNo;
 		this.branchNo = branchNo;
+	}
+
+	public CarInfo(int carNo, String carTypeName, String carNum, String carFuel, String carColor, String carLunchYear,
+			String carOption, int carRidePeople, String carModifyName, String carType) {
+		super();
+		this.carNo = carNo;
+		this.carTypeName = carTypeName;
+		this.carNum = carNum;
+		this.carFuel = carFuel;
+		this.carColor = carColor;
+		this.carLunchYear = carLunchYear;
+		this.carOption = carOption;
+		this.carRidePeople = carRidePeople;
+		this.carModifyName = carModifyName;
+		this.carType = carType;
 	}
 
 	public int getCarNo() {
@@ -144,6 +160,14 @@ public class CarInfo {
 
 	public void setBranchNo(int branchNo) {
 		this.branchNo = branchNo;
+	}
+
+	public String getCarType() {
+		return carType;
+	}
+
+	public void setCarType(String carType) {
+		this.carType = carType;
 	}
 
 	@Override

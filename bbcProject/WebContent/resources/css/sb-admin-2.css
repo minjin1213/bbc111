@@ -121,8 +121,9 @@ textarea {
   }
 }
 
-#car-modal-content{
-  height: 30rem;
+table.car-exp-table {
+  border-collapse: separate;
+  border-spacing: 10px;
 }
 
 #car-modal-dialog {

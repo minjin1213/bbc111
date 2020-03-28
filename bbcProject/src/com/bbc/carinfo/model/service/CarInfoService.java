@@ -9,10 +9,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.bbc.attachment.model.dao.AttachmentDao;
-import com.bbc.attachment.model.vo.Attachment;
 import com.bbc.carinfo.model.dao.CarInfoDao;
 import com.bbc.carinfo.model.vo.CarInfo;
+import com.bbc.common.page.vo.PageInfo;
 
 public class CarInfoService {
 
@@ -45,5 +44,23 @@ public class CarInfoService {
 		close(conn);
 		
 		return result;
+	}
+	
+	
+	// --------- 민진
+	/**
+	 * 보유차량 조회
+	 * @param pi	페이지 객체
+	 * @return		지점에 등록된 차량 객체
+	 */
+	public ArrayList<CarInfo> branchCarList(PageInfo pi, int branch){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<CarInfo> list = new CarInfoDao().branchCarList(conn, pi, branch);
+		
+		close(conn);
+		
+		return list;
 	}
 }

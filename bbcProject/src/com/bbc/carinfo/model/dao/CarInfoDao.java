@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
-import com.bbc.attachment.model.vo.Attachment;
 import com.bbc.carinfo.model.vo.CarInfo;
+import com.bbc.common.page.vo.PageInfo;
 
 public class CarInfoDao {
 	private Properties prop = new Properties();
@@ -121,6 +121,53 @@ public class CarInfoDao {
 		}
 		
 		return result;
+	}
+	
+	// --- 민진
+	public ArrayList<CarInfo> branchCarList(Connection conn, PageInfo pi, int branch){
+		
+		ArrayList<CarInfo> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("carList");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
+			int endRow = startRow + pi.getTableLimit() - 1;
+			
+			pstmt.setInt(1,branch);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				CarInfo ci = new CarInfo(rset.getInt("car_no"),
+										rset.getString("car_name"),
+										rset.getString("car_num"),
+										rset.getString("car_fuel"),
+										rset.getString("car_color"),
+										rset.getString("car_lunch_year"),
+										rset.getString("car_option"),
+										rset.getInt("car_ride_people"),
+										rset.getString("car_modify_name"),
+										rset.getString("car_type_name"));
+				
+				list.add(ci);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

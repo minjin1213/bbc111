@@ -47,7 +47,13 @@ public class CarListServlet extends HttpServlet {
 		}
 
 		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
-		ArrayList<CarInfo> list = new CarInfoService().branchCarList(pi); 
+		
+		int branch=31;
+		
+		ArrayList<CarInfo> list = new CarInfoService().branchCarList(pi, branch); 
+	
+		request.setAttribute("list", list);
+		request.setAttribute("pi", pi);
 		
 		request.getRequestDispatcher("views/branch/carmanagement/myCar.jsp").forward(request, response);
 	}
