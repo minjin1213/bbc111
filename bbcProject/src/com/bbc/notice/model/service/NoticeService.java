@@ -278,7 +278,7 @@ public class NoticeService {
 	public int adminUserAddNotice(Notice n, ArrayList<Attachment> list) {
 		Connection conn = getConnection();
 
-		System.out.println(n.getNoticeField());
+//		System.out.println(n.getNoticeField());
 
 		// 공지사항 작성 전달 
 		int result1 = new NoticeDao().adminUserNotice(conn, n); 

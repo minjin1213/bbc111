@@ -94,4 +94,27 @@ public class CarInfoService {
 		
 		return list;
 	}
+	
+	public int branchDeleteChkCar(String[] arr) {
+	
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		for(int i=0; i<arr.length; i++) {
+			
+			result = new CarInfoDao().branchDeleteChkCar(conn, arr[i]);
+		}
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	
+	}
 }

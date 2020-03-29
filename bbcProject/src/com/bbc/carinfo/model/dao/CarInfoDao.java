@@ -274,4 +274,26 @@ public class CarInfoDao {
 		return list;
 		
 	}
+	
+	public int branchDeleteChkCar(Connection conn, String arr) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCar");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, arr);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
