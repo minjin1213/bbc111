@@ -20,5 +20,79 @@ public class CarTypeService {
 		return list;
 		
 	}
+	
+	// ------------------------------------ 민기 Service
+	/**
+	 * 1. 입력되어있는 금액정보 불러오는 서비스
+	 * @return 금액정보 객체 리턴
+	 */
+	public ArrayList<CarType> amdinPriceSelectList(){
+		Connection conn = getConnection();
+		
+		ArrayList<CarType> allList = new CarTypeDao().amdinPriceSelectList(conn);
+		
+		close(conn);
+		
+		return allList;
+	}
+	
+	public ArrayList<CarType> adminPriceSelectList1(){
+		Connection conn = getConnection();
+		
+		ArrayList<CarType> list1 = new CarTypeDao().adminPriceSelectList1(conn);
+		
+		close(conn);
+		
+		return list1;
+	}
+	public ArrayList<CarType> adminPriceSelectList2(){
+		Connection conn = getConnection();
+		
+		ArrayList<CarType> list2 = new CarTypeDao().adminPriceSelectList2(conn);
+		
+		close(conn);
+		
+		return list2;
+	}
+	public ArrayList<CarType> adminPriceSelectList3(){
+		Connection conn = getConnection();
+		
+		ArrayList<CarType> list3 = new CarTypeDao().adminPriceSelectList3(conn);
+		
+		close(conn);
+		
+		return list3;
+	}
+	
+	
+	public int adminCarPrice(CarType c1, CarType c2, CarType c3, ArrayList<String> list1, ArrayList<String> list2, ArrayList<String> list3) {
+		Connection conn = getConnection();
+		
+		int result1 = 0;
+		int result2 = 0;
+		int result3 = 0;
+		
+		if(list1 != null) {
+			result1 = new CarTypeDao().adminCarPrice1(conn, c1);			
+		}
+		if(list2 != null) {
+			result2 = new CarTypeDao().adminCarPrice2(conn, c2);			
+		}
+		if(list3 != null) {
+			result3 = new CarTypeDao().adminCarPrice3(conn, c3);			
+		}
+		
+		int result = result1 + result2 + result3;
+		
+		
+		if(result == 0) {
+			rollback(conn);
+		}else {
+			commit(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 
 }

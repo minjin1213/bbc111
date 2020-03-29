@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.bbc.cartype.model.vo.CarType" %>
+<%
+	String priceU = (String)request.getAttribute("priceU");
+	ArrayList<CarType> list1 = (ArrayList<CarType>)request.getAttribute("list1");
+	ArrayList<CarType> list2 = (ArrayList<CarType>)request.getAttribute("list2");
+	ArrayList<CarType> list3 = (ArrayList<CarType>)request.getAttribute("list3");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,6 +130,12 @@
 </head>
 <body>
 	<%@ include file="../common/adminBase.jsp" %>
+	<script>
+		var priceU = "<%=priceU%>"
+		if(priceU != "null"){
+			alert(priceU);
+		}
+	</script>
 	
 	<div class="outer">
 		<div class="faq-header">
@@ -134,7 +147,7 @@
 		
 	    <article class="tabs">
 			<!-- 첫번째 탭 내용 -->
-			<form>
+			<form action="<%=contextPath%>/cPrice.t.ct" method="post">
 		        <section id="carPrice-tab">
 		            <h2><a href="#carPrice-tab">차량금액</a></h2>
 		            <h5 id="price-title">기간별 대여료</h5>
@@ -148,25 +161,31 @@
 		                    <th>7일+</th>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="sDayCheck"></td>
 		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-day1" name="s-day1" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="s-day6" name="s-day6" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="s-day7" name="s-day7" placeholder="금액을입력해주세요"></td>
+		                    <% for(CarType c : list1){ %>
+			                    <td><input type="text" id="s-day1" name="s-day1" value="<%=c.getRent1D()%>"></td>
+			                    <td><input type="text" id="s-day6" name="s-day6" value="<%=c.getRent1D6D()%>"></td>
+			                    <td><input type="text" id="s-day7" name="s-day7" value="<%=c.getRent7DP()%>"></td>
+		                    <% } %>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="mDayCheck"></td>
 		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-day1" name="m-day1" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="m-day6" name="m-day6" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="m-day7" name="m-day7" placeholder="금액을입력해주세요"></td>
+		                    <% for(CarType c : list2){ %>
+			                    <td><input type="text" id="m-day1" name="m-day1" value="<%=c.getRent1D()%>"></td>
+			                    <td><input type="text" id="m-day6" name="m-day6" value="<%=c.getRent1D6D()%>"></td>
+			                    <td><input type="text" id="m-day7" name="m-day7" value="<%=c.getRent7DP()%>"></td>
+		                    <% } %>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="lDayCheck"></td>
 		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-day1" name="l-day1" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="l-day6" name="l-day6" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="l-day7" name="l-day7" placeholder="금액을입력해주세요"></td>
+		                    <% for(CarType c : list3){ %>
+			                    <td><input type="text" id="l-day1" name="l-day1" value="<%=c.getRent1D()%>"></td>
+			                    <td><input type="text" id="l-day6" name="l-day6" value="<%=c.getRent1D6D()%>"></td>
+			                    <td><input type="text" id="l-day7" name="l-day7" value="<%=c.getRent7DP()%>"></td>
+		                    <% } %>
 		                </tr>
 		            </table>
 		            
@@ -183,25 +202,25 @@
 		                    <th>+12시간</th>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="sOverCheck"></td>
 		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-over1" name="s-over1" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="s-over6" name="s-over6" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="s-over7" name="s-over7" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="s-over1" name="s-over1" value="0"></td>
+		                    <td><input type="text" id="s-over6" name="s-over6" value="0"></td>
+		                    <td><input type="text" id="s-over7" name="s-over7" value="0"></td>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="mOverCheck"></td>
 		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-over1" name="m-over1" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="m-over6" name="m-over6" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="m-over7" name="m-over7" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="m-over1" name="m-over1" value="0"></td>
+		                    <td><input type="text" id="m-over6" name="m-over6" value="0"></td>
+		                    <td><input type="text" id="m-over7" name="m-over7" value="0"></td>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="lOverCheck"></td>
 		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-over1" name="l-over1" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="l-over6" name="l-over6" placeholder="금액을입력해주세요"></td>
-		                    <td><input type="text" id="l-over7" name="l-over7" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="l-over1" name="l-over1" value="0"></td>
+		                    <td><input type="text" id="l-over6" name="l-over6" value="0"></td>
+		                    <td><input type="text" id="l-over7" name="l-over7" value="0"></td>
 		                </tr>
 		            </table>
 		            
@@ -216,24 +235,24 @@
 		                    <th>1일</th>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="sCarCheck"></td>
 		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-car1" name="s-car1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="s-car1" name="s-car1" value="0"></td>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="mCarCheck"></td>
 		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-car1" name="m-car1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="m-car1" name="m-car1" value="0"></td>
 		                </tr>
 		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
+		                    <td><input type="checkbox" name="lCarCheck"></td>
 		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-car1" name="l-car1" placeholder="금액을입력해주세요"></td>
+		                    <td><input type="text" id="l-car1" name="l-car1" value="0"></td>
 		                </tr>
 		            </table>
 		            
 		            <br>
-		            <button type="button" id="completeBtn">등록하기</button>
+		            <button type="submit" id="completeBtn">등록하기</button>
 		        </section>
 			</form>
 	        
