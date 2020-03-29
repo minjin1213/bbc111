@@ -91,23 +91,22 @@
 													
 														<% if(listSize != index) { %>
 														<td>
+															<input type="checkbox" name="chk-car" value="<%= list.get(i).getCarNo() %>" style="margin-right: 230px;">
 															<% if(list.get(index).getCarLunchYear().equals("2020")) { %> 
-																<span class="card-notify-badge"></span>
 																<span class="card-notify-year">New</span> 
 															<% } %> 
 															
-															<input type="checkbox" name="chk-car" value="<%= list.get(i).getCarNo() %>">
 															<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= list.get(index).getCarModifyName() %>" style="width:250px; height:150px">
 															<div class="card-body text-center">
 																<div class="ad-title m-auto">
 																	<a href="#" data-toggle="modal" data-target="#carModal"
-																			data-carTypeName="<%= list.get(i).getCarTypeName()%>"
-																			data-carType="<%= list.get(i).getCarType() %>"
-																			data-carNum="<%= list.get(i).getCarNum() %>"
-																			data-carColor="<%= list.get(i).getCarColor() %>"
-																			data-carFuel="<%= list.get(i).getCarFuel() %>"
-																			data-carYear="<%= list.get(i).getCarLunchYear() %>"
-																			data-carOption="<%= list.get(i).getCarOption() %>">
+																			data-carTypeName="<%= list.get(index).getCarTypeName()%>"
+																			data-carType="<%= list.get(index).getCarType() %>"
+																			data-carNum="<%= list.get(index).getCarNum() %>"
+																			data-carColor="<%= list.get(index).getCarColor() %>"
+																			data-carFuel="<%= list.get(index).getCarFuel() %>"
+																			data-carYear="<%= list.get(index).getCarLunchYear() %>"
+																			data-carOption="<%= list.get(index).getCarOption() %>">
 																		<h5><%= list.get(index).getCarTypeName() %></h5>
 																	</a>
 																</div>
@@ -249,7 +248,7 @@
 		<div class="modal-dialog" role="document" id="car-modal-dialog">
 			<div class="modal-content" id="car-modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"><label class="carTypeName"></label></h5>
+					<h5 class="modal-title" id="exampleModalLabel">상세 정보</label></h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
