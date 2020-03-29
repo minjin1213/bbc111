@@ -204,23 +204,29 @@
 		                <tr>
 		                    <td><input type="checkbox" name="sOverCheck"></td>
 		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-over1" name="s-over1" value="0"></td>
-		                    <td><input type="text" id="s-over6" name="s-over6" value="0"></td>
-		                    <td><input type="text" id="s-over7" name="s-over7" value="0"></td>
+		                    <% for(CarType c : list1){ %>
+			                    <td><input type="text" id="s-over1" name="s-over1" value="<%=c.getOver6T()%>"></td>
+			                    <td><input type="text" id="s-over6" name="s-over6" value="<%=c.getOver9T()%>"></td>
+			                    <td><input type="text" id="s-over7" name="s-over7" value="<%=c.getOver12T()%>"></td>
+		                    <% } %>
 		                </tr>
 		                <tr>
 		                    <td><input type="checkbox" name="mOverCheck"></td>
 		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-over1" name="m-over1" value="0"></td>
-		                    <td><input type="text" id="m-over6" name="m-over6" value="0"></td>
-		                    <td><input type="text" id="m-over7" name="m-over7" value="0"></td>
+		                    <% for(CarType c : list2){ %>
+			                    <td><input type="text" id="m-over1" name="m-over1" value="<%=c.getOver6T()%>"></td>
+			                    <td><input type="text" id="m-over6" name="m-over6" value="<%=c.getOver9T()%>"></td>
+			                    <td><input type="text" id="m-over7" name="m-over7" value="<%=c.getOver12T()%>"></td>
+		                    <% } %>
 		                </tr>
 		                <tr>
 		                    <td><input type="checkbox" name="lOverCheck"></td>
 		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-over1" name="l-over1" value="0"></td>
-		                    <td><input type="text" id="l-over6" name="l-over6" value="0"></td>
-		                    <td><input type="text" id="l-over7" name="l-over7" value="0"></td>
+		                    <% for(CarType c : list3){ %>
+			                    <td><input type="text" id="l-over1" name="l-over1" value="<%=c.getOver6T()%>"></td>
+			                    <td><input type="text" id="l-over6" name="l-over6" value="<%=c.getOver9T()%>"></td>
+			                    <td><input type="text" id="l-over7" name="l-over7" value="<%=c.getOver12T()%>"></td>
+		                    <% } %>
 		                </tr>
 		            </table>
 		            
@@ -237,17 +243,23 @@
 		                <tr>
 		                    <td><input type="checkbox" name="sCarCheck"></td>
 		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-car1" name="s-car1" value="0"></td>
+		                    <% for(CarType c : list1){ %>
+		                    	<td><input type="text" id="s-car1" name="s-car1" value="<%=c.getMemberCar()%>"></td>
+		                    <% } %>
 		                </tr>
 		                <tr>
 		                    <td><input type="checkbox" name="mCarCheck"></td>
 		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-car1" name="m-car1" value="0"></td>
+		                    <% for(CarType c : list2){ %>
+		                    	<td><input type="text" id="m-car1" name="m-car1" value="<%=c.getMemberCar()%>"></td>
+		                    <% } %>
 		                </tr>
 		                <tr>
 		                    <td><input type="checkbox" name="lCarCheck"></td>
 		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-car1" name="l-car1" value="0"></td>
+		                    <% for(CarType c : list3){ %>
+		                    	<td><input type="text" id="l-car1" name="l-car1" value="<%=c.getMemberCar()%>"></td>
+		                    <% } %>
 		                </tr>
 		            </table>
 		            

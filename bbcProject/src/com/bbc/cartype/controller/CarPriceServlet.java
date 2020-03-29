@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bbc.cartype.model.service.CarTypeService;
 import com.bbc.cartype.model.vo.CarType;
@@ -145,8 +146,9 @@ public class CarPriceServlet extends HttpServlet {
 		int result = new CarTypeService().adminCarPrice(c1, c2, c3, list1, list2, list3);
 			
 		if(result > 0) {
-			request.setAttribute("priceU", "금액정보 수정에 성공했습니다.");
-			request.getRequestDispatcher("views/admin/car/priceInfo.jsp").forward(request, response);
+			HttpSession session = request.getSession();
+			session.setAttribute("priceU", "금액정보 수정에 성공했습니다.");
+			response.sendRedirect("price.t.ct");
 		}else {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}

@@ -23,19 +23,9 @@ public class CarTypeService {
 	
 	// ------------------------------------ 민기 Service
 	/**
-	 * 1. 입력되어있는 금액정보 불러오는 서비스
+	 * 1. 입력되어있는 금액정보 불러오는 서비스(1,2,3)
 	 * @return 금액정보 객체 리턴
 	 */
-	public ArrayList<CarType> amdinPriceSelectList(){
-		Connection conn = getConnection();
-		
-		ArrayList<CarType> allList = new CarTypeDao().amdinPriceSelectList(conn);
-		
-		close(conn);
-		
-		return allList;
-	}
-	
 	public ArrayList<CarType> adminPriceSelectList1(){
 		Connection conn = getConnection();
 		

@@ -61,99 +61,6 @@ public class CarTypeDao {
 	}
 	
 	// -------------------------------- 민기 Dao
-	public ArrayList<CarType> amdinPriceSelectList(Connection conn){
-		ArrayList<CarType> allList = new ArrayList<>();
-		ArrayList<CarType> list1 = new ArrayList<>();
-		ArrayList<CarType> list2 = new ArrayList<>();
-		ArrayList<CarType> list3 = new ArrayList<>();
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		String sql1 = prop.getProperty("amdinPriceSelectList1");
-		String sql2 = prop.getProperty("amdinPriceSelectList2");
-		String sql3 = prop.getProperty("amdinPriceSelectList3");
-		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql1);
-			while(rset.next()) {
-			list1.add(new CarType(rset.getInt("car_type_no"),
-								 rset.getInt("rent_1d"),
-								 rset.getInt("rent_1d_6d"),
-								 rset.getInt("rent_7dp"),
-								 rset.getInt("over_6t"),
-								 rset.getInt("over_9t"),
-								 rset.getInt("over_12t"),
-								 rset.getInt("member_car"),
-								 rset.getInt("rent_insu_type1"),
-								 rset.getInt("rent_insu_type2"),
-								 rset.getInt("accident_price_type1"),
-								 rset.getInt("accident_price_type2"),
-								 rset.getInt("accident_exemption"),
-								 rset.getInt("recess_price")));
-			}
-			rset = stmt.executeQuery(sql2);
-			while(rset.next()) {
-			list2.add(new CarType(rset.getInt("car_type_no"),
-								 rset.getInt("rent_1d"),
-								 rset.getInt("rent_1d_6d"),
-								 rset.getInt("rent_7dp"),
-								 rset.getInt("over_6t"),
-								 rset.getInt("over_9t"),
-								 rset.getInt("over_12t"),
-								 rset.getInt("member_car"),
-								 rset.getInt("rent_insu_type1"),
-								 rset.getInt("rent_insu_type2"),
-								 rset.getInt("accident_price_type1"),
-								 rset.getInt("accident_price_type2"),
-								 rset.getInt("accident_exemption"),
-								 rset.getInt("recess_price")));
-			}
-			rset = stmt.executeQuery(sql3);
-			while(rset.next()) {
-			list3.add(new CarType(rset.getInt("car_type_no"),
-								 rset.getInt("rent_1d"),
-								 rset.getInt("rent_1d_6d"),
-								 rset.getInt("rent_7dp"),
-								 rset.getInt("over_6t"),
-								 rset.getInt("over_9t"),
-								 rset.getInt("over_12t"),
-								 rset.getInt("member_car"),
-								 rset.getInt("rent_insu_type1"),
-								 rset.getInt("rent_insu_type2"),
-								 rset.getInt("accident_price_type1"),
-								 rset.getInt("accident_price_type2"),
-								 rset.getInt("accident_exemption"),
-								 rset.getInt("recess_price")));
-			}
-
-//			rset = stmt.executeQuery(sql);
-//			
-//			while(rset.next()) {
-//				list.add(new CarType(rset.getInt("car_type_no"),
-//									 rset.getInt("rent_1d"),
-//									 rset.getInt("rent_1d_6d"),
-//									 rset.getInt("rent_7dp"),
-//									 rset.getInt("over_6t"),
-//									 rset.getInt("over_9t"),
-//									 rset.getInt("over_12t"),
-//									 rset.getInt("member_car"),
-//									 rset.getInt("rent_insu_type1"),
-//									 rset.getInt("rent_insu_type2"),
-//									 rset.getInt("accident_price_type1"),
-//									 rset.getInt("accident_insu_type2"),
-//									 rset.getInt("accident_exemption"),
-//									 rset.getInt("recess_price")));
-//			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		System.out.println(allList);
-		
-		return allList;
-	}
 	public ArrayList<CarType> adminPriceSelectList1(Connection conn){
 		ArrayList<CarType> list1 = new ArrayList<>();
 		Statement stmt = null;
@@ -255,7 +162,6 @@ public class CarTypeDao {
 	}
 	
 	
-	
 	public int adminCarPrice(Connection conn, CarType c1, CarType c2, CarType c3, ArrayList<ArrayList> allList) {
 		int allResult = 0;
 		int result1 = 2;
@@ -325,6 +231,10 @@ public class CarTypeDao {
 			pstmt.setInt(1, c1.getRent1D());
 			pstmt.setInt(2, c1.getRent1D6D());
 			pstmt.setInt(3, c1.getRent7DP());
+			pstmt.setInt(4, c1.getOver6T());
+			pstmt.setInt(5, c1.getOver9T());
+			pstmt.setInt(6, c1.getOver12T());
+			pstmt.setInt(7, c1.getMemberCar());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -346,6 +256,10 @@ public class CarTypeDao {
 			pstmt.setInt(1, c2.getRent1D());
 			pstmt.setInt(2, c2.getRent1D6D());
 			pstmt.setInt(3, c2.getRent7DP());
+			pstmt.setInt(4, c2.getOver6T());
+			pstmt.setInt(5, c2.getOver9T());
+			pstmt.setInt(6, c2.getOver12T());
+			pstmt.setInt(7, c2.getMemberCar());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -367,6 +281,10 @@ public class CarTypeDao {
 			pstmt.setInt(1, c3.getRent1D());
 			pstmt.setInt(2, c3.getRent1D6D());
 			pstmt.setInt(3, c3.getRent7DP());
+			pstmt.setInt(4, c3.getOver6T());
+			pstmt.setInt(5, c3.getOver9T());
+			pstmt.setInt(6, c3.getOver12T());
+			pstmt.setInt(7, c3.getMemberCar());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
