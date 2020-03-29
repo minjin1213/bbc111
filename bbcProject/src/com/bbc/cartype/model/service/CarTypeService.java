@@ -55,6 +55,15 @@ public class CarTypeService {
 	}
 	
 	
+	/** 2. 차량금액 정보 업데이트용 서비스
+	 * @param c1
+	 * @param c2
+	 * @param c3
+	 * @param list1	경차 분류 정보가 담겨있는 ArrayList
+	 * @param list2	중형 분류 정보가 담겨있는 ArrayList
+	 * @param list3	대형 분류 정보가 담겨있는 ArrayList
+	 * @return
+	 */
 	public int adminCarPrice(CarType c1, CarType c2, CarType c3, ArrayList<String> list1, ArrayList<String> list2, ArrayList<String> list3) {
 		Connection conn = getConnection();
 		
@@ -84,5 +93,6 @@ public class CarTypeService {
 		
 		return result;
 	}
+
 
 }

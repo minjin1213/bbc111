@@ -115,7 +115,7 @@
 	    font-size: 19px;
 	    margin: 0;
 	}
-	#completeBtn{
+	.completeBtn{
 		border-radius: 5px;
 	    outline: 0;
 	    border: 0;
@@ -146,7 +146,7 @@
 		
 		
 	    <article class="tabs">
-			<!-- 첫번째 탭 내용 -->
+			<!-- 첫번째 탭 내용 : 차량금액 관련 부분 -->
 			<form action="<%=contextPath%>/cPrice.t.ct" method="post">
 		        <section id="carPrice-tab">
 		            <h2><a href="#carPrice-tab">차량금액</a></h2>
@@ -264,12 +264,12 @@
 		            </table>
 		            
 		            <br>
-		            <button type="submit" id="completeBtn">등록하기</button>
+		            <button type="submit" class="completeBtn">등록하기</button>
 		        </section>
 			</form>
 	        
 	        
-	        <!-- 두번째 탭 내용 -->
+	        <!-- 두번째 탭 내용 : 보험료 관련 부분 -->
 	        <section id="tab2">
 	       		<h2><a href="#tab2">보험금액</a></h2>
 	       		<fieldset>
@@ -277,185 +277,200 @@
 	       			<input type="radio" name="category" onclick="showInsurance(this);" id="insu-1">
 	       			<label for="insu-1">보험유형1</label>&nbsp; &nbsp; 
 	       			<input type="radio" name="category" onclick="showInsurance(this);" id="insu-2">
-	       			<label for="insu-2">보험유형2</label>
+	       			<label for="insu-2">보험유형2</label>&nbsp; &nbsp; 
+	       			<input type="radio" name="category" onclick="showInsurance(this);" id="insu-3">
+	       			<label for="insu-3">고객부담금 면제</label>
 	       		</fieldset>
 	       		
 	       		<!-- 보험유형1 테이블 영역 -->
 	       		<div id="insu-1Box" class="box">
-	       			<h5 id="price-title">24시간 기준 금액</h5>
-					<br><br>
-					<table id="day-price">
-		                <tr height="40px;">
-		                    <th width="50px;">비고</th>
-		                    <th width="350px;">차종</th>
-		                    <th>금액</th>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-insurance1" name="s-insurance1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-insurance1" name="m-insurance1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-insurance1" name="l-insurance1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		            </table>
-		            
-		            <br>
-		            
-		            <h5 id="price-title">사고시,처리면책금(본인부담금)</h5>
-					<br><br>
-					<table id="day-price">
-		                <tr height="40px;">
-		                    <th width="50px;">비고</th>
-		                    <th width="350px;">차종</th>
-		                    <th>금액</th>
-		                    <th>휴차료</th>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-accident1" name="s-accident1" placeholder="금액을입력해주세요"></td>
-		                    <td rowspan="3" width="200px"><input type="text" id="stopDay" name="stopDay" placeholder="1일 대여로의 비율로 입력하세요.(%)"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-accident1" name="m-accident1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-accident1" name="l-accident1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		            </table>
-		            
-		            <br>
-		            
-		            <h5 id="price-title">보상한도</h5>
-					<br><br>
-					<table id="day-price">
-		                <tr height="40px;">
-		                    <th width="50px;">비고</th>
-		                    <th width="350px;">차종</th>
-		                    <th>기준 금액</th>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-reward1" name="s-reward1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-reward1" name="m-reward1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-reward1" name="l-reward1" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		            </table>
-		            
-		            <br>
-		            
-		            <button type="button" id="completeBtn" onclick="goComplete();">등록하기</button>
-	       		
+	       			<form action="<%=contextPath%>/iPrice.t.ct" method="post">
+		       			<h5 id="price-title">보험료</h5>
+						<br><br>
+						<table id="day-price">
+			                <tr height="40px;">
+			                    <th width="50px;">비고</th>
+			                    <th width="350px;">차종</th>
+			                    <th>금액</th>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>경차, 준중형, 중형(2000cc미만)</td>
+				                <% for(CarType c : list1){ %>
+				                    <td><input type="text" id="s-insurance1" name="s-insurance1" value="<%=c.getRentInsuType1()%>"></td>
+				                <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+			                    <% for(CarType c : list2){ %>
+			                    	<td><input type="text" id="m-insurance1" name="m-insurance1" value="<%=c.getRentInsuType1()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+			                    <% for(CarType c : list3){ %>
+			                    	<td><input type="text" id="l-insurance1" name="l-insurance1" value="<%=c.getRentInsuType1()%>"></td>
+			                    <% } %>
+			                </tr>
+			            </table>
+			            
+			            <br>
+			            
+			            <h5 id="price-title">사고시,처리면책금(본인부담금)</h5>
+						<br><br>
+						<table id="day-price">
+			                <tr height="40px;">
+			                    <th width="50px;">비고</th>
+			                    <th width="350px;">차종</th>
+			                    <th>금액</th>
+			                    <th>휴차료</th>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>경차, 준중형, 중형(2000cc미만)</td>
+			                    <% for(CarType c : list1){ %>
+				                    <td><input type="text" id="s-accident1" name="s-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
+				                    <td rowspan="3" width="200px"><input type="text" id="stopDay" name="stopDay" value="<%=c.getRecessPrice()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+			                    <% for(CarType c : list2){ %>
+			                    	<td><input type="text" id="m-accident1" name="m-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+			                    <% for(CarType c : list3){ %>
+			                    	<td><input type="text" id="l-accident1" name="l-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
+			                    <% } %>
+			                </tr>
+			            </table>
+			            
+			            <br>
+			            
+			            <button type="submit" class="completeBtn">등록하기</button>
+	       			</form>
 	       		</div>
 	       		
 	       		<!-- 보험유형2 테이블 영역 -->
 	       		<div id="insu-2Box" class="box">
-	       			<h5 id="price-title">24시간 기준 금액</h5>
-					<br><br>
-					<table id="day-price">
-		                <tr height="40px;">
-		                    <th width="50px;">비고</th>
-		                    <th width="350px;">차종</th>
-		                    <th>금액</th>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-insurance2" name="s-insurance2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-insurance2" name="m-insurance2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-insurance2" name="l-insurance2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		            </table>
-		            
-		            <br>
-		            
-		            <h5 id="price-title">사고시,처리면책금(본인부담금)</h5>
-					<br><br>
-					<table id="day-price">
-		                <tr height="40px;">
-		                    <th width="50px;">비고</th>
-		                    <th width="350px;">차종</th>
-		                    <th>금액</th>
-		                    <th>휴차료</th>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-accident2" name="s-accident2" placeholder="금액을입력해주세요"></td>
-		                    <td rowspan="3" width="200px"><input type="text" id="stopDay" name="stopDay" placeholder="1일 대여로의 비율로 입력하세요.(%)"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-accident2" name="m-accident2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-accident2" name="l-accident2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		            </table>
-		            
-		            <br>
-		            
-		            <h5 id="price-title">보상한도</h5>
-					<br><br>
-					<table id="day-price">
-		                <tr height="40px;">
-		                    <th width="50px;">비고</th>
-		                    <th width="350px;">차종</th>
-		                    <th>기준 금액</th>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>경차, 준중형, 중형(2000cc미만)</td>
-		                    <td><input type="text" id="s-reward2" name="s-reward2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
-		                    <td><input type="text" id="m-reward2" name="m-reward2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		                <tr>
-		                    <td><input type="checkbox" name="checkRow"></td>
-		                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-		                    <td><input type="text" id="l-reward2" name="l-reward2" placeholder="금액을입력해주세요"></td>
-		                </tr>
-		            </table>
-		            
-		            <br>
-		            
-		            <button type="button" id="completeBtn" onclick="goComplete();">등록하기</button>
+	       			<form action="<%=contextPath%>/iPrice.t.ct" method="post">
+		       			<h5 id="price-title">보험료</h5>
+						<br><br>
+						<table id="day-price">
+			                <tr height="40px;">
+			                    <th width="50px;">비고</th>
+			                    <th width="350px;">차종</th>
+			                    <th>금액</th>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>경차, 준중형, 중형(2000cc미만)</td>
+			                    <% for(CarType c : list1){ %>
+			                    	<td><input type="text" id="s-insurance2" name="s-insurance2" value="<%=c.getRentInsuType2()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+			                    <% for(CarType c : list2){ %>
+			                    	<td><input type="text" id="m-insurance2" name="m-insurance2" value="<%=c.getRentInsuType2()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+			                    <% for(CarType c : list3){ %>
+			                    	<td><input type="text" id="l-insurance2" name="l-insurance2" value="<%=c.getRentInsuType2()%>"></td>
+			                    <% } %>
+			                </tr>
+			            </table>
+			            
+			            <br>
+			            
+			            <h5 id="price-title">사고시,처리면책금(본인부담금)</h5>
+						<br><br>
+						<table id="day-price">
+			                <tr height="40px;">
+			                    <th width="50px;">비고</th>
+			                    <th width="350px;">차종</th>
+			                    <th>금액</th>
+			                    <th>휴차료</th>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>경차, 준중형, 중형(2000cc미만)</td>
+			                    <% for(CarType c : list1){ %>
+				                    <td><input type="text" id="s-accident2" name="s-accident2" value="<%=c.getAccidentPriceType2()%>"></td>
+				                    <td rowspan="3" width="200px"><input type="text" id="stopDay" name="stopDay" value="<%=c.getRecessPrice()%>"></td>
+				                <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+			                    <% for(CarType c : list2){ %>
+			                    	<td><input type="text" id="m-accident2" name="m-accident2" value="<%=c.getAccidentPriceType2()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+			                    <% for(CarType c : list3){ %>
+			                    	<td><input type="text" id="l-accident2" name="l-accident2" value="<%=c.getAccidentPriceType2()%>"></td>
+			                    <% } %>
+			                </tr>
+			            </table>
+			            
+			            <br>
+			            
+			            <button type="submit" class="completeBtn">등록하기</button>
+	       			</form>
+	       		</div>
 	       		
+	       		<!-- 보험유형3 테이블 영역 -->
+	       		<div id="insu-3Box" class="box">
+		       		<form action="<%=contextPath%>/iPrice.t.ct" method="post">
+		       			<h5 id="price-title">보험료</h5>
+						<br><br>
+						<table id="day-price">
+			                <tr height="40px;">
+			                    <th width="50px;">비고</th>
+			                    <th width="350px;">차종</th>
+			                    <th>금액</th>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>경차, 준중형, 중형(2000cc미만)</td>
+			                    <% for(CarType c : list1){ %>
+			                    	<td><input type="text" id="s-insurance2" name="s-insurance2" value="<%=c.getAccidentExemption()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
+			                    <% for(CarType c : list2){ %>
+			                    	<td><input type="text" id="m-insurance2" name="m-insurance2" value="<%=c.getAccidentExemption()%>"></td>
+			                    <% } %>
+			                </tr>
+			                <tr>
+			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
+			                    <% for(CarType c : list3){ %>
+			                    	<td><input type="text" id="l-insurance2" name="l-insurance2" value="<%=c.getAccidentExemption()%>"></td>
+			                    <% } %>
+			                </tr>
+			            </table>
+			            
+			            <br><br>
+			            
+			            <button type="submit" class="completeBtn">등록하기</button>
+		       		
+		       		</form>
 	       		</div>
 	        </section>
 	    </article>
@@ -478,10 +493,6 @@
         			tag[i].style.display = "none";
         		}
         	}
-        }
-        
-        function goComplete(){
-        	alert("정상적으로 등록되었습니다.");
         }
     </script>
 
