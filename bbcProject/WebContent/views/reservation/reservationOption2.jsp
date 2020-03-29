@@ -1,10 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ page import="java.util.HashMap, java.text.DecimalFormat" %>    
+<% 	
+	HashMap<String, String> carInfo = (HashMap<String, String>)request.getAttribute("carInfo");	
+	int rentBrCode = Integer.parseInt(carInfo.get("rentBrCode"));
+	int returnBrCode = Integer.parseInt(carInfo.get("returnBrCode"));
+	String rentDate = carInfo.get("rentDate");
+	String returnDate = carInfo.get("returnDate");
+	int carPrice = Integer.parseInt(carInfo.get("carPrice"));
+	int carNo = Integer.parseInt(carInfo.get("carNo"));
+	String optionInfo = carInfo.get("optionInfo");
+	String discountCate = carInfo.get("discountCate");
+	int discountNo = Integer.parseInt(carInfo.get("discountNo"));
+	int discountPrice = Integer.parseInt(carInfo.get("discountPrice"));
+	int cwdTotalPrice = Integer.parseInt(carInfo.get("cwdTotalPrice"));
+	int totalPrice = Integer.parseInt(carInfo.get("totalPrice"));
+	
+	String rentBrName = carInfo.get("rentBrName");
+	String returnBrName = carInfo.get("returnBrName");
+	String carName = carInfo.get("carName");
+	String carImg = carInfo.get("carImg");
+	int cwdPrice = Integer.parseInt(carInfo.get("cwdPrice"));
+	int babySeatPrice = Integer.parseInt(carInfo.get("babySeatPrice"));
+	
+	String licenseType = carInfo.get("licenseType");
+	String licenseNumber1 = carInfo.get("licenseNumber1");
+	String licenseNumber2 = carInfo.get("licenseNumber2");
+	String licenseNo = carInfo.get("licenseNo");
+	String licenseIssueDate = carInfo.get("licenseIssueDate");
+	String licenseReturnDate = carInfo.get("licenseReturnDate");
+		
+	DecimalFormat df = new DecimalFormat("#,###");
+	String strCarPrice = df.format(carPrice);
+	String strDiscountPrice = df.format(discountPrice);
+	String strCWDTotalPrice = df.format(cwdTotalPrice);
+	String strTotalPrice = df.format(totalPrice);
+	String strCWDPrice = df.format(cwdPrice);
+	String strBabySeatPrice = df.format(babySeatPrice);
+	
+%> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>차량예약</title>
+<title>정보입력</title>
 <link href="<%= request.getContextPath() %>/resources/css/reservation/reservation.css" rel="stylesheet" type="text/css"> 
 </head>
 <body>
@@ -21,12 +60,12 @@
 		<div class="option-left">	
 			<div class="option-left-top">	
 				<div class="box-schd">
-					<span id="rentInfo"><strong id="rentBr">강남</strong><strong id="rentDt">2020-03-07 10시 00분</strong></span>
+					<span id="rentInfo"><strong id="rentBr"><%=rentBrName%></strong><strong id="rentDt"><%=rentDate%></strong></span>
 						<em class="ico-to">to</em>
-					<span id="returnInfo"><strong id="returnBr">강남</strong><strong id="returnDt">2020-03-08 10시 00분</strong></span>
+					<span id="returnInfo"><strong id="returnBr"><%=returnBrName%></strong><strong id="returnDt"><%=returnDate%></strong></span>
 				</div>
-				<div id="carInfo" class="box-car">아반떼 AD (D) F/L
-					<div class="img-car"><img src="<%=contextPath%>/resources/images/car/newavante.png"></div>
+				<div id="carInfo" class="box-car"><%=carName%>
+					<div class="img-car"><img src="<%=contextPath%>/resources/carinfo_upfile/<%=carImg%>"></div>
 				</div>
 				<p class="f10 txt-gray1 txt-center pb25">실제 대여하는 차량과 외관, 색상, 옵션 등 차이가 있을 수 있으며<br>사고 또는 고장 등 부득이한 경우 동급차종으로 변경될 수 있습니다.</p>
 			</div>	
@@ -34,32 +73,32 @@
 				<ul>
 					<!-- 대여금액 -->
                 	<li>
-	                	<span class="tit">대여금액</span><span class="price" id="rentalFee"><strong>110,000</strong><em>원</em></span>
+	                	<span class="tit">대여금액</span><span class="price" id="rentalFee" price="<%=carPrice%>"><strong><%=strCarPrice%></strong><em>원</em></span>
                     </li>
 					<!-- 할인금액 -->
                     <li>
-	                	<span class="tit">할인금액</span><span class="price" id="totalDiscountFeeView"><strong>-55,000</strong><em>원</em></span>
+	                	<span class="tit">할인금액</span><span class="price"><strong>-</strong><strong id="discountPay"><%=strDiscountPrice%></strong><em>원</em></span>
 						<ul class="detail">
 							<li>
-								<span id="eventShow">[서울전지점]3월 안전하고 건강한여행(50% 할인)</span><span class="price"></span>
+								<span id="eventShow"></span><span class="price"></span>
 							</li>
 						</ul>
                      </li>
 					<!-- 보험및기타옵션 -->
 					<li>
-	                	<span class="tit">보험 및 기타 옵션</span><span class="price" id="totalOptionFeeView"><strong>0</strong><em>원</em></span>
+	                	<span class="tit">보험 및 기타 옵션</span><span class="price"><strong id="strCWDTotalPrice"><%=strCWDTotalPrice%></strong><em>원</em></span>
 						<ul class="detail">
 							<li>
-								<span class="tit" id="cdwNameShow">보험 미적용</span><span class="price" id="cdwFee">0원</span>
+								<span class="tit" id="cdwNameShow">보험 미적용</span><span class="price"><strong id="cdwFee"><%=strCWDPrice%></strong>원</span>
 							</li>	
 							<li>
-								<span class="tit" id="babySeatShow">베이비 시트</span><span class="price" id="babySeatFee">0원</span>
+								<span class="tit" id="babySeatShow">베이비 시트</span><span class="price"><strong id="babySeatFee"><%=strBabySeatPrice%></strong>원</span>
 							</li>					
 						</ul>
                      </li>
 					<!-- 금액 -->
                     <li class="total">
-                    	<span class="tit">금액</span><span class="price" id="totalRentalFeeView"><strong>55,000</strong><em>원</em></span>
+                    	<span class="tit">금액</span><span class="price" id="totalRentalFeeView"><strong id="totalPay"><%=strTotalPrice%></strong><em>원</em></span>
                     </li>
                 </ul>
 			</div>
@@ -78,16 +117,30 @@
                       	<col style="width:auto">
                     </colgroup>
                     <tbody>
+                    <% if(loginUser == null) { %>
                     	<tr>
                         	<th>회원등급</th>
                         	<td>
-                        	<input type="text" id="memberGrade" name="memberGrade" value="일반회원" readonly>
+                        	<input type="text" id="memberGrade" name="memberGrade" value="비회원" readonly>
                         	</td>
                         </tr>
                         <tr>
                             <th>이름</th>
                             <td>
-							<input type="text" id="userName" name="userName" title="이름" placeholder="이름을 입력하세요." value="홍길동" readonly>
+							<input type="text" id="userName" name="userName" title="이름" placeholder="이름을 입력하세요.">
+							</td>
+						</tr>
+						<tr>
+                            <th>법정생년월일</th>
+                            <td>
+							<input type="text" id="userBirth" name="userBirth" title="법정생년월일" placeholder="8자리로입력하세요(ex. 19880101)">
+							</td>
+						</tr>
+						<tr>
+                            <th>성별</th>
+                            <td>
+							<input type="radio" name="gender" value="M" style="position: inherit; width: 17px; height: 17px; opacity:1;">&nbsp;남&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="gender" value="F" style="position: inherit; width: 17px; height: 17px; opacity:1;">&nbsp;여
 							</td>
 						</tr>
 						<tr>
@@ -106,6 +159,36 @@
                                 <input  type="text" name="phone3" id="phone3" title="휴대폰 마지막 숫자" style="width:100px;" value="" maxlength="4" onkeydown="" onkeypress="" onkeyup="">
                            </td>
                         </tr>
+                   <% } else { %>
+                   		                    	<tr>
+                        	<th>회원등급</th>
+                        	<td>
+                        	<input type="text" id="memberGrade" name="memberGrade" value="일반회원" readonly>
+                        	</td>
+                        </tr>
+                        <tr>
+                            <th>이름</th>
+                            <td>
+							<input type="text" id="userName" name="userName" title="이름" value="<%=loginUser.getMemberName()%>" readonly>
+							</td>
+						</tr>
+						<tr>
+                        	<th>이메일</th>
+                            <td>
+								<input type="text" name="userEmail" id="userEmail" maxlength="80" value="<%=loginUser.getMemberEmail()%>" title="이메일" readonly>
+							</td>
+						</tr>
+                        <tr>
+                           <th>휴대전화</th>
+                           <td>
+								<input  type="text" name="phone1" id="phone1" style="width:76px;" value="<%=loginUser.getPhone().substring(0, 3)%>" readonly>
+                                <span class="hyphen"> - </span>
+                                <input  type="text" name="phone2" id="phone2" style="width:100px;" value="<%=loginUser.getPhone().substring(4, 8)%>" readonly>
+                                <span class="hyphen"> - </span>
+                                <input  type="text" name="phone3" id="phone3" style="width:100px;" value="<%=loginUser.getPhone().substring(9, 13)%>" readonly>
+                           </td>
+                        </tr>
+                   <% } %>     
                    </tbody>
 				</table>
 			</div>			
@@ -118,16 +201,61 @@
                       	<col style="width:auto">
                     </colgroup>
                     <tbody>
-                    	<tr>
-                        	<th>면허구분</th>
-                        	<td>
-                        	 <select name="licenseNo">	
-		    					<option value="국내">국내</option>
-		    					<option value="국제">국제</option>
-							</select>
-                        	</td>
-                        </tr>
+                    <% if(licenseType != "") { %>
                         <tr>
+                            <th>면허 종류</th>
+                            <td> 
+                            <input  type="text" name="licenseKind" style="width:70px;" value="<%=licenseType%>" readonly>
+							</td>
+						</tr>
+						<tr>
+                        	<th>면허증 번호</th>
+                        	<td>       
+                        	 <input  type="text" name="licenseNo1" style="width:60px;" value="<%=licenseNumber1%>" readonly>
+                           	<span class="hyphen"> - </span>
+                            <input  type="text" name="licenseNo2" style="width:60px;" value="<%=licenseNumber2.substring(0, 2)%>" readonly>
+                            <span class="hyphen"> - </span>
+                            <input  type="text" name="licenseNo3" style="width:90px;" value="<%=licenseNumber2.substring(2, 8)%>" readonly>
+                           	<span class="hyphen"> - </span>
+                            <input  type="text" name="licenseNo4" style="width:60px;" value="<%=licenseNumber2.substring(8, 10)%>" readonly>
+                           </td>
+						</tr>
+						<tr>
+                        	<th>발급일</th>
+								<td>
+									<div class="licenseDateY"> 
+									<input name="licenseAcqYYYY" style="width:90px;" value="<%=licenseIssueDate.substring(0, 4)%>" readonly>
+									<span>년</span>	
+									</div>	
+									<div class="licenseDateM">							
+                                	<input name="licenseAcqMM" style="width:60px;" value="<%=licenseIssueDate.substring(5, 7)%>" readonly>
+                                	<span>월</span> 
+                                	 </div>	
+									<div class="licenseDateD">	                           	
+                                	<input name="licenseAcqDD" style="width:60px;" value="<%=licenseIssueDate.substring(8, 10)%>" readonly>
+                                	<span>일</span>
+                                	</div>
+								</td>
+						</tr>
+						<tr>
+                        	<th>만료일</th>
+								<td>
+									<div class="licenseDateY">
+									<input name="licenseAcqYYYY" style="width:90px;" value="<%=licenseReturnDate.substring(0, 4)%>" readonly>
+									<span>년</span>	
+									</div>	
+									<div class="licenseDateM">							
+                                	<input name="licenseAcqMM" style="width:60px;" value="<%=licenseReturnDate.substring(5, 7)%>" readonly>
+                                	<span>월</span> 
+                                	 </div>	
+									<div class="licenseDateD">	                           	
+                                	<input name="licenseAcqDD" style="width:60px;" value="<%=licenseReturnDate.substring(8, 10)%>" readonly>
+                                	<span>일</span>
+                                	</div>
+								</td>
+						</tr>
+					<% } else { %>
+					     <tr>
                             <th>면허 종류</th>
                             <td>
 							<select name="licenseKind">	
@@ -192,6 +320,7 @@
                                 	</div>
 								</td>
 						</tr>
+					<% } %>     
                    </tbody>
 				</table>
 			</div>	
@@ -296,7 +425,7 @@
             <p class="hg-10"></p>
 			<div class="optionBtn">
 				<button class="btn-default-cancel btn-prev" onclick="goLinkPage('<%=contextPath%>/carOption.rv');">이전</button>
-				<button class="btn-default-ok btn-next" onclick="goLinkPage('<%=contextPath%>/carPayment.rv');">다음</button>
+				<button class="btn-default-ok btn-next" onclick="goPaymentPage();">다음</button>
 			</div>
 		</div>		
 		<!-- /div car-info-right -->
@@ -305,6 +434,27 @@
 		</table>
 	</div>
 	<p class="hg-30"></p>
+	<script>		
+		var rentBrCode = "<%=rentBrCode%>";
+		var returnBrCode = "<%=returnBrCode%>";
+		var rentDate = "<%=rentDate%>";
+		var returnDate = "<%=returnDate%>";
+		var carPrice =  "<%=carPrice%>";
+		var carNo = "<%=carNo%>";
+		var optionInfo = "<%=optionInfo%>";
+		var discountCate = "<%=discountCate%>";
+		var discountNo = "<%=discountNo%>";
+		var discountPrice = "<%=discountPrice%>";
+		var cwdTotalPrice = "<%=cwdTotalPrice%>";
+		var totalPrice = "<%=totalPrice%>";
+		
+		var rentBrName = "<%=rentBrName%>";
+		var returnBrName = "<%=returnBrName%>";
+		var carName = "<%=carName%>";
+		var carImg = "<%=carImg%>";	
+		var cwdPrice = "<%=cwdPrice%>";	
+		var babySeatPrice = "<%=babySeatPrice%>";	
+	</script>
 	<script type="text/javascript" src="<%=contextPath%>/resources/js/reservation/reservation.js"></script>  
 
 </body>	
