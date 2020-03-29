@@ -84,11 +84,11 @@ public class CarInfoService {
 		return list;
 	}
 	
-	public ArrayList<CarInfo> branchCarEnroll(PageInfo pi){
+	public ArrayList<CarInfo> branchCarEnrollList(PageInfo pi){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<CarInfo> list = new CarInfoDao().branchCarEnroll(conn, pi);
+		ArrayList<CarInfo> list = new CarInfoDao().branchCarEnrollList(conn, pi);
 		
 		close(conn);
 		
@@ -115,6 +115,27 @@ public class CarInfoService {
 		close(conn);
 		
 		return result;
+	}
 	
+	public int branchEnrollChkCar(String[] arr, int branch) {
+		
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		for(int i=0; i<arr.length; i++) {
+			
+			result = new CarInfoDao().branchEnrollChkCar(conn, arr[i], branch);
+		}
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 }

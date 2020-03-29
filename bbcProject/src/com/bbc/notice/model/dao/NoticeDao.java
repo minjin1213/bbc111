@@ -272,6 +272,7 @@ public class NoticeDao {
 			pstmt.setString(2, n.getNoticeContent());
 			pstmt.setInt(3, n.getNoticeImport());
 			pstmt.setInt(4, n.getNoticeNo());
+			pstmt.setInt(5, memNo);
 			
 			result = pstmt.executeUpdate();
 			

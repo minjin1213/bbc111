@@ -33,7 +33,6 @@ public class CarDeleteServlet extends HttpServlet {
 		
 		String str = request.getParameter("str");
 		
-		
 		String[] arr = str.split(",");
 		
 		int result = new CarInfoService().branchDeleteChkCar(arr);

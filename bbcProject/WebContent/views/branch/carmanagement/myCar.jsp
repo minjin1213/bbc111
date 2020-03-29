@@ -103,11 +103,12 @@
 																	<a href="#" data-toggle="modal" data-target="#carModal"
 																			data-carTypeName="<%= list.get(i).getCarTypeName()%>"
 																			data-carType="<%= list.get(i).getCarType() %>"
-																			date-carNum="<%= list.get(i).getCarNum() %>"
-																			date-carColor="<%= list.get(i).getCarColor() %>"
-																			date-carFuel="<%= list.get(i).getCarFuel() %>"
-																			date-carYear="<%= list.get(i).getCarLunchYear() %>"
-																			date-carOption="<%= list.get(i).getCarOption() %>"><h5><%= list.get(index).getCarTypeName() %></h5>
+																			data-carNum="<%= list.get(i).getCarNum() %>"
+																			data-carColor="<%= list.get(i).getCarColor() %>"
+																			data-carFuel="<%= list.get(i).getCarFuel() %>"
+																			data-carYear="<%= list.get(i).getCarLunchYear() %>"
+																			data-carOption="<%= list.get(i).getCarOption() %>">
+																		<h5><%= list.get(index).getCarTypeName() %></h5>
 																	</a>
 																</div>
 															</div>
@@ -273,7 +274,7 @@
 						</tr>
 						<tr>
 							<th>연식</th>
-							<td><label class="carFuel"></label></td>
+							<td><label class="carYear"></label></td>
 						</tr>
 						<tr>
 							<th>옵션</th>
@@ -306,7 +307,7 @@
 				
 				var modal = $(this);
 				modal.find(".carTypeName").text(carTypeName);
-				modal.fin(".carType").text(carType);
+				modal.find(".carType").text(carType);
 				modal.find(".carNum").text(carNum);
 				modal.find(".carColor").text(carColor);
 				modal.find(".carFuel").text(carFuel);

@@ -105,11 +105,11 @@
 																	<a href="#" data-toggle="modal" data-target="#carModal"
 																			data-carTypeName="<%= list.get(i).getCarTypeName()%>"
 																			data-carType="<%= list.get(i).getCarType() %>"
-																			date-carNum="<%= list.get(i).getCarNum() %>"
-																			date-carColor="<%= list.get(i).getCarColor() %>"
-																			date-carFuel="<%= list.get(i).getCarFuel() %>"
-																			date-carYear="<%= list.get(i).getCarLunchYear() %>"
-																			date-carOption="<%= list.get(i).getCarOption() %>"><h5><%= list.get(index).getCarTypeName() %></h5>
+																			data-carNum="<%= list.get(i).getCarNum() %>"
+																			data-carColor="<%= list.get(i).getCarColor() %>"
+																			data-carFuel="<%= list.get(i).getCarFuel() %>"
+																			data-carYear="<%= list.get(i).getCarLunchYear() %>"
+																			data-carOption="<%= list.get(i).getCarOption() %>"><h5><%= list.get(index).getCarTypeName() %></h5>
 																	</a>
 																</div>
 															</div>
@@ -242,7 +242,7 @@
 				<div class="modal-body">선택된 차량을 등록하시겠습니까 ?</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="enroll-car.html">등록</a>
+					<a class="btn btn-primary" href="#" id="selectCar">등록</a>
 				</div>
 			</div>
 		</div>
@@ -317,6 +317,29 @@
 				modal.find(".carFuel").text(carFuel);
 				modal.find(".carYear").text(carYear);
 				modal.find(".carOption").text(carOption);
+			});
+		});
+		
+		$("#selectCar").click(function(){
+			
+			var arr = new Array();
+			
+			$('input:checkbox[name=chk-car]:checked').each(function(){
+				arr.push($(this).val());
+			});
+			
+			var str = arr.join();
+			
+			$.ajax({
+				url:"enrollCar.b.ci",
+				type:"get",
+				data:{str:str},
+				success:function(){
+					location.href="enrollCarPage.b.ci";
+				},
+				error:function(){
+					console.log("차량 선택 등록 ajax 통신 오류");
+				}
 			});
 		});
 	</script>

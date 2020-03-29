@@ -40,12 +40,6 @@ public class HelpEventEnrollServlet extends HttpServlet {
 		String endDate = request.getParameter("endDate");
 		String rate = request.getParameter("rate");
 		
-		System.out.println(title);
-		System.out.println(content);
-		System.out.println(startDate);
-		System.out.println(endDate);
-		System.out.println(rate);
-		
 		Event e = new Event();
 		e.setEventTitle(title);
 		e.setEventContent(content);
