@@ -57,12 +57,12 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mx-auto">
 						<li class="nav-item">
-							<a class="nav-link ml-lg-0" href="index.html">Home
+							<a class="nav-link ml-lg-0" href="<%=contextPath%>">Home
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="about.html">차량예약</a>
+							<a class="nav-link" href="<%=contextPath%>/reservationSearch.rv">차량예약</a>
 						</li>
 						
 						

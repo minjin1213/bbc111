@@ -424,7 +424,7 @@
             <!-- div 고유식별정보 수집에 대한 동의 -->
             <p class="hg-10"></p>
 			<div class="optionBtn">
-				<button class="btn-default-cancel btn-prev" onclick="goLinkPage('<%=contextPath%>/carOption.rv');">이전</button>
+				<button class="btn-default-cancel btn-prev" onclick="goCarOption();">이전</button>
 				<button class="btn-default-ok btn-next" onclick="goPaymentPage();">다음</button>
 			</div>
 		</div>		

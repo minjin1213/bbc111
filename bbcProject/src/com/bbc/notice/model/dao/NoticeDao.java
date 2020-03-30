@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.bbc.attachment.model.vo.Attachment;
 import com.bbc.common.page.vo.PageInfo;
+import com.bbc.event.model.vo.Event;
 import com.bbc.notice.model.vo.Notice;
 import com.bbc.notice.model.vo.UserPageInfo;
 
@@ -399,6 +400,40 @@ public class NoticeDao {
 		}
 				
 		return n;
+		
+	}
+	
+	public ArrayList<Notice> selectByRv(Connection conn) {
+
+		ArrayList<Notice> nlist = new ArrayList<>();
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectByRv");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			while(rset.next()) {
+				Notice n = new Notice();
+				String title = rset.getString("NOTICE_TITLE");
+				if(title.length() > 30) {
+					title = title.substring(0, 30) + "...";
+				}
+				n.setNoticeTitle(title);
+				n.setEnrollDate(rset.getDate("NOTICE_DATE"));
+				n.setNoticeContent(rset.getString("NOTICE_CONTENT"));				
+				nlist.add(n);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+				
+		return nlist;
 		
 	}
 	

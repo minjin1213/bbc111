@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
-<%@ page import="java.util.ArrayList, com.bbc.area.model.vo.Area, com.bbc.branchmanagement.model.vo.BranchManagement" %>    
-<% 
+<%@ page import="java.util.ArrayList, com.bbc.notice.model.vo.Notice, com.bbc.event.model.vo.Event, com.bbc.area.model.vo.Area, com.bbc.branchmanagement.model.vo.BranchManagement" %>    
+<% 	
+	ArrayList<Event> elist = (ArrayList<Event>)request.getAttribute("elist"); 	
+	ArrayList<Notice> nlist = (ArrayList<Notice>)request.getAttribute("nlist"); 	
 	ArrayList<Area> list = (ArrayList<Area>)request.getAttribute("list"); 	
+	
+	String preLink = (String)request.getAttribute("preLink");	
+	String rent_branch = (String)(request.getAttribute("rent_branch"));
+	String return_branch = (String)(request.getAttribute("return_branch"));
+	String rent_branchnm = (String)request.getAttribute("rent_branchnm");
+	String return_branchnm = (String)request.getAttribute("return_branchnm");
+	String rentDate = (String)request.getAttribute("rentDate");
+	String returnDate = (String)request.getAttribute("returnDate");	
+	String carno = (String)(request.getAttribute("carno"));
+	String carType = (String)(request.getAttribute("carType"));
 %>    
 <!DOCTYPE html>
 <html>
@@ -59,46 +71,38 @@
 			<p class="hg-20"></p>
 			<table style="margin-left:12px">	
 				<tr>
-					<td colspan="2"><label class="car-info-title">이벤트</label></td>
+					<td colspan="2"><label class="car-info-title" onclick="goNotice();" style="cursor: pointer">이벤트</label></td>
 				</tr>
-				<tr>
-					<td>새 봄 맞이 최대 55% 할인 이벤트!</td>
-					<td width="200px">2020.02.24 ~ 2020.07.31</td>
-				</tr>
-				<tr>
-					<td>새 봄 맞이 최대 55% 할인 이벤트!</td>
-					<td>2020.02.24 ~ 2020.07.31</td>
-				</tr>
-				<tr>
-					<td>새 봄 맞이 최대 55% 할인 이벤트!</td>
-					<td>2020.02.24 ~ 2020.07.31</td>
-				</tr>
-				<tr>
-					<td>새 봄 맞이 최대 55% 할인 이벤트!</td>
-					<td>2020.02.24 ~ 2020.07.31</td>
-				</tr>
+				<% if(elist.isEmpty()){ %>
+					<tr>
+						<td colspan="5">존재하는 이벤트가 없습니다.</td>
+					</tr>
+				<% }else { %>
+					<% for(Event e : elist){ %>
+						<tr style="cursor: pointer" data-toggle="modal" data-target="#eventInfoHome" data-whatever="<%=e.getEventContent()%>">
+							<td><%=e.getEventTitle()%></td>
+							<td width="200px"><%=e.getEventStartDate()%> ~ <%=e.getEventEndDate()%></td>
+						</tr>
+					<% } %>
+				<% } %>
 			</table>
 			<p class="hg-20"></p>
 			<table style="margin-left:12px">	
 				<tr>
-					<td colspan="2"><label class="car-info-title">공지사항</label></td>
+					<td colspan="2"><label class="car-info-title" onclick="goNotice();" style="cursor: pointer">공지사항</label></td>
 				</tr>
-				<tr>
-					<td>시스템 점검 작업 안내</td>
-					<td width="120px">2020.02.24</td>
-				</tr>
-				<tr>
-					<td>시스템 점검 작업 안내</td>
-					<td>2020.02.24</td>
-				</tr>
-				<tr>
-					<td>시스템 점검 작업 안내</td>
-					<td>2020.02.24</td>
-				</tr>
-				<tr>
-					<td>시스템 점검 작업 안내</td>
-					<td>2020.02.24</td>
-				</tr>
+				<% if(nlist.isEmpty()){ %>
+					<tr>
+						<td colspan="5">존재하는 공지사항이 없습니다.</td>
+					</tr>
+				<% }else { %>
+					<% for(Notice n : nlist){ %>
+						<tr style="cursor: pointer" data-toggle="modal" data-target="#noticeInfoHome" data-whatever="<%=n.getNoticeContent()%>">						
+							<td width="397px"><%=n.getNoticeTitle()%></td>
+							<td><%=n.getEnrollDate()%></td>
+						</tr>
+					<% } %>
+				<% } %>	
 			</table>
 		</div>
 		<!-- /div car-info-right -->
@@ -107,136 +111,6 @@
 			<label class="mt5 ml10" id="searchcnt"></label>					
 			<span class="pl100 pb15 f12 txt-red1">* 할인 및 쿠폰적용은 예약 다음 페이지에서 선택 가능합니다.</span>
 			<div class="list-car">			
-			<table style="width:470px" border="1">
-					<tbody>
-					<tr>
-					<td rowspan="3">
-					<img src="/bbc/resources/images/car/avante2019.jpg">
-					</td>
-					</tr>	
-					<tr>
-					<td width="70%" class="car-type">아반떼 AD</td>
-					<td width="30%" class="car-price">49,500원</td>
-					</tr>
-					<tr>
-					<td colspan="2">
-					<span class="ico-gas"><img src="/bbc/resources/images/car/ico_gas_new.png"></span>
-					<div class="ico-people-wrap">
-					<div><img src="/bbc/resources/images/car/ico_people.png"></div>
-					<div class="ico-people-text"><p class="ico-people-count">5</p></div>
-					</div>
-					<div class="btn-reservation" onclick="goLinkPage('/caroption.rv')">예약</div>
-					</td>
-					</tr>
-					<tr>
-					<td colspan="3">
-					<p style="border-bottom: 1px solid #757272; margin-top:10px; margin-bottom:5px;"></p>
-					</td>
-					</tr>
-					<!-- -- 두번째 -->
-					<tr>
-					<td rowspan="3"><img src="<%=request.getContextPath()%>/resources/images/car/avante2019.jpg"></td>
-					</tr>
-					<tr>
-					<td width="70%" class="car-type">ALL NEW K3 (G)</td>
-					<td width="30%" class="car-price">49,500원</td>
-					</tr>	
-					<tr>
-					<td colspan="2">
-					<span class="ico-gas"><img src="<%=request.getContextPath()%>/resources/images/car/ico_gas_new.png"></span>
-					<div class="ico-people-wrap">
-						<div><img src="/bbc/resources/images/car/ico_people.png"></div>
-						<div class="ico-people-text"><p class="ico-people-count">5</p></div>
-					</div>					
-					<div class="btn-reservation" onclick="goLinkPage('<%=contextPath%>/carOption.rv');">예약</div>					
-					</td>				
-					</tr>	
-					<tr>
-					<td colspan="3"><p style="border-bottom: 1px solid #757272; margin-top:10px; margin-bottom:5px;"></p></td>
-					</tr>				
-					<!-- -- 두번째 -->
-					<tr>
-					<td rowspan="3"><img src="<%=request.getContextPath()%>/resources/images/car/avante2019.jpg"></td>
-					</tr>
-					<tr>
-					<td width="70%" class="car-type">아반떼 AD (D) F/L</td>
-					<td width="30%" class="car-price">49,500원</td>
-					</tr>	
-					<tr>
-					<td colspan="2">
-					<span class="ico-gas"><img src="<%=request.getContextPath()%>/resources/images/car/ico_lpg_new.png"></span>
-					<div class="ico-people-wrap">
-						<div><img src="/bbc/resources/images/car/ico_people.png"></div>
-						<div class="ico-people-text"><p class="ico-people-count">5</p></div>
-					</div>					
-					<div class="btn-reservation" onclick="">예약</div>
-					</td>		
-					</tr>
-					<tr>
-					<td colspan="3"><p style="border-bottom: 1px solid #757272; margin-top:10px; margin-bottom:5px;"></p></td>
-					</tr>	
-					<!-- -- 세번째 -->
-					<tr>
-					<td rowspan="3"><img src="<%=request.getContextPath()%>/resources/images/car/canival.jpg"></td>
-					</tr>
-					<tr>
-					<td width="70%" class="car-type">올 뉴 카니발 9인승 (D)</td>
-					<td width="30%" class="car-price">121,500원</td>
-					</tr>	
-					<tr>
-					<td colspan="2">
-					<span class="ico-gas"><img src="<%=request.getContextPath()%>/resources/images/car/ico_diesel_new.png"></span>
-					<div class="ico-people-wrap">
-						<div><img src="/bbc/resources/images/car/ico_people.png"></div>
-						<div class="ico-people-text"><p class="ico-people-count">9</p></div>
-					</div>					
-					<div class="btn-reservation" onclick="">예약</div>
-					</td>		
-					</tr>
-					<tr>
-					<td colspan="3"><p style="border-bottom: 1px solid #757272; margin-top:10px; margin-bottom:5px;"></p></td>
-					</tr>	
-					<!--- 네번째 --->
-					<tr>
-					<td rowspan="3"><img src="<%=request.getContextPath()%>/resources/images/car/canival.jpg"></td>
-					</tr>
-					<tr>
-					<td width="70%" class="car-type">올 뉴 카니발 9인승 (D)</td>
-					<td width="30%" class="car-price">121,500원</td>
-					</tr>	
-					<tr>
-					<td colspan="2">
-					<span class="ico-gas"><img src="<%=request.getContextPath()%>/resources/images/car/ico_diesel_new.png"></span>
-					<div class="ico-people-wrap">
-						<div><img src="/bbc/resources/images/car/ico_people.png"></div>
-						<div class="ico-people-text"><p class="ico-people-count">9</p></div>
-					</div>					
-					<div class="btn-reservation" onclick="">예약</div>
-					</td>		
-					</tr>
-					<tr>
-					<td colspan="3"><p style="border-bottom: 1px solid #757272; margin-top:10px; margin-bottom:5px;"></p></td>
-					</tr>
-					<!--- 다섯번째 --->
-					<tr>
-					<td rowspan="3"><img src="<%=request.getContextPath()%>/resources/images/car/avante2019.jpg"></td>
-					</tr>
-					<tr>
-					<td width="70%" class="car-type">ALL NEW K3 (G)</td>
-					<td width="30%" class="car-price">49,500원</td>
-					</tr>	
-					<tr>
-					<td colspan="2">
-					<span class="ico-gas"><img src="<%=request.getContextPath()%>/resources/images/car/ico_gas_new.png"></span>
-					<div class="ico-people-wrap">
-						<div><img src="/bbc/resources/images/car/ico_people.png"></div>
-						<div class="ico-people-text"><p class="ico-people-count">5</p></div>
-					</div>					
-					<div class="btn-reservation" onclick="">예약</div>
-					</td>		
-					</tr>
-						</tbody>
-				</table>
 			</div>
 		</div>	
 		<!-- div /car-search-result -->
@@ -385,7 +259,7 @@
     	</div>
   	</div>
 
- 	<!-- 공지사항 모달창 -->
+ 	<!-- 지점공지사항 모달창 -->
   	<div class="modal fade" id="noticeInfo" role="dialog" aria-hidden="true">
     	<div class="modal-dialog modal-dialog-centered" role="document">
       		<div class="modal-content">
@@ -400,7 +274,22 @@
     	</div>
   	</div>
   	
-   	<!-- 이벤트 모달창 -->  	
+  	<!-- 공지사항 모달창 -->
+  	<div class="modal fade" id="noticeInfoHome" role="dialog" aria-hidden="true">
+    	<div class="modal-dialog modal-dialog-centered" role="document">
+      		<div class="modal-content">
+      			<div class="modal-header">
+            		<span class="left-margin">공지사항</span>
+          			<button type="button" class="close" data-dismiss="modal">×</button>  			
+        		</div>
+        		<div class="modal-body">     
+          			<ul class="txt-list"></ul>            			      	
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+  	
+   	<!-- 지점이벤트 모달창 -->  	
   	<div class="modal fade" id="eventInfo" role="dialog" aria-hidden="true">
     	<div class="modal-dialog modal-dialog-centered" role="document">
       		<div class="modal-content">
@@ -415,6 +304,32 @@
     	</div>
   	</div>
   	
+  	<!-- 이벤트 모달창 -->  	
+  	<div class="modal fade" id="eventInfoHome" role="dialog" aria-hidden="true">
+    	<div class="modal-dialog modal-dialog-centered" role="document">
+      		<div class="modal-content">
+      			<div class="modal-header">
+            		<span class="left-margin">이벤트</span>
+          			<button type="button" class="close" data-dismiss="modal">×</button>  			
+        		</div>
+        		<div class="modal-body">     
+          			<ul class="txt-list"></ul>        	
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+  	
+  	<script>
+		var rentBrCode = "<%=rent_branch%>";
+		var returnBrCode = "<%=return_branch%>";
+		var rentBrName = "<%=rent_branchnm%>";
+		var returnBrName = "<%=return_branchnm%>";
+		var rentDate = "<%=rentDate%>";
+		var returnDate = "<%=returnDate%>";
+		var carNo = "<%=carno%>";
+		var carTypeInfo = "<%=carType%>";
+		var preLink = "<%=preLink%>";
+	</script>
 	<script type="text/javascript" src="<%=contextPath%>/resources/js/reservation/reservation.js"></script>
 
 </body>	

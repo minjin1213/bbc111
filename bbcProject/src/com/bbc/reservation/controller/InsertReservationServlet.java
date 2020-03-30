@@ -123,11 +123,13 @@ public class InsertReservationServlet extends HttpServlet {
 						
 				int result = new ReservationService().insertResevation(r);
 				
-				System.out.println("result : " + result);
+				System.out.println("결재정보 테이블 result : " + result);
 				
 				if(result > 0) {
 					// 본인의 차량예약내역 페이지로 이동				
-					response.sendRedirect("view.rv");
+					// response.sendRedirect("view.rv");
+					request.setAttribute("msg", "예약이 정상적으로 처리되었습니다. 감사합니다!");
+					request.getRequestDispatcher("views/common/infoPage.jsp").forward(request, response);
 				}else {
 					request.setAttribute("msg", "차량예약정보 저장 실패");
 					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
