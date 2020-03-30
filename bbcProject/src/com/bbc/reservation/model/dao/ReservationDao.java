@@ -32,7 +32,7 @@ public class ReservationDao {
 		}
 	}
 	
-	public ArrayList<Reservation> selectWholeList(Connection conn, PageInfo pi, int st){
+	public ArrayList<Reservation> selectWholeList(Connection conn, PageInfo pi, String st){
 		
 		ArrayList<Reservation> wholeList = new ArrayList<>();
 		
@@ -43,7 +43,7 @@ public class ReservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, st);
+			pstmt.setString(1, st);
 			
 			rset = pstmt.executeQuery();
 			
@@ -123,7 +123,7 @@ public class ReservationDao {
 		
 	}
 
-	public ArrayList<Reservation> selectRentList(Connection conn, PageInfo pi, int st){
+	public ArrayList<Reservation> selectRentList(Connection conn, PageInfo pi, String st){
 		
 		ArrayList<Reservation> rentList = new ArrayList<>();
 		
@@ -135,7 +135,7 @@ public class ReservationDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, st);
+			pstmt.setString(1, st);
 			
 			rset = pstmt.executeQuery();
 			

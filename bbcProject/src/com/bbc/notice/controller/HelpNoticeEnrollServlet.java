@@ -45,8 +45,6 @@ public class HelpNoticeEnrollServlet extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			int memNo = 21;
-			
 			int showNotice = Integer.parseInt(multiRequest.getParameter("showNotice"));
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
@@ -69,6 +67,7 @@ public class HelpNoticeEnrollServlet extends HttpServlet {
 					String originName = multiRequest.getOriginalFileName(name);
 					String changeName = multiRequest.getFilesystemName(name);
 					
+					
 					Attachment at = new Attachment();
 					at.setFileName(originName);
 					at.setRename(changeName);
@@ -78,7 +77,7 @@ public class HelpNoticeEnrollServlet extends HttpServlet {
 				}
 			}
 			
-			int result = new NoticeService().branchInsertNotice(n, list, memNo);
+			int result = new NoticeService().branchInsertNotice(n, list);
 			
 			if(result > 0) {
 				response.sendRedirect("notice.b.no");

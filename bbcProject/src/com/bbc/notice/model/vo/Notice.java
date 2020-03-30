@@ -14,7 +14,6 @@ public class Notice {
 	private int memberNo;			// 회원 번호
 	private int noticeImport;		// 중요공지사항 여부(1-중요공지사항)
 	private int noticeField;		// 공지분류(1-사용자,2-지점)
-	private int branchNo;			// 공지사항 등록자(지점관리자)의 지점번호
 	
 	private String memberName;		// 이벤트 리스트 조회시 필요한 회원 이름
 	private int rowNum;				// 조회 번호
@@ -30,7 +29,7 @@ public class Notice {
 	}
 
 	public Notice(int noticeNo, String noticeTitle, String noticeContent, Date enrollDate, Date modifyDate,
-			int noticeReadCnt, int memberNo, int noticeImport, int noticeField, int branchNo, int prev, int next) {
+			int noticeReadCnt, int memberNo, int noticeImport, int noticeField, int prev, int next) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
@@ -41,7 +40,6 @@ public class Notice {
 		this.memberNo = memberNo;
 		this.noticeImport = noticeImport;
 		this.noticeField = noticeField;
-		this.branchNo = branchNo;
 		this.prev = prev;
 		this.next = next;
 	}
@@ -186,14 +184,6 @@ public class Notice {
 
 	public void setRowNum(int rowNum) {
 		this.rowNum = rowNum;
-	}
-
-	public int getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(int branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public int getPrev() {

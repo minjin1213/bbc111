@@ -34,12 +34,10 @@ public class CarListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int branch=31;
-
 		int listCount;			// 총 게시글 갯수
 		int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
 		
-		listCount = new CarInfoService().getCarListCount(branch);
+		listCount = new CarInfoService().getCarListCount();
 		
 		currentPage = 1;
 		
@@ -50,7 +48,7 @@ public class CarListServlet extends HttpServlet {
 		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
 		
 		
-		ArrayList<CarInfo> list = new CarInfoService().branchCarList(pi, branch); 
+		ArrayList<CarInfo> list = new CarInfoService().branchCarList(pi); 
 	
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);

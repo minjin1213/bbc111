@@ -160,20 +160,19 @@ public class CarInfoDao {
 		return carEnrollCount;
 	}
 	
-	public int getCarListCount(Connection conn, int branch) {
+	public int getCarListCount(Connection conn) {
 		
 		int carListCount = 0;
 		
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("getCarListCount");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, branch);
+			stmt = conn.createStatement();
 			
-			rset = pstmt.executeQuery();
+			rset = stmt.executeQuery(sql);
 			
 			if(rset.next()) {
 				carListCount = rset.getInt(1);
@@ -183,14 +182,14 @@ public class CarInfoDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(pstmt);
+			close(stmt);
 		}
 		
 		return carListCount;
 	}
 	
 
-	public ArrayList<CarInfo> branchCarList(Connection conn, PageInfo pi, int branch){
+	public ArrayList<CarInfo> branchCarList(Connection conn, PageInfo pi){
 		
 		ArrayList<CarInfo> list = new ArrayList<>();
 		
@@ -206,9 +205,8 @@ public class CarInfoDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
 			int endRow = startRow + pi.getTableLimit() - 1;
 			
-			pstmt.setInt(1,branch);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -304,7 +302,7 @@ public class CarInfoDao {
 		return result;
 	}
 	
-	public int branchEnrollChkCar(Connection conn, String arr, int branch) {
+	public int branchEnrollChkCar(Connection conn, String arr) {
 		
 		int result = 0;
 		
@@ -313,8 +311,7 @@ public class CarInfoDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, branch);
-			pstmt.setString(2, arr);
+			pstmt.setString(1, arr);
 			
 			result = pstmt.executeUpdate();
 			

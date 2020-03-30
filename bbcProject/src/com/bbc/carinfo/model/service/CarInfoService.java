@@ -57,11 +57,11 @@ public class CarInfoService {
 		return result;
 	}
 	
-	public int getCarListCount(int branch) {
+	public int getCarListCount() {
 		
 		Connection conn = getConnection();
 		
-		int result = new CarInfoDao().getCarListCount(conn, branch);
+		int result = new CarInfoDao().getCarListCount(conn);
 		
 		close(conn);
 		
@@ -73,11 +73,11 @@ public class CarInfoService {
 	 * @param pi	페이지 객체
 	 * @return		지점에 등록된 차량 객체
 	 */
-	public ArrayList<CarInfo> branchCarList(PageInfo pi, int branch){
+	public ArrayList<CarInfo> branchCarList(PageInfo pi){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<CarInfo> list = new CarInfoDao().branchCarList(conn, pi, branch);
+		ArrayList<CarInfo> list = new CarInfoDao().branchCarList(conn, pi);
 		
 		close(conn);
 		
@@ -125,7 +125,7 @@ public class CarInfoService {
 		
 		for(int i=0; i<arr.length; i++) {
 			
-			result = new CarInfoDao().branchEnrollChkCar(conn, arr[i], branch);
+			result = new CarInfoDao().branchEnrollChkCar(conn, arr[i]);
 		}
 		
 		if(result > 0) {

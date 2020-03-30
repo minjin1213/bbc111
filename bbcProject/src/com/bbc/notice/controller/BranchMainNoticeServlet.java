@@ -47,9 +47,7 @@ public class BranchMainNoticeServlet extends HttpServlet {
 
 		PageInfo pi = MainPageTemplate.getPageInfo(listCount, currentPage);
 		
-		int memNo = 21;
-		
-		ArrayList<Notice> list = new NoticeService().branchMainNoticeList(memNo, pi);
+		ArrayList<Notice> list = new NoticeService().branchMainNoticeList(pi);
 		
 		
 		request.setAttribute("list", list);

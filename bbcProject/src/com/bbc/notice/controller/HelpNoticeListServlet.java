@@ -47,9 +47,7 @@ public class HelpNoticeListServlet extends HttpServlet {
 
 		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
 		
-		int memNo = 21;
-		
-		ArrayList<Notice> list = new NoticeService().branchSelectNoticeList(memNo, pi);
+		ArrayList<Notice> list = new NoticeService().branchSelectNoticeList(pi);
 		
 		
 		request.setAttribute("list", list);
