@@ -382,6 +382,12 @@ table.car-exp-table {
   width: 1105px;
 }
 
+#return-hr{
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  width: 1105px;
+}
+
 #info-client {
   color: rgb(64,64,64);
   text-align: left;
