@@ -41,8 +41,7 @@
 					<!-- Content Row -->
 					<div class="h-bar list-bar">
 
-						<a href="#" class="logout-bt" data-toggle="modal"
-							data-target="#logoutModal"> <i
+						<a href="#" class="logout-bt" data-toggle="modal" data-target="#logoutModal"> <i
 							class="fas fa-sign-out-alt logout-icon"> log out </i>
 						</a>
 					</div>

@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.bbc.common.page.vo.PageInfo;
 import com.bbc.myinquiry.model.vo.MyInquiry;
 import com.bbc.myinquiry.model.vo.UserPageInfo;
+import com.bbc.userInfo.model.vo.UserInfo;
  
 public class MyInquiryDao {
 	// ----------------------------------- 공통
@@ -188,20 +189,51 @@ public class MyInquiryDao {
 	}
 	
 	
+	//사용자 총 리스트(용환)
+	public int UserGetListCount(Connection conn,int memNo1) {
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("UserGetListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo1);
+			rset =pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+		
+	}
+	
+	
 	//사용자  리스트 및 페이징(용환)
 	public ArrayList<MyInquiry> UserselectList(Connection conn, UserPageInfo pi) {
 		ArrayList<MyInquiry> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("UserSelectList");
-
 		
+		int memberNo = 1;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset = pstmt.executeQuery();
 			
@@ -220,6 +252,92 @@ public class MyInquiryDao {
 		}
 		return list;
 	}//사용자  리스트 및 페이징(용환) 끝나는부분
+	
+	
+	public ArrayList<UserInfo> userInfoGetList(Connection conn){
+		
+		ArrayList<UserInfo> list = new ArrayList<>();
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("userInfoGetList");
+		try {
+			stmt = conn.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				list.add(new UserInfo(rset.getInt("member_no"),
+									  rset.getString("member_name"),
+								 	  rset.getString("phone"),
+								 	  rset.getString("member_email")));
+				
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return list;
+	}
+	
+	public int insertUserMyInquiry(Connection conn,MyInquiry m) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertMyInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getInquiryTitle());
+			pstmt.setString(2, m.getInquiryContent());
+			pstmt.setInt(3, m.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public MyInquiry UserSelectDetail(Connection conn, int min) {
+		MyInquiry m = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("UserSelectDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, min);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new MyInquiry(rset.getString("member_name"),
+								  rset.getString("member_email"),
+								  rset.getString("phone"),
+								  rset.getString("inquiry_title"),
+								  rset.getString("inquiry_content"),
+								  rset.getDate("inquiry_date"),
+								  rset.getString("inquiry_answer"));	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+		
+	}
 	
 
 

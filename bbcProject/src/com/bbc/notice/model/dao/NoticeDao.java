@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.bbc.attachment.model.vo.Attachment;
 import com.bbc.common.page.vo.PageInfo;
+import com.bbc.event.model.vo.Event;
 import com.bbc.notice.model.vo.Notice;
 import com.bbc.notice.model.vo.UserPageInfo;
 
@@ -402,6 +403,40 @@ public class NoticeDao {
 		
 	}
 	
+	public ArrayList<Notice> selectByRv(Connection conn) {
+
+		ArrayList<Notice> nlist = new ArrayList<>();
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectByRv");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			while(rset.next()) {
+				Notice n = new Notice();
+				String title = rset.getString("NOTICE_TITLE");
+				if(title.length() > 30) {
+					title = title.substring(0, 30) + "...";
+				}
+				n.setNoticeTitle(title);
+				n.setEnrollDate(rset.getDate("NOTICE_DATE"));
+				n.setNoticeContent(rset.getString("NOTICE_CONTENT"));				
+				nlist.add(n);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+				
+		return nlist;
+		
+	}
+	
 	public int branchDeleteChkNotice(Connection conn, String arr) {
 		
 		int result = 0;
@@ -695,22 +730,32 @@ public class NoticeDao {
 
 		public Notice UserSelectNotice(Connection conn, int nno) {
 			Notice n = null;
+			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
+			
 			String sql = prop.getProperty("UserSelectNotice");
+			
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, nno);
+				pstmt.setInt(2, nno);
+				pstmt.setInt(3, nno);
+				
 				rset = pstmt.executeQuery();
-
+				
 				if(rset.next()) {
 					n = new Notice(rset.getInt("notice_no"),
 									rset.getString("notice_title"),
 									rset.getString("notice_content"),
 									rset.getDate("notice_date"),
 									rset.getInt("notice_readcnt"),
-									rset.getInt("notice_field"));
+									rset.getInt("notice_field"),
+									rset.getInt("prev"),
+									rset.getInt("next"));
 				}
+				
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -718,8 +763,9 @@ public class NoticeDao {
 				close(rset);
 				close(pstmt);
 			}
-			return n;	
-
+			return n;
+			
+			
 		}
 		//사용자 끝
 	 

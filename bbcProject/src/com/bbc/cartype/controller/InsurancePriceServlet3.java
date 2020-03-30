@@ -13,16 +13,16 @@ import com.bbc.cartype.model.service.CarTypeService;
 import com.bbc.cartype.model.vo.CarType;
 
 /**
- * Servlet implementation class PriceInfoPageServlet
+ * Servlet implementation class InsurancePriceServlet3
  */
-@WebServlet("/price.t.ct")
-public class PriceInfoPageServlet extends HttpServlet {
+@WebServlet("/iPrice3.t.ct")
+public class InsurancePriceServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PriceInfoPageServlet() {
+    public InsurancePriceServlet3() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +31,30 @@ public class PriceInfoPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<CarType> list1 = new CarTypeService().adminPriceSelectList1();
-		ArrayList<CarType> list2 = new CarTypeService().adminPriceSelectList2();
-		ArrayList<CarType> list3 = new CarTypeService().adminPriceSelectList3();
+		String sInsuCheck = request.getParameter("sInsuCheck");
+		String mInsuCheck = request.getParameter("mInsuCheck");
+		String lInsuCheck = request.getParameter("lInsuCheck");
 		
-		System.out.println(list1);
-		System.out.println(list2);
-		System.out.println(list3);
+		ArrayList<String> list = new ArrayList<>();
+		list.add(sInsuCheck);
+		list.add(mInsuCheck);
+		list.add(lInsuCheck);
 		
-		if(list1.isEmpty() && list2.isEmpty() && list3.isEmpty()) {
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		int sInsurance = Integer.parseInt(request.getParameter("s-insurance1"));
+		int mInsurance= Integer.parseInt(request.getParameter("m-insurance1"));
+		int lInsurance = Integer.parseInt(request.getParameter("l-insurance1"));
+		
+		CarType c = new CarType();
+		c.setRentInsuType1(sInsurance);
+		c.setRentInsuType2(mInsurance);
+		c.setAccidentExemption(lInsurance);
+		
+		int result = new CarTypeService().adminInsuranceUpdate3(c, list);
+		
+		if(result > 0) {
+			response.sendRedirect("price.t.ct");
 		}else {
-			request.setAttribute("list1", list1);
-			request.setAttribute("list2", list2);
-			request.setAttribute("list3", list3);
-			request.getRequestDispatcher("views/admin/car/priceInfo.jsp").forward(request, response);			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

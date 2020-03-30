@@ -282,6 +282,7 @@ public class EventDao {
 //		return eList;
 //	}
 	
+	// 차량선택시 지점선택화면에 표시할 리스트
 	public ArrayList<Event> selectListBranch(Connection conn, int branchNo) {
 		
 		ArrayList<Event> elist = new ArrayList<>();
@@ -337,6 +338,41 @@ public class EventDao {
 		}
 		
 		return result;
+	}
+	
+	public ArrayList<Event> selectListRv(Connection conn) {
+		
+		ArrayList<Event> elist = new ArrayList<>();
+		
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListRv");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			while(rset.next()) {
+				Event e = new Event();
+				String title = rset.getString("EVENT_MANAGEMENT_TITLE");
+				if(title.length() > 30) {
+					title = title.substring(0, 30) + "...";
+				}
+				e.setEventTitle(title);				
+				e.setEventStartDate(rset.getDate("EVENT_MANAGEMENT_START"));
+				e.setEventEndDate(rset.getDate("EVENT_MANAGEMENT_END"));
+				e.setEventContent(rset.getString("EVENT_MANAGEMENT_CONTENT"));				
+				elist.add(e);
+			}
+		} catch (SQLException e) {			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return elist;
+		
 	}
 
 }

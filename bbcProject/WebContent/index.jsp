@@ -23,15 +23,6 @@
 	<meta charset="utf-8">
 	<meta name="keywords" content=" a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-	<script>
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
-
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
 	<link href="<%=contextPath%>/resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="<%=contextPath%>/resources/css/owl.carousel.css" type="text/css" media="all">
 	<link rel="stylesheet" href="<%=contextPath%>/resources/css/owl.theme.css" type="text/css" media="all">
@@ -74,7 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mx-auto">
 						<li class="nav-item">
-							<a class="nav-link ml-lg-0" href="index.html">Home
+							<a class="nav-link ml-lg-0" href="<%=contextPath%>">Home
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
@@ -112,11 +103,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							    aria-expanded="false">
 								고객센터
 							</a>
+							
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item text-center" href="">FAQ</a>
-								<a class="dropdown-item text-center" href="">고객의견</a>
+								<a class="dropdown-item text-center" onclick="goFAQ();">FAQ</a>
+								<a class="dropdown-item text-center" onclick="goCustomeropinion();">고객의견</a>
 								<a class="dropdown-item text-center" href="">1:1 상담</a>
-								<a class="dropdown-item text-center" href="">공지사항</a>
+								<a class="dropdown-item text-center" onclick="goUserNotice();">공지사항</a>
 							</div>
 						</li>
 					</ul>
@@ -137,7 +129,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a class="navbar-brand" href="index.html">
 										<i class="fas fa-cubes"></i> B B C</a>
 								</h3>
-								<h4>bbang bban car</h4>
+								<h4>bbang bbang car</h4>
 								<div class="banner-form">
 									<form action="#" method="post">
 										<div class="row">
@@ -350,6 +342,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
  		function goDl(){
  			location.href = "<%= request.getContextPath()%>/go.dl";
+ 		}
+ 		function goFAQ(){
+ 			location.href = "<%= request.getContextPath()%>/list.fa";
+ 		}
+ 		function goCustomeropinion(){
+ 			location.href = "<%= request.getContextPath()%>/mail.co";
+ 		}
+ 		function goUserNotice(){
+ 			location.href = "<%= request.getContextPath()%>/CsList.no";
  		}
 	</script>
 	

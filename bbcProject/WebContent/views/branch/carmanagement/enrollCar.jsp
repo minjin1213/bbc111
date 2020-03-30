@@ -103,14 +103,14 @@
 															<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= list.get(index).getCarModifyName() %>" style="width:250px; height:150px">
 															<div class="card-body text-center">
 																<div class="ad-title m-auto">
-																	<a href="#" data-toggle="modal" data-target="#carModal"
-																			data-carTypeName="<%= list.get(index).getCarTypeName()%>"
-																			data-carType="<%= list.get(index).getCarType() %>"
-																			data-carNum="<%= list.get(index).getCarNum() %>"
-																			data-carColor="<%= list.get(index).getCarColor() %>"
-																			data-carFuel="<%= list.get(index).getCarFuel() %>"
-																			data-carYear="<%= list.get(index).getCarLunchYear() %>"
-																			data-carOption="<%= list.get(index).getCarOption() %>"><h5><%= list.get(index).getCarTypeName() %></h5>
+																	<a href="#" data-toggle="modal" data-target="#carEModal"
+																			data-cartypename="<%= list.get(index).getCarTypeName()%>"
+																			data-cartype="<%= list.get(index).getCarType() %>"
+																			data-carnum="<%= list.get(index).getCarNum() %>"
+																			data-carcolor="<%= list.get(index).getCarColor() %>"
+																			data-carfuel="<%= list.get(index).getCarFuel() %>"
+																			data-caryear="<%= list.get(index).getCarLunchYear() %>"
+																			data-caroption="<%= list.get(index).getCarOption() %>"><h5><%= list.get(index).getCarTypeName() %></h5>
 																	</a>
 																</div>
 															</div>
@@ -250,11 +250,11 @@
 	</div>
 	
 	<!-- car Modal -->
-	<div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="carEModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document" id="car-modal-dialog">
 			<div class="modal-content" id="car-modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"><label class="carTypeName"></label></h5>
+					<h5 class="modal-title" id="exampleModalLabel"><label class="cartypename"></label></h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
@@ -263,27 +263,27 @@
 					<table class="car-exp-table">
 						<tr>
 							<th>차종</th>
-							<td><label class="carType"></label></td>
+							<td><label class="cartype"></label></td>
 						</tr>
 						<tr>
 							<th>차량 번호</th>
-							<td><label class="carNum"></label></td>
+							<td><label class="carnum"></label></td>
 						</tr>
 						<tr>
 							<th>색상</th>
-							<td><label class="carColor"></label></td>
+							<td><label class="carcolor"></label></td>
 						</tr>
 						<tr>
 							<th>연료</th>
-							<td><label class="carFuel"></label></td>
+							<td><label class="carfuel"></label></td>
 						</tr>
 						<tr>
 							<th>연식</th>
-							<td><label class="carFuel"></label></td>
+							<td><label class="caryear"></label></td>
 						</tr>
 						<tr>
 							<th>옵션</th>
-							<td><label class="carOption"></label></td>
+							<td><label class="caroption"></label></td>
 						</tr>
 					</table>
 					<div class="modal-footer">
@@ -298,28 +298,24 @@
 	
 		$(function(){
 			
-			var carNo="";
-			
-			$("#carModal").on('show.bs.modal', function(event){
+			$("#carEModal").on('show.bs.modal', function(event){
 				
-				var carTypeName = $(event.relatedTarget).data('carTypeName');
-				var carType = $(event.relatedTarget).data('carType');
-				var carNum = $(event.relatedTarget).data('carNum');
-				var carColor = $(event.relatedTarget).data('carColor');
-				var carFuel = $(event.relatedTarget).data('carFuel');
-				var carYear = $(event.relatedTarget).data('carYear');
-				var carOption = $(event.relatedTarget).data('carOption');
-				
-				console.log(carTypeName);
+				var cartypename = $(event.relatedTarget).data('cartypename');
+				var cartype = $(event.relatedTarget).data('cartype');
+				var carnum = $(event.relatedTarget).data('carnum');
+				var carcolor = $(event.relatedTarget).data('carcolor');
+				var carfuel = $(event.relatedTarget).data('carfuel');
+				var caryear = $(event.relatedTarget).data('caryear');
+				var caroption = $(event.relatedTarget).data('caroption');
 				
 				var modal = $(this);
-				modal.find(".carTypeName").text(carTypeName);
-				modal.find(".carType").text(carType);
-				modal.find(".carNum").text(carNum);
-				modal.find(".carColor").text(carColor);
-				modal.find(".carFuel").text(carFuel);
-				modal.find(".carYear").text(carYear);
-				modal.find(".carOption").text(carOption);
+				modal.find(".cartypename").text(cartypename);
+				modal.find(".cartype").text(cartype);
+				modal.find(".carnum").text(carnum);
+				modal.find(".carcolor").text(carcolor);
+				modal.find(".carfuel").text(carfuel);
+				modal.find(".caryear").text(caryear);
+				modal.find(".caroption").text(caroption);
 				
 			});
 		});

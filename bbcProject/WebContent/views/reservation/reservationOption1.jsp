@@ -17,6 +17,7 @@
 	String returnBrName = carOption.get("returnBrName");
 	String carName = carOption.get("carName");
 	String carImg = carOption.get("carImg");
+	String carType = carOption.get("carType");
 	
 	int accidentPrice1 = Integer.parseInt(carOption.get("accidentPrice1")); 	// 5만원
 	int accidentPrice2 = Integer.parseInt(carOption.get("accidentPrice2"));		// 30만원
@@ -189,7 +190,7 @@
 			</span>
 			<p class="hg-50"></p>
 			<div class="optionBtn">
-				<button class="btn-default-cancel btn-prev" onclick="goLinkPage('<%=contextPath%>/carSearch.rv');">이전</button>
+				<button class="btn-default-cancel btn-prev" onclick="goCarSerch();">이전</button>
 				<button class="btn-default-ok btn-next" onclick="goInfoPage();">다음</button>
 			</div>
 		</div>
@@ -294,6 +295,7 @@
 		var carNo = "<%=carNo%>";
 		var carName = "<%=carName%>";
 		var carImg = "<%=carImg%>";	
+		var carType = "<%=carType%>";	
 	</script>
 	<script type="text/javascript" src="<%=contextPath%>/resources/js/reservation/reservation.js"></script>  	
   	

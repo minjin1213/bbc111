@@ -7,9 +7,7 @@
 	<title>BBC Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-
-		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/resources/css/login/vendor/bootstrap/css/bootstrap.min.css">
+		
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="<%= request.getContextPath() %>/resources/css/login/images/icons/favicon.ico"/>
 <!--===============================================================================================-->

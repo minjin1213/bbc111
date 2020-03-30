@@ -222,7 +222,7 @@ public class NoticeService {
 	/**
 	 * 9. 차랑예약시 지점선택시 선택한 지점의 공지사항 리스트 조회
 	 * @param branchNo	조회할 지점 번호
-	 * @return			지점의 공지사항 리스트
+	 * @return			지점의 공지사항 리스트(가장최근에 등록된 한건만 반환)
 	 */
 	public Notice selectListByBr(int branchNo) {
 		
@@ -233,6 +233,22 @@ public class NoticeService {
 		close(conn);
 		
 		return n;
+		
+	}
+	
+	/**
+	 * 10. 차랑예약 첫화면에서 표시할 공지사항 리스트
+	 * @return	전체공지사항 리스트(4건만조회)
+	 */
+	public ArrayList<Notice> selectListRv() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> nlist = new NoticeDao().selectByRv(conn);
+		
+		close(conn);
+		
+		return nlist;
 		
 	}
 	

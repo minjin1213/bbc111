@@ -282,7 +282,7 @@
           <!-- Bar Chart -->
           <div class="card shadow mb-4" style="background-color: white;">
             <div class="card-header py-3" style="background-color: whitesmoke;">
-              <h6 class="m-0 font-weight-bold" style="color: black;">월 별 실적 현황</h6>
+              <h6 class="m-0 font-weight-bold" style="color: black;">지점 별 실적 현황</h6>
             </div>
             <div class="card-body">
               <div class="chart-area">
@@ -316,7 +316,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" onclick="logout();">Logout</a>
         </div>
       </div>
     </div>

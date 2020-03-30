@@ -183,7 +183,6 @@ public class ReservationDao {
 									rset.getString("rrn"),
 									rset.getString("phone"),
 									rset.getString("member_email"));
-				System.out.println(ui);
 				
 			}
 		} catch (SQLException e) {
@@ -345,7 +344,7 @@ public class ReservationDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			
-			rset = pstmt.executeQuery(sql);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				r = new Reservation(rset.getInt("reservation_no"),
@@ -367,100 +366,71 @@ public class ReservationDao {
 	
 	// 요한 
 	
-	public ArrayList<Reservation> selectReservationList(Connection conn, int mno){
-		
-		ArrayList<Reservation> reservationlist = new ArrayList<Reservation>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("viewMyReservation");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, mno);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				reservationlist.add(new Reservation(rset.getInt("RESERVATION_NO"),
-													rset.getDate("RENT_DATE"),
-													rset.getDate("RETURN_DATE"),
-													rset.getString("CAR_TYPE_NAME"),
-													rset.getString("RentBranch"),
-													rset.getString("ReturnBranch"),
-													rset.getInt("RESERVATION_STATUS"),
-													rset.getInt("CWD_PRICE"),
-													rset.getInt("PRICE"),
-													rset.getInt("DISCOUNT_PRICE"),
-													rset.getInt("TOTAL_PRICE"),
-													rset.getDate("PAY_DATE"),
-													rset.getInt("PAY_AMOUNT"),
-													rset.getString("PAY_METHOD"),
-													rset.getString("REFUND_STATEMENT"),
-													rset.getDate("REFUND_DATE")
-													));
-			}
-			System.out.println(reservationlist);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-			
-		}
-		return reservationlist;
-	
-	}
-	
-	public ArrayList<Reservation> selectTotalReservationList(Connection conn, int mno){
-
-		ArrayList<Reservation> reservationtotal = new ArrayList<Reservation>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("viewMyHistory");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, mno);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				reservationtotal.add(new Reservation(rset.getInt("RESERVATION_NO"),
-													rset.getDate("RENT_DATE"),
-													rset.getDate("RETURN_DATE"),
-													rset.getString("CAR_TYPE_NAME"),
-													rset.getString("RentBranch"),
-													rset.getString("ReturnBranch"),
-													rset.getInt("RESERVATION_STATUS"),
-													rset.getInt("CWD_PRICE"),
-													rset.getInt("PRICE"),
-													rset.getInt("DISCOUNT_PRICE"),
-													rset.getInt("TOTAL_PRICE"),
-													rset.getDate("PAY_DATE"),
-													rset.getInt("PAY_AMOUNT"),
-													rset.getString("PAY_METHOD"),
-													rset.getString("REFUND_STATEMENT"),
-													rset.getDate("REFUND_DATE")
-													));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-			
-		}
-		return reservationtotal;
-	
-		
-	}
+	/*
+	 * public ArrayList<Reservation> selectReservationList(Connection conn, int
+	 * mno){
+	 * 
+	 * ArrayList<Reservation> reservationlist = new ArrayList<Reservation>();
+	 * 
+	 * PreparedStatement pstmt = null; ResultSet rset = null;
+	 * 
+	 * String sql = prop.getProperty("viewMyReservation");
+	 * 
+	 * try { pstmt = conn.prepareStatement(sql);
+	 * 
+	 * pstmt.setInt(1, mno);
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * while(rset.next()) { reservationlist.add(new
+	 * Reservation(rset.getInt("RESERVATION_NO"), rset.getDate("RENT_DATE"),
+	 * rset.getDate("RETURN_DATE"), rset.getString("CAR_TYPE_NAME"),
+	 * rset.getString("RentBranch"), rset.getString("ReturnBranch"),
+	 * rset.getInt("RESERVATION_STATUS"), rset.getInt("CWD_PRICE"),
+	 * rset.getInt("PRICE"), rset.getInt("DISCOUNT_PRICE"),
+	 * rset.getInt("TOTAL_PRICE"), rset.getDate("PAY_DATE"),
+	 * rset.getInt("PAY_AMOUNT"), rset.getString("PAY_METHOD"),
+	 * rset.getString("REFUND_STATEMENT"), rset.getDate("REFUND_DATE") )); }
+	 * System.out.println(reservationlist); } catch (SQLException e) {
+	 * e.printStackTrace(); } finally { close(rset); close(pstmt);
+	 * 
+	 * } return reservationlist;
+	 * 
+	 * }
+	 * 
+	 * public ArrayList<Reservation> selectTotalReservationList(Connection conn, int
+	 * mno){
+	 * 
+	 * ArrayList<Reservation> reservationtotal = new ArrayList<Reservation>();
+	 * 
+	 * PreparedStatement pstmt = null; ResultSet rset = null;
+	 * 
+	 * String sql = prop.getProperty("viewMyHistory");
+	 * 
+	 * try { pstmt = conn.prepareStatement(sql);
+	 * 
+	 * pstmt.setInt(1, mno);
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * while(rset.next()) { reservationtotal.add(new
+	 * Reservation(rset.getInt("RESERVATION_NO"), rset.getDate("RENT_DATE"),
+	 * rset.getDate("RETURN_DATE"), rset.getString("CAR_TYPE_NAME"),
+	 * rset.getString("RentBranch"), rset.getString("ReturnBranch"),
+	 * rset.getInt("RESERVATION_STATUS"), rset.getInt("CWD_PRICE"),
+	 * rset.getInt("PRICE"), rset.getInt("DISCOUNT_PRICE"),
+	 * rset.getInt("TOTAL_PRICE"), rset.getDate("PAY_DATE"),
+	 * rset.getInt("PAY_AMOUNT"), rset.getString("PAY_METHOD"),
+	 * rset.getString("REFUND_STATEMENT"), rset.getDate("REFUND_DATE") )); }
+	 * 
+	 * } catch (SQLException e) { e.printStackTrace(); } finally { close(rset);
+	 * close(pstmt);
+	 * 
+	 * } return reservationtotal;
+	 * 
+	 * 
+	 * }
+	 */
 	
 	public int deleteMyReservation(Connection conn, int userno, int rno) {
 		
@@ -499,6 +469,24 @@ public class ReservationDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertReservation");
+		
+		System.out.println(r.getMemberStatus());
+		System.out.println(r.getReservationStatus());
+		System.out.println(r.getRentDate());
+		System.out.println(r.getReturnDate());
+		System.out.println(r.getOption());
+		System.out.println(r.getPrice());
+		System.out.println(r.getDiscountCategory());
+		System.out.println(r.getDiscountNo());
+		System.out.println(r.getCwdPrice());
+		System.out.println(r.getTotalPrice());
+		System.out.println(r.getOilRent());
+		System.out.println(r.getCarNo());
+		System.out.println(r.getMemberNo());
+		System.out.println(r.getBranchReservationNo());
+		System.out.println(r.getBranchReturnNo());
+		System.out.println(r.getPayNo());
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

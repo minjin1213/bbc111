@@ -19,6 +19,25 @@ if(currentJSMenu == "차량선택") {
 }
 
 $(function() {
+	
+	if(currentJSMenu == "차량선택") {
+		if(preLink == "Y") {
+			rent_branch = rentBrCode; 
+			return_branch = returnBrCode;
+			rent_branchnm = rentBrName;
+			return_branchnm = returnBrName;
+			carType = carTypeInfo;
+			rentDate = rentDate; 
+			returnDate = returnDate;
+			$('input[name="rent_branch"]').val(rentBrName);
+			$('input[name="return_branch"]').val(returnBrName);
+			$('input[name="reservation_date"]').val(rentDate);
+			$('input[name="return_date"]').val(returnDate);
+			
+			displayCarInfo();
+			serachCarList();
+		}
+	}
 			
   	$('#selectDate').daterangepicker({  		
   		autoUpdateInput: false,
@@ -61,7 +80,7 @@ $(function() {
   		displayBranchList($(this).val());
   	});
   	  	  	
-  	// 지점 이벤트 클릭시 수행
+  	// 지점선택 화면에서 지점 이벤트 클릭시 수행
   	$('#eventInfo').on('show.bs.modal', function (event) {
   		var rTarget = $(event.relatedTarget)
   		var eventData = rTarget.data('whatever')
@@ -91,7 +110,23 @@ $(function() {
  
   	});
   	
-  	// 지점 공지사항 클릭시 수행
+  	// 이벤트 클릭시 수행
+  	$('#eventInfoHome').on('show.bs.modal', function (event) {
+  		var rTarget = $(event.relatedTarget)
+  		var eventData = rTarget.data('whatever')	
+  		var modal = $(this)
+  		modal.find('.modal-body ul').text(eventData) 
+  	});
+  	
+  	// 공지사항 클릭시 수행
+  	$('#noticeInfoHome').on('show.bs.modal', function (event) {
+  		var rTarget = $(event.relatedTarget)
+  		var eventData = rTarget.data('whatever')	
+  		var modal = $(this)
+  		modal.find('.modal-body ul').text(eventData) 
+  	});
+  	
+  	// 지점선택창에서 지점 공지사항 클릭시 수행
   	$('#noticeInfo').on('show.bs.modal', function (event) {
   		var rTarget = $(event.relatedTarget)
   		var noticeData = rTarget.data('whatever')
@@ -236,6 +271,8 @@ function goOptionPage(obj) {
 	
 	$newForm.append($("<input/>", {type:"hidden", name:"navigation", value:navigation}));
 	$newForm.append($("<input/>", {type:"hidden", name:"babySeat", value:babySeat}));
+	
+	$newForm.append($("<input/>", {type:"hidden", name:"carType", value:carType}));
 		
 	$newForm.submit();
 }
@@ -308,6 +345,20 @@ function goInfoPage() {
 	$newForm.append($("<input/>", {type:"hidden", name:"carImg", value:carImg}));
 	$newForm.append($("<input/>", {type:"hidden", name:"cwdPrice", value:cwdPrice}));
 	$newForm.append($("<input/>", {type:"hidden", name:"babySeatPrice", value:babySeatPrice}));
+	
+	rdoOption =  $('input[name="rdoOption"]:checked').val();
+	couponDiscount = $("select[name=couponDiscount]").val();
+	eventDiscount = $("select[name=eventDiscount]").val();
+	rdoCDW = $('input[name="rdoOption"]:checked').val();
+	babyseat = $('input:checkbox[name="babyseat"]').is(':checked');
+	navigationt = $('input:checkbox[name="navigationt"]').is(':checked');
+	
+	$newForm.append($("<input/>", {type:"hidden", name:"rdoOption", value:rdoOption}));
+	$newForm.append($("<input/>", {type:"hidden", name:"couponDiscount", value:couponDiscount}));
+	$newForm.append($("<input/>", {type:"hidden", name:"eventDiscount", value:eventDiscount}));
+	$newForm.append($("<input/>", {type:"hidden", name:"rdoCDW", value:rdoCDW}));
+	$newForm.append($("<input/>", {type:"hidden", name:"babyseat", value:babyseat}));
+	$newForm.append($("<input/>", {type:"hidden", name:"navigation", value:navigation}));
 		
 	$newForm.submit();
 }	
@@ -451,17 +502,20 @@ function displayCarInfo() {
   			var listcnt = 0;
   			var carInfoValue = "<table>"
   			for(var i=0; i<list.length; i++) {  
-  				
+  				style ="";
+  				if (list[i].carTypeNo == carType) {
+  				  style ="style='color:#007bff'";	
+  				}  		
   				if(listcnt==0) {
    					carInfoValue += "<tr>"
-  				}	
+  				}
   				carInfoValue += "<td ctype='" + 
 					list[i].carTypeNo + "'cname='" + 
 					list[i].carTypeName + "' rentP1='" + 
 					list[i].rent1D + "' rentP2='" + 
 					list[i].rent1D6D + "' rentP3='" +
 					list[i].rent7DP + "' memberP='" +
-					list[i].memberCar + "' onclick='setCarType(this)'>" + 
+					list[i].memberCar + "' onclick='setCarType(this)'" + style + ">" + 
 					list[i].carTypeName + "</td>"
 	  			if(listcnt==2 || i==list.length-1) {	  				
 	  				carInfoValue += "</tr>"
@@ -487,18 +541,7 @@ function displayCarInfo() {
 function setCarType(target) {	
 	carType = $(target).attr('ctype');
 	$("#car-type-list > table > tbody > tr > td").removeAttr("style");
-	$(target).css("color", "#007bff");
-	
-	/*
-	if(carType != "all" && carType != "memberp") {
-		carTypeName = $(target).attr('cname');
-		rentPay1 = $(target).attr('rentP1');	// 1일 대여료
-		rentPay2 = $(target).attr('rentP2');	// 3~6일 대여료
-		rentPay3 = $(target).attr('rentP3');	// 7일이상 대여료
-		rentPay4 = $(target).attr('memberP');	// 알뜰카 대여료
-	}
-	*/
-	
+	$(target).css("color", "#007bff");	
 }
 
 function serachCarList(){
@@ -615,6 +658,55 @@ function setTotalPrice() {
 	otherPay = stringNumberToInt($("#cdwFee").text()) + stringNumberToInt($("#babySeatFee").text());	//	보험및기타금액(+)
 	$("#totalOptionFeeView").text(numberFormat(otherPay));
 	$("#totalPay").text(numberFormat(rentalPay + otherPay - discountPay));
+}
+
+// 차량조회화면으로 이동
+function goCarSerch(){
+
+	if(confirm("이전페이지로 이동하면 현재 페이지에서 선택된 값은 모두 사라집니다.\n이동하시겠습니까?")) {
+		var $newForm = $('<form></form>');	
+		$newForm.attr("method", "post");
+		$newForm.attr("action", "reservationPre.rv");
+		$newForm.appendTo('body');
+		
+		$newForm.append($("<input/>", {type:"hidden", name:"rent_branch", value:rentBrCode}));
+		$newForm.append($("<input/>", {type:"hidden", name:"return_branch", value:returnBrCode}));
+		$newForm.append($("<input/>", {type:"hidden", name:"rent_branchnm", value:rentBrName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"return_branchnm", value:returnBrName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"rentDate", value:rentDate}));
+		$newForm.append($("<input/>", {type:"hidden", name:"returnDate", value:returnDate}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carno", value:carNo}));  
+		$newForm.append($("<input/>", {type:"hidden", name:"carType", value:carType}));
+			
+		$newForm.submit();	
+	}
+}
+
+function goCarOption() {
+	
+	if(confirm("이전페이지로 이동하면 현재 페이지에서 선택된 값은 모두 사라집니다.\n이동하시겠습니까?")) {
+		var $newForm = $('<form></form>');	
+		$newForm.attr("method", "post");
+		$newForm.attr("action", "carOptionPre.rv");
+		$newForm.appendTo('body');
+		
+		$newForm.append($("<input/>", {type:"hidden", name:"rent_branch", value:rentBrCode}));
+		$newForm.append($("<input/>", {type:"hidden", name:"return_branch", value:returnBrCode}));
+		$newForm.append($("<input/>", {type:"hidden", name:"rentDate", value:rentDate}));
+		$newForm.append($("<input/>", {type:"hidden", name:"returnDate", value:returnDate}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carpay", value:carNo}))
+		$newForm.append($("<input/>", {type:"hidden", name:"carno", value:carNo})); 
+		
+		$newForm.append($("<input/>", {type:"hidden", name:"rent_branchnm", value:rentBrName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"return_branchnm", value:returnBrName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carname", value:returnBrName}));
+		$newForm.append($("<input/>", {type:"hidden", name:"carimg", value:returnBrName}));		 
+		$newForm.append($("<input/>", {type:"hidden", name:"carType", value:carType}));
+			
+		$newForm.submit();	
+	}
+	
+	
 }
 
 
