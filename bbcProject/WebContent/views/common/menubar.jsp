@@ -61,11 +61,16 @@
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
+						<%if(loginUser != null){ %>
 						<li class="nav-item">
 							<a class="nav-link" href="<%=contextPath%>/reservationSearch.rv">차량예약</a>
 						</li>
-						
-						
+						<%} else{ %>
+						<li class="nav-item">
+							<a class="nav-link" readonly >차량예약</a>							
+						</li>
+						<%} %>
+					<%if(loginUser != null){ %>	
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 							    aria-expanded="false">
@@ -81,7 +86,14 @@
 								<a class="dropdown-item text-center" onclick="goMyInfo();">회원 정보 수정</a>
 							</div>
 						</li>
-						
+						<%} else{ %>
+						<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+							    aria-expanded="false" readonly>
+								마이페이지
+							</a>
+						</li>
+						<%} %>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 							    aria-expanded="false">

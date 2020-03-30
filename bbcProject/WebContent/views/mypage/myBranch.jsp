@@ -244,7 +244,7 @@ $(".search").click(function(){
   		console.log("areano : "+areano);
   		
   		$.ajax({
-  			url:"branchSearch.mb?areano=" + areano,
+  			url:"brsh.mb?areano=" + areano,
   			type:"get",
   			success:function(list){  
   				var value = "";  	

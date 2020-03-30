@@ -59,6 +59,7 @@ public class Reservation {
 	public Reservation() {
 		
 	}
+	
 
 	public Reservation(int reservationNo, String memberStatus, String reservationStatus, Date rentDate, Date returnDate,
 			String option, int price, String discountCategory, int discountNo, int discountPrice, int cwdPrice,
