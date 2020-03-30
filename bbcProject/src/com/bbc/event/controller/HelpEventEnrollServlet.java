@@ -32,8 +32,6 @@ public class HelpEventEnrollServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		int memNo = 21;
-		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String startDate = request.getParameter("startDate");
@@ -45,7 +43,7 @@ public class HelpEventEnrollServlet extends HttpServlet {
 		e.setEventContent(content);
 		
 		
-		int result = new EventService().insertEvent(e, memNo, startDate, endDate, rate);
+		int result = new EventService().insertEvent(e, startDate, endDate, rate);
 		
 		if(result > 0) {
 			response.sendRedirect("event.b.ev");
