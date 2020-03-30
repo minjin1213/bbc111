@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bbc.area.model.service.AreaService;
 import com.bbc.area.model.vo.Area;
+import com.bbc.event.model.service.EventService;
+import com.bbc.event.model.vo.Event;
+import com.bbc.notice.model.service.NoticeService;
+import com.bbc.notice.model.vo.Notice;
 
 /**
  * Servlet implementation class ReservationPreServlet
@@ -31,6 +35,14 @@ public class ReservationPreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 이벤트 리스트 가져오기
+		ArrayList<Event> elist = new EventService().selectListRv();
+						
+		// 공지사항 리스트 가져오기
+		ArrayList<Notice> nlist = new NoticeService().selectListRv();
+			
+		// 지점관리 지역리스트 가져오기
 		ArrayList<Area> list = new AreaService().selectList();
 		
 		request.setAttribute("parentMenu", "차량예약");
@@ -47,6 +59,8 @@ public class ReservationPreServlet extends HttpServlet {
 		request.setAttribute("carType", request.getParameter("carType"));
 		request.setAttribute("preLink", "Y");
 		
+		request.setAttribute("elist", elist);
+		request.setAttribute("nlist", nlist);
 		request.setAttribute("list", list);	
 		
 		request.getRequestDispatcher("views/reservation/reservationSearchForm.jsp").forward(request, response);

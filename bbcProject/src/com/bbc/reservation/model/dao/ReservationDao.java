@@ -470,6 +470,24 @@ public class ReservationDao {
 		
 		String sql = prop.getProperty("insertReservation");
 		
+		System.out.println(r.getMemberStatus());
+		System.out.println(r.getReservationStatus());
+		System.out.println(r.getRentDate());
+		System.out.println(r.getReturnDate());
+		System.out.println(r.getOption());
+		System.out.println(r.getPrice());
+		System.out.println(r.getDiscountCategory());
+		System.out.println(r.getDiscountNo());
+		System.out.println(r.getCwdPrice());
+		System.out.println(r.getTotalPrice());
+		System.out.println(r.getOilRent());
+		System.out.println(r.getCarNo());
+		System.out.println(r.getMemberNo());
+		System.out.println(r.getBranchReservationNo());
+		System.out.println(r.getBranchReturnNo());
+		System.out.println(r.getPayNo());
+		
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, r.getMemberStatus());
