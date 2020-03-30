@@ -26,9 +26,9 @@
          margin-top:-10px;
          border-radius:10px;
          display:none;
-            margin-left: 6rem;
+            margin-left: 4rem;
             margin-bottom: 30px;
-            width: 69%;
+            width: 85%;
      }
 	button.faqAdd, #updateBtn {
 	    margin-bottom: 10px;
@@ -71,9 +71,9 @@
 	    border-bottom: 1px solid transparent;
 	    border-top-left-radius: 3px;
 	    border-top-right-radius: 3px;
-        width: 69%;
+        width: 85%;
 	    text-align: left;
-	    margin-left: 6rem;
+	    margin-left: 4rem;
 	    margin-bottom: 15px;
 	    padding-left: 80px;
 	}
@@ -145,6 +145,10 @@
 		margin: 17px 0px 0px 0px;
 	}
 	
+		.divfaq>p{
+	color:dimgrey;
+	}
+	
  </style>
 </head>
 <body>
@@ -182,7 +186,7 @@
 	    <p class="faq">지금 확인 중 입니다.</p>
 -->	    
 
-	    
+	    <div class="divfaq">
 	    <% if(list.isEmpty()){ %>
 	    	<div id="faq-title">
 	    		<table id="faq-title">
@@ -201,16 +205,16 @@
 		    <p class="faq"> <%= n.getFaqContent() %>  </p>		
 	    	<% } %>
 	    <% } %>
-
+		 </div>
 
 
 
 
 
 	
-	    <script>
+  	    <script>
 	        $(function(){
-	            $("div").on("click", function(){
+	            $(".divfaq>div").on("click", function(){
 	
 	                var p = $(this).next();
 	
@@ -223,14 +227,9 @@
 	            });
 	        });
 	        
-	        /* jsp 연결 부분 */
-	        function goWrite(){
-	        	location.href="<%=contextPath%>/views/admin/faqWrite.jsp";
-	        }
-	        
 
 	        
-	    </script>
+	    </script>  
     </div>
      
     

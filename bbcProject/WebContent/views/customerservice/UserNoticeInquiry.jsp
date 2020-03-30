@@ -174,7 +174,7 @@ int endPage = pi.getEndPage();
                         <tbody> 
                             <tr class="prev"> 
                                 <td>이전</td>
-                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=nno-1%>"><input type="button" value="이전" id="b1"></a></td>
+                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=n.getNext()%>">이전 게시판으로 가기</a></td>
                                 <td>2020.02.22</td>
                             </tr>
                             <tr class="current"> 
@@ -184,7 +184,7 @@ int endPage = pi.getEndPage();
                             </tr>
                             <tr class="next"> 
                                 <td>다음</td>
-                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=nno+1%>">다음</a></td>
+                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=n.getPrev()%>">다음 게시판으로 가기</a></td>
                                 <td>2019.08.08</td>
                             </tr>
                         </tbody>
@@ -195,7 +195,7 @@ int endPage = pi.getEndPage();
 
 				<br>
                 <div class="btn_wrap">
-                    <button type="button" class="btn-default-ok btn-ni-opinion">목록</button>
+                    <button type="button" class="btn-default-ok btn-ni-opinion" onclick="goBack()">목록</button>
                 </div>
 			</div> <!--인풋필터 닫아주는거 ㅇㅇ-->
             <br>
@@ -206,6 +206,11 @@ int endPage = pi.getEndPage();
 
         </div>
     </div>
+<script>
+		function goBack() {
+		    window.history.back();
+		}
 
+</script>
 </body>
 </html>

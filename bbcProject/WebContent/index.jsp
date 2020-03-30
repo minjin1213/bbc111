@@ -112,11 +112,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							    aria-expanded="false">
 								고객센터
 							</a>
+							
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item text-center" href="">FAQ</a>
-								<a class="dropdown-item text-center" href="">고객의견</a>
+								<a class="dropdown-item text-center" onclick="goFAQ();">FAQ</a>
+								<a class="dropdown-item text-center" onclick="goCustomeropinion();">고객의견</a>
 								<a class="dropdown-item text-center" href="">1:1 상담</a>
-								<a class="dropdown-item text-center" href="CsList.no">공지사항</a>
+								<a class="dropdown-item text-center" onclick="goUserNotice();">공지사항</a>
 							</div>
 						</li>
 					</ul>
@@ -350,6 +351,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
  		function goDl(){
  			location.href = "<%= request.getContextPath()%>/go.dl";
+ 		}
+ 		function goFAQ(){
+ 			location.href = "<%= request.getContextPath()%>/list.fa";
+ 		}
+ 		function goCustomeropinion(){
+ 			location.href = "<%= request.getContextPath()%>/mail.co";
+ 		}
+ 		function goUserNotice(){
+ 			location.href = "<%= request.getContextPath()%>/CsList.no";
  		}
 	</script>
 	

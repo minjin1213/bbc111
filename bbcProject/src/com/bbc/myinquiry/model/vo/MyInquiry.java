@@ -74,6 +74,18 @@ public class MyInquiry {
 		this.inquiryAnswer = inquiryAnswer;
 		this.inquiryAnswerDate = inquiryAnswerDate;
 	}
+	
+	//용환 유저 상세조회용
+	public MyInquiry(String memberName, String memberEmail, String phone,String inquiryTitle, String inquiryContent, Date inquiryDate, String inquiryAnswer) {
+		super();
+		this.memberName = memberName;
+		this.memberEmail = memberEmail;
+		this.phone = phone;
+		this.inquiryTitle = inquiryTitle;
+		this.inquiryContent = inquiryContent;
+		this.inquiryDate = inquiryDate;
+		this.inquiryAnswer = inquiryAnswer;
+	}
 
 	public int getInquiryNo() {
 		return inquiryNo;
