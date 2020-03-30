@@ -101,7 +101,7 @@
 															<div class="card-body text-center">
 																<div class="ad-title m-auto">
 																	<a href="#" data-toggle="modal" data-target="#carModal"
-																			data-cartypeName="<%= list.get(index).getCarTypeName()%>"
+																			data-cartypename="<%= list.get(index).getCarTypeName()%>"
 																			data-cartype="<%= list.get(index).getCarType() %>"
 																			data-carnum="<%= list.get(index).getCarNum() %>"
 																			data-carcolor="<%= list.get(index).getCarColor() %>"
@@ -249,7 +249,7 @@
 		<div class="modal-dialog" role="document" id="car-modal-dialog">
 			<div class="modal-content" id="car-modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">상세 정보</label></h5>
+					<h5 class="modal-title" id="exampleModalLabel"><label class="cartypename"></label></h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
@@ -295,7 +295,7 @@
 			
 			$("#carModal").on('show.bs.modal', function(event){
 				
-				var cartypeName = $(event.relatedTarget).data('cartypeName');
+				var cartypename = $(event.relatedTarget).data('cartypename');
 				var cartype = $(event.relatedTarget).data('cartype');
 				var carnum = $(event.relatedTarget).data('carnum');
 				var carcolor = $(event.relatedTarget).data('carcolor');
@@ -305,7 +305,7 @@
 				
 				var modal = $(this);
 				
-				modal.find(".cartypeName").text(cartypeName);
+				modal.find(".cartypename").text(cartypename);
 				modal.find(".cartype").text(cartype);
 				modal.find(".carnum").text(carnum);
 				modal.find(".carcolor").text(carcolor);
