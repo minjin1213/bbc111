@@ -55,6 +55,8 @@ public class CarOptionServlet extends HttpServlet {
 		String carName = request.getParameter("carname");
 		String carImg = request.getParameter("carimg");
 		
+		String carType = request.getParameter("carType");
+		
 		// 보험금액정보
 		String accidentPrice1 = request.getParameter("accidentPrice1"); 	// 5만원
 		String accidentPrice2 = request.getParameter("accidentPrice2");		// 30만원
@@ -108,7 +110,8 @@ public class CarOptionServlet extends HttpServlet {
 		
 		carOptionMap.put("navigation", navigation);
 		carOptionMap.put("babySeat", babySeat);
-		
+		carOptionMap.put("carType", carType);
+				
 		request.setAttribute("parentMenu", "차량예약^차량선택");
 		request.setAttribute("currentMenu", "옵션선택");
 		request.setAttribute("carOption", carOptionMap);	

@@ -171,7 +171,7 @@ public class EventService {
 //	}
 	
 	/**
-	 * 8. 차량예약예서 지점선택시 지점에 해당하는 이벤트 가져오기
+	 * 차량예약예서 지점선택시 지점에 해당하는 이벤트 가져오기
 	 * @param branchNo	조회할 지점
 	 * @return		   	지점에 등록된 이벤트 리스트
 	 */
@@ -206,6 +206,23 @@ public class EventService {
 		close(conn);
 		
 		return result;
+	}
+	
+	
+	/**
+	 * 차량예약 첫화면에서 보여질 이벤트 리스트	 
+	 * @return	전지점에 등록된 이벤트 리스트
+	 */
+	public ArrayList<Event> selectListRv() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Event> elist = new EventDao().selectListRv(conn);
+		
+		close(conn);
+		
+		return elist;
+		
 	}
 	
 
