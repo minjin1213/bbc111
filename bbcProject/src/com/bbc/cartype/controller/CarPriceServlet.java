@@ -147,7 +147,7 @@ public class CarPriceServlet extends HttpServlet {
 			
 		if(result > 0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("priceU", "금액정보 수정에 성공했습니다.");
+			session.setAttribute("priceU", "차량 금액 정보 수정에 성공했습니다.");
 			response.sendRedirect("price.t.ct");
 		}else {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

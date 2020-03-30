@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.bbc.cartype.model.vo.CarType" %>
 <%
-	String priceU = (String)request.getAttribute("priceU");
+	String priceU = (String)session.getAttribute("priceU");
 	ArrayList<CarType> list1 = (ArrayList<CarType>)request.getAttribute("list1");
 	ArrayList<CarType> list2 = (ArrayList<CarType>)request.getAttribute("list2");
 	ArrayList<CarType> list3 = (ArrayList<CarType>)request.getAttribute("list3");
+	
+	String insuranceU = (String)session.getAttribute("insuranceU");
 %>
 <!DOCTYPE html>
 <html>
@@ -134,6 +136,13 @@
 		var priceU = "<%=priceU%>"
 		if(priceU != "null"){
 			alert(priceU);
+			<%session.removeAttribute("priceU");%>
+		}
+		
+		var insuranceU = "<%=insuranceU%>"
+		if(insuranceU != "null"){
+			alert(insuranceU);
+			<%session.removeAttribute("insuranceU");%>
 		}
 	</script>
 	
@@ -284,7 +293,7 @@
 	       		
 	       		<!-- 보험유형1 테이블 영역 -->
 	       		<div id="insu-1Box" class="box">
-	       			<form action="<%=contextPath%>/iPrice.t.ct" method="post">
+	       			<form action="<%=contextPath%>/iPrice1.t.ct" method="post">
 		       			<h5 id="price-title">보험료</h5>
 						<br><br>
 						<table id="day-price">
@@ -294,25 +303,25 @@
 			                    <th>금액</th>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="sInsuCheck"></td>
 			                    <td>경차, 준중형, 중형(2000cc미만)</td>
-				                <% for(CarType c : list1){ %>
-				                    <td><input type="text" id="s-insurance1" name="s-insurance1" value="<%=c.getRentInsuType1()%>"></td>
-				                <% } %>
+			                    <% for(CarType c : list1){ %>
+			                    	<td><input type="text" id="s-insurance1" name="s-insurance1" value="<%=c.getRentInsuType1()%>"></td>
+			                    <% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="mInsuCheck"></td>
 			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
 			                    <% for(CarType c : list2){ %>
-			                    	<td><input type="text" id="m-insurance1" name="m-insurance1" value="<%=c.getRentInsuType1()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="m-insurance1" name="m-insurance1" value="<%=c.getRentInsuType1()%>"></td>
+		                    	<% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="lInsuCheck"></td>
 			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
 			                    <% for(CarType c : list3){ %>
-			                    	<td><input type="text" id="l-insurance1" name="l-insurance1" value="<%=c.getRentInsuType1()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="l-insurance1" name="l-insurance1" value="<%=c.getRentInsuType1()%>"></td>
+		                    	<% } %>
 			                </tr>
 			            </table>
 			            
@@ -325,31 +334,48 @@
 			                    <th width="50px;">비고</th>
 			                    <th width="350px;">차종</th>
 			                    <th>금액</th>
-			                    <th>휴차료</th>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="sAcciCheck"></td>
 			                    <td>경차, 준중형, 중형(2000cc미만)</td>
 			                    <% for(CarType c : list1){ %>
-				                    <td><input type="text" id="s-accident1" name="s-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
-				                    <td rowspan="3" width="200px"><input type="text" id="stopDay" name="stopDay" value="<%=c.getRecessPrice()%>"></td>
+			                    	<td><input type="text" id="s-accident1" name="s-accident1" value="<%=c.getAccidentExemption()%>"></td>
 			                    <% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="mAcciCheck"></td>
 			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
 			                    <% for(CarType c : list2){ %>
-			                    	<td><input type="text" id="m-accident1" name="m-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="m-accident1" name="m-accident1" value="<%=c.getAccidentExemption()%>"></td>
+		                    	<% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="lAcciCheck"></td>
 			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
 			                    <% for(CarType c : list3){ %>
-			                    	<td><input type="text" id="l-accident1" name="l-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="l-accident1" name="l-accident1" value="<%=c.getAccidentExemption()%>"></td>
+		                    	<% } %>
 			                </tr>
 			            </table>
+			            
+			    		<br>
+			    		
+			    		<h5 id="price-title">휴차료</h5>
+						<br><br>
+			    		<table>
+			    			<tr height="40px">
+			    				<th width="50px">비고</th>
+			    				<th width="350px">차종</th>
+			    				<th>휴차료</th>
+							</tr>
+							<tr>
+			                    <td><input type="checkbox" name="stopCheck"></td>
+			                    <td>보험 유형1 휴차료</td>
+			                    <% for(CarType c : list1){ %>
+			                    	<td><input type="text" name="stopDay" value="<%=c.getRecessPrice()%>"></td>
+			                    <% } %>
+		                  	</tr>
+			    		</table>
 			            
 			            <br>
 			            
@@ -359,7 +385,7 @@
 	       		
 	       		<!-- 보험유형2 테이블 영역 -->
 	       		<div id="insu-2Box" class="box">
-	       			<form action="<%=contextPath%>/iPrice.t.ct" method="post">
+	       			<form action="<%=contextPath%>/iPrice2.t.ct" method="post">
 		       			<h5 id="price-title">보험료</h5>
 						<br><br>
 						<table id="day-price">
@@ -369,25 +395,25 @@
 			                    <th>금액</th>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="sInsuCheck"></td>
 			                    <td>경차, 준중형, 중형(2000cc미만)</td>
 			                    <% for(CarType c : list1){ %>
-			                    	<td><input type="text" id="s-insurance2" name="s-insurance2" value="<%=c.getRentInsuType2()%>"></td>
+			                    	<td><input type="text" id="s-insurance1" name="s-insurance1" value="<%=c.getRentInsuType2()%>"></td>
 			                    <% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="mInsuCheck"></td>
 			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
 			                    <% for(CarType c : list2){ %>
-			                    	<td><input type="text" id="m-insurance2" name="m-insurance2" value="<%=c.getRentInsuType2()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="m-insurance1" name="m-insurance1" value="<%=c.getRentInsuType2()%>"></td>
+		                    	<% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="lInsuCheck"></td>
 			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
 			                    <% for(CarType c : list3){ %>
-			                    	<td><input type="text" id="l-insurance2" name="l-insurance2" value="<%=c.getRentInsuType2()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="l-insurance1" name="l-insurance1" value="<%=c.getRentInsuType2()%>"></td>
+		                    	<% } %>
 			                </tr>
 			            </table>
 			            
@@ -400,31 +426,48 @@
 			                    <th width="50px;">비고</th>
 			                    <th width="350px;">차종</th>
 			                    <th>금액</th>
-			                    <th>휴차료</th>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="sAcciCheck"></td>
 			                    <td>경차, 준중형, 중형(2000cc미만)</td>
 			                    <% for(CarType c : list1){ %>
-				                    <td><input type="text" id="s-accident2" name="s-accident2" value="<%=c.getAccidentPriceType2()%>"></td>
-				                    <td rowspan="3" width="200px"><input type="text" id="stopDay" name="stopDay" value="<%=c.getRecessPrice()%>"></td>
-				                <% } %>
+			                    	<td><input type="text" id="s-accident1" name="s-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
+			                    <% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="mAcciCheck"></td>
 			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
 			                    <% for(CarType c : list2){ %>
-			                    	<td><input type="text" id="m-accident2" name="m-accident2" value="<%=c.getAccidentPriceType2()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="m-accident1" name="m-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
+		                    	<% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="lAcciCheck"></td>
 			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
 			                    <% for(CarType c : list3){ %>
-			                    	<td><input type="text" id="l-accident2" name="l-accident2" value="<%=c.getAccidentPriceType2()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="l-accident1" name="l-accident1" value="<%=c.getAccidentPriceType1()%>"></td>
+		                    	<% } %>
 			                </tr>
 			            </table>
+			            
+			    		<br>
+			    		
+			    		<h5 id="price-title">휴차료</h5>
+						<br><br>
+			    		<table>
+			    			<tr height="40px">
+			    				<th width="50px">비고</th>
+			    				<th width="350px">차종</th>
+			    				<th>휴차료</th>
+							</tr>
+							<tr>
+			                    <td><input type="checkbox" name="stopCheck"></td>
+			                    <td>보험 유형1 휴차료</td>
+			                    <% for(CarType c : list3){ %>
+			                    	<td><input type="text" name="stopDay" value="<%=c.getRecessPrice()%>"></td>
+			                    <% } %>
+		                  	</tr>
+			    		</table>
 			            
 			            <br>
 			            
@@ -434,7 +477,7 @@
 	       		
 	       		<!-- 보험유형3 테이블 영역 -->
 	       		<div id="insu-3Box" class="box">
-		       		<form action="<%=contextPath%>/iPrice.t.ct" method="post">
+		       		<form action="<%=contextPath%>/iPrice3.t.ct" method="post">
 		       			<h5 id="price-title">보험료</h5>
 						<br><br>
 						<table id="day-price">
@@ -444,25 +487,25 @@
 			                    <th>금액</th>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="sInsuCheck"></td>
 			                    <td>경차, 준중형, 중형(2000cc미만)</td>
 			                    <% for(CarType c : list1){ %>
-			                    	<td><input type="text" id="s-insurance2" name="s-insurance2" value="<%=c.getAccidentExemption()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="s-insurance2" name="s-insurance1" value="<%=c.getAccidentPriceType3()%>"></td>
+		                    	<% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="mInsuCheck"></td>
 			                    <td>준대형(2000cc이상 3000cc미만), 승합/RV</td>
 			                    <% for(CarType c : list2){ %>
-			                    	<td><input type="text" id="m-insurance2" name="m-insurance2" value="<%=c.getAccidentExemption()%>"></td>
-			                    <% } %>
+		                    		<td><input type="text" id="m-insurance2" name="m-insurance1" value="<%=c.getAccidentPriceType3()%>"></td>
+		                    	<% } %>
 			                </tr>
 			                <tr>
-			                    <td><input type="checkbox" name="checkRow"></td>
+			                    <td><input type="checkbox" name="lInsuCheck"></td>
 			                    <td>대형,수입차량(3000cc초과, 수입차량)</td>
-			                    <% for(CarType c : list3){ %>
-			                    	<td><input type="text" id="l-insurance2" name="l-insurance2" value="<%=c.getAccidentExemption()%>"></td>
-			                    <% } %>
+			                    <% for(CarType c: list3){ %>
+		                    		<td><input type="text" id="l-insurance2" name="l-insurance1" value="<%=c.getAccidentPriceType3()%>"></td>
+		                    	<% } %>
 			                </tr>
 			            </table>
 			            
