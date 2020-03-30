@@ -51,8 +51,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", loginUser);
 				response.sendRedirect(request.getContextPath());
-			}else if(auth == 1) // 지점관리자
-			{
+			}else if(auth == 1) { // 지점관리자
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", loginUser);
 				request.getRequestDispatcher("views/branch/common/branchmain.jsp").forward(request, response);

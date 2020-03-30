@@ -69,9 +69,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
+						<%if(loginUser != null){ %>
 						<li class="nav-item">
 							<a class="nav-link" href="<%=contextPath%>/reservationSearch.rv">차량예약</a>							
 						</li>
+						<%} else{ %>
+						<li class="nav-item">
+							<a class="nav-link" >차량예약</a>							
+						</li>
+						<%} %>
 						
 						<%if(loginUser != null){ %>
 						<li class="nav-item dropdown">

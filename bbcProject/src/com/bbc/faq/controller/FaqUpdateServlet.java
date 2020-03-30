@@ -1,6 +1,7 @@
 package com.bbc.faq.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,11 @@ public class FaqUpdateServlet extends HttpServlet {
 		int result = new FaqService().updateFaq(f);
 		
 		if(result > 0) {
-			response.sendRedirect("list.t.fa");
+			// alert창 인코딩 처리해주는 부분
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			// alert바로 띄우는 기능 설정해주는 부분
+			out.println("<script>alert('FAQ 수정이 완료되었습니다.'); location.href='list.t.fa';</script>");
 		}else {
 			request.setAttribute("msg", "FAQ 게시글 수정 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
