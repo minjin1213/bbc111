@@ -117,7 +117,7 @@ public class CarInfoService {
 		return result;
 	}
 	
-	public int branchEnrollChkCar(String[] arr, int branch) {
+	public int branchEnrollChkCar(String[] arr) {
 		
 		Connection conn = getConnection();
 		

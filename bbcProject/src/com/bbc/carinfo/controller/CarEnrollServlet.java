@@ -35,8 +35,7 @@ public class CarEnrollServlet extends HttpServlet {
 		
 		String[] arr = str.split(",");
 		
-		int branch = 31;
-		int result = new CarInfoService().branchEnrollChkCar(arr, branch);
+		int result = new CarInfoService().branchEnrollChkCar(arr);
 		
 		response.setContentType("application/json; charset=utf-8");
 		

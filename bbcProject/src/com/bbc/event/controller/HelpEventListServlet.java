@@ -47,9 +47,7 @@ public class HelpEventListServlet extends HttpServlet {
 
 		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
 		
-		int memNo = 21;
-		
-		ArrayList<Event> list = new EventService().selectEventList(memNo, pi);
+		ArrayList<Event> list = new EventService().selectEventList(pi);
 		
 		
 		request.setAttribute("list", list);
