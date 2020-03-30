@@ -487,5 +487,43 @@ public class ReservationDao {
 			close(pstmt2);
 		} 
 		return result;
+
+	public int insertReservation(Connection conn, Reservation r) {
+		int result = 0;
+	
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, r.getMemberStatus());
+			pstmt.setString(2, r.getReservationStatus());
+			pstmt.setDate(3, r.getRentDate());
+			pstmt.setDate(4, r.getReturnDate());
+			pstmt.setString(5, r.getOption());
+			pstmt.setInt(6, r.getPrice());
+			pstmt.setString(7, r.getDiscountCategory());
+			pstmt.setInt(8, r.getDiscountNo());
+			pstmt.setInt(9, r.getDiscountPrice());
+			pstmt.setInt(10, r.getCwdPrice());
+			pstmt.setInt(11, r.getTotalPrice());
+			pstmt.setInt(12, r.getOilRent());
+			pstmt.setInt(13,  r.getCarNo());
+			pstmt.setInt(14, r.getMemberNo());
+			pstmt.setInt(15, r.getBranchReservationNo());
+			pstmt.setInt(16,  r.getBranchReturnNo());
+			pstmt.setInt(17, r.getPayNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);			
+		}
+		
+		return result;
+		
 	}
 }

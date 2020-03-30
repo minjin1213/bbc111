@@ -11,7 +11,7 @@ public class Reservation {
 	
 	private int reservationNo;
 	private String memberStatus;
-	private int reservationStatus;
+	private String reservationStatus;
 	private Date rentDate;
 	private Date returnDate;
 	private String option;
@@ -60,7 +60,7 @@ public class Reservation {
 		
 	}
 
-	public Reservation(int reservationNo, String memberStatus, int reservationStatus, Date rentDate, Date returnDate,
+	public Reservation(int reservationNo, String memberStatus, String reservationStatus, Date rentDate, Date returnDate,
 			String option, int price, String discountCategory, int discountNo, int discountPrice, int cwdPrice,
 			int totalPrice, int overTime, int overTimePrice, int overDayCount, int overDayPrice, String repair,
 			int repairDayCount, int repairPrice, int oilRent, int oilReturn, int oilPrice, int returnPrice, int carNo,
@@ -300,11 +300,11 @@ public class Reservation {
 		this.memberStatus = memberStatus;
 	}
 
-	public int getReservationStatus() {
+	public String getReservationStatus() {
 		return reservationStatus;
 	}
 
-	public void setReservationStatus(int reservationStatus) {
+	public void setReservationStatus(String reservationStatus) {
 		this.reservationStatus = reservationStatus;
 	}
 

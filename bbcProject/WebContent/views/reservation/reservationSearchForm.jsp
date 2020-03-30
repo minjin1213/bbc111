@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%> 
 <%@ page import="java.util.ArrayList, com.bbc.area.model.vo.Area, com.bbc.branchmanagement.model.vo.BranchManagement" %>    
 <% 
-	ArrayList<Area> list = (ArrayList<Area>)request.getAttribute("list"); 
+	ArrayList<Area> list = (ArrayList<Area>)request.getAttribute("list"); 	
 %>    
 <!DOCTYPE html>
 <html>

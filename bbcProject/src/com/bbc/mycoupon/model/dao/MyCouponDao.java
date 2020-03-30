@@ -1,3 +1,4 @@
+
 package com.bbc.mycoupon.model.dao;
 
 import java.io.FileNotFoundException;
@@ -69,5 +70,31 @@ public class MyCouponDao {
 			return list;
 			
 		}
+		public ArrayList<MyCoupon> selectByMemberNo(Connection conn, int memberNo) {
+		
+		 ArrayList<MyCoupon> clist = new ArrayList<MyCoupon>();
+		 
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 
+		 String sql = prop.getProperty("selectByMemberNo");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				clist.add(new MyCoupon(rset.getInt("COUPON_NO")));
+			}
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		 
+		return clist; 
+	}
+
 
 }
