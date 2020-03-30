@@ -491,6 +491,7 @@ public class ReservationDao {
 			close(pstmt2);
 		} 
 		return result;
+	}
 
 	public int insertReservation(Connection conn, Reservation r) {
 		int result = 0;

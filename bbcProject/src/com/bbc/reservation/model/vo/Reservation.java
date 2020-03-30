@@ -152,7 +152,7 @@ public class Reservation {
 	}
 	// 요한 차량이용내역
 	
-	public Reservation(int reservationNo, String memberStatus, int reservationStatus, Date rentDate, Date returnDate,
+	public Reservation(int reservationNo, String memberStatus, String reservationStatus, Date rentDate, Date returnDate,
 			String option, int price, String discountCategory, int discountNo, int discountPrice, int cwdPrice,
 			int totalPrice, int overTime, int overTimePrice, int overDayCount, int overDayPrice, String repair,
 			int repairDayCount, int repairPrice, int oilRent, int oilReturn, int oilPrice, int returnPrice, int carNo,
@@ -197,7 +197,7 @@ public class Reservation {
 	}
 	
 	public Reservation(int reservationNo,Date rentDate, Date returnDate,String carTypeName, String rentBranch, String returnBranch,
-			int reservationStatus, int cwdPrice,int price, int discountPrice, int totalPrice, 
+			String reservationStatus, int cwdPrice,int price, int discountPrice, int totalPrice, 
 			Date payDate, int payAmount, String payMethod, String refundStatement, Date refundDate) {
 		super();
 		this.reservationNo = reservationNo;

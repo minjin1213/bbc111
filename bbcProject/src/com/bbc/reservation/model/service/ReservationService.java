@@ -199,6 +199,7 @@ public class ReservationService {
 			return reservationtotal;
 		
 		}
+	
 	// 차량예약취소
 	public int deletemyReservation(int userno, int rno) {
 		
@@ -207,6 +208,14 @@ public class ReservationService {
 		int result = new ReservationDao().deleteMyReservation(conn,userno, rno);
 		
 		if (result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 
 	/**
 	 * 10. 차량예약정보 테이블 저장
