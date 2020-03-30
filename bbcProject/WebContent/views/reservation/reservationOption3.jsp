@@ -142,7 +142,7 @@
 				<p class="hg-40"></p>
 				<div class="optionBtn">			
 					<button class="btn-default-cancel btn-prev" onclick="goLinkPage('<%=contextPath%>/carInfo.rv');">이전</button>
-					<button class="btn-default-ok btn-next" onclick="">결제</button>
+					<button class="btn-default-ok btn-next" onclick="goInsertReservation();">결제</button>
 				</div> 				        
 			</div>	
 		</div>		
@@ -165,6 +165,7 @@
 		var discountPrice = "<%=discountPrice%>";
 		var cwdTotalPrice = "<%=cwdTotalPrice%>";
 		var totalPrice = "<%=totalPrice%>";
+		var oilRent = "70";
 	</script>
 	<script type="text/javascript" src="<%=contextPath%>/resources/js/reservation/reservation.js"></script>  
 	

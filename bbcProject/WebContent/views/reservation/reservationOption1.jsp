@@ -1,19 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>     
-<%@ page import="java.text.DecimalFormat" %>    
-<% 
-	int rent_branch = (int)request.getAttribute("rent_branch");
-	int return_branch = (int)request.getAttribute("return_branch");
-	String rent_branchnm = (String)request.getAttribute("rent_branchnm");
-	String return_branchnm = (String)request.getAttribute("return_branchnm");
-	String rentDate = (String)(request.getAttribute("rentDate"));
-	String returnDate = (String)(request.getAttribute("returnDate"));
-	String carname = (String)request.getAttribute("carname");
-	String carimg = (String)request.getAttribute("carimg");
-	int carpay = (int)request.getAttribute("carpay");
-	int carno = (int)request.getAttribute("carno");
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.bbc.event.model.vo.Event, com.bbc.coupon.model.vo.Coupon, com.bbc.area.model.vo.Area, java.util.HashMap, java.text.DecimalFormat" %>     
+<% 	
+	ArrayList<Event> elist = (ArrayList<Event>)request.getAttribute("elist"); 
+	ArrayList<Coupon> myclist = (ArrayList<Coupon>)request.getAttribute("myclist"); 
+	HashMap<String, String> carOption = (HashMap<String, String>)request.getAttribute("carOption");
+	
+	int rentBrCode = Integer.parseInt(carOption.get("rentBrCode"));
+	int returnBrCode = Integer.parseInt(carOption.get("returnBrCode"));
+	String rentDate = carOption.get("rentDate");
+	String returnDate = carOption.get("returnDate");	
+	int carPrice = Integer.parseInt(carOption.get("carPrice"));
+	int carNo = Integer.parseInt(carOption.get("carNo"));
+	
+	String rentBrName = carOption.get("rentBrName");
+	String returnBrName = carOption.get("returnBrName");
+	String carName = carOption.get("carName");
+	String carImg = carOption.get("carImg");
+	
+	int accidentPrice1 = Integer.parseInt(carOption.get("accidentPrice1")); 	// 5만원
+	int accidentPrice2 = Integer.parseInt(carOption.get("accidentPrice2"));		// 30만원
+	int rentInsuPrice1 = Integer.parseInt(carOption.get("rentInsuPrice1"));		// 12000원
+	int rentInsuPrice2 = Integer.parseInt(carOption.get("rentInsuPrice2"));		// 10000원
+	int exemptionPrice = Integer.parseInt(carOption.get("exemptionPrice"));
+	
+	String navigation = carOption.get("navigation");
+	String babySeat = carOption.get("babySeat");
+	
 	DecimalFormat df = new DecimalFormat("#,###");
-	String strCarpay = df.format(carpay);
+	String strCarPrice = df.format(carPrice);
+	String strExemptionPrice = df.format(exemptionPrice);
+	String strAccidentPrice1 = df.format(accidentPrice1);
+	String strAccidentPrice2 = df.format(accidentPrice2);
+	String strRentInsuPrice1 = df.format(rentInsuPrice1);
+	String strRentInsuPrice2 = df.format(rentInsuPrice2);
 %> 
 <!DOCTYPE html>
 <html>
@@ -36,12 +56,12 @@
 		<div class="option-left">	
 			<div class="option-left-top">	
 				<div class="box-schd">
-					<span id="rentInfo"><strong><%=rent_branchnm%></strong><strong><%=rentDate%></strong></span>
+					<span id="rentInfo"><strong><%=rentBrName%></strong><strong><%=rentDate%></strong></span>
 						<em class="ico-to">to</em>
-					<span id="returnInfo"><strong><%=return_branchnm%></strong><strong><%=returnDate%></strong></span>
+					<span id="returnInfo"><strong><%=returnBrName%></strong><strong><%=returnDate%></strong></span>
 				</div>
-				<div id="carInfo" class="box-car"><%=carname%>
-					<div class="img-car"><img src="<%=contextPath%>/resources/carinfo_upfile/<%=carimg%>"></div>
+				<div id="carInfo" class="box-car"><%=carName%>
+					<div class="img-car"><img src="<%=contextPath%>/resources/carinfo_upfile/<%=carImg%>"></div>
 				</div>
 				<p class="f10 txt-gray1 txt-center pb25">실제 대여하는 차량과 외관, 색상, 옵션 등 차이가 있을 수 있으며<br>사고 또는 고장 등 부득이한 경우 동급차종으로 변경될 수 있습니다.</p>
 			</div>	
@@ -49,7 +69,7 @@
 				<ul>
 					<!-- 대여금액 -->
                 	<li>
-	                	<span class="tit">대여금액</span><span class="price" id="rentalFee" price="<%=carpay%>"><strong><%=strCarpay%></strong><em>원</em></span>
+	                	<span class="tit">대여금액</span><span class="price" id="rentalFee" price="<%=carPrice%>"><strong><%=strCarPrice%></strong><em>원</em></span>
                     </li>
 					<!-- 할인금액 -->
                     <li>
@@ -74,7 +94,7 @@
                      </li>
 					<!-- 금액 -->
                     <li class="total">
-                    	<span class="tit">금액</span><span class="price" id="totalRentalFeeView"><strong id="totalPay"><%=strCarpay%></strong><em>원</em></span>
+                    	<span class="tit">금액</span><span class="price" id="totalRentalFeeView"><strong id="totalPay"><%=strCarPrice%></strong><em>원</em></span>
                     </li>
                 </ul>
 			</div>
@@ -95,18 +115,28 @@
 	            	<input type="radio" id="rdoEvent" name="rdoOption">
 	                <label for="rdoEvent">이벤트</label>
 	                <select name="eventDiscount" id="eventDiscount" style="margin-left: 80px;">	
-		    			<option value="0">선택</option>
-		    			<option value="50">[서울전지점]3월 안전하고 건강한여행(50% 할인)</option>
-		    			<option value="20">[서울전지점]5월 안전하고 건강한여행(20% 할인)</option>
+	                	<% if(elist.isEmpty()){ %>
+	                		<option value="0" disabled>선택</option>
+	                	<% }else { %>
+	                		<option value="0">선택</option>
+							<% for(Event e : elist){ %>
+								<option value="<%=e.getDiscountRate()%>"><%=e.getEventTitle()%></option>
+							<% } %>
+						<% } %>
 					</select>
 	             </li>
 	             <li>
 	             	<input type="radio" id="rdoCoupon" name="rdoOption">
 	                <label for="rdoCoupon">쿠폰</label>
 	                <select name="couponDiscount" id="couponDiscount" style="margin-left: 95px">
-		    			<option value="0">선택</option>
-		    			<option value="60">신규회원 가입 감사 쿠폰(60% 할인)</option>
-		    			<option value="40">첫 예약 할인 쿠폰(40% 할인)</option>
+	                	<% if(myclist.isEmpty()){ %>
+	                		<option value="0" disabled>선택</option>
+	                	<% }else { %>
+	                		<option value="0">선택</option>
+							<% for(Coupon m : myclist){ %>
+								<option value="<%=m.getCouponDc()%>"><%=m.getCouponName()%></option>
+							<% } %>
+						<% } %>
 					</select>
                  </li>
 			</ul>
@@ -121,31 +151,41 @@
 					<label for="rdoNoCDW1">보험 미적용 (0원)</label>
 				</li>
 				<li>
-					<input type="radio" id="rdoCDW2" name="rdoCDW" value="20000" onclick="setCDWPrice(this.value)">
-					<label for="rdoCDW2">고객부담금 면제&nbsp;(20,000원)</label>
+					<input type="radio" id="rdoCDW2" name="rdoCDW" value="<%=exemptionPrice%>" onclick="setCDWPrice(this.value)">
+					<label for="rdoCDW2">고객부담금 면제&nbsp;(<%=strExemptionPrice%>원)</label>
 				</li>
 				<li>
-					<input type="radio" id="rdoCDW3" name="rdoCDW" value="12000" onclick="setCDWPrice(this.value)">
-					<label for="rdoCDW3">사고시 면책금 5만원&nbsp;(12,000원)</label>
+					<input type="radio" id="rdoCDW3" name="rdoCDW" value="<%=rentInsuPrice1%>" onclick="setCDWPrice(this.value)">
+					<label for="rdoCDW3">사고시 면책금(<%=strAccidentPrice1%>원)&nbsp;&nbsp;(<%=strRentInsuPrice1%>원)</label>
 				</li>
 				<li>
-					<input type="radio" id="rdoCDW4" name="rdoCDW" value="10000" onclick="setCDWPrice(this.value)">
-					<label for="rdoCDW4">사고시 면책금 30만원&nbsp;(10,000원)</label>
+					<input type="radio" id="rdoCDW4" name="rdoCDW" value="<%=rentInsuPrice2%>" onclick="setCDWPrice(this.value)">
+					<label for="rdoCDW4">사고시 면책금(<%=strAccidentPrice2%>원)&nbsp;&nbsp;(<%=strRentInsuPrice2%>원)</label>
 				</li>
 			</ul>
 			<p class="hg-40"></p>
 			<label class="option-right-hr f15">기타 옵션</label>
 			<span class="f14">내비게이션(무료)</span>
 			<span class="ml5"><a data-toggle="modal" href="#naviInfo" data-backdrop="static" class="btn-tooltip"></a></span>
-			<span class="ml10 mt5 ds-block f14">
-				<input type="checkbox" name="navigation" id="navigation" style="vertical-align:-2px;">
-				<label for="navigation" class="txt-gray2 fontwt-normal pl5">영문 내비게이션</label>
+			<span class="ml10 mt5 ds-block f14">				
+				<%if(navigation.equals("1")){ %>
+					<input type="checkbox" name="navigation" id="navigation" style="vertical-align:-2px;">
+					<label for="navigation" class="txt-gray2 fontwt-normal pl5">영문 내비게이션</label>
+				<%}else {%>
+					<input type="checkbox" name="navigation" id="navigation" style="vertical-align:-2px;" disabled>
+					<label class="txt-gray2 fontwt-normal pl5">영문 내비게이션</label>
+				<%}%>				
 			</span>	        	
 			<span class="f14">베이비 시트(1회 2,000원 추가)</span>
 			<span class="ml5"><a data-toggle="modal" href="#babyseatInfo" data-backdrop="static" class="btn-tooltip"></a></span>
 			<span class="ml10 mt5 ds-block f14">
-				<input type="checkbox" name="babyseat" value="2000" id="babyseat" style="vertical-align:-2px;" onclick="setBaybyPrice(this)">
-				<label for="babyseat" class="txt-gray2 fontwt-normal pl5">베이비 시트</label>
+				<%if(babySeat.equals("1")){ %>
+					<input type="checkbox" name="babyseat" value="2000" id="babyseat" style="vertical-align:-2px;" onclick="setBaybyPrice(this)">
+					<label for="babyseat" class="txt-gray2 fontwt-normal pl5">베이비 시트</label>
+				<%}else {%>
+					<input type="checkbox" name="babyseat" value="2000" id="babyseat" style="vertical-align:-2px;" disabled">
+					<label class="txt-gray2 fontwt-normal pl5">베이비 시트</label>
+				<%}%>	
 			</span>
 			<p class="hg-50"></p>
 			<div class="optionBtn">
@@ -244,16 +284,16 @@
   	</div>
 
 	<script>
-		var rentBrCode = "<%=rent_branch%>";
-		var returnBrCode = "<%=return_branch%>";
-		var rentBrName = "<%=rent_branchnm%>";
-		var returnBrName = "<%=return_branchnm%>";
+		var rentBrCode = "<%=rentBrCode%>";
+		var returnBrCode = "<%=returnBrCode%>";
+		var rentBrName = "<%=rentBrName%>";
+		var returnBrName = "<%=returnBrName%>";
 		var rentDate = "<%=rentDate%>";
 		var returnDate = "<%=returnDate%>";
-		var carPrice =  "<%=carpay%>";
-		var carNo = "<%=carno%>";
-		var carName = "<%=carname%>";
-		var carImg = "<%=carimg%>";	
+		var carPrice =  "<%=carPrice%>";
+		var carNo = "<%=carNo%>";
+		var carName = "<%=carName%>";
+		var carImg = "<%=carImg%>";	
 	</script>
 	<script type="text/javascript" src="<%=contextPath%>/resources/js/reservation/reservation.js"></script>  	
   	

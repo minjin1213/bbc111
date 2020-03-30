@@ -100,5 +100,21 @@ public class CouponService {
 		
 		return result;
 	}
+	
+	/**
+	 * 5. 마이쿠폰 리스트 조회 서비스
+	 * @param  couponNo	조회할 쿠폰 번호
+	 * @return cp		쿠폰정보를 담은 객체 반환
+	 */
+	public Coupon selectListByCoupon(int couponNo) {
+		Connection conn = getConnection();
+		
+		Coupon cp = new CouponDao().selectListByCoupon(conn,couponNo);
+		
+		close(conn);
+		
+		return cp;		
+		
+	}
 
 }
