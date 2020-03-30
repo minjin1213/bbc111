@@ -282,7 +282,7 @@
           <!-- Bar Chart -->
           <div class="card shadow mb-4" style="background-color: white;">
             <div class="card-header py-3" style="background-color: whitesmoke;">
-              <h6 class="m-0 font-weight-bold" style="color: black;">월 별 실적 현황</h6>
+              <h6 class="m-0 font-weight-bold" style="color: black;">지점 별 실적 현황</h6>
             </div>
             <div class="card-body">
               <div class="chart-area">
