@@ -61,13 +61,13 @@
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
-						<%if(loginUser != null){ %>
+							<%if(loginUser != null){ %>
 						<li class="nav-item">
-							<a class="nav-link" href="<%=contextPath%>/reservationSearch.rv">차량예약</a>
+							<a class="nav-link" href="<%=contextPath%>/reservationSearch.rv">차량예약</a>							
 						</li>
 						<%} else{ %>
 						<li class="nav-item">
-							<a class="nav-link" readonly >차량예약</a>							
+							<a class="nav-link" >차량예약</a>							
 						</li>
 						<%} %>
 					<%if(loginUser != null){ %>	
