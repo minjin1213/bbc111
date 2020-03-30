@@ -49,7 +49,7 @@ public class ReservWholeListServlet extends HttpServlet {
 		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
 		
 		String fr = request.getParameter("fr");
-		int st = Integer.parseInt(request.getParameter("st"));
+		String st = request.getParameter("st");
 
 		ArrayList<Reservation> wholeList = new ReservationService().selectWholeList(pi, st);
 		

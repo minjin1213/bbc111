@@ -2405,14 +2405,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #4e73df;
+  color: white !important;
+  background-color: orange;
   border-color: #4e73df;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
+  background-color: orange;
   border-color: #2653d4;
 }
 

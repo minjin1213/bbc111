@@ -22,11 +22,11 @@ public class NoticeService {
 	 * @param pi		페이지 객체
 	 * @return			조회된 공지사항 리스트 객체
 	 */
-	public ArrayList<Notice> branchSelectNoticeList(int memNo, PageInfo pi) {
+	public ArrayList<Notice> branchSelectNoticeList(PageInfo pi) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Notice> list = new NoticeDao().branchSelectNoticeList(conn, memNo, pi);
+		ArrayList<Notice> list = new NoticeDao().branchSelectNoticeList(conn, pi);
 		
 		close(conn);
 		
@@ -87,12 +87,13 @@ public class NoticeService {
 	 * @param flag		중요 공지사항 체크여부
 	 * @return			공지사항 등록 후 행의 개수
 	 */
-	public int branchInsertNotice(Notice n, ArrayList<Attachment> list, int memNo) {
+	public int branchInsertNotice(Notice n, ArrayList<Attachment> list) {
 		
 		Connection conn = getConnection();
 		
-		int result1 = new NoticeDao().branchInsertNotice(conn, n, memNo);
+		int result1 = new NoticeDao().branchInsertNotice(conn, n);
 		int result2 = new NoticeDao().branchInsertAttachment(conn, list);
+		
 		
 		if(result1 > 0 && result2 > 0) {
 			commit(conn);
@@ -127,11 +128,11 @@ public class NoticeService {
 	 * @param memNo	로그인한 회원 번호
 	 * @return		두 실행 결과를 곱한 값
 	 */
-	public int branchUpdateNotice(Notice n, ArrayList<Attachment> list, int memNo) {
+	public int branchUpdateNotice(Notice n, ArrayList<Attachment> list) {
 		
 		Connection conn = getConnection();
 		
-		int result1 = new NoticeDao().branchUpdateNotice(conn, n, memNo);
+		int result1 = new NoticeDao().branchUpdateNotice(conn, n);
 		int result2 = new NoticeDao().branchInsertAttachment(conn, list);
 		
 		if(result1 > 0 && result2 > 0) {
@@ -207,11 +208,11 @@ public class NoticeService {
 		return result;
 	}
 	
-	public ArrayList<Notice> branchMainNoticeList(int memNo, PageInfo pi) {
+	public ArrayList<Notice> branchMainNoticeList(PageInfo pi) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Notice> list = new NoticeDao().branchMainNoticeList(conn, memNo, pi);
+		ArrayList<Notice> list = new NoticeDao().branchMainNoticeList(conn, pi);
 		
 		close(conn);
 		

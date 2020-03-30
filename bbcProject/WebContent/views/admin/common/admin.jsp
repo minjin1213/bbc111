@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.bbc.userInfo.model.vo.UserInfo" %>
 <%
 	String contextPath = request.getContextPath();
+	UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,7 +172,7 @@
           <!-- Content Row -->
           <div class="h-bar">
 
-          <a href="#" class="logout-bt">
+          <a href="#" class="logout-bt" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt logout-icon">
               log out
             </i>
@@ -313,7 +315,7 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">통합관리자 페이지를 로그아웃 하시겠습니까?</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           <a class="btn btn-primary" onclick="logout();">Logout</a>
@@ -321,6 +323,11 @@
       </div>
     </div>
   </div>
+  <script>
+  	function logout(){
+  		location.href = "<%=contextPath%>/logout.ui"
+  	}
+  </script>
 
   <!-- Bootstrap core JavaScript-->
   <script src="<%=request.getContextPath() %>/resources/css/admin/vendor/jquery/jquery.min.js"></script>
