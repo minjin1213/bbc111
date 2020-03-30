@@ -156,7 +156,7 @@
 		<div class="btnArea">
 	        
 	        <form action="uDelete.t.no" method="post">
-		        <button class="enrollBtn" data-toggle="modal" data-target="#myModal">수정</button>
+		        <button type="button" class="enrollBtn" data-toggle="modal" data-target="#myModal">수정</button>
 	        	<input type="hidden" name="noticeNo" value="<%=no%>">
 		        <button type="submit" class="deleteBtn" onclick="deleteNotice();">삭제</button>
 	        </form>
@@ -167,10 +167,13 @@
 		<br><br>
 		<hr id="header-line">
 		<p id="file-title">첨부파일</p>
-		<span id="fileName1"><%=n.getRename() %></span>
-		<span class="fileName">123</span>
-		<span class="fileName">456</span>
-	
+		<% if(n.getRename() != null){ %>
+			<span id="fileName1"><%=n.getRename() %></span>
+			<span class="fileName"><%=n.getRename() %></span>
+			<span class="fileName"><%=n.getRename() %></span>
+		<% }else { %>
+
+		<% } %>
 		<br><br>
 		
 		<div id="notice-table-btn">

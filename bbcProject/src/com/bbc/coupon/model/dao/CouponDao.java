@@ -67,7 +67,7 @@ public class CouponDao {
 									rset.getString("coupon_name"),
 									rset.getInt("coupon_dc"),
 									rset.getInt("coupon_give"),
-									rset.getDate("coupon_create_date"),
+									rset.getDate("coupon_create"),
 									rset.getString("member_id")));
 			}
 			
@@ -109,8 +109,8 @@ public class CouponDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, c.getCouponName());
 			pstmt.setInt(2, c.getCouponDc());
-			pstmt.setInt(3, c.getCouponGive());
-			pstmt.setInt(4, c.getMemberNo());
+			pstmt.setInt(3, c.getMemberNo());
+			pstmt.setInt(4, c.getCouponGive());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

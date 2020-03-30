@@ -31,7 +31,7 @@ public class AdminMemberBlackServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int blackNo = Integer.parseInt(request.getParameter("no"));
-		
+		System.out.println(blackNo);
 		int result = new UserInfoService().adminBlackUser(blackNo);
 		
 		if(result > 0) {
