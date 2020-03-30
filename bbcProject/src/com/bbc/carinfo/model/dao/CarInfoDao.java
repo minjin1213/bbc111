@@ -36,12 +36,23 @@ public class CarInfoDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectCarTypeRv");
+		String sql;
+		if(carType == 0) {
+			sql = prop.getProperty("selectCarTypeAllRv");
+		}else {
+			sql = prop.getProperty("selectCarTypeRv");
+		}
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, carType);
-			pstmt.setInt(2, rent_branch);
+			if(carType == 0) {
+				pstmt.setInt(1, rent_branch);
+			}else {
+				pstmt.setInt(1, carType);
+				pstmt.setInt(2, rent_branch);
+			}
+			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				HashMap<String,String> hashMap = new HashMap<>();
