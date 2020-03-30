@@ -88,8 +88,9 @@
 												<% for(int i=0; i<size; i++) { %>
 												
 													<% for(int j=0; j<3; j++) { %>
-													
+
 														<% if(listSize != index) { %>
+														
 														<td>
 															<input type="checkbox" name="chk-car" value="<%= list.get(i).getCarNo() %>" style="margin-right: 230px;">
 															<% if(list.get(index).getCarLunchYear().equals("2020")) { %> 
@@ -292,8 +293,6 @@
 	
 		$(function(){
 			
-			var carNo="";
-			
 			$("#carModal").on('show.bs.modal', function(event){
 				
 				var carTypeName = $(event.relatedTarget).data('carTypeName');
@@ -305,6 +304,7 @@
 				var carOption = $(event.relatedTarget).data('carOption');
 				
 				var modal = $(this);
+				
 				modal.find(".carTypeName").text(carTypeName);
 				modal.find(".carType").text(carType);
 				modal.find(".carNum").text(carNum);

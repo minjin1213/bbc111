@@ -176,12 +176,15 @@ public class ReservationDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				ui = new UserInfo(rset.getString("member_name"),
+				ui = new UserInfo(rset.getInt("member_no"),
+									rset.getString("member_name"),
 									rset.getString("member_zipcode"),
 									rset.getString("member_address"),
 									rset.getString("rrn"),
 									rset.getString("phone"),
 									rset.getString("member_email"));
+				System.out.println(ui);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -273,7 +276,8 @@ public class ReservationDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				ui = new UserInfo(rset.getString("member_name"),
+				ui = new UserInfo(rset.getInt("member_no"),
+									rset.getString("member_name"),
 									rset.getString("member_zipcode"),
 									rset.getString("member_address"),
 									rset.getString("rrn"),
@@ -335,13 +339,13 @@ public class ReservationDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("");
+		String sql = prop.getProperty("rentDetailReserv");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			
-			rset = pstmt.executeQuery("rentDetailReserv");
+			rset = pstmt.executeQuery(sql);
 			
 			if(rset.next()) {
 				r = new Reservation(rset.getInt("reservation_no"),

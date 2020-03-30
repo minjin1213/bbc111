@@ -142,6 +142,7 @@ public class Reservation {
 		this.branchName = branchName;
 	}
 
+	
 	public int getReservationNo() {
 		return reservationNo;
 	}

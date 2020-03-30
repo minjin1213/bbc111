@@ -252,8 +252,7 @@
 	
 	$("#return-user-table>tbody>tr>td").click(function(){
 		var nno = $(this).parent().children().eq(1).text();
-		console.log(nno);
-		location.href="<%= request.getContextPath() %>/detailRent.b.rv?nno=" + nno + "&&fr=tab";
+		location.href="<%= request.getContextPath() %>/detailRent.b.rv?nno=" + nno;
 	});
 </script>
 </body>
