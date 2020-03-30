@@ -524,7 +524,7 @@ function displayCarInfo() {
 	  				listcnt++
 	  			}
   			}
-  			carInfoValue += "<tr><td ctype='all' onclick='setCarType(this)'>전체보기</td>"
+  			carInfoValue += "<tr><td ctype='0' onclick='setCarType(this)'>전체보기</td>"
   			carInfoValue += "<td colspan='2' ctype='memberp' onclick='setCarType(this)'>알뜰카(회원전용)</td></tr>"
   			carInfoValue += "</table>" 		
   			$("#car-type-list").html(carInfoValue);
@@ -540,11 +540,16 @@ function displayCarInfo() {
 // 선택한 차량유형값 변수에 셋팅
 function setCarType(target) {	
 	carType = $(target).attr('ctype');
+	if (carType == "memberp") {
+		alert("골드회원만 사용가능합니다.");
+		return;
+	}
 	$("#car-type-list > table > tbody > tr > td").removeAttr("style");
 	$(target).css("color", "#007bff");	
 }
 
 function serachCarList(){
+
 		var rent_date = $('input[name="reservation_date"]').val();
   		var return_date = $('input[name="return_date"]').val();
   		if(rent_date == "대여일시" || return_date == "반납일시") {
@@ -556,8 +561,8 @@ function serachCarList(){
 		}else if(typeof carType == "undefined") {
   			alert("차량유형을 선택해 주세요");
   			return;
-		}	
-  		
+		}	  		
+ 
   		$.ajax({
   	  		url:"searchCar.rv?carType=" + carType + "&rent_branch=" + rent_branch + "&rent_date=" + rent_date + "&return_date=" + return_date,
   	  		type:"get",

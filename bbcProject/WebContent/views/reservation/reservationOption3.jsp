@@ -111,8 +111,8 @@
 				<p class="hg-40"></p>
 				<label class="option-right-hr f15">취소 수수료 안내</label>
 				<ul class="txt-list">
-					<li class="black f14">해당 예약은 대여시간 24시간 전 
-					<span class="txt-point">(2020년 03월 26일 (목) 10:00)</span>까지 수수료 없이 취소 가능하며, 이후 취소하는 경우 수수료가 발생합니다.<br>
+					<li class="black f14">해당 예약은 
+					<span class="txt-point">대여시간 24시간 전 </span>까지 수수료 없이 취소 가능하며, 이후 취소하는 경우 수수료가 발생합니다.<br>
 			    	</li>
 					<li class="black f14">대여지점과 사전 협의 없이 대여시간까지 지점을 방문하지 않는 경우 해당 예약은 취소되며, 노쇼(NO SHOW) 수수료가 발생합니다.</li>			
 				</ul>	
