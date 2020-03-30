@@ -14,9 +14,10 @@ public class CarType {
 	private int memberCar;			// 알뜰카 대여료
 	private int rentInsuType1;		// 보험유형1 금액
 	private int rentInsuType2;		// 보험유형2 금액
+	private int accidentExemption;	// 보험유형3 금액면책금X
 	private int accidentPriceType1;	// 면책금(보험유형1)
 	private int accidentPriceType2;	// 면책금(보험유형2)
-	private int accidentExemption;	// 면책금X
+	private int accidentPriceType3;	// 면책금(보험유형3)
 	private int recessPrice;		// 휴차료
 	
 	public CarType() {
@@ -54,10 +55,9 @@ public class CarType {
 		this.memberCar = memberCar;
 	}
 	
-
-	public CarType(int carTypeNo, int rent1d, int rent1d6d, int rent7dp, int over6t, int over9t,
-			int over12t, int memberCar, int rentInsuType1, int rentInsuType2, int accidentPriceType1,
-			int accidentPriceType2, int accidentExemption, int recessPrice) {
+	public CarType(int carTypeNo, int rent1d, int rent1d6d, int rent7dp, int over6t, int over9t, int over12t,
+			int memberCar, int rentInsuType1, int rentInsuType2, int accidentExemption, int accidentPriceType1,
+			int accidentPriceType2, int accidentPriceType3, int recessPrice) {
 		super();
 		this.carTypeNo = carTypeNo;
 		rent1D = rent1d;
@@ -69,9 +69,10 @@ public class CarType {
 		this.memberCar = memberCar;
 		this.rentInsuType1 = rentInsuType1;
 		this.rentInsuType2 = rentInsuType2;
+		this.accidentExemption = accidentExemption;
 		this.accidentPriceType1 = accidentPriceType1;
 		this.accidentPriceType2 = accidentPriceType2;
-		this.accidentExemption = accidentExemption;
+		this.accidentPriceType3 = accidentPriceType3;
 		this.recessPrice = recessPrice;
 	}
 
@@ -195,14 +196,27 @@ public class CarType {
 		this.accidentExemption = accidentExemption;
 	}
 
+	public int getAccidentPriceType3() {
+		return accidentPriceType3;
+	}
+
+	public void setAccidentPriceType3(int accidentPriceType3) {
+		this.accidentPriceType3 = accidentPriceType3;
+	}
+
 	@Override
 	public String toString() {
 		return "CarType [carTypeNo=" + carTypeNo + ", carTypeName=" + carTypeName + ", rent1D=" + rent1D + ", rent1D6D="
 				+ rent1D6D + ", rent7DP=" + rent7DP + ", over6T=" + over6T + ", over9T=" + over9T + ", over12T="
 				+ over12T + ", memberCar=" + memberCar + ", rentInsuType1=" + rentInsuType1 + ", rentInsuType2="
-				+ rentInsuType2 + ", accidentPriceType1=" + accidentPriceType1 + ", accidentPriceType2="
-				+ accidentPriceType2 + ", recessPrice=" + recessPrice + "]";
+				+ rentInsuType2 + ", accidentExemption=" + accidentExemption + ", accidentPriceType1="
+				+ accidentPriceType1 + ", accidentPriceType2=" + accidentPriceType2 + ", accidentPriceType3="
+				+ accidentPriceType3 + ", recessPrice=" + recessPrice + "]";
 	}
+	
+	
+
+	
 	
 	
 

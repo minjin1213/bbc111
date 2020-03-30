@@ -19,7 +19,18 @@ public class BranchManagementService {
 		
 		return list;
 	}
-	
+	// -----------------------------요한
+public ArrayList<BranchManagement> selectArea(int areano) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<BranchManagement> list = new BranchManagementDao().selectArea(conn, areano);
+		
+		close(conn);
+		
+		return list;
+		
+	}
 	// ------------------------------ 민기 Service
 	/**
 	 * 1. 공지사항 전체 리스트 갯수 조회용 서비스

@@ -43,8 +43,10 @@ public class InquiryDetailsServlet extends HttpServlet {
 		int pageLimit;			// 한페이지 하단에 보여질 최대 갯수
 		int boardLimit;			// 한페이지  보여질 최대 갯수
 		
-		listCount = new MyInquiryService().UserGetListCount();
+		int memNo1 = 1;
 		
+		listCount = new MyInquiryService().UserGetListCount(memNo1);
+						                   
 		currentPage = 1;
 
 		if(request.getParameter("currentPage") != null) {
@@ -70,13 +72,12 @@ public class InquiryDetailsServlet extends HttpServlet {
 		request.setAttribute("parentMenu", "마이페이지");
 		request.setAttribute("currentMenu", "나의 문의 내역");
 		
-		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		
 
 		
-		 
+		
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("views/mypage/userInquiryDetails.jsp");

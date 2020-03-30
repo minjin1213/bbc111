@@ -49,7 +49,7 @@
             
             <h5 id="divider-name"><li class="fas fa-fw fa-user-edit"></li>예약 정보</h5>
 
-            <h5 id="info-client">예약자 정보 <hr id="info-client-hr"></h5>
+            <h5 id="info-client">예약자 정보 <hr id="return-hr"></h5>
 
             <!-- 예약자 정보 div -->
             <div>
@@ -77,7 +77,7 @@
               </table>
             </div>
 
-            <h5 id="info-client">대여 정보 <hr id="info-client-hr"></h5>
+            <h5 id="info-client">대여 정보 <hr id="return-hr"></h5>
 
             <!-- 대여 정보 div-->
             <div>
@@ -95,6 +95,26 @@
                     	<td><%= r.getCarName() %></td>
                     	<td><%= r.getRentDate() %> ~ <%= r.getReturnDate() %></td>
                     	<td><%= r.getBranchName() %></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h5 id="info-client">결제 정보 <hr id="return-hr"></h5>
+            
+            <!-- 결제 정보 div -->
+            <div>
+                <table class="table info-client-table info-table">
+                    <tr>
+                    	<th>결제 번호</th>
+                    	<th>결제 방식</th>
+                    	<th>결제 금액</th>
+                    	<th>결제 일시</th>
+                    </tr>
+                    <tr>
+                    	<td><%= p.getPayNo() %></td>
+                    	<td><%= p.getPayMethod() %></td>
+                    	<td><%= p.getPayAmount() %></td>
+                    	<td><%= p.getPayDate() %></td>
                     </tr>
                 </table>
             </div>

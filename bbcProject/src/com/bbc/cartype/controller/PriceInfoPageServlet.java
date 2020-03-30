@@ -35,6 +35,10 @@ public class PriceInfoPageServlet extends HttpServlet {
 		ArrayList<CarType> list2 = new CarTypeService().adminPriceSelectList2();
 		ArrayList<CarType> list3 = new CarTypeService().adminPriceSelectList3();
 		
+		System.out.println(list1);
+		System.out.println(list2);
+		System.out.println(list3);
+		
 		if(list1.isEmpty() && list2.isEmpty() && list3.isEmpty()) {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}else {

@@ -212,6 +212,10 @@
   border-bottom-right-radius: 3px;
 }
 
+.ListArea>tbody>tr:hover{
+	cursor:pointer;
+	background:gray;
+}
 
 </style>
 <body>
@@ -223,11 +227,11 @@
 		<hr class="garo">
 
             <div class="popup" style="float: right;">
-                <button class="search2" style="font-size:10px;" onclick="location.href='<%=contextPath%>/insertForm.bo';">문의하기</button>
+                <button class="search2" style="font-size:10px;" onclick="location.href='<%=contextPath%>/MyInquiryInsert.my';">문의하기</button>
 
             </div>
 
-            <table id="tableMain">
+            <table class="ListArea" id="tableMain">
             
                 <thead>
                     <tr class="tableheader">
@@ -238,68 +242,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <!--  
-                    <tr>
-                        <td>10</td>
-                        <td>이용방법은요?</td>
-                        <td>2020-02-22</td>
-                        <td>답변완료</td>
-                    </tr>    
-                    <tr>
-                        <td>9</td>
-                        <td>결제방법은요?</td>
-                        <td> 2020-01-22</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>회원가입은요?</td>
-                        <td> 2019-12-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>지점위치는요?</td>
-                        <td> 2019-10-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>지점번호</td>
-                        <td> 2019-06-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>쿠폰에관하여</td>
-                        <td> 2019-05-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>회원가입에관하여</td>
-                        <td> 2019-04-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>휴대폰인증</td>
-                        <td> 2019-03-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>채팅</td>
-                        <td> 2019-02-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>전화문의</td>
-                        <td> 2019-01-01</td>
-                        <td>답변완료</td>
-                    </tr>
-                -->
+
                    <%if(list.isEmpty()){ %>
 				 	<tr>
 				 		<td colspan="5">존재하는 나의문의사항이 없습니다.</td>
@@ -350,6 +293,18 @@
               
 
 	</div> <!-- <div class="outer"> -->
+	
+			<script>
+				$(function(){
+					$(".ListArea>tbody>tr").click(function(){
+						
+						var min = $(this).children().eq(0).text();
+						//console.log(nno);
+						location.href="<%=contextPath%>/MyInquiryDetail.my?min=" + min;
+					});			
+				});
+       
+			</script>
 
 	
 </body>

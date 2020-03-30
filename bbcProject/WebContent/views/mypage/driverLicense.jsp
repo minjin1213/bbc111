@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+   <%@ page import="com.bbc.userInfo.model.vo.UserInfo, com.bbc.driverlicense.model.vo.DriverLicense"%>
+<% 
+	DriverLicense d = (DriverLicense)session.getAttribute("d");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+   
 <meta charset="UTF-8">
 <title>운전면허 등록</title>
 <style>
@@ -243,73 +245,72 @@ body {font-family: Arial, Helvetica, sans-serif;}
 	
 
 		<div class="outer"> 
-		     <div class="main-title">운전면허 등록</div>
-		<hr class="garo"> 
+		
+		    <div class="main-title">운전면허 등록</div>
+			<hr class="garo"> 
 	     
-		
-	 <form id="file-upload-form" class="uploader" style="margin-top: 25px;">
-                <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
-              
-                <label for="file-upload" id="file-drag" style="margin-top: 0px; margin-bottom: 0px;">
-                  <img id="file-image" src="#" alt="Preview" class="hidden">
-                  <div id="start">
-                    <i class="fa fa-download" aria-hidden="true"></i>
-                    <div id="file-upload-btn" class="btn btn-primary" >Select a file</div>
-                  </div>
-                  <div id="response" class="hidden">
-                    <div id="messages"></div>
-                    <progress class="progress" id="file-progress" value="0">
-                      <span>0</span>%
-                    </progress>
-                  </div>
-                </label>
-              </form>
-		
-		
-        <div id="right" style="margin-bottom: 0px; margin-top: 35px;">
+	     
+			<form  id="file-upload-form"  class="uploader"  style="margin-top:25px;" enctype="multipart/form-data"  action="<%=request.getContextPath()%>/insert.dl" method="post">
+				<form>
+	                <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+	              
+	                <label for="file-upload" id="file-drag" style="margin-top: 0px; margin-bottom: 0px;">
+	                <img id="file-image" src="#" alt="Preview" class="hidden">
+	                  <div id="start">
+		                    <i class="fa fa-download" aria-hidden="true"></i>
+		                    <div id="file-upload-btn" class="btn btn-primary" >Select a file</div>
+	                  </div>
+	                  <div id="response" class="hidden">
+	                    <div id="messages"></div>
+	                  
+	                  </div>
+	                </label> 
+	                <div id="right" style="margin-bottom: 0px; margin-top: 35px;">
        
-            <ul style="margin-right:50px;margin-top:20px;margin-bottom: 30px;">
-                <li>
-                    <form>
-                         <label for="type" id="letter" style="width: 20%;">면허 종류: </label>
-                            <select id="type" name="type">
+            		<ul style="margin-right:50px;margin-top:20px;margin-bottom: 30px;">
+                		<li> 
+                         	<span for="type" id="letter" style="width: 20%;">면허 종류: </span>
+                            <select id="type" name="dlType">
                                 <option value="선택">선택</option>
                                 <option value="1종대형">1종대형</option>
                                 <option value="1종보통">1종보통</option>
                                 <option value="2종보통">2종보통</option>
                                 <option value="2종오토">2종오토</option>
                             </select>
-                     </form>
-               </li>
-                <li style="margin-top:14px;">
-                    <form>
-                     <span> 
-                        <label for="type" id="letter">면허증 번호: </label>
-                         <select id="small" name="type">
-                                <option value="선택">선택</option>
-                                <option value="11">11</option>
-                                <option value="22">22</option>
-                        </select>
-                         </form>
-                        <input type="text" id="chg" class="chgs" value="0000" > - <input type="text" id="chg" class="chgs" value="0000"  style="width:60px"> - <input type="text" id="chg" class="chgs" value="0000"  style="width:60px">
-                      </span>
-                </li>
-                <li style="margin-top:14px;">
-                        <label for="발급일" id="letter">발급일:</label>
-                        <input type="date" style="width: 150px;" class="chgs" name="발급일">
-        
-                </li>
-                    <li style="margin-top:14px;">
-                        <label for="만료일" id="letter">만료일:</label>
-                        <input type="date" style="width: 150px;" class="chgs" name="만료일">
-                </li> 
-            </ul>
-        </div>
-		
-		  <h3 style="margin-top:60px;">운전면허정보 등록을 위한 이용자 동의사항</h3>
-            <hr>
-            <span><input type="checkbox" style="margin-right:5px;" required>고유 식별 정보 수집에 관한 동의(필수)</span>
-    				
+                    
+               		  </li>
+		                <li style="margin-top:14px;">
+	                        <span for="type" id="letter">면허증 번호: </span>
+	                         <select id="small" name="dlNum">
+	                                <option value="선택">선택</option>
+	                                <option value="11" >11</option>
+	                                <option value="12">12</option>
+	                                <option value="13">13</option>
+	                                <option value="15">15</option>             
+	                                <option value="23">23</option>
+	                        </select>
+	                        <input type="text" id="chg" class="chgs" placeholder="xx" name="dlNum1"style="width:40px" maxlength="2"> - <input type="text" id="chg" class="chgs" placeholder="xxxxxx" name="dlNum2" style="width:80px" maxlength="6"> - <input type="text" id="chg" class="chgs" placeholder="xx" name="dlNum3" style="width:40px" maxlength="2">
+		                   <input type="hidden">
+		                </li>
+		                <li style="margin-top:14px;">
+		                        <span for="발급일" id="letter">발급일:</span>
+		                        <input type="date" style="width: 200px;" class="chgs" name="new">
+		        
+		                </li>
+		                    <li style="margin-top:14px;">
+		                        <span for="만료일" id="letter">만료일:</span>
+		                        <input type="date" style="width: 200px;" class="chgs" name="expire">
+		                </li> 
+		            </ul>
+		            
+		        </div>
+		        
+		        
+		        	
+		  		<h3 style="margin-top:90px; font-size:20px;">운전면허정보 등록을 위한 이용자 동의사항</h3>
+	            <hr>
+	            <span><input type="checkbox" style="margin-right:5px;" required>고유 식별 정보 수집에 관한 동의(필수)</span>
+	    				
     			
     
                <div style=" margin-left: 20px; border:1px solid lightgray; width:800px; height:200px; overflow: auto;margin-top:10px; margin-bottom:40px;">
@@ -325,16 +326,155 @@ body {font-family: Arial, Helvetica, sans-serif;}
                     라. 부정가입 방지 관련<br>
                     부정가입 방지를 위해 고객(대리인 포함)이 제시한 신분증의 진위 여부 및 법정대리인 관계확인에 필요한 성명 , 주민등록번호(외국인은 외국인등록번호, 거소신고번호, 여권번호), 운전면허번호, 그 밖에 신분증 기재사항을 한국정보통신진흥협회, 행정자치부, 법원행정처 등 신분증 발급기관에 제공하여 진위 여부를 확인하는데 동의합니다.<br>
                </div>
-         
+		     				<!-- 등록 -->
+				<button id="myBtn" type="submit" style="background: #ffc107; color:white; font-weight:bold; width: 100px; height: 40px; border-radius: 4px; float:right; text-align:center; margin-top: 40px; margin-right: 380px;" >등록</button>
+	    
+	    
+	    
+	            </form>
 		
+			</form>
+		
+		</div>
 
-<!-- Trigger/Open The Modal -->
-<button id="myBtn" type="submit" style="background: #ffc107; color:white; font-weight:bold; width: 100px; height: 40px; border-radius: 4px; float:right; text-align:center; margin-top: 40px; margin-right: 380px;" onclick="successDL();">등록</button>
+		<script type="text/javascript" >
+			function ekUpload(){
+				  function Init() {
+			
+				    console.log("Upload Initialised");
+			
+				    var fileSelect    = document.getElementById('file-upload'),
+				        fileDrag      = document.getElementById('file-drag'),
+				        submitButton  = document.getElementById('submit-button');
+			
+				    fileSelect.addEventListener('change', fileSelectHandler, false);
+			
+				    // Is XHR2 available?
+				    var xhr = new XMLHttpRequest();
+				    if (xhr.upload) {
+				      // File Drop
+				      fileDrag.addEventListener('dragover', fileDragHover, false);
+				      fileDrag.addEventListener('dragleave', fileDragHover, false);
+				      fileDrag.addEventListener('drop', fileSelectHandler, false);
+				    }
+				  }
+			
+				  function fileDragHover(e) {
+				    var fileDrag = document.getElementById('file-drag');
+			
+				    e.stopPropagation();
+				    e.preventDefault();
+			
+				    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
+				  }
+			
+				  function fileSelectHandler(e) {
+				    // Fetch FileList object
+				    var files = e.target.files || e.dataTransfer.files;
+			
+				    // Cancel event and hover styling
+				    fileDragHover(e);
+			
+				    // Process all File objects
+				    for (var i = 0, f; f = files[i]; i++) {
+				      parseFile(f);
+				      uploadFile(f);
+				    }
+				  }
+			
+				  // Output
+				  function output(msg) {
+				    // Response
+				    var m = document.getElementById('messages');
+				    m.innerHTML = msg;
+				  }
+			
+				  function parseFile(file) {
+			
+				    console.log(file.name);
+				    output(
+				      '<strong style="font-size:10px;">' + file.name + '</strong>'
+				    );
+				    
+				    // var fileType = file.type;
+				    // console.log(fileType);
+				    var imageName = file.name;
+			
+				    var isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
+				    if (isGood) {
+				      document.getElementById('start').classList.add("hidden");
+				      document.getElementById('response').classList.remove("hidden");
+			
+				      // Thumbnail Preview
+				      document.getElementById('file-image').classList.remove("hidden");
+				      document.getElementById('file-image').src = URL.createObjectURL(file);
+				    }
+				    else {
+				      document.getElementById('file-image').classList.add("hidden");
+				      document.getElementById('notimage').classList.remove("hidden");
+				      document.getElementById('start').classList.remove("hidden");
+				      document.getElementById('response').classList.add("hidden");
+				      document.getElementById("file-upload-form").reset();
+				    }
+				  }
+			
+				  function setProgressMaxValue(e) {
+				    var pBar = document.getElementById('file-progress');
+			
+				    if (e.lengthComputable) {
+				      pBar.max = e.total;
+				    }
+				  }
+			
+				
+			
+				  function uploadFile(file) {
+			
+				    var xhr = new XMLHttpRequest();
+				      fileInput = document.getElementById('file-upload'),
+				      pBar = document.getElementById('file-progress'),
+				      fileSizeLimit = 1024; // In MB
+				    if (xhr.fileInput) {
+				      // Check if file is less than x MB
+				      if (file.size <= fileSizeLimit * 1024 * 1024) {
+				        // Progress bar
+				        pBar.style.display = 'inline';
+				        xhr.upload.addEventListener('loadstart', setProgressMaxValue, false);
+				        xhr.upload.addEventListener('progress', updateFileProgress, false);
+			
+				        // File received / failed
+				        xhr.onreadystatechange = function(e) {
+				          if (xhr.readyState == 4) {
+				            // Everything is good!
+			
+				            // progress.className = (xhr.status == 200 ? "success" : "failure");
+				            // document.location.reload(true);
+				          }
+				        };
+			
+				        // Start upload
+				        xhr.open('POST', document.getElementById('file-upload-form').action, true);
+				        xhr.setRequestHeader('X-File-Name', file.name);
+				        xhr.setRequestHeader('X-File-Size', file.size);
+				        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+				        xhr.send(file);
+				      } else {
+				        output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+				      }
+				    }
+				  }
+			
+				  // Check for the various File API support.
+				  if (window.File && window.FileList && window.FileReader) {
+				    Init();
+				  } else {
+				    document.getElementById('file-drag').style.display = 'none';
+				  }
+				}
+			
+				  ekUpload();
 
-
-
-
-</div>
+	</script>
 
 <script>
 
@@ -345,151 +485,6 @@ function successDL(){
 
 </script>
 
-<script type="text/javascript" >
- 
-function ekUpload(){
-	  function Init() {
-
-	    console.log("Upload Initialised");
-
-	    var fileSelect    = document.getElementById('file-upload'),
-	        fileDrag      = document.getElementById('file-drag'),
-	        submitButton  = document.getElementById('submit-button');
-
-	    fileSelect.addEventListener('change', fileSelectHandler, false);
-
-	    // Is XHR2 available?
-	    var xhr = new XMLHttpRequest();
-	    if (xhr.upload) {
-	      // File Drop
-	      fileDrag.addEventListener('dragover', fileDragHover, false);
-	      fileDrag.addEventListener('dragleave', fileDragHover, false);
-	      fileDrag.addEventListener('drop', fileSelectHandler, false);
-	    }
-	  }
-
-	  function fileDragHover(e) {
-	    var fileDrag = document.getElementById('file-drag');
-
-	    e.stopPropagation();
-	    e.preventDefault();
-
-	    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
-	  }
-
-	  function fileSelectHandler(e) {
-	    // Fetch FileList object
-	    var files = e.target.files || e.dataTransfer.files;
-
-	    // Cancel event and hover styling
-	    fileDragHover(e);
-
-	    // Process all File objects
-	    for (var i = 0, f; f = files[i]; i++) {
-	      parseFile(f);
-	      uploadFile(f);
-	    }
-	  }
-
-	  // Output
-	  function output(msg) {
-	    // Response
-	    var m = document.getElementById('messages');
-	    m.innerHTML = msg;
-	  }
-
-	  function parseFile(file) {
-
-	    console.log(file.name);
-	    output(
-	      '<strong>' + encodeURI(file.name) + '</strong>'
-	    );
-	    
-	    // var fileType = file.type;
-	    // console.log(fileType);
-	    var imageName = file.name;
-
-	    var isGood = (/\.(?=gif|jpg|png|jpeg)/gi).test(imageName);
-	    if (isGood) {
-	      document.getElementById('start').classList.add("hidden");
-	      document.getElementById('response').classList.remove("hidden");
-	      document.getElementById('notimage').classList.add("hidden");
-	      // Thumbnail Preview
-	      document.getElementById('file-image').classList.remove("hidden");
-	      document.getElementById('file-image').src = URL.createObjectURL(file);
-	    }
-	    else {
-	      document.getElementById('file-image').classList.add("hidden");
-	      document.getElementById('notimage').classList.remove("hidden");
-	      document.getElementById('start').classList.remove("hidden");
-	      document.getElementById('response').classList.add("hidden");
-	      document.getElementById("file-upload-form").reset();
-	    }
-	  }
-
-	  function setProgressMaxValue(e) {
-	    var pBar = document.getElementById('file-progress');
-
-	    if (e.lengthComputable) {
-	      pBar.max = e.total;
-	    }
-	  }
-
-	  function updateFileProgress(e) {
-	    var pBar = document.getElementById('file-progress');
-
-	    if (e.lengthComputable) {
-	      pBar.value = e.loaded;
-	    }
-	  }
-
-	  function uploadFile(file) {
-
-	    var xhr = new XMLHttpRequest(),
-	      fileInput = document.getElementById('class-roster-file'),
-	      pBar = document.getElementById('file-progress'),
-	      fileSizeLimit = 1024; // In MB
-	    if (xhr.upload) {
-	      // Check if file is less than x MB
-	      if (file.size <= fileSizeLimit * 1024 * 1024) {
-	        // Progress bar
-	        pBar.style.display = 'inline';
-	        xhr.upload.addEventListener('loadstart', setProgressMaxValue, false);
-	        xhr.upload.addEventListener('progress', updateFileProgress, false);
-
-	        // File received / failed
-	        xhr.onreadystatechange = function(e) {
-	          if (xhr.readyState == 4) {
-	            // Everything is good!
-
-	            // progress.className = (xhr.status == 200 ? "success" : "failure");
-	            // document.location.reload(true);
-	          }
-	        };
-
-	        // Start upload
-	        xhr.open('POST', document.getElementById('file-upload-form').action, true);
-	        xhr.setRequestHeader('X-File-Name', file.name);
-	        xhr.setRequestHeader('X-File-Size', file.size);
-	        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-	        xhr.send(file);
-	      } else {
-	        output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
-	      }
-	    }
-	  }
-
-	  // Check for the various File API support.
-	  if (window.File && window.FileList && window.FileReader) {
-	    Init();
-	  } else {
-	    document.getElementById('file-drag').style.display = 'none';
-	  }
-	}
-
-	  ekUpload();
-
-</script>
 
 </body>
 

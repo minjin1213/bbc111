@@ -75,13 +75,13 @@
 		<p style="margin-top:15px;color:black;"><strong> 회원정보입력</strong> &nbsp;<b class="str">*는 필수 입력항목입니다</b></p>
 
 <hr>          
-<form name="RegForm" action="<%= request.getContextPath() %>/insert.ui" onsubmit="return validate();" method="post">  
+<form id="enrollForm" name="RegForm" action="<%= request.getContextPath() %>/insert.ui" onsubmit="return validate();" method="post">  
       
     <p><b class="str">* &nbsp;</b><b>성별:</b><b style="color:black;margin-left:5px;"> 남 </b> <input type="radio" name="gender" value="M" style="width:20px;"><b style="color:black;"> 여</b><input type="radio" name="gender" value="F" style="width:20px;color:black;"> </p> 
     <hr>      
     <p><b class="str">* &nbsp;</b><b>이름:</b> <input type="text" size=35 name="Name" id="name" required> </p> 
     <hr>
-    <p><b class="str">* &nbsp;</b><b>아이디:</b> <input type="text" size=33 name="userId" id="userID" style="width: 286px;" required>  </p>
+    <p><b class="str">* &nbsp;</b><b>아이디:</b> <input type="text" size=33 name="userId" id="userID" style="width: 286px;" required> <button style="width:60;font-size:10px;height:30px;color:white;background: #ffc107;border-radius:5px;margin-top:5px;text-align:center;"type="button" id="idCheckBtn" onclick="checkId();">중복확인</button> </p>
     <hr>
     <p><b class="str">* &nbsp;</b><b>비밀번호:</b> <input type="password" size=31 name="Password" id="userPass" style="width: 327px;" required> </p>
     <hr>
@@ -99,10 +99,48 @@
            
 
     <p>
-    <center><input type="submit" value="등록" name="Submit" class="search" >  </center>  
+    <center><input type="submit" value="등록" name="Submit" class="search" id="joinBtn">  </center>  
     </p>          
 </form> 
 		</div>
+		
+		
+<script>
+		function checkId(){
+			
+			// 아이디 입력받는 input요소
+			var userId = $("#enrollForm input[name=userId]"); // input요소 자체
+			
+			$.ajax({
+				url:"idCheck.me",
+				data:{userId:userId.val()},
+				type:"post",
+				success:function(result){
+					
+					if(result == 1){ // 사용불가능한 아이디
+						alert("사용불가능한 아이디입니다.");
+						userId.focus();
+						
+					}else{ // 사용가능한 아이디
+						
+						if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
+							userId.attr("readonly", "true"); // 더이상 아이디 수정 불가능하게
+							$("#joinBtn").removeAttr("disabled"); // 가입하기 버튼 활성화
+						}else{
+							userId.focus();
+						}
+						
+					}
+					
+					
+				},
+				error:function(){
+					console.log("아이디 중복체크 ajax 통신 실패!!");
+				}
+			});
+			
+		}
+	</script>		
 <script type="text/javascript">
 
 function validate()                                    

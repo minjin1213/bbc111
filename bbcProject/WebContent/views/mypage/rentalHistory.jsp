@@ -3,7 +3,7 @@
  <%@page import="com.bbc.reservation.model.vo.Reservation" %>
  <%@ page import="java.util.ArrayList" %>
  <%
- 	ArrayList<Reservation> list = (ArrayList<Reservation>)request.getAttribute("reservationlist");
+ 	ArrayList<Reservation> list = (ArrayList<Reservation>)request.getAttribute("totalList");
  %>
     
 <!DOCTYPE html>
@@ -333,15 +333,13 @@
                 <button onclick="myFunction();" class="search">사용자 지정</button>
                 <span class="popuptext" id="myPopup"> 
                         <b style="font-size: 15px; color:white">조회기간</b><br>
-             <span> <input  type="date" name="listDate" value="01/01/2018" style="width: 155px;height: 24px; background-color:white;" >
+             <span> <input  type="date" name="listDate"style="width: 155px;height: 24px; background-color:white;" >
  					<br>
  				~
  					<br>            
-              <input type="date" name="listDate" value="02/01/2018" style="width: 155px;height: 24px; background-color:white;"> </span> <br>
-                  <button class="month" type="submit" value="1개월">1개월</button>	
-                  <button class="month" type="submit" value="3개월">3개월</button>	
-                  <button class="month" type="submit" value="6개월">6개월</button> <br>
-                  <button  onclick="myFunction();"class="month" id="length" type="submit" value="적용" style="Width:100px;">적용</button>
+              <input type="date" name="listDate" style="width: 155px;height: 24px; background-color:white;"> </span> <br>
+                 
+                  <button  onclick="myFunction();"class="month" id="length" type="submit" value="적용" style="Width:100px;border-radius:5px;">적용</button>
                  
               </div>
 
@@ -435,10 +433,11 @@ function myFunction() {
                 <td id="bor" colspan="2">결제 방식</td>
                 <td style="border:1px solid gray" colspan="2" ><%=r.getPayMethod()%></td>
               </tr>
-              <tr id="pop">
+              
+             <tr id="pop">
                 <td  style="border:1px solid gray" id="bor"colspan="2">환불 여부</td>
                 <% if(r.getRefundStatement() != null){ %>
-                <td  colspan="2" style="border:1px solid gray"  ><%=r.getRefundStatement() %></td>
+                <td  colspan="2" style="border:1px solid gray"  >환불완료</td>
                 <%} else { %>
                      <td  colspan="2" style="border:1px solid gray"  > - </td>
                      <%} %>
@@ -451,7 +450,9 @@ function myFunction() {
                       <td  colspan="2" style="border:1px solid gray"  > - </td>
                         <%} %>
               </tr>
-         
+      
+                      
+              
                
             </tbody>
           </table>

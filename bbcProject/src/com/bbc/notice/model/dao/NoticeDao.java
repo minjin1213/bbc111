@@ -730,22 +730,32 @@ public class NoticeDao {
 
 		public Notice UserSelectNotice(Connection conn, int nno) {
 			Notice n = null;
+			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
+			
 			String sql = prop.getProperty("UserSelectNotice");
+			
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, nno);
+				pstmt.setInt(2, nno);
+				pstmt.setInt(3, nno);
+				
 				rset = pstmt.executeQuery();
-
+				
 				if(rset.next()) {
 					n = new Notice(rset.getInt("notice_no"),
 									rset.getString("notice_title"),
 									rset.getString("notice_content"),
 									rset.getDate("notice_date"),
 									rset.getInt("notice_readcnt"),
-									rset.getInt("notice_field"));
+									rset.getInt("notice_field"),
+									rset.getInt("prev"),
+									rset.getInt("next"));
 				}
+				
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -753,8 +763,9 @@ public class NoticeDao {
 				close(rset);
 				close(pstmt);
 			}
-			return n;	
-
+			return n;
+			
+			
 		}
 		//사용자 끝
 	 

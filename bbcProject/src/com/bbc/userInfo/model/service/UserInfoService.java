@@ -53,6 +53,7 @@ public class UserInfoService{
 		 return info;
 		  
 	  }
+ // 회원정보 조회
   public UserInfo selectUser(int userNo) {
 		  Connection conn = getConnection();
 		  
@@ -62,7 +63,108 @@ public class UserInfoService{
 		  
 		  return mem;
 	  }
+  // 회원수정
+ public int updateUser(UserInfo mem) {
+	  
+	  Connection conn = getConnection();
+		
+		int result = new UserInfoDao().updateUser(conn,mem);
+		
+		if (result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	  
+  }
+  //회원탈퇴
+  public int deleteUser(String userId) {
+	  
+	  Connection conn = getConnection();
+	  
+	  int result = new UserInfoDao().deleteUser(conn,userId);
+	  
+	  if(result>0) {
+		  commit(conn);
+	  }else {
+		  rollback(conn);
+	  }
+	  
+	  close(conn);
+	  
+	  return result;
+  }
+  // 이메일로 아이디찾기 
+  public UserInfo findMyIdEmail(String name, String email) {
+	  
+	  Connection conn = getConnection();
+	  
+	  UserInfo  findid = new UserInfoDao().findMyIdEmail(conn,name,email);
+	  
+	  close(conn);
+	  
+	  return findid; 
+  }
+  //폰으로 아이디찾기 
+  public UserInfo findMyIdPhone(String name, String phone) {
+	  
+	  Connection conn = getConnection();
+	  
+	  UserInfo findid = new UserInfoDao().findMyIdPhone(conn, name, phone);
+	  
+	  close(conn);
+	  
+	  return findid;
+	  
+  }
+  // 비밀번호 찾기
+  public UserInfo findMyPw(String name, String email, String phone) {
+	  
+	  Connection conn = getConnection();
+	  
+	  UserInfo findPw = new UserInfoDao().findMyPw(conn,name,email,phone);
+	  
+	  close(conn);
+	  
+	  return findPw;
+  }
+  // 비밀번호 변경
+  public int updatePw(UserInfo mem) {
+	  
+		Connection conn = getConnection();
+		
+		int result = new UserInfoDao().updatePw(conn, mem);
 
+		if (result >0) {
+			commit(conn);
+		}
+		
+		if(result>0) {
+			  commit(conn);
+		  }else {
+			  rollback(conn);
+		  }
+		  
+		  close(conn);
+		  
+		  return result;
+  }
+  // 중복확인
+  public int idCheck(String userId) {
+		
+		Connection conn = getConnection();
+		
+		int result = new UserInfoDao().idCheck(conn, userId);
+		
+		close(conn);
+		
+		return result;
+		
+	}
 	// ---------------------------------- 민기 Service
 	/**
 	 * 1. 등록된 유저수 조회용 서비스

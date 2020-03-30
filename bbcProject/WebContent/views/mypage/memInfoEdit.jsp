@@ -2,18 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ page import ="java.util.ArrayList"%>
  <%@page import="com.bbc.userInfo.model.vo.*"%>
- <%
- 	UserInfo mem = (UserInfo)request.getAttribute("mem");
- 	
- 	String userId = mem.getMemberId();
- 	String userPwd = mem.getMemberPwd();
- 	String userName = mem.getMemberName();
- 	String phone = (mem.getPhone() != null) ? mem.getPhone() : "";
- 	String email = (mem.getMemberEmail() != null) ? mem.getMemberEmail() : "";
- 	String address = (mem.getMemberAddress() != null) ? mem.getMemberEmail() : "";
- 	String detailAddress = (mem.getMemberZipcode() != null ) ? mem.getMemberZipcode(): ""; 	
- 
- %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,13 +78,13 @@
 		<p style="margin-top:15px;color:black;"><strong> 회원정보입력</strong> &nbsp;<b class="str">*는 필수 입력항목입니다</b></p>
 
 <hr>          
-<form name="RegForm" action="<%= request.getContextPath()%>/change.ui" onsubmit="return validate();" method="post">  
+<form id="enrollForm" name="RegForm" action="<%=request.getContextPath()%>/change2.ui" onsubmit="return validate();" method="post">  
       
     <p><b class="str">* &nbsp;</b><b>성별:</b><b style="color:black;margin-left:5px;"> 남 </b> <input type="radio" name="gender" value="M" style="width:20px;"><b style="color:black;"> 여</b><input type="radio" name="gender" value="F" style="width:20px;color:black;"> </p> 
     <hr>      
     <p><b class="str">* &nbsp;</b><b>이름:</b> <input type="text" size=35 name="Name" id="name" required> </p> 
     <hr>
-    <p><b class="str">* &nbsp;</b><b>아이디:</b> <input type="text" size=33 name="userId" id="userID" style="width: 286px;" required>  </p>
+    <p><b class="str">* &nbsp;</b><b>아이디:</b> <input type="text" size=33 name="userId" id="userID" style="width: 286px;" required> <button style="width:60;font-size:10px;height:30px;color:white;background: #ffc107;border-radius:5px;margin-top:5px;text-align:center;"type="button" id="idCheckBtn" onclick="checkId();">중복확인</button> </p>
     <hr>
     <p><b class="str">* &nbsp;</b><b>비밀번호:</b> <input type="password" size=31 name="Password" id="userPass" style="width: 327px;" required> </p>
     <hr>
@@ -105,15 +94,13 @@
     <hr>
     <p> <b class="str">* &nbsp;</b><b>휴대폰번호</b><input type="text" size=27 name="Phone" id="Phone"  placeholder="xxx-xxxx-xxxx" style="width: 325px;" required></p>
    	<hr>
-    <p> <b class="str">* &nbsp;</b><b>주민번호:</b><input type="text" size=27 name="RRN" id="RRN"  placeholder="xxxxxx-xxxxxxx" style="width: 332px;" required></p>
-    <hr>
     <p><b class="str">* &nbsp;</b><b>주소:</b>    
         <input type="text" size=63  name="address" id="address" style="margin-left: 7px; margin-top:5px;" placeholder="주소"><br>
         <input type="text" size=63  name="detailAddress" id="detailAddress" style="margin-left:60px; margin-top:5px;" placeholder="상세주소"> </p>   
            
 
     <p>
-    <center><input type="submit" value="등록" name="Submit" class="search" >  </center>  
+    <center><input type="submit" value="수정 " name="Submit" class="search" >  </center>  
     </p>          
 </form> 
 		</div>
@@ -212,7 +199,42 @@ function validate()
    	
 
 </script>
-
+<script>
+		function checkId(){
+			
+			// 아이디 입력받는 input요소
+			var userId = $("#enrollForm input[name=userId]"); // input요소 자체
+			
+			$.ajax({
+				url:"idCheck.me",
+				data:{userId:userId.val()},
+				type:"post",
+				success:function(result){
+					
+					if(result == 1){ // 사용불가능한 아이디
+						alert("사용불가능한 아이디입니다.");
+						userId.focus();
+						
+					}else{ // 사용가능한 아이디
+						
+						if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
+							userId.attr("readonly", "true"); // 더이상 아이디 수정 불가능하게
+							$("#joinBtn").removeAttr("disabled"); // 가입하기 버튼 활성화
+						}else{
+							userId.focus();
+						}
+						
+					}
+					
+					
+				},
+				error:function(){
+					console.log("아이디 중복체크 ajax 통신 실패!!");
+				}
+			});
+			
+		}
+	</script>	
 
  
 </body>

@@ -1,5 +1,7 @@
+
 package com.bbc.mycoupon.model.dao;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,27 +10,56 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import com.bbc.mycoupon.model.vo.MyCoupon;
 import static com.bbc.common.JDBCTemplate.*;
 
+import com.bbc.coupon.model.dao.CouponDao;
+import com.bbc.mycoupon.model.vo.MyCoupon;
+
 public class MyCouponDao {
-	
+
 	private Properties prop = new Properties();
 	
-	public MyCouponDao() {
-		
-		String fileName = MyCouponDao.class.getResource("/sql/mycoupon/mycoupon-query.properties").getPath();
-		
-		try {
-			prop.load(new FileReader(fileName));
-		} catch (IOException e) {
-			e.printStackTrace();
+		public MyCouponDao() {
+			
+			String fileName = CouponDao.class.getResource("/sql/coupon/coupon-query.properties").getPath();
+			
+			try {
+				prop.load(new FileReader(fileName));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
-	}
-	
-	public ArrayList<MyCoupon> selectByMemberNo(Connection conn, int memberNo) {
+				
+	/*
+	 * public ArrayList<MyCoupon> selectCouponList(Connection conn,int mno){
+	 * 
+	 * ArrayList<MyCoupon> list = new ArrayList<MyCoupon>();
+	 * 
+	 * PreparedStatement pstmt = null; ResultSet rset = null;
+	 * 
+	 * String sql = prop.getProperty("viewMyCoupon");
+	 * 
+	 * try { pstmt = conn.prepareStatement(sql);
+	 * 
+	 * pstmt.setInt(1, mno);
+	 * 
+	 * rset = pstmt.executeQuery();
+	 * 
+	 * while(rset.next()) { list.add(new MyCoupon(rset.getString("COUPON_USE"),
+	 * rset.getString("COUPON_NAME"), rset.getDate("COUPON_POST"),
+	 * rset.getDate("COUPON_EXP"), rset.getString("COUPON_TYPE"),
+	 * rset.getString("COUPON_CONDITION"), rset.getInt("COUPON_DC") )); }
+	 * 
+	 * 
+	 * } catch (SQLException e) {
+	 * 
+	 * e.printStackTrace(); } finally { close(rset); close(pstmt); } return list;
+	 * 
+	 * }
+	 */
+		public ArrayList<MyCoupon> selectByMemberNo(Connection conn, int memberNo) {
 		
 		 ArrayList<MyCoupon> clist = new ArrayList<MyCoupon>();
 		 
@@ -53,5 +84,6 @@ public class MyCouponDao {
 		 
 		return clist; 
 	}
+
 
 }
