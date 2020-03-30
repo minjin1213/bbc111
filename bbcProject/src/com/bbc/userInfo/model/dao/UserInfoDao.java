@@ -195,9 +195,7 @@ public class UserInfoDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("loginUserInfo");
-		
-		
-		
+				
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberId);
@@ -229,6 +227,7 @@ public class UserInfoDao {
 		} finally {
 			close(pstmt);
 		}
+		
 		return loginUser;
 	}
 	

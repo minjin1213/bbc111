@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import com.bbc.attachment.model.vo.Attachment;
 import com.bbc.common.page.vo.PageInfo;
-import com.bbc.event.model.vo.Event;
 import com.bbc.notice.model.vo.Notice;
 import com.bbc.notice.model.vo.UserPageInfo;
 
@@ -36,7 +35,7 @@ public class NoticeDao {
 	
 	
 	
-	public ArrayList<Notice> branchSelectNoticeList(Connection conn, int memNo, PageInfo pi) {
+	public ArrayList<Notice> branchSelectNoticeList(Connection conn, PageInfo pi) {
 		
 		ArrayList<Notice> list = new ArrayList<>();
 		
@@ -51,9 +50,8 @@ public class NoticeDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
 			int endRow = startRow + pi.getTableLimit() - 1;
 			
-			pstmt.setInt(1, memNo);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -76,7 +74,7 @@ public class NoticeDao {
 		return list;
 	}
 	
-	public ArrayList<Notice> branchMainNoticeList(Connection conn, int memNo, PageInfo pi) {
+	public ArrayList<Notice> branchMainNoticeList(Connection conn, PageInfo pi) {
 		
 		ArrayList<Notice> list = new ArrayList<>();
 		
@@ -91,9 +89,8 @@ public class NoticeDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
 			int endRow = startRow + pi.getTableLimit() - 1;
 			
-			pstmt.setInt(1, memNo);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -166,7 +163,6 @@ public class NoticeDao {
 									rset.getInt("member_no"),
 									rset.getInt("notice_import"),
 									rset.getInt("notice_field"),
-									rset.getInt("branch_no"),
 									rset.getInt("prev"),
 									rset.getInt("next"));
 			}
@@ -205,7 +201,7 @@ public class NoticeDao {
 		return result;
 	}
 	
-	public int branchInsertNotice(Connection conn, Notice n, int memNo) {
+	public int branchInsertNotice(Connection conn, Notice n) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -215,8 +211,7 @@ public class NoticeDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, n.getNoticeTitle());
 			pstmt.setString(2, n.getNoticeContent());
-			pstmt.setInt(3, memNo);
-			pstmt.setInt(4, n.getNoticeImport());
+			pstmt.setInt(3, n.getNoticeImport());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -260,7 +255,7 @@ public class NoticeDao {
 		
 	}
 	
-	public int branchUpdateNotice(Connection conn, Notice n, int memNo) {
+	public int branchUpdateNotice(Connection conn, Notice n) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -273,7 +268,6 @@ public class NoticeDao {
 			pstmt.setString(2, n.getNoticeContent());
 			pstmt.setInt(3, n.getNoticeImport());
 			pstmt.setInt(4, n.getNoticeNo());
-			pstmt.setInt(5, memNo);
 			
 			result = pstmt.executeUpdate();
 			

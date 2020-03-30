@@ -49,7 +49,7 @@ public class ReservReturnManageServlet extends HttpServlet {
 		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
 		
 		String fr = request.getParameter("fr");
-		int st = (Integer.parseInt(request.getParameter("st")));
+		String st = request.getParameter("st");
 //		int branch=21;
 		
 		ArrayList<Reservation> rentList = new ReservationService().selectRentList(pi, st);

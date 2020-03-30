@@ -31,7 +31,7 @@ public class EventDao {
 		
 	}
 	
-	public ArrayList<Event> selectEventList(Connection conn, int memNo, PageInfo pi){
+	public ArrayList<Event> selectEventList(Connection conn, PageInfo pi){
 		
 		ArrayList<Event> list = new ArrayList<>();
 		
@@ -46,9 +46,8 @@ public class EventDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
 			int endRow = startRow + pi.getTableLimit() - 1;
 			
-			pstmt.setInt(1, memNo);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -164,7 +163,7 @@ public class EventDao {
 		return eList;
 	}
 	
-	public int insertEvent(Connection conn, Event e, int memNo, String startDate, String endDate, String rate) {
+	public int insertEvent(Connection conn, Event e, String startDate, String endDate, String rate) {
 		
 		int result = 0;
 		
@@ -179,7 +178,6 @@ public class EventDao {
 			pstmt.setString(3, endDate);
 			pstmt.setString(4, rate);
 			pstmt.setString(5, e.getEventContent());
-			pstmt.setInt(6, memNo);
 			
 			result = pstmt.executeUpdate();
 			
@@ -193,7 +191,7 @@ public class EventDao {
 		
 	}
 	
-	public int updateEvent(Connection conn, Event e, int memNo, String startDate, String endDate, String rate) {
+	public int updateEvent(Connection conn, Event e, String startDate, String endDate, String rate) {
 		
 		int result = 0;
 		
@@ -207,8 +205,7 @@ public class EventDao {
 			pstmt.setString(3, endDate);
 			pstmt.setString(4, rate);
 			pstmt.setString(5, e.getEventContent());
-			pstmt.setInt(6, memNo);
-			pstmt.setInt(7, e.getEventNo());
+			pstmt.setInt(6, e.getEventNo());
 			
 			result = pstmt.executeUpdate();
 			

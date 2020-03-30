@@ -45,7 +45,6 @@ public class HelpNoticeModifyServlet extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			int memNo = 21;
 			
 			int nno = Integer.parseInt(multiRequest.getParameter("nno"));
 			int showNotice = Integer.parseInt(multiRequest.getParameter("showNotice"));
@@ -80,7 +79,7 @@ public class HelpNoticeModifyServlet extends HttpServlet {
 				}
 			}
 			
-			int result = new NoticeService().branchUpdateNotice(n, list, memNo);
+			int result = new NoticeService().branchUpdateNotice(n, list);
 			
 			if(result > 0) {
 				response.sendRedirect("notice.b.no");

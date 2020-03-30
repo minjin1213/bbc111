@@ -55,7 +55,7 @@
 						<form enctype="multipart/form-data" action="<%= request.getContextPath() %>/enroll.b.no" method="post">
 							
 							<p id="checkNotice">
-								<input type="checkbox" name="showNotice" id="showNotice" value=1> 중요 공지사항
+								<input type="checkbox" name="showNotice" id="showNotice" value="1"> 중요 공지사항
 							</p>
 							<div>
 								<table class="notice-table">
@@ -152,10 +152,6 @@
 				}
 			}
 		};
-		
-		//$(function(){
-		//	$("#showNotice").on("click", function() {  flag = 1;  });
-		//});
 		
 	</script>
 

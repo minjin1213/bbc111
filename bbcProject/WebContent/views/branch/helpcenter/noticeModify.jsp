@@ -60,7 +60,7 @@
 						<form enctype="multipart/form-data" action="<%= request.getContextPath() %>/update.b.no" method="post">
 							<input type="hidden" name="nno" value="<%= n.getNoticeNo() %>">
 							<p id="checkNotice">
-								<input type="checkbox" name="showNotice" id="showNotice" value=1> 중요 공지사항
+								<input type="checkbox" name="showNotice" id="showNotice" value="1"> 중요 공지사항
 							</p>
 							<div>
 								<table class="notice-table">

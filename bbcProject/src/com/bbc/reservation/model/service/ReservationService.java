@@ -20,7 +20,7 @@ public class ReservationService {
 	 * @param pi	페이지 객체
 	 * @return		조회된 전체 회원 예약 정보 객체
 	 */
-	public ArrayList<Reservation> selectWholeList(PageInfo pi, int st){
+	public ArrayList<Reservation> selectWholeList(PageInfo pi, String st){
 		
 		Connection conn = getConnection();
 		
@@ -68,7 +68,7 @@ public class ReservationService {
 	 * @param pi	페이지 객체
 	 * @return		대여리스트 객체
 	 */
-	public ArrayList<Reservation> selectRentList(PageInfo pi, int st){
+	public ArrayList<Reservation> selectRentList(PageInfo pi, String st){
 		
 		Connection conn = getConnection();
 		

@@ -48,7 +48,7 @@ public class HelpEventModifyServlet extends HttpServlet {
 		e.setEventTitle(title);
 		e.setEventContent(content);
 		
-		int result = new EventService().updateEvent(e, memNo, startDate, endDate, rate);
+		int result = new EventService().updateEvent(e, startDate, endDate, rate);
 		
 		if(result > 0) {
 			response.sendRedirect("event.b.ev");

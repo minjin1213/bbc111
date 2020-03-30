@@ -41,24 +41,20 @@ public class LoginServlet extends HttpServlet {
 	
 			
 		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
-		
-		int auth = loginUser.getAuthorityNo();
-	
-		 
+						 
 		if(loginUser != null) {
+						
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
 			
-			if(auth == 0) {    // 일반 사용자 
-				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
+			int auth = loginUser.getAuthorityNo();
+						
+			if(auth == 0) {    // 일반 사용자 	
 				response.sendRedirect(request.getContextPath());
-			}else if(auth == 1) { // 지점관리자
-				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
-				request.getRequestDispatcher("views/branch/common/branchmain.jsp").forward(request, response);
-			}else if(auth ==2) { // 통합관리자
-				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
-				request.getRequestDispatcher("views/admin/common/admin.jsp").forward(request, response);
+			}else if(auth == 1) { // 지점관리자	
+				response.sendRedirect(request.getContextPath() + "/mainNotice.b.no");
+			}else if(auth ==2) { // 통합관리자		
+	            request.getRequestDispatcher("views/admin/common/admin.jsp").forward(request, response);
 			}
 			
 		}else {

@@ -80,7 +80,7 @@
 								<div class="col-md-12">
 
 									<div class="tab-content" id="nav-tabContent">
-											<table class="table">
+											<table class="table" id="main-notice">
 												<thead>
 													<tr>
 														<th>No</th>
@@ -93,6 +93,7 @@
 													<% for(Notice n : list) { %>
 													<tr>
 														<td><%= n.getRowNum() %></td>
+														<td style="display:none;"><%= n.getNoticeNo() %></td>
 														<td><%= n.getNoticeTitle() %></td>
 														<td><%= n.getMemberName() %></td>
 														<td><%= n.getEnrollDate() %></td>
@@ -112,9 +113,11 @@
 											<% if(currentPage == 1) { %>
 												<button class="page-bt" disabled> &lt; </button>
 											<% } else { %>
-												<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/mainNotice.b.no=<%= currentPage - 1 %>';"> &lt; </button>
+												<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/mainNotice.b.no?currentPage=<%= currentPage - 1 %>';"> &lt; </button>
 											<% } %>
 											
+
+							
 											<!-- (>) -->
 											<% if(currentPage == maxPage) { %>
 												<button class="page-bt" disabled> &gt; </button>
@@ -178,6 +181,12 @@
 	</div>
 	
 	<script>
+
+		$("#main-notice>tbody>tr>td").click(function(){
+			var nno = $(this).parent().children().eq(1).text();
+			location.href="<%= request.getContextPath() %>/detail.b.no?nno=" + nno;
+		});
+		
 		var ctx = document.getElementById("myPieChart");
 		var myPieChart = new Chart(ctx, {
 		  type: 'doughnut',
@@ -323,6 +332,8 @@
 			    }
 			  }
 			});
+			
+			
 
 	</script>
 

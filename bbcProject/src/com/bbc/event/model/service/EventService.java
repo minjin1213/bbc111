@@ -16,11 +16,11 @@ public class EventService {
 	 * @param memNo	(로그인기능 전)가입한 지점관리자의 회원번호라고 침
 	 * @return		조회된 리스트
 	 */
-	public ArrayList<Event> selectEventList(int memNo, PageInfo pi){
+	public ArrayList<Event> selectEventList(PageInfo pi){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Event> list = new EventDao().selectEventList(conn, memNo, pi);
+		ArrayList<Event> list = new EventDao().selectEventList(conn, pi);
 		
 		close(conn);
 		
@@ -75,11 +75,11 @@ public class EventService {
 	 * @param e		등록할 이벤트 객체
 	 * @return		insert 후 처리된 행의 개수
 	 */
-	public int insertEvent(Event e, int memNo, String startDate, String endDate, String rate) {
+	public int insertEvent(Event e, String startDate, String endDate, String rate) {
 		
 		Connection conn = getConnection();
 		
-		int result = new EventDao().insertEvent(conn, e, memNo, startDate, endDate, rate);
+		int result = new EventDao().insertEvent(conn, e, startDate, endDate, rate);
 		
 		if(result > 0) {
 			commit(conn);
@@ -112,11 +112,11 @@ public class EventService {
 	 * @param e		입력한 이벤트 객체
 	 * @return		sql 성공 후 행의 개수
 	 */
-	public int updateEvent(Event e, int memNo, String startDate, String endDate, String rate) {
+	public int updateEvent(Event e, String startDate, String endDate, String rate) {
 		
 		Connection conn = getConnection();
 		
-		int result = new EventDao().updateEvent(conn, e, memNo, startDate, endDate, rate);
+		int result = new EventDao().updateEvent(conn, e, startDate, endDate, rate);
 		
 		if(result > 0) {
 			commit(conn);
