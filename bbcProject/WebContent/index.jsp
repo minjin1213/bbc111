@@ -116,7 +116,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<a class="dropdown-item text-center" href="">FAQ</a>
 								<a class="dropdown-item text-center" href="">고객의견</a>
 								<a class="dropdown-item text-center" href="">1:1 상담</a>
-								<a class="dropdown-item text-center" href="">공지사항</a>
+								<a class="dropdown-item text-center" href="CsList.no">공지사항</a>
 							</div>
 						</li>
 					</ul>
