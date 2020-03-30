@@ -1,6 +1,7 @@
 package com.bbc.reservation.model.service;
 
-import static com.bbc.common.JDBCTemplate.close;
+import static com.bbc.common.JDBCTemplate.*;
+
 import static com.bbc.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -142,6 +143,11 @@ public class ReservationService {
 		return ui;
 	}
 	
+	/**
+	 * 8. 
+	 * @param no	
+	 * @return		
+	 */
 	public ArrayList<Payment> selectReservDetailPay(int no) {
 		
 		Connection conn = getConnection();
@@ -153,6 +159,11 @@ public class ReservationService {
 		return list;
 	}
 	
+	/**
+	 * 9. 
+	 * @param 	
+	 * @return		
+	 */
 	public Reservation selectRentDetailReserv(int no) {
 		
 		Connection conn = getConnection();
@@ -164,5 +175,68 @@ public class ReservationService {
 		return r;
 	}
 
+
+/*	//요한 예약내역조회 
+	public ArrayList<Reservation> selectReservationList(int mno){
+			
+			Connection conn = getConnection();
+			
+			ArrayList<Reservation> reservationlist = new ReservationDao().selectReservationList(conn,mno);
+		
+			close(conn);
+			return reservationlist;
+		
+	}
+	
+	// 차량이용내역 조회
+	public ArrayList<Reservation> selectTotalReservationList(int mno){
+			
+			Connection conn = getConnection();
+			
+			ArrayList<Reservation> reservationtotal = new ReservationDao().selectTotalReservationList(conn,mno);
+		
+			close(conn);
+			
+			return reservationtotal;
+		
+	}*/
+	
+	// 차량예약취소
+	public int deletemyReservation(int userno, int rno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReservationDao().deleteMyReservation(conn,userno, rno);
+		
+		if (result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	/**
+	 * 10. 차량예약정보 테이블 저장
+	 * @param 	r : 차량예약정보가 담긴 객체
+	 * @return	차량예약정보 테이블 저장 수행 결과
+	 */
+	public int insertResevation(Reservation r) {
+		Connection conn = getConnection();
+		
+		int result = new ReservationDao().insertReservation(conn, r);
+		
+		if(result > 0) {
+
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

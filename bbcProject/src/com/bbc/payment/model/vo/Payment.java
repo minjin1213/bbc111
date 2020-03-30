@@ -11,6 +11,7 @@ public class Payment {
 	private String payMethod;		// 결제 방식
 	private String refundStatus;	// 환불 여부
 	private Date refundDate;		// 환불 일시
+	private int memberNo;			// 결재수행한 회원번호
 	
 	// -- 추가된 필드
 	private int rowNum;
@@ -156,6 +157,14 @@ public class Payment {
 		this.rowNum = rowNum;
 	}
 	
+	
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	@Override
 	public String toString() {

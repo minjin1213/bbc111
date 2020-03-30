@@ -41,8 +41,7 @@
 					<!-- Content Row -->
 					<div class="h-bar list-bar">
 
-						<a href="#" class="logout-bt" data-toggle="modal"
-							data-target="#logoutModal"> <i
+						<a href="#" class="logout-bt" data-toggle="modal" data-target="#logoutModal"> <i
 							class="fas fa-sign-out-alt logout-icon"> log out </i>
 						</a>
 					</div>
@@ -252,8 +251,7 @@
 	
 	$("#return-user-table>tbody>tr>td").click(function(){
 		var nno = $(this).parent().children().eq(1).text();
-		console.log(nno);
-		location.href="<%= request.getContextPath() %>/detailRent.b.rv?nno=" + nno + "&&fr=tab";
+		location.href="<%= request.getContextPath() %>/detailRent.b.rv?nno=" + nno;
 	});
 </script>
 </body>

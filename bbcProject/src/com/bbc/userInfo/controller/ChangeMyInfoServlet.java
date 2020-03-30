@@ -32,27 +32,13 @@ public class ChangeMyInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
-		
- 		int userNo = loginUser.getMemberNo();
+	
+		request.setAttribute("currentMenu", "마이페이지/회원정보");
 
- 		UserInfo mem = new UserInfoService().selectUser(userNo);
- 		
- 		if( mem != null) {
+		RequestDispatcher view = request.getRequestDispatcher("views/mypage/memInfoEdit.jsp");
+		view.forward(request, response);
  			
- 			request.setAttribute("mem", mem);
- 			RequestDispatcher view = request.getRequestDispatcher("views/mypage/memInfoEdit.jsp");
- 			view.forward(request, response);
- 			
- 		}else {
- 			
- 			request.setAttribute("msg", "조회에 실패했습니다.");
- 			
- 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
- 			view.forward(request, response);
- 		}
+
  		
 	}
 

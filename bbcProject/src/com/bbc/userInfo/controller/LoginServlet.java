@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
@@ -41,21 +42,30 @@ public class LoginServlet extends HttpServlet {
 			
 		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
 		
+		int auth = loginUser.getAuthorityNo();
+	
+		 
 		if(loginUser != null) {
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
+			if(auth == 0) {    // 일반 사용자 
+				HttpSession session = request.getSession();
+				session.setAttribute("loginUser", loginUser);
+				response.sendRedirect(request.getContextPath());
+			}else if(auth == 1) // 지점관리자
+			{
+				
+			}else if(auth ==2) { // 통합관리자
+				
+			}
 			
-			response.sendRedirect(request.getContextPath());
-		
 		}else {
-			
-			request.setAttribute("msg", "로그인 실패");
-			request.setAttribute("currentMenu", "로그인");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+				request.setAttribute("msg", "로그인 실패");
+				request.setAttribute("currentMenu", "로그인");
+				RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+				view.forward(request, response);
 		}
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

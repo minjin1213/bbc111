@@ -50,8 +50,7 @@ public class CarInfoDao {
  	            hashMap.put("CAR_NO",String.valueOf(rset.getInt("CAR_NO")));
  	            hashMap.put("CAR_TYPE_NAME", rset.getString("CAR_TYPE_NAME"));
  	            hashMap.put("CAR_MODIFY_NAME", rset.getString("CAR_MODIFY_NAME"));
- 	            //hashMap.put("CAR_FUEL", rset.getString("CAR_FUEL"));
- 	            
+  	            
 				// 연료타입으로 이미지값 변경
 				String fuel = rset.getString("CAR_FUEL");
 				if(fuel.equals("LPG")) {
@@ -67,18 +66,26 @@ public class CarInfoDao {
 				//예약일수에 따른 대여료 셋팅            	
 				 if(dayCount >= 7) {
 					 // 7일 이상인 경우
-					 hashMap.put("PRICE", String.valueOf(rset.getInt("RENT_7DP")));		 	           
+					 hashMap.put("PRICE", String.valueOf(rset.getInt("RENT_7DP") * dayCount));		 	           
 				 }else if(dayCount <= 2) {
 					 // 2일 이하인 경우
-					 hashMap.put("PRICE", String.valueOf(rset.getInt("RENT_1D")));		
+					 hashMap.put("PRICE", String.valueOf(rset.getInt("RENT_1D") * dayCount));		
 				 }else {
 					 // 3~6일
-					 hashMap.put("PRICE", String.valueOf(rset.getInt("RENT_1D_6D")));		
+					 hashMap.put("PRICE", String.valueOf(rset.getInt("RENT_1D_6D") * dayCount));		
 				 }
  	            
  	            hashMap.put("CAR_RIDE_PEOPLE",String.valueOf(rset.getInt("CAR_RIDE_PEOPLE")));
+ 	            hashMap.put("CAR_OPTION",rset.getString("CAR_OPTION")); 	           
  	            hashMap.put("MEMBER_CAR",String.valueOf(rset.getInt("MEMBER_CAR")));
  	            
+ 	            // 보험료금액
+ 	            hashMap.put("RENT_INSU_TYPE1",String.valueOf(rset.getInt("RENT_INSU_TYPE1")));
+ 	            hashMap.put("RENT_INSU_TYPE2",String.valueOf(rset.getInt("RENT_INSU_TYPE2")));
+ 	            hashMap.put("ACCIDENT_PRICE_TYPE1",String.valueOf(rset.getInt("ACCIDENT_PRICE_TYPE1")));
+ 	            hashMap.put("ACCIDENT_PRICE_TYPE2",String.valueOf(rset.getInt("ACCIDENT_PRICE_TYPE2")));
+ 	            hashMap.put("ACCIDENT_EXEMPTION",String.valueOf(rset.getInt("ACCIDENT_EXEMPTION")));
+ 	                
  			    list.add(hashMap);
  			 }
 			
@@ -229,14 +236,14 @@ public class CarInfoDao {
 		return list;
 	}
 	
-	public ArrayList<CarInfo> branchCarEnroll(Connection conn, PageInfo pi){
+	public ArrayList<CarInfo> branchCarEnrollList(Connection conn, PageInfo pi){
 		
 		ArrayList<CarInfo> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("carEnroll");
+		String sql = prop.getProperty("carEnrollList");
 		
 		try {
 			
@@ -273,5 +280,50 @@ public class CarInfoDao {
 		
 		return list;
 		
+	}
+	
+	public int branchDeleteChkCar(Connection conn, String arr) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCar");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, arr);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int branchEnrollChkCar(Connection conn, String arr, int branch) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("carEnroll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, branch);
+			pstmt.setString(2, arr);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

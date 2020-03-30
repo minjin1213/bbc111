@@ -11,6 +11,11 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	int index = 0;
+	
+	int listSize = list.size();
+	int size = (int)(Math.ceil((double)list.size()/3));
 %>
 <!DOCTYPE html>
 <html>
@@ -78,78 +83,52 @@
 								<div class="col-md-4">
 									<div class="car-card">
 										<div class="card-image">
-											<% for(CarInfo ci : list) { %>
 											<table>
 												<tr>
-													<td>
-														<% if(ci.getCarLunchYear().equals("2020")) { %> 
-															<span class="card-notify-badge"></span>
-															<span class="card-notify-year">New</span> 
-														<% } %> 
+												<% for(int i=0; i<size; i++) { %>
+												
+													<% for(int j=0; j<3; j++) { %>
+
+														<% if(listSize != index) { %>
 														
-														<span class="card-notify-badge"><input type="checkbox" name="chk-car"></span>
-														<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= ci.getCarModifyName() %>"  style="width:300px; height:200px">
-														<div class="card-body text-center">
-															<div class="ad-title m-auto">
-																<a href="#" data-toggle="modal" data-target="#carModal"><h5><%= ci.getCarTypeName() %></h5></a>
+														<td>
+															<input type="checkbox" name="chk-car" value="<%= list.get(i).getCarNo() %>" style="margin-right: 230px;">
+															<% if(list.get(index).getCarLunchYear().equals("2020")) { %> 
+																<span class="card-notify-year">New</span> 
+															<% } %> 
+															
+															<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= list.get(index).getCarModifyName() %>" style="width:250px; height:150px">
+															<div class="card-body text-center">
+																<div class="ad-title m-auto">
+																	<a href="#" data-toggle="modal" data-target="#carModal"
+																			data-cartypename="<%= list.get(index).getCarTypeName()%>"
+																			data-cartype="<%= list.get(index).getCarType() %>"
+																			data-carnum="<%= list.get(index).getCarNum() %>"
+																			data-carcolor="<%= list.get(index).getCarColor() %>"
+																			data-carfuel="<%= list.get(index).getCarFuel() %>"
+																			data-caryear="<%= list.get(index).getCarLunchYear() %>"
+																			data-caroption="<%= list.get(index).getCarOption() %>">
+																		<h5><%= list.get(index).getCarTypeName() %></h5>
+																	</a>
+																</div>
 															</div>
-														</div>
-														<div class="card-exp card-image-overlay m-auto">
-															<span>- 색상 : <%= ci.getCarColor() %></span>
-															<span>- 연료 : <%= ci.getCarFuel() %></span>
-															<span>- 연식 : <%= ci.getCarLunchYear() %></span>
-														</div>
-													</td>
+															<div class="card-exp card-image-overlay m-auto">
+																<span>- 색상 : <%= list.get(index).getCarColor() %></span>
+																<span>- 연료 : <%= list.get(index).getCarFuel() %></span>
+																<span>- 연식 : <%= list.get(index).getCarLunchYear() %></span>
+															</div>
+														</td>
+														<% index++; %>
+														
+														<% } %>
+													<% } %>
+													
 												</tr>
+												
+												<% } %>
+												
 											</table>
 											
-											
-											
-											<!-- car Modal -->
-											<div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												<div class="modal-dialog" role="document" id="car-modal-dialog">
-													<div class="modal-content" id="car-modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLabel"><%= ci.getCarTypeName() %></h5>
-															<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-																<span aria-hidden="true">×</span>
-															</button>
-														</div>
-														<div class="modal-body" id="car-modal-body">
-															<table class="car-exp-table">
-																<tr>
-																	<th>차종</th>
-																	<td><%= ci.getCarType() %></td>
-																</tr>
-																<tr>
-																	<th>차량 번호</th>
-																	<td><%= ci.getCarNum() %></td>
-																</tr>
-																<tr>
-																	<th>색상</th>
-																	<td><%= ci.getCarColor() %></td>
-																</tr>
-																<tr>
-																	<th>연료</th>
-																	<td><%= ci.getCarFuel() %></td>
-																</tr>
-																<tr>
-																	<th>연식</th>
-																	<td><%= ci.getCarLunchYear() %></td>
-																</tr>
-																<tr>
-																	<th>옵션</th>
-																	<td><%= ci.getCarOption() %></td>
-																</tr>
-															</table>
-															<div class="modal-footer">
-																<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<% } %>
 										</div>
 
 									</div>
@@ -243,6 +222,7 @@
 		</div>
 		<!-- End of Page Wrapper -->
 	</div>
+	</div>
 	
 	<!-- delete car Modal -->
 	<div class="modal fade" id="deletecarModal" tabindex="-1" role="dialog"
@@ -258,12 +238,106 @@
 				<div class="modal-body">선택된 차량을 삭제하시겠습니까 ?</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">삭제</a>
+					<a class="btn btn-primary" href="#" id="selectDelete">삭제</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- car Modal -->
+	<div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document" id="car-modal-dialog">
+			<div class="modal-content" id="car-modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><label class="cartypename"></label></h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body" id="car-modal-body">
+					<table class="car-exp-table">
+						<tr>
+							<th>차종</th>
+							<td><label class="cartype"></label></td>
+						</tr>
+						<tr>
+							<th>차량 번호</th>
+							<td><label class="carnum"></label></td>
+						</tr>
+						<tr>
+							<th>색상</th>
+							<td><label class="carcolor"></label></td>
+						</tr>
+						<tr>
+							<th>연료</th>
+							<td><label class="carfuel"></label></td>
+						</tr>
+						<tr>
+							<th>연식</th>
+							<td><label class="caryear"></label></td>
+						</tr>
+						<tr>
+							<th>옵션</th>
+							<td><label class="caroption"></label></td>
+						</tr>
+					</table>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<script>
+	
+		$(function(){
+			
+			$("#carModal").on('show.bs.modal', function(event){
+				
+				var cartypename = $(event.relatedTarget).data('cartypename');
+				var cartype = $(event.relatedTarget).data('cartype');
+				var carnum = $(event.relatedTarget).data('carnum');
+				var carcolor = $(event.relatedTarget).data('carcolor');
+				var carfuel = $(event.relatedTarget).data('carfuel');
+				var caryear = $(event.relatedTarget).data('caryear');
+				var caroption = $(event.relatedTarget).data('caroption');
+				
+				var modal = $(this);
+				
+				modal.find(".cartypename").text(cartypename);
+				modal.find(".cartype").text(cartype);
+				modal.find(".carnum").text(carnum);
+				modal.find(".carcolor").text(carcolor);
+				modal.find(".carfuel").text(carfuel);
+				modal.find(".caryear").text(caryear);
+				modal.find(".caroption").text(caroption);
+			});
+		});
+		
+		$("#selectDelete").click(function(){
+			
+			var arr = new Array();
+			
+			$('input:checkbox[name=chk-car]:checked').each(function(){
+				arr.push($(this).val());
+			});
+			
+			var str = arr.join();
+			
+			$.ajax({
+				url:"deleteCar.b.ci",
+				type:"get",
+				data:{str:str},
+				success:function(){
+					location.href="carList.b.ci";
+				},
+				error:function(){
+					console.log("차량 선택 삭제 ajax 통신 오류");
+				}
+			});
+		});
+	</script>
 
 </body>
 </html>

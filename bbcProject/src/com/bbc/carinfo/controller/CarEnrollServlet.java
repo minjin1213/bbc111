@@ -1,7 +1,6 @@
 package com.bbc.carinfo.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bbc.carinfo.model.service.CarInfoService;
-import com.bbc.carinfo.model.vo.CarInfo;
-import com.bbc.common.PageTemplate;
-import com.bbc.common.page.vo.PageInfo;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class EnrollCarServlet
+ * Servlet implementation class CarEnrollServlet
  */
 @WebServlet("/enrollCar.b.ci")
 public class CarEnrollServlet extends HttpServlet {
@@ -34,25 +31,17 @@ public class CarEnrollServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int listCount;			// 총 게시글 갯수
-		int currentPage;		// 현재 페이지 (즉, 요청한 페이지)
+		String str = request.getParameter("str");
 		
-		listCount = new CarInfoService().getCarEnrollCount();
+		String[] arr = str.split(",");
 		
-		currentPage = 1;
+		int branch = 31;
+		int result = new CarInfoService().branchEnrollChkCar(arr, branch);
 		
-		if(request.getParameter("currentPage") != null) {
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-
-		PageInfo pi = PageTemplate.getPageInfo(listCount, currentPage);
+		response.setContentType("application/json; charset=utf-8");
 		
-		ArrayList<CarInfo> list = new CarInfoService().branchCarEnroll(pi); 
-		
-		request.setAttribute("list", list);
-		request.setAttribute("pi", pi);
-		
-		request.getRequestDispatcher("views/branch/carmanagement/enrollCar.jsp").forward(request, response);
+		Gson gson = new Gson();
+		gson.toJson(result, response.getWriter());
 	}
 
 	/**

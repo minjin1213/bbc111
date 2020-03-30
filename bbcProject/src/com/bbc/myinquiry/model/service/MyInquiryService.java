@@ -9,6 +9,7 @@ import com.bbc.common.page.vo.PageInfo;
 import com.bbc.myinquiry.model.dao.MyInquiryDao;
 import com.bbc.myinquiry.model.vo.MyInquiry;
 import com.bbc.myinquiry.model.vo.UserPageInfo;
+import com.bbc.userInfo.model.vo.UserInfo;
 
 public class MyInquiryService {
 	// ---------------------------------- 민기 Service
@@ -76,10 +77,10 @@ public class MyInquiryService {
 	}
 	
 	//사용자 총 리스트(용환)
-	public int UserGetListCount() {
+	public int UserGetListCount(int memNo1) {
 		Connection conn = getConnection();
 		
-		int listCount = new MyInquiryDao().UserGetListCount(conn);
+		int listCount = new MyInquiryDao().UserGetListCount(conn, memNo1);
 		
 		close(conn);
 		
@@ -95,6 +96,45 @@ public class MyInquiryService {
 		close(conn);
 		
 		return list;
+	}
+	
+	//상세조회에서 유저정보 가져오는거(용환)
+	public ArrayList<UserInfo> userInfoGetList(){
+		Connection conn = getConnection();
+		
+		ArrayList<UserInfo> list = new MyInquiryDao().userInfoGetList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	//사용자(용환)
+	public int insertUserMyInquiry(MyInquiry m) {
+		Connection conn = getConnection();
+		
+		int result = new MyInquiryDao().insertUserMyInquiry(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	//사용자(용환)
+	public MyInquiry UserSelectDetail(int min) {
+		Connection conn = getConnection();
+		
+		MyInquiry m = new MyInquiryDao().UserSelectDetail(conn, min);
+		
+		
+		close(conn);
+		
+		return m;
 	}
 
 }

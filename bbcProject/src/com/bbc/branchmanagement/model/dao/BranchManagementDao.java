@@ -56,7 +56,35 @@ public class BranchManagementDao {
 		return list;
 		
 	}
+	//-------------------------요한 
+
+	public ArrayList<BranchManagement> selectArea(Connection conn, int areano) {
 	
+		ArrayList<BranchManagement> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectListArea");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, areano);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new BranchManagement(rset.getInt("BRANCH_NO"),
+						                      rset.getString("BRANCH_NAME")));
+			}
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	// ---------------------------- 민기 Dao
 	public int adminGetListCount(Connection conn) {
 		int listCount = 0;

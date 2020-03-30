@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 변경</title>
+<title>아이디 찾기</title>
 
 <style>
 
@@ -24,15 +24,33 @@
 		margin: 17px 0px 0px 0px;
 	}	
 	
-	table{
-		margin-top: 17px;
-		border: 1px solid black;
-		width: 70%;
-		height: 50%;'
 	
-	}
+.all{
+    border: 1px solid lightgray;
+    height: 130px;
+    margin-left: 20px;
+    width:60%;
+    display: none;
+    background-color: lightgray;
+    padding-top:17px;
+    padding-left:40px;
+}
 
 
+
+#hw{
+    width:150px;
+    height:15px;
+    margin-bottom: 10px;
+}
+p{
+	font-color:black;
+}	
+ #fnt{
+ 	font-size:20px;
+	color:black;
+	padding-left:10px;
+}
 </style>
 </head>
 <body>
@@ -42,35 +60,38 @@
 
     
         <div class="outer"> 
-            <span class="main-title">비밀번호 변경</span> 
+            <span class="main-title">비밀번호 찾기</span>
             <hr class="garo">
 
-		<table>
-		<tr>
-			<td style="padding-left: 20px;padding-top: 20px;padding-right: 10px;
-			">
-			    비밀번호는 대문자,소문자,숫자,특수문자 중 2종류 이상을 조합하여 최소 10자리 이상 또는
-    3종류 이상을 조합하여 최소 8자리 이상만 사용할 수 있습니다.
-			</td>
-		</tr>
-		<tr>
-			<td style="padding-left: 20px;padding-bottom:20px;padding-top: 30px;">
-			<b>새 비밀번호:</b> <input type="text">
-			</td>
-		</tr> 
-		<tr style="padding-top:15px">
-			<td style="padding-left: 20px;padding-bottom:20px;">
-			<b>비밀번호 확인:</b> <input type="text">
-			</td>
-		</tr>
-		</table>
+	<form method="post" action="<%= request.getContextPath()%>/findpw2.ui">
+      <p style="margin-top: 17px;">
+     
+        <table>
 
-    
+        <tr>
+        <td>
+            <b style="margin-top: 10px;">이름</b> <input id="hw" type="text" style="margin-left: 53px;height: 26px;width: 250px;" name="Name">  <br><br>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                 <b>이메일 주소</b> <input id="hw" style="margin-left:8px;height: 26px;width: 251px;" type="text" name="Email">  <br><br>
+            </td>
+        </tr>
+         <tr>
+                <td>
+                    <b>휴대번호</b> <input id="hw" type="text" style="margin-left: 25px;height: 26px;width: 250px;" name="Phone" placeholder="xxx-xxxx-xxxx">  
+                </td>
+            </tr>
+         </table>   
+    </p> 
+    	
     
     <button id="myBtn" type="submit" style="background: #ffc107; color:white; font-weight:bold; width: 100px; height: 40px; border-radius: 4px; float:right; text-align:center; margin-top: 250px; margin-right: 380px;">다음</button>
+    </form>
     </div>
-
    
+
 </body>
 
 </html>

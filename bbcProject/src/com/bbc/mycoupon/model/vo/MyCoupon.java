@@ -21,6 +21,12 @@ public class MyCoupon {
 		this.couponUsage = couponUsage;
 		this.couponUseDate = couponUseDate;
 	}
+	
+	// 차량예약시 나의 쿠폰조회시 사용
+	public MyCoupon(int couponNo) {
+		super();		
+		this.couponNo = couponNo;
+	}
 
 	public int getMemberNo() {
 		return memberNo;
@@ -62,3 +68,4 @@ public class MyCoupon {
 
 	
 }
+

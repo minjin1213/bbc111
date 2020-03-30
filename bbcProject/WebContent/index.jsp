@@ -82,7 +82,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<a class="nav-link" href="<%=contextPath%>/reservationSearch.rv">차량예약</a>							
 						</li>
 						
-						
+						<%if(loginUser != null){ %>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 							    aria-expanded="false">
@@ -90,25 +90,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item text-center" onclick="goMyRes();">차량 이용 내역</a>
-								<a class="dropdown-item text-center" onclick="goMyRes();">예약 내역 조회</a>
+								<a class="dropdown-item text-center" onclick="goMyReservation();">예약 내역 조회</a>
 								<a class="dropdown-item text-center" onclick="goCoupon();">쿠폰함 조회</a>
-								<a class="dropdown-item text-center" href="">운전면허 등록/수정</a>
+								<a class="dropdown-item text-center" onclick="goDl();">운전면허 등록</a>
 								<a class="dropdown-item text-center" href="">나의 문의 내역</a>
 								<a class="dropdown-item text-center" onclick="goMyBranch();">나의 지점 관리</a>
 								<a class="dropdown-item text-center" onclick="goMyInfo();">회원 정보 수정</a>
 							</div>
 						</li>
+							<%} else{ %>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+							    aria-expanded="false" readonly>
+								마이페이지
+							</a>
+							</li>
+							<%} %>
 						
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 							    aria-expanded="false">
 								고객센터
 							</a>
+							
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item text-center" href="">FAQ</a>
-								<a class="dropdown-item text-center" href="">고객의견</a>
+								<a class="dropdown-item text-center" onclick="goFAQ();">FAQ</a>
+								<a class="dropdown-item text-center" onclick="goCustomeropinion();">고객의견</a>
 								<a class="dropdown-item text-center" href="">1:1 상담</a>
-								<a class="dropdown-item text-center" href="">공지사항</a>
+								<a class="dropdown-item text-center" onclick="goUserNotice();">공지사항</a>
 							</div>
 						</li>
 					</ul>
@@ -330,14 +339,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			location.href = "<%=request.getContextPath()%>/areaSearch.mb";
 		}
 		function goMyInfo(){
-			location.href = "<%=request.getContextPath()%>/view.ui"
+			location.href = "<%=request.getContextPath()%>/view.ui";
 		}
 		function goMyRes(){
-			location.href = "<%= request.getContextPath()%>/view.rv"
+			location.href = "<%= request.getContextPath()%>/view.rv";
 		}
-		function goMyRes(){
-			location.href = "<%= request.getContextPath()%>/viewRes.rv";
-		}
+		
+ 		function goMyReservation(){
+			location.href = "<%= request.getContextPath()%>/viewReservation.rv";
+ 		}
+
+ 		function goDl(){
+ 			location.href = "<%= request.getContextPath()%>/go.dl";
+ 		}
+ 		function goFAQ(){
+ 			location.href = "<%= request.getContextPath()%>/list.fa";
+ 		}
+ 		function goCustomeropinion(){
+ 			location.href = "<%= request.getContextPath()%>/mail.co";
+ 		}
+ 		function goUserNotice(){
+ 			location.href = "<%= request.getContextPath()%>/CsList.no";
+ 		}
 	</script>
 	
 	

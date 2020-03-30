@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.bbc.userInfo.model.vo.UserInfo" %>
+ 
+<%
+	ArrayList<UserInfo> list = (ArrayList<UserInfo>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,10 +168,12 @@
             <div class="main-title">고객 문의</div>
             <hr class="garo">
             
-            <label class="option-right-hr">문의사항</label>
+            <label class="option-right-hr">문의사항 작성하기</label>
             <!--  <div class="main-title">개인정보</div>
             <hr class="hr.yong"> -->
+			<form id="inserForm" action="<%=contextPath%>/MyInquiryInsertList.my" method="post">
 			<div class="input-fields">
+			<% for(UserInfo n : list) { %>
                 <div class="grid noBorderT">
                     <table class="tb-noBorder">
                         <colgroup>
@@ -180,7 +187,9 @@
                                     <label for="userName">이름</label>
                                 </th>
                                 <td>
-                                    <input type="text" id="userName" name="userName"  class="chgs" value="" title="이름" placeholder="이름을 입력하세요." >
+                                	<%=n.getMemberName()%>
+                                	<input type="hidden" id="userName" name="userName" value="<%=n.getMemberName()%>">
+                                	<input type="hidden" name="memberNo" value="<%=n.getMemberNo()%>">
                                 </td>
                             </tr>
                             
@@ -189,7 +198,8 @@
                                     <label for="userEmail">이메일</label>
                                 </th>
                                 <td>
-                                    <input type="text" name="userEmail" id="userEmail" class="chgs" value="" title="이메일" placeholder="이메일을 입력하세요." maxlength="80">
+                                    <%=n.getMemberEmail()%>
+                                    <input type="hidden" id="userEmail" name="userEmail" value="<%=n.getMemberEmail()%>">
                                 </td>
                             </tr>
                             
@@ -198,18 +208,16 @@
                                    <label for="phone1">휴대전화</label>
                                </th>
                                <td>
-                                    <input type="text" name="phone1" id="phone1" class="chgs" title="휴대폰 첫번째 숫자" style="width:70px;" value="" maxlength="4" onkeydown="" onkeypress="" onkeyup="">
-                                    <span class="hyphen"> - </span>
-                                    <input type="text" name="phone2" id="phone2" class="chgs" title="휴대폰 가운데 숫자" style="width:90px;" value="" maxlength="4" onkeydown="" onkeypress="" onkeyup="">
-                                    <span class="hyphen"> - </span>
-                                    <input type="text" name="phone3" id="phone3" class="chgs" title="휴대폰 마지막 숫자" style="width:90px;" value="" maxlength="4" onkeydown="" onkeypress="" onkeyup="">
+									<%=n.getPhone()%>
+									<input type="hidden" id="phone1" name="phone1" value="<%=n.getPhone()%>">
                                </td>
                             </tr>
-                            
+
                        </tbody>
                     </table>
                 </div>
-
+				<% } %>
+				
                 <div class="grid noBorderT mb50">    
                 <table class="tb_noBorder">
 
@@ -222,7 +230,7 @@
                         <tr>
                             <th scope="row"><label for="title">제목</label></th>
                             <td>
-                                <input type="text" id="title" class="chgs2" name="title" value="" placeholder="제목을 입력하세요." style="width:100%;">
+                                <input type="text" name="title" id="title" class="chgs2"  value="" placeholder="제목을 입력하세요." style="width:100%;">
                             </td> 
                         </tr>
 
@@ -260,9 +268,10 @@
 
                  
                 <div class="btn_wrap">
-                    <button type="button" class="btn-default-ok btn-opinion" onclick="chkformreq();return false;">등록</button>
+                    <button type="submit" class="btn-default-ok btn-opinion" >등록</button>
                 </div>
 			</div> <!--인풋필터 닫아주는거 ㅇㅇ-->
+            </form>    
             <br>
             
         </div>

@@ -117,11 +117,7 @@
 		}
 		
 		function goEnrollCar(){
-			location.href="<%=request.getContextPath()%>/enrollCar.b.ci";
-		}
-		
-		function goDeleteCar(){
-			location.href="<%=request.getContextPath()%>/deleteCar.b.ci";
+			location.href="<%=request.getContextPath()%>/enrollCarPage.b.ci";
 		}
 	</script>
 

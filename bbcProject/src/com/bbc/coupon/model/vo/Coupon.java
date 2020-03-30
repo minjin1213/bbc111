@@ -48,6 +48,15 @@ public class Coupon {
 		this.couponCreateDate = couponCreateDate;
 		this.memberId = memberId;
 	}
+	
+	// 차량예약시 나의쿠폰 리스트 조회용
+	public Coupon(int couponNo, String couponName, int couponDc) {
+		super();
+		this.couponNo = couponNo;
+		this.couponName = couponName;
+		this.couponDc = couponDc;
+	}
+	
 
 	public int getCouponNo() {
 		return couponNo;

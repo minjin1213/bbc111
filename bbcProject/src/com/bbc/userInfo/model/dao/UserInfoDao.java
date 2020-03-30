@@ -347,6 +347,220 @@ public class UserInfoDao {
 		
 		return mem;
 	}
+	public int updateUser(Connection conn, UserInfo mem) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+	
+		String sql = prop.getProperty("updateUser");
+	
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem.getMemberId());
+			pstmt.setString(2, mem.getMemberPwd());
+			pstmt.setString(3, mem.getMemberName());
+			pstmt.setString(4, mem.getMemberZipcode());
+			pstmt.setString(5, mem.getMemberAddress());
+			pstmt.setString(6, mem.getPhone());
+			pstmt.setString(7, mem.getMemberEmail());
+			pstmt.setString(8, mem.getGender());
+			pstmt.setInt(9,mem.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+		
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	public int deleteUser(Connection conn, String userId) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteUser");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result; 
+		
+	}
+	
+	public UserInfo findMyIdEmail(Connection conn, String name, String email) {
+		
+		UserInfo findid = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findIdByEmail");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, name);
+				pstmt.setString(2, email);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {	
+					findid = new UserInfo(rset.getString("MEMBER_ID"));
+				}
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			return findid;
+		
+	}
+	
+	public UserInfo findMyIdPhone(Connection conn, String name, String phone) {
+		
+		UserInfo findid = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findIdByPhone");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, name);
+				pstmt.setString(2, phone);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					findid = new UserInfo(rset.getString("Member_Id"));
+				}
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return findid;
+					
+	}
+	
+	public UserInfo findMyPw(Connection conn, String name, String email, String phone) {
+		
+		UserInfo findPw = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findMyPw");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, name);
+				pstmt.setString(2, email);
+				pstmt.setString(3, phone);
+				
+				
+				rset= pstmt.executeQuery();
+				
+				if(rset.next()) {
+					findPw = new UserInfo(rset.getString("MEMBER_ID"));
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return findPw;
+			
+	}
+	
+	public int updatePw(Connection conn, UserInfo mem) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+	
+		String sql = prop.getProperty("updatePw");
+	
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem.getMemberPwd());
+			pstmt.setString(2, mem.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		
+			System.out.println(result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	public int idCheck(Connection conn, String userId) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+	}
 	
 	
 }

@@ -2,7 +2,6 @@ package com.bbc.reservation.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +50,7 @@ public class ReservReturnManageServlet extends HttpServlet {
 		
 		String fr = request.getParameter("fr");
 		int st = (Integer.parseInt(request.getParameter("st")));
+//		int branch=21;
 		
 		ArrayList<Reservation> rentList = new ReservationService().selectRentList(pi, st);
 		

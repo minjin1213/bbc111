@@ -1,6 +1,6 @@
 package com.bbc.event.model.dao;
 
-import static com.bbc.common.JDBCTemplate.*;
+import static com.bbc.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -193,10 +193,34 @@ public class EventDao {
 		
 	}
 	
-//	public int updateEvent(Connection conn, Event e) {
-//		
-//		
-//	}
+	public int updateEvent(Connection conn, Event e, int memNo, String startDate, String endDate, String rate) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateEvent");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, e.getEventTitle());
+			pstmt.setString(2, startDate);
+			pstmt.setString(3, endDate);
+			pstmt.setString(4, rate);
+			pstmt.setString(5, e.getEventContent());
+			pstmt.setInt(6, memNo);
+			pstmt.setInt(7, e.getEventNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	public int deleteOneEvent(Connection conn, int eno) {
 		
