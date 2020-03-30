@@ -36,22 +36,26 @@ public class myCouponListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		HttpSession session = request.getSession();
-		
-		UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
-		
-		int userNo = loginUser.getMemberNo();
-		
-		
-		ArrayList<MyCoupon> couponlist = new MyCouponService().selectCouponList(userNo);
-		
-		request.setAttribute("currentMenu", "마이페이지/쿠폰함");
-		
-		request.setAttribute("couponlist", couponlist); //만들기 
-		
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/mypage/couponList.jsp"); // 뿌리는것
-		view.forward(request, response);
+		/*
+		 * HttpSession session = request.getSession();
+		 * 
+		 * UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
+		 * 
+		 * int userNo = loginUser.getMemberNo();
+		 * 
+		 * 
+		 * ArrayList<MyCoupon> couponlist = new
+		 * MyCouponService().selectCouponList(userNo);
+		 * 
+		 * request.setAttribute("currentMenu", "마이페이지/쿠폰함");
+		 * 
+		 * request.setAttribute("couponlist", couponlist); //만들기
+		 * 
+		 * 
+		 * RequestDispatcher view =
+		 * request.getRequestDispatcher("views/mypage/couponList.jsp"); // 뿌리는것
+		 * view.forward(request, response);
+		 */
 	}
 
 	/**

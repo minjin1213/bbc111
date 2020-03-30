@@ -1,4 +1,4 @@
-package com.bbc.reservation.controller;
+package com.bbc.mybranch.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

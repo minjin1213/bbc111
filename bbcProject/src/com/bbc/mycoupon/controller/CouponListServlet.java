@@ -1,4 +1,4 @@
-package com.bbc.Mycoupon.controller;
+package com.bbc.mycoupon.controller;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class CouponListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Coupon c = new CouponService().selectCoupon();
+		/* Coupon c = new CouponService().selectCoupon(); */
 	}
 
 	/**
