@@ -1,3 +1,5 @@
+
+
 package com.bbc.mycoupon.model.vo;
 
 import java.sql.Date;
@@ -68,3 +70,4 @@ public class MyCoupon {
 
 	
 }
+

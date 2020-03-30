@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.bbc.userInfo.model.vo.UserInfo"%>
+<%
+	UserInfo m = (UserInfo)request.getAttribute("findId");
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,8 +51,8 @@
     <br>
 	<b style="margin-top:17px;"> * 일치하는 회원 정보가 있습니다 </b>
     <div class="area">
-            아이디는 <b style="background: lightgray;">"shinhwa"</b>입니다
-
+ 
+            아이디는 &nbsp;<b style="background: lightgray;"><%=m.getMemberId()%></b>&nbsp;입니다
     </div>
     
     

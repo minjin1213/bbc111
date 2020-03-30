@@ -14,16 +14,16 @@ import com.bbc.userInfo.model.service.UserInfoService;
 import com.bbc.userInfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class WithDrawUserServlet
  */
-@WebServlet("/login.ui")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/withdraw.ui")
+public class WithDrawUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public WithDrawUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +32,25 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("userId");
-		String memberPwd = request.getParameter("userPwd");
-	
-			
-		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
 		
-		if(loginUser != null) {
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
+		HttpSession session = request.getSession();
+		String userId = ((UserInfo)session.getAttribute("loginUser")).getMemberId();
+		
+		int result = new UserInfoService().deleteUser(userId);
+		
+		if(result>0) {
+		
+			session.removeAttribute("loginUser");
 			
 			response.sendRedirect(request.getContextPath());
-		
 		}else {
+			request.setAttribute("msg", "회원 탈퇴에 실패했습니다. ");
 			
-			request.setAttribute("msg", "로그인 실패");
-			request.setAttribute("currentMenu", "로그인");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
+	
 	}
 
 	/**

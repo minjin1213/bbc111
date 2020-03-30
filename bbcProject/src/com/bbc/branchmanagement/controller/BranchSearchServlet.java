@@ -1,6 +1,7 @@
-package com.bbc.userInfo.controller;
+package com.bbc.branchmanagement.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.bbc.userInfo.model.service.UserInfoService;
-import com.bbc.userInfo.model.vo.UserInfo;
+import com.bbc.branchmanagement.model.service.BranchManagementService;
+import com.bbc.branchmanagement.model.vo.BranchManagement;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class BranchSearchServlet
  */
-@WebServlet("/login.ui")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/branchSearch.mb")
+public class BranchSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public BranchSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +33,17 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("userId");
-		String memberPwd = request.getParameter("userPwd");
 	
-			
-		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
 		
-		if(loginUser != null) {
+		int areano = Integer.parseInt(request.getParameter("areano"));
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
+		ArrayList<BranchManagement> list = new BranchManagementService().selectArea(areano);
 		
-		}else {
-			
-			request.setAttribute("msg", "로그인 실패");
-			request.setAttribute("currentMenu", "로그인");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new Gson();
+		gson.toJson(list,response.getWriter());
 	}
 
 	/**

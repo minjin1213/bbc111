@@ -47,6 +47,15 @@ public class Reservation {
 	private int rowNum;				// 조회 번호
 	private String branchName;
 	
+	// 차량이용내역 추가 한것 
+	private String carTypeName;
+	private String rentBranch;
+	private String returnBranch;
+	private Date payDate;
+	private int payAmount;
+	private String payMethod;
+	private String refundStatement;
+	private Date refundDate;
 	public Reservation() {
 		
 	}
@@ -140,6 +149,138 @@ public class Reservation {
 		this.rentDate = rentDate;
 		this.returnDate = returnDate;
 		this.branchName = branchName;
+	}
+	// 요한 차량이용내역
+	
+	public Reservation(int reservationNo, String memberStatus, int reservationStatus, Date rentDate, Date returnDate,
+			String option, int price, String discountCategory, int discountNo, int discountPrice, int cwdPrice,
+			int totalPrice, int overTime, int overTimePrice, int overDayCount, int overDayPrice, String repair,
+			int repairDayCount, int repairPrice, int oilRent, int oilReturn, int oilPrice, int returnPrice, int carNo,
+			int memberNo, int branchReservationNo, int branchReturnNo, int payNo, String carTypeName, String rentBranch,
+			String returnBranch, Date payDate, int payAmount, String refundStatement, Date refundDate) {
+		super();
+		this.reservationNo = reservationNo;
+		this.memberStatus = memberStatus;
+		this.reservationStatus = reservationStatus;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
+		this.option = option;
+		this.price = price;
+		this.discountCategory = discountCategory;
+		this.discountNo = discountNo;
+		this.discountPrice = discountPrice;
+		this.cwdPrice = cwdPrice;
+		this.totalPrice = totalPrice;
+		this.overTime = overTime;
+		this.overTimePrice = overTimePrice;
+		this.overDayCount = overDayCount;
+		this.overDayPrice = overDayPrice;
+		this.repair = repair;
+		this.repairDayCount = repairDayCount;
+		this.repairPrice = repairPrice;
+		this.oilRent = oilRent;
+		this.oilReturn = oilReturn;
+		this.oilPrice = oilPrice;
+		this.returnPrice = returnPrice;
+		this.carNo = carNo;
+		this.memberNo = memberNo;
+		this.branchReservationNo = branchReservationNo;
+		this.branchReturnNo = branchReturnNo;
+		this.payNo = payNo;
+		this.carTypeName = carTypeName;
+		this.rentBranch = rentBranch;
+		this.returnBranch = returnBranch;
+		this.payDate = payDate;
+		this.payAmount = payAmount;
+		this.refundStatement = refundStatement;
+		this.refundDate = refundDate;
+	}
+	
+	public Reservation(int reservationNo,Date rentDate, Date returnDate,String carTypeName, String rentBranch, String returnBranch,
+			int reservationStatus, int cwdPrice,int price, int discountPrice, int totalPrice, 
+			Date payDate, int payAmount, String payMethod, String refundStatement, Date refundDate) {
+		super();
+		this.reservationNo = reservationNo;
+		this.reservationStatus = reservationStatus;
+		this.rentDate = rentDate;
+		this.returnDate = returnDate;
+		this.price = price;
+		this.discountPrice = discountPrice;
+		this.cwdPrice = cwdPrice;
+		this.totalPrice = totalPrice;
+		this.carTypeName = carTypeName;
+		this.rentBranch = rentBranch;
+		this.returnBranch = returnBranch;
+		this.payDate = payDate;
+		this.payAmount = payAmount;
+		this.payMethod = payMethod;
+		this.refundStatement = refundStatement;
+		this.refundDate = refundDate;
+	}
+
+
+	public String getCarTypeName() {
+		return carTypeName;
+	}
+
+	public void setCarTypeName(String carTypeName) {
+		this.carTypeName = carTypeName;
+	}
+
+	public String getRentBranch() {
+		return rentBranch;
+	}
+
+	public void setRentBranch(String rentBranch) {
+		this.rentBranch = rentBranch;
+	}
+
+	public String getReturnBranch() {
+		return returnBranch;
+	}
+
+	public void setReturnBranch(String returnBranch) {
+		this.returnBranch = returnBranch;
+	}
+
+	public Date getPayDate() {
+		return payDate;
+	}
+
+	public void setPayDate(Date payDate) {
+		this.payDate = payDate;
+	}
+
+	public int getPayAmount() {
+		return payAmount;
+	}
+
+	public void setPayAmount(int payAmount) {
+		this.payAmount = payAmount;
+	}
+
+	public String getPayMethod() {
+		return payMethod;
+	}
+
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
+	}
+
+	public String getRefundStatement() {
+		return refundStatement;
+	}
+
+	public void setRefundStatement(String refundStatement) {
+		this.refundStatement = refundStatement;
+	}
+
+	public Date getRefundDate() {
+		return refundDate;
+	}
+
+	public void setRefundDate(Date refundDate) {
+		this.refundDate = refundDate;
 	}
 
 	

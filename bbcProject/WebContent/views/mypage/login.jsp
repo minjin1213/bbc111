@@ -79,10 +79,10 @@
 					</div>
 					<div class="text-center p-t-115">
 						<span class="txt1">
-							<a href="<%=request.getContextPath()%>/views/mypage/findMyId.jsp" class="txt2" class="txt2">
+							<a href="<%=request.getContextPath()%>/findmyid.ui" class="txt2" class="txt2">
 								아이디 찾기
 							</a>
-							<a href="<%=request.getContextPath()%>/views/mypage/memInfoEdit.jsp" class="txt2">
+							<a href="<%=request.getContextPath()%>/findpw.ui" class="txt2">
 								/ 비밀번호 찾기
 							</a>
 						</span>
@@ -92,7 +92,7 @@
 							처음이신가요?
 						</span>
 					
-						<a href="<%=request.getContextPath()%>/views/mypage/memSignUp.jsp" class="txt2">
+						<a href="<%=request.getContextPath()%>/signup.ui" class="txt2">
 							회원가입
 						</a>
 					</div>

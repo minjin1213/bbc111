@@ -75,6 +75,13 @@ public class BranchManagement {
 		this.mapX = mapX;
 		this.mapY = mapY;
 	}
+	// 지점지역 조회 (요한)
+	public BranchManagement(int branchNo, String branchName) {
+		super();
+		this.branchName = branchName;
+		this.branchNo = branchNo;
+	}
+
 	
 
 	public int getBranchNo() {

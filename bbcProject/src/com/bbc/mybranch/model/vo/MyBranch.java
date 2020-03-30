@@ -20,12 +20,14 @@ public class MyBranch {
 		super();
 		this.memberNo = memberNo;
 		this.branchNo = branchNo;
-		
 	}
 	
-	public MyBranch(String branchName, String areaName, String branchPhone, String branchAddress, String branchHrs,
+
+
+	public MyBranch(int branchNo,String branchName, String areaName, String branchPhone, String branchAddress, String branchHrs,
 			String branchDir) {
 		super();
+		this.branchNo = branchNo;
 		this.branchName = branchName;
 		this.AreaName = areaName;
 		this.branchPhone = branchPhone;
@@ -50,7 +52,6 @@ public class MyBranch {
 		this.branchNo = branchNo;
 	}
 
-	
 	public String getBranchName() {
 		return branchName;
 	}
@@ -98,11 +99,13 @@ public class MyBranch {
 	public void setBranchDir(String branchDir) {
 		this.branchDir = branchDir;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "MyBranch [memberNo=" + memberNo + ", branchNo=" + branchNo + "]";
+		return "MyBranch [memberNo=" + memberNo + ", branchNo=" + branchNo + ", branchName=" + branchName
+				+ ", AreaName=" + AreaName + ", branchPhone=" + branchPhone + ", branchAddress=" + branchAddress
+				+ ", branchHrs=" + branchHrs + ", branchDir=" + branchDir + "]";
 	}
-	
-	 
+
 }

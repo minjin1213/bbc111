@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.bbc.userInfo.model.service.UserInfoService;
 import com.bbc.userInfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class FindMyPwServlet3
  */
-@WebServlet("/login.ui")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/updatepw.ui")
+public class FindMyPwServlet3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public FindMyPwServlet3() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +31,29 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("userId");
-		String memberPwd = request.getParameter("userPwd");
-	
-			
-		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
 		
-		if(loginUser != null) {
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
+		String newPw = request.getParameter("newpw");
+		String id = request.getParameter("id");
+		
+		
+		UserInfo mem = new UserInfo();
+		mem.setMemberPwd(newPw);
+		mem.setMemberId(id);
+		
+		
+		int result = new UserInfoService().updatePw(mem);
+		
+		
+		if(result>0) {
 			
 			response.sendRedirect(request.getContextPath());
 		
 		}else {
 			
-			request.setAttribute("msg", "로그인 실패");
-			request.setAttribute("currentMenu", "로그인");
+			request.setAttribute("msg", "비밀번호 업데이트 실패");
+			request.setAttribute("churrentMenu", "비밀번호수정");
+			
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
