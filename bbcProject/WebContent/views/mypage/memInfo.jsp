@@ -92,6 +92,7 @@
 							      </tr>
 							      <tr>
 
+
 					</tr>
 					<% } %>
 				<% } %> 
@@ -99,19 +100,38 @@
 							</table>
 	
 	
-	  <button  onclick="goEdit();" style="background:#ffc107; lightgray;color:white;font-weight:bold;width: 100px;height: 40px;border-radius: 4px;float:right;text-align:center;margin-top: 5%;margin-right: 50%;margin-left: -40;margin-left: -41;">수정</button>
-		<button  type="submit" style="background: lightgray;color:white;font-weight:bold;width: 100px;height: 40px;border-radius: 4px;float:right;text-align:center;margin-top: 5%;margin-right: -25%;margin-left: 0px;">회원 탈퇴</button>
+	  
+		
 	</form>
-    
+	<button onclick='withDraw();' style="background: lightgray;color:white;font-weight:bold;width: 100px;height: 40px;border-radius: 4px;float:right;text-align:center;margin-top: 5%;margin-right: 300px;margin-left: 0px;margin-bottom: -20%;">회원 탈퇴</button>
+	 <button  onclick="goEdit();" style="background:#ffc107; lightgray;color:white;font-weight:bold;width: 100px;height: 40px;border-radius: 4px;float:right;text-align:center;margin-top: 5%;margin-right: 50%;margin-left: -40;margin-left: -41;">수정</button>
+ <script>
+	function goEdit(){
+		
+		var c = confirm("수정하시겠습니까?");
+		if (c == true){
+		location.href="<%=request.getContextPath()%>/change.ui";
+		} else{
+			
+		}
+		
+	}
+	
+	function withDraw(){
+		
+		var c = confirm("삭제하시겠습니까?");
+		if(c == true){
+		location.href="<%=request.getContextPath()%>/withdraw.ui";
+		}else{
+			
+		}
+	}
+</script>
    
     </div>
 
    
 </body>
 
-<script>
-	function goEdit(){
-		location.href="<%=request.getContextPath()%>/change.ui";
-	}
-</script>
+
 </html>

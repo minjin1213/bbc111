@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.bbc.userInfo.model.service.UserInfoService;
 import com.bbc.userInfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class FindMyPwServlet
  */
-@WebServlet("/login.ui")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/findpw2.ui")
+public class FindMyPwServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public FindMyPwServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +31,31 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("userId");
-		String memberPwd = request.getParameter("userPwd");
-	
-			
-		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
+		request.setCharacterEncoding("utf-8");
 		
-		if(loginUser != null) {
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
+		String name = request.getParameter("Name");
+		String email = request.getParameter("Email");
+		String phone = request.getParameter("Phone");
 		
-		}else {
+		UserInfo findpw = new UserInfoService().findMyPw(name,email,phone);
+		
+		
+		
+		if(findpw != null) {
 			
-			request.setAttribute("msg", "로그인 실패");
-			request.setAttribute("currentMenu", "로그인");
+			request.setAttribute("currentMenu", "비밀번호 변경");
+			request.setAttribute("findpw", findpw);
+			request.getRequestDispatcher("views/mypage/afterPwChange.jsp").forward(request, response);;
+			
+		} else {
+			
+			request.setAttribute("msg", "비밀번호 찾기 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			view.forward(request, response);	
+		
 		}
+		
 	}
 
 	/**

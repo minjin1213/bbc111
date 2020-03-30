@@ -1,6 +1,7 @@
-package com.bbc.userInfo.controller;
+package com.bbc.mycoupon.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bbc.userInfo.model.service.UserInfoService;
+import com.bbc.mycoupon.model.service.MyCouponService;
+import com.bbc.mycoupon.model.vo.MyCoupon;
 import com.bbc.userInfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class myCouponListServlet
  */
-@WebServlet("/login.ui")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/list.mc")
+public class myCouponListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public myCouponListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +34,24 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("userId");
-		String memberPwd = request.getParameter("userPwd");
-	
-			
-		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
 		
-		if(loginUser != null) {
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
+		HttpSession session = request.getSession();
 		
-		}else {
-			
-			request.setAttribute("msg", "로그인 실패");
-			request.setAttribute("currentMenu", "로그인");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
+		UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
+		
+		int userNo = loginUser.getMemberNo();
+		
+		
+		ArrayList<MyCoupon> couponlist = new MyCouponService().selectCouponList(userNo);
+		
+		request.setAttribute("currentMenu", "마이페이지/쿠폰함");
+		
+		request.setAttribute("couponlist", couponlist); //만들기 
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher("views/mypage/couponList.jsp"); // 뿌리는것
+		view.forward(request, response);
 	}
 
 	/**

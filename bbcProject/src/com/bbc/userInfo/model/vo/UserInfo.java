@@ -105,6 +105,10 @@ public class UserInfo {
 		this.phone = phone;
 		this.memberZipcode = memberZipcode;
 	}
+	public UserInfo(String memberId) {
+		super();
+		this.memberId = memberId;
+	}
 
 	public int getMemberNo() {
 		return memberNo;

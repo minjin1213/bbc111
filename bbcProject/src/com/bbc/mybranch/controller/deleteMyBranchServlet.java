@@ -1,8 +1,7 @@
-package com.bbc.userInfo.controller;
+package com.bbc.mybranch.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bbc.userInfo.model.service.UserInfoService;
+import com.bbc.mybranch.model.service.MyBranchService;
 import com.bbc.userInfo.model.vo.UserInfo;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class deleteMyBranchServlet
  */
-@WebServlet("/login.ui")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/deletemb.mb")
+public class deleteMyBranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public deleteMyBranchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +31,23 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("userId");
-		String memberPwd = request.getParameter("userPwd");
-	
-			
-		UserInfo loginUser = new UserInfoService().loginUserInfo(memberId, memberPwd);
+		HttpSession session = request.getSession();
+		UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
 		
-		if(loginUser != null) {
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
+		int userno = loginUser.getMemberNo();
 		
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
+		int result = new MyBranchService().deleteMyBranch(userno, bno);
+		
+		if(result > 0) {
+			response.sendRedirect("areaSearch.mb");
 		}else {
-			
-			request.setAttribute("msg", "로그인 실패");
-			request.setAttribute("currentMenu", "로그인");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			request.setAttribute("msg", "내지점삭제 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
+		
 	}
 
 	/**

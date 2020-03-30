@@ -280,7 +280,9 @@
         <td><div class="arrow"></div>&nbsp;<%=r.getReservationNo()%></td>
         <td><%=r.getRentDate() %> ~ <%=r.getReturnDate()%></td>
         <td><%=r.getRentBranch() %> - <%=r.getReturnBranch() %> <td>
-       	<input id="space" style="margin-right: 20px;" type="button" value="예약 취소" onclick="cancelRes();">
+        
+        <input type="hidden" value="<%= r.getReservationNo()%>">
+       	<input id="space" class="delete" style="margin-right: 20px;" type="button" value="예약취소" >
        	</td>
       </tr>
       <tr class="accordion-body" style="display: none;">
@@ -321,19 +323,14 @@
               </tr>
   			  <tr id="pop">
                 <td  style="border:1px solid gray" id="bor"colspan="2">환불 여부</td>
-                <% if(r.getRefundStatement() != null){ %>
-                <td  colspan="2" style="border:1px solid gray"  ><%=r.getRefundStatement() %></td>
-                <%} else { %>
                      <td  colspan="2" style="border:1px solid gray"  > - </td>
-                     <%} %>
+                  
               </tr>
                <tr id="pop">    
                 <td style="border:1px solid gray"  colspan="2" id="bor">환불 일시</td>
-                     <% if(r.getRefundDate() != null){ %>
-                <td style="border:1px solid gray"  colspan="2"><%=r.getRefundDate() %></td>
-                  <%} else { %>
+                 
                       <td  colspan="2" style="border:1px solid gray"  > - </td>
-                        <%} %>
+                     
               </tr>
       
                       
@@ -403,12 +400,16 @@
     </script>
     
     <script>
-   
-    function cancelRes() {
-      alert("예약이 취소되었습니다.");
-    }
-
+    	$(".delete").click(function(){
+    		location.href="delete.rv?rno=" + $(this).prev().val();
+    		 alert("예약이 취소되었습니다.");
+    	})
+    
     </script>
+    
+    
+    
+    
           
 </body>
 </html>

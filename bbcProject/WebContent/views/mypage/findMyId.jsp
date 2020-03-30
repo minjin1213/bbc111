@@ -63,7 +63,7 @@ p{
             <span class="main-title">아이디 찾기</span>
             <hr class="garo">
 
-
+	<form method="post" action="<%= request.getContextPath()%>/findmyid2.ui">
       <p style="margin-top: 17px;">
       <input type="radio" name="idFinder" value="email" class="check" onclick="showDiv1();"><b id="fnt">이메일주소로 찾기</b>
     <div class="all" id="box1" style="margin-top: 20px;">
@@ -71,12 +71,12 @@ p{
 
         <tr>
         <td>
-            <b style="margin-top: 3px;">이름</b> <input id="hw" type="text" style="margin-left: 53px;height: 26px;width: 250px;">  <br><br>
+            <b style="margin-top: 3px;">이름</b> <input id="hw" type="text" style="margin-left: 53px;height: 26px;width: 250px;" name="NameE">  <br><br>
         </td>
         </tr>
         <tr>
             <td>
-                 <b>이메일 주소</b> <input id="hw" style="margin-left:8px;height: 26px;width: 251px;" type="text">  
+                 <b>이메일 주소</b> <input id="hw" style="margin-left:8px;height: 26px;width: 251px;" type="text" name="email">  
             </td>
         </tr>
          </table>
@@ -89,12 +89,12 @@ p{
         <div class="all"  id="box2" style="margin-top: 20px;">
         <tr>
             <td>
-                <b style="margin-top: 3px;">이름</b> <input id="hw" type="text" style="margin-left:35px;height: 26px; width: 60%;">  <br><br>
+                <b style="margin-top: 3px;">이름</b> <input id="hw" type="text" style="margin-left:35px;height: 26px; width: 60%;" name="NameP">  <br><br>
             </td>
             </tr>
             <tr>
                 <td>
-                    <b>휴대번호</b> <input id="hw" style="margin-left:8px;height: 26px; width: 60%;" type="text">  
+                    <b>휴대번호</b> <input id="hw" style="margin-left:8px;height: 26px; width: 60%;" type="text" name="phone" placeholder="xxx-xxxx-xxxx">  
                 </td>
             </tr>
              </table> 
@@ -102,14 +102,9 @@ p{
     </p>
     
     <button onclick="next();"id="myBtn" type="submit" style="background: #ffc107; color:white; font-weight:bold; width: 100px; height: 40px; border-radius: 4px; float:right; text-align:center; margin-top: 250px; margin-right: 380px;">다음</button>
+    </form>
     </div>
-    
-   <script>
-   function next(){
-		location.href = "<%=request.getContextPath()%>/views/mypage/afterFindmyId.jsp";
-	}
    
-   </script>
    <script>
        $(document).ready(function(){
            $('.check').click(function(){

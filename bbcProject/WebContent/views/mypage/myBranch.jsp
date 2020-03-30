@@ -217,7 +217,6 @@ hr.garo{
 			<%} %>     
 		</table>
 		
-	
 </div>
 
 <script>

@@ -1,6 +1,6 @@
 package com.bbc.reservation.model.service;
 
-import static com.bbc.common.JDBCTemplate.close;
+import static com.bbc.common.JDBCTemplate.*;
 import static com.bbc.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -164,5 +164,44 @@ public class ReservationService {
 		return r;
 	}
 
+	//요한 예약내역조회 
+	public ArrayList<Reservation> selectReservationList(int mno){
+			
+			Connection conn = getConnection();
+			
+			ArrayList<Reservation> reservationlist = new ReservationDao().selectReservationList(conn,mno);
+		
+			close(conn);
+			return reservationlist;
+		
+		}
+	// 차량이용내역 조회
+	public ArrayList<Reservation> selectTotalReservationList(int mno){
+			
+			Connection conn = getConnection();
+			
+			ArrayList<Reservation> reservationtotal = new ReservationDao().selectTotalReservationList(conn,mno);
+		
+			close(conn);
+			
+			return reservationtotal;
+		
+		}
+	// 차량예약취소
+	public int deletemyReservation(int userno, int rno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReservationDao().deleteMyReservation(conn,userno, rno);
+		
+		if (result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }
