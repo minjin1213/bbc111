@@ -56,6 +56,7 @@
 						<!-- 이벤트 수정 form -->
 
 						<form action="<%= request.getContextPath() %>/modifyEvent.b.ev" method="post">
+							<input type="hidden" name="eno" value="<%= eList.getEventNo() %>">
 							<div>
 								<table class="event-table">
 									<tr>
@@ -95,7 +96,7 @@
 								<textarea class="event-content" id="content" name="content"><%= eList.getEventContent() %></textarea>
 							</div>
 
-							<a data-toggle="modal" data-target="#event-modify-modal"><button class="bt-style" id="event-modify-bt">수정하기</button></a>
+							<button type="submit" class="bt-style" id="event-modify-bt">수정하기</button>
 						</form>
 
 
@@ -110,26 +111,6 @@
 
 		</div>
 		<!-- End of Page Wrapper -->
-		
-
-		<!-- event enroll Modal -->
-		<div class="modal fade" id="event-modify-modal" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="modal-body">수정하시겠습니까?</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="<%= request.getContextPath() %>/modifyEvent.b.ev">수정</a>
-					</div>
-				</div>
-			</div>
-		</div>
 
 	</div>
 </body>

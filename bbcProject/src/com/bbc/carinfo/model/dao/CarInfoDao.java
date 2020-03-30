@@ -236,14 +236,14 @@ public class CarInfoDao {
 		return list;
 	}
 	
-	public ArrayList<CarInfo> branchCarEnroll(Connection conn, PageInfo pi){
+	public ArrayList<CarInfo> branchCarEnrollList(Connection conn, PageInfo pi){
 		
 		ArrayList<CarInfo> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("carEnroll");
+		String sql = prop.getProperty("carEnrollList");
 		
 		try {
 			
@@ -280,5 +280,50 @@ public class CarInfoDao {
 		
 		return list;
 		
+	}
+	
+	public int branchDeleteChkCar(Connection conn, String arr) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCar");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, arr);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int branchEnrollChkCar(Connection conn, String arr, int branch) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("carEnroll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, branch);
+			pstmt.setString(2, arr);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

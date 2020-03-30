@@ -112,20 +112,20 @@ public class EventService {
 	 * @param e		입력한 이벤트 객체
 	 * @return		sql 성공 후 행의 개수
 	 */
-//	public int updateEvent(Event e) {
-//		
-//		Connection conn = getConnection();
-//		
-//		int result = new EventDao().updateEvent(conn, e);
-//		
-//		if(result > 0) {
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		
-//		return result;
-//	}
+	public int updateEvent(Event e, int memNo, String startDate, String endDate, String rate) {
+		
+		Connection conn = getConnection();
+		
+		int result = new EventDao().updateEvent(conn, e, memNo, startDate, endDate, rate);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * 7. 이벤트 한개 삭제 서비스

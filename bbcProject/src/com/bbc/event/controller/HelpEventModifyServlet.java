@@ -1,9 +1,6 @@
 package com.bbc.event.controller;
 
 import java.io.IOException;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,33 +30,31 @@ public class HelpEventModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				
+		request.setCharacterEncoding("utf-8");
+		
+		int memNo = 21;
+		
+		int eno = Integer.parseInt(request.getParameter("eno"));
 		String title = request.getParameter("title");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
-		int rate = Integer.parseInt(request.getParameter("rate"));
+		String rate = request.getParameter("rate");
 		String content = request.getParameter("content");
-//		
-//		System.out.println(startDate);
-//		System.out.println(endDate);
 		
 		Event e = new Event();
 		
+		e.setEventNo(eno);
 		e.setEventTitle(title);
-//		e.setEventStartDate(startDate);
-//		e.setEventEndDate(endDate);
-		e.setDiscountRate(rate);
 		e.setEventContent(content);
 		
-//		int result = new EventService().updateEvent(e);
-//		
-//		if(result > 0) {
-//			
-//		} else {
-//			
-//		}
+		int result = new EventService().updateEvent(e, memNo, startDate, endDate, rate);
+		
+		if(result > 0) {
+			response.sendRedirect("event.b.ev");
+		} else {
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

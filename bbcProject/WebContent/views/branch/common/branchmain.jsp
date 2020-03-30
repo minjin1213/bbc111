@@ -6,7 +6,7 @@
 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
-	int noticeCount = pi.getListCount();
+	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();

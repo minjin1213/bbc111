@@ -1,11 +1,15 @@
 package com.bbc.carinfo.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.bbc.carinfo.model.service.CarInfoService;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class CarDeleteServlet
@@ -27,7 +31,16 @@ public class CarDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("views/branch/carmanagement/deleteCar.jsp").forward(request, response);
+		String str = request.getParameter("str");
+		
+		String[] arr = str.split(",");
+		
+		int result = new CarInfoService().branchDeleteChkCar(arr);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new Gson();
+		gson.toJson(result, response.getWriter());
 	}
 
 	/**
