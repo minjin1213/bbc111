@@ -4,6 +4,7 @@
 	import="com.bbc.carinfo.model.vo.CarInfo, com.bbc.common.page.vo.PageInfo, java.util.ArrayList"%>
 <%
 	ArrayList<CarInfo> list = (ArrayList<CarInfo>)request.getAttribute("list");
+	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
@@ -14,8 +15,16 @@
 	
 	int index = 0;
 	
-	int listSize = list.size();
-	int size = (int)(Math.ceil((double)list.size()/3));
+	// list.size() 15 --> 5행
+				 //14 --> 5행
+				 //13 --> 5행
+				 //10 --> 4행
+				 // 9 --> 3행
+				 // 5 --> 2행
+				 // 1 --> 1행
+	int trSize = (int)(Math.ceil((list.size()-1)/3)) + 1;
+	//int listSize = list.size();
+	//int size = (int)(Math.ceil((double)list.size()/3));
 %>
 <!DOCTYPE html>
 <html>
@@ -84,15 +93,14 @@
 									<div class="car-card">
 										<div class="card-image">
 											<table>
-												<tr>
-												<% for(int i=0; i<size; i++) { %>
 												
-													<% for(int j=0; j<3; j++) { %>
-
-														<% if(listSize != index) { %>
+												<% for(int j=0; j<trSize; j++) { %>
+												<tr>
+													<% int temp=0; %>
+													<% for(int i=0; i<list.size(); i++) { %>
 														
 														<td>
-															<input type="checkbox" name="chk-car" value="<%= list.get(i).getCarNo() %>" style="margin-right: 230px;">
+															<input type="checkbox" name="chk-car" value="<%= list.get(index).getCarNo() %>" style="margin-right: 230px;">
 															<% if(list.get(index).getCarLunchYear().equals("2020")) { %> 
 																<span class="card-notify-year">New</span> 
 															<% } %> 
@@ -118,9 +126,12 @@
 																<span>- 연식 : <%= list.get(index).getCarLunchYear() %></span>
 															</div>
 														</td>
-														<% index++; %>
+														<% 
+															temp++;
+															index++;
+															if(temp == 3) break; 
+														%>
 														
-														<% } %>
 													<% } %>
 													
 												</tr>
@@ -323,8 +334,10 @@
 				arr.push($(this).val());
 			});
 			
-			var str = arr.join();
+			console.log(arr);
 			
+			var str = arr.join();
+			 
 			$.ajax({
 				url:"deleteCar.b.ci",
 				type:"get",

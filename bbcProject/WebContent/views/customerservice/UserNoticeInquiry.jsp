@@ -195,7 +195,7 @@ int endPage = pi.getEndPage();
 
 				<br>
                 <div class="btn_wrap">
-                    <button type="button" class="btn-default-ok btn-ni-opinion" onclick="goBack()">목록</button>
+                    <button type="button" class="btn-default-ok btn-ni-opinion" onclick="goBack();">목록</button>
                 </div>
 			</div> <!--인풋필터 닫아주는거 ㅇㅇ-->
             <br>
@@ -208,7 +208,7 @@ int endPage = pi.getEndPage();
     </div>
 <script>
 		function goBack() {
-		    window.history.back();
+		    location.href="<%=request.getContextPath()%>/CsList.no";
 		}
 
 </script>

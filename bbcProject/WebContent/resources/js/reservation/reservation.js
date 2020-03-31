@@ -570,8 +570,8 @@ function serachCarList(){
   		  		
   	  			var resultValue = "<table style='width:470px'>"
   	    		for(var i=0; i<list.length; i++) {
-  	    			console.log(typeof list[i].CAR_NAME != 'undefined');
-  	    			if(typeof list[i].CAR_NAME != 'undefined') {
+//  	    			console.log(typeof list[i].CAR_NAME != 'undefined');
+  	    			if(typeof list[i].CAR_TYPE_NAME != 'undefined') {
   	    	    			resultValue += "<tr>"
   	    	  	    			resultValue += "<td rowspan='3'><img width='125px' height='85px' src='" + contextJSPath + "/resources/carinfo_upfile/" + list[i].CAR_MODIFY_NAME + "'></td>"
   	    	  	    			resultValue += "</tr>"
