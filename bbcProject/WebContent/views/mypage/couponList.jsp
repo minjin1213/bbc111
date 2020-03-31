@@ -76,7 +76,7 @@ hr.garo{
         background: lightgray;
     }
     th,td {
-         padding: 15px 20px;
+    
          text-align: center;
     }
 
@@ -107,15 +107,7 @@ hr.garo{
     }
 
 
-    .arrow {
-            float: left;
-            border: 10px solid transparent;
-            margin-top: 3px;
-            margin-left: 20px;
-            border-top-color: lightgray;
-            transition: 350ms;
-            position: absolute;
-    }
+    
     .accordion-head.open{
             background: white;
     }
@@ -243,11 +235,11 @@ hr.garo{
 	
 
 		<div class="outer"> 
-		     <div class="main-title">쿠폰함</div>
+		     <div class="main-title" style="margin-top: 17px;">쿠폰함</div>
 		<hr class="garo"> 
 	 
 
-            <table id="tableMain" style="margin-top: 25px;">
+            <table id="tableMain" style="margin-top: 35px;">
             
                 <thead>
                     <tr class="tableheader">
@@ -265,16 +257,15 @@ hr.garo{
 					<tr>
 					
 					
-              <tr class="accordion-head breakrow open"><td style="height:40px"><div class="arrow"></div><%=c.getCouponUse()%></td>
-              <td style="left-margin:5px;"><%=c.getCouponName() %></td><td><%=c.getCouponPost()%>~<%=c.getCouponExp() %></td></tr>    
-                    <tr><td id="pop" colspan="3"><div id="bor">할인혜택</div>
-                       &nbsp; &nbsp;<%=c.getCouponDc() %>원</td></tr>
-                    <tr><td id="pop" colspan="3"><div id="bor">쿠폰타입</div>
-                       &nbsp;&nbsp; <%=c.getCouponType() %></td></tr>
-                    <tr><td id="pop" colspan="3"><div id="bor">사용조건</div>
-                       &nbsp; &nbsp;<%=c.getCouponCondition() %><br>
-                 
-
+              <tr >
+              <td style="height:40px"> 
+                <% if(c.getCouponUsage().equals("Y")){ %>
+                	미사용 
+                <%}  else{%>
+                	사용
+                	<%} %>
+              </td>
+              <td style="left-margin:5px;"><%=c.getCouponName() %></td><td><%=c.getCouponUseDate()%> ~<%=c.getCouponEndDate()%></td></tr>    
 					</tr>
 					<% } %>
 				<% } %> 
@@ -285,7 +276,7 @@ hr.garo{
                                                 
             </table>
        
-       		<div class="pagination" style="padding-left:250px; margin-top:60px;">
+       		<div class="pagination" style=" margin-top:60px;">
                 <a href="#">«</a>
                 <a href="#">&lt;</a>
                 <li><a href="#home">1</a></li>
@@ -298,26 +289,7 @@ hr.garo{
             </div>
             
               
-<script>
 
-$(document).ready(function(){
-
-$('tr.breakrow').nextUntil('tr.breakrow').hide();
-
-    $('#tableMain').on('click', 'tr.breakrow',function(){
-    
-        $('tr.breakrow').nextUntil('tr.breakrow').hide();
-        
-        $(this).nextUntil('tr.breakrow').slideDown("fast");
-        $(this).css("background-color","#eee")
-        $('#tableMain').on('dblclick', 'tr.breakrow',function(){
-        $(this).nextUntil('tr.breakrow').slideUp("fast");
-        $(this).css("background-color","white")
-        });
-});
-});
-
-</script>
 							
 
 </div>

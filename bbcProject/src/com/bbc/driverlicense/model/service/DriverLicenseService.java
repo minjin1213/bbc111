@@ -28,4 +28,44 @@ public DriverLicense selectByMemberId(int memberNo) {
 		return d;
 	}
 
+// 요한
+public int insertDriverLicense(DriverLicense d) {
+	
+	Connection conn = getConnection();
+	
+	int result = new DriverLicenseDao().insertDriverLicense(conn, d);
+	
+	if(result >0) {
+		commit(conn);
+	}else {
+		rollback(conn);
+	}
+	close(conn);
+	
+	return result;
+}
+
+public DriverLicense selectDriverlicense(int userno) {
+	
+	Connection conn = getConnection();
+		
+	DriverLicense d = new DriverLicenseDao().selectDriverLicense(conn,userno);
+	
+	close(conn);
+	return d;
+}
+public int deletemyDriverLicense(int mno) {
+	
+	Connection conn = getConnection();
+	
+	int result = new DriverLicenseDao().deletemyDriverLicense(conn, mno);
+	System.out.println(mno);
+	if(result >0) {
+		commit(conn);
+	}else {
+		rollback(conn);
+	}
+	close(conn);
+	return result;
+}
 }

@@ -48,6 +48,7 @@ public class Reservation {
 	private String branchName;
 	
 	// 차량이용내역 추가 한것 
+	private String carModifyName;
 	private String carTypeName;
 	private String rentBranch;
 	private String returnBranch;
@@ -199,7 +200,8 @@ public class Reservation {
 	
 	public Reservation(int reservationNo,Date rentDate, Date returnDate,String carTypeName, String rentBranch, String returnBranch,
 			String reservationStatus, int cwdPrice,int price, int discountPrice, int totalPrice, 
-			Date payDate, int payAmount, String payMethod, String refundStatement, Date refundDate) {
+			Date payDate, int payAmount, String payMethod, String refundStatement, Date refundDate,
+			String carModifyName ) {
 		super();
 		this.reservationNo = reservationNo;
 		this.reservationStatus = reservationStatus;
@@ -217,6 +219,17 @@ public class Reservation {
 		this.payMethod = payMethod;
 		this.refundStatement = refundStatement;
 		this.refundDate = refundDate;
+		this.carModifyName = carModifyName;
+	}
+
+
+	public String getCarModifyName() {
+		return carModifyName;
+	}
+
+
+	public void setCarModifyName(String carModifyName) {
+		this.carModifyName = carModifyName;
 	}
 
 
