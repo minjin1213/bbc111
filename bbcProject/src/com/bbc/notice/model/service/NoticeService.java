@@ -360,6 +360,15 @@ public class NoticeService {
 		
 		return result;
 	}
+	public ArrayList<Notice> adminMainPageNotice(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new NoticeDao().adminMainPageNotice(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 	/**
 	 * 사용자 공지사항 리스트 개수 조회 서비스

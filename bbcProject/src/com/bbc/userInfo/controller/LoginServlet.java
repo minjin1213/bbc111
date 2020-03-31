@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 			}else if(auth == 1) { // 지점관리자	
 				response.sendRedirect(request.getContextPath() + "/mainNotice.b.no");
 			}else if(auth ==2) { // 통합관리자		
-	            request.getRequestDispatcher("views/admin/common/admin.jsp").forward(request, response);
+	            request.getRequestDispatcher("adminMain.t.no").forward(request, response);
 			}
 			
 		}else {

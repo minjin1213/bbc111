@@ -645,6 +645,35 @@ public class NoticeDao {
 		 
 		 return result;
 	 }
+	 public ArrayList<Notice> adminMainPageNotice(Connection conn, PageInfo pi) {
+		 ArrayList<Notice> list = new ArrayList<>();
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 String sql = prop.getProperty("adminMainPageNotice");
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getTableLimit() + 1;
+			int endRow = startRow + pi.getTableLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt("notice_no"),
+									rset.getString("notice_title"),
+									rset.getDate("notice_date")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		 return list;
+	 }
 	 
 		//사용자
 		public ArrayList<Notice> userSelectList(Connection conn, UserPageInfo pi) {

@@ -72,7 +72,15 @@ public class Notice {
 		this.noticeReadCnt = noticeReadCnt;
 	}
    
-   // 공지사항 전체 조회용 (용환)
+   // 메인페이지 공지사항 조회용 매개변수(민기)
+   public Notice(int noticeNo, String noticeTitle, Date enrollDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.enrollDate = enrollDate;
+	}
+
+// 공지사항 전체 조회용 (용환)
    public Notice(int noticeNo, String noticeTitle, String noticeContent, Date modifyDate, int noticeReadCnt,
 			int noticeField) {
 		super();
