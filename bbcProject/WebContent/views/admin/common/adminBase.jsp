@@ -65,7 +65,7 @@
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Home -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=contextPath%>/views/admin/common/admin.jsp">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=contextPath%>/adminMain.t.no">
         <div class="sidebar-brand-text mx-3">
           BBC
           <i class="fa fa-home fa-fw home-icon"></i>

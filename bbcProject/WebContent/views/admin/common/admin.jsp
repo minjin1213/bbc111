@@ -1,9 +1,19 @@
+------------------------------------ admin --------------------------------
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.bbc.userInfo.model.vo.UserInfo" %>
+<%@ page import="com.bbc.userInfo.model.vo.UserInfo, java.util.ArrayList,
+				 com.bbc.notice.model.vo.Notice, com.bbc.common.page.vo.PageInfo" %>
 <%
 	String contextPath = request.getContextPath();
 	UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +46,7 @@
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Home -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=contextPath%>/views/admin/common/admin.jsp">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=contextPath%>/adminMain.t.no">
         <div class="sidebar-brand-text mx-3">
           BBC
           <i class="fa fa-home fa-fw home-icon"></i>
@@ -199,7 +209,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold">공지사항</h6>
+                  <h6 class="m-0 font-weight-bold">최근 공지사항</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body container">
@@ -212,42 +222,43 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td> 1월 3일 11시~11시10분 삼성카드 결제 중단 안내</td>
-                        <td>2020-02-14</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>1월 3일 11시~11시10분 삼성카드 결제 중단 안내</td>
-                        <td>2020-02-14</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>1월 3일 11시~11시10분 삼성카드 결제 중단 안내</td>
-                        <td>2020-02-14</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>1월 3일 11시~11시10분 삼성카드 결제 중단 안내</td>
-                        <td>2020-02-14</td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>1월 3일 11시~11시10분 삼성카드 결제 중단 안내</td>
-                        <td>2020-02-14</td>
-                      </tr>
+                    	<% if(list != null){ %>
+                    		<% for(Notice n : list){ %>
+                    			<tr>
+                    				<td><%=n.getNoticeNo()%></td>
+                    				<td><%=n.getNoticeTitle()%></td>
+                    				<td><%=n.getEnrollDate()%>
+                    			</tr>
+                    		<% } %>
+                    	<% }else { %>
+                    		<tr>
+                    			<td colspan="3">등록된 공지사항이 없습니다.</td>
+                    		</tr>
+                    	<% } %>
+                      
                     </tbody>
                   </table>
 
                   <div class="paginate">
-                    <a href="#" class="prev">prev</a>
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#" class="next">next</a>
+                  	<!-- 맨 처음으로 이동(<<) -->
+		            <a href="<%=contextPath%>/adminMain.t.no"> &lt;&lt; </a>
+		            <!-- 이전 페이지(<) -->
+		            <a href="<%=contextPath%>/adminMain.t.no?currentPage=<%=currentPage-1%>"> &lt; </a>
+		           	
+		           	<!-- 페이지 목록 -->       
+		            <% for(int p=startPage; p<=endPage; p++){ %>
+		            	<% if(currentPage == p){ %>
+		            		<a><%=p%></a>
+		            	<% }else { %>
+		            		<a href="<%=contextPath%>/adminMain.t.no?currentPage=<%=p%>"><%=p%></a>
+		            	<% } %>
+		            <% } %>
+		            
+		            <!-- 다음 페이지(>) -->
+		            <a href="<%=contextPath%>/adminMain.t.no?currentPage=<%=currentPage+1%>"> &gt; </a>
+		            <!-- 맨 끝으로 이동(>>) -->
+		            <a href="<%=contextPath%>/adminMain.t.no?currentPage=<%=maxPage%>"> &gt;&gt; </a>
+
                   </div>
 
                 </div>
@@ -270,10 +281,10 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2 pie-name">
-                      <i class="fas fa-circle" id="pie-reservation"></i> Reservation
+                      <i class="fas fa-circle" id="pie-reservation"></i> 달성율
                     </span>
                     <span class="mr-2 pie-name">
-                      <i class="fas fa-circle" id="pie-none"></i> None
+                      <i class="fas fa-circle" id="pie-none"></i> 남은비율
                     </span>
                   </div>
                 </div>
