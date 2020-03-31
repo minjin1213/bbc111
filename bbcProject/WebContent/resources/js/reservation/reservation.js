@@ -567,38 +567,42 @@ function serachCarList(){
   	  		url:"searchCar.rv?carType=" + carType + "&rent_branch=" + rent_branch + "&rent_date=" + rent_date + "&return_date=" + return_date,
   	  		type:"get",
   	  		success:function(list){  
-  	  			
+  		  		
   	  			var resultValue = "<table style='width:470px'>"
-  	    		for(var i=0; i<list.length; i++) {    	    		
-  	    			resultValue += "<tr>"
-  	    			resultValue += "<td rowspan='3'><img width='125px' height='85px' src='" + contextJSPath + "/resources/carinfo_upfile/" + list[i].CAR_MODIFY_NAME + "'></td>"
-  	    			resultValue += "</tr>"
-  	    			resultValue += "<tr>"
-  	    			resultValue += "<td width='70%' class='car-type'>" + list[i].CAR_TYPE_NAME + "</td>"
-  	    			resultValue += "<td width='30%' class='car-price'>" + numberFormat(list[i].PRICE) + "원</td>"
-  	    			resultValue += "</tr>"
-  	    			resultValue += "<tr>"
-  	    			resultValue += "<td colspan='2'>"
-  	    			resultValue += "<span class='ico-gas'><img src='" + contextJSPath + "/resources/images/car/" + list[i].FUEL_IMG + "'></span>"
-  	    			resultValue += "<div class='ico-people-wrap'>"
-  	    			resultValue += "<div><img src='" + contextJSPath + "/resources/images/car/ico_people.png'></div>"
-  	    			resultValue += "<div class='ico-people-text'><p class='ico-people-count'>" + list[i].CAR_RIDE_PEOPLE + "</p></div>"
-  	    			resultValue += "</div>"					
-  	    			resultValue += "<div class='btn-reservation' carname='" + list[i].CAR_TYPE_NAME + "' " 
-  	    			resultValue += "carimg='" + list[i].CAR_MODIFY_NAME + "' "
-  	    			resultValue += "carpay='" + list[i].PRICE + "' "
-  	    			resultValue += "accidentPrice1='" + list[i].ACCIDENT_PRICE_TYPE1 + "' "
-  	    			resultValue += "accidentPrice2='" + list[i].ACCIDENT_PRICE_TYPE2 + "' "
-  	    			resultValue += "rentInsuPrice1='" + list[i].RENT_INSU_TYPE1 + "' "
-  	    			resultValue += "rentInsuPrice2='" + list[i].RENT_INSU_TYPE2 + "' "
-  	    			resultValue += "exemptionPric='" + list[i].ACCIDENT_EXEMPTION + "' "
-  	    			resultValue += "option='" + list[i].CAR_OPTION + "' "
-  	    			resultValue += "carno='" + list[i].CAR_NO + "' onclick='goOptionPage(this);'>예약</div>"				
-  	    			resultValue += "</td>"				
-  	    			resultValue += "</tr>"
-  	    			resultValue += "<tr>"
-  	    			resultValue += "<td colspan='3'><p style='border-bottom: 1px solid #757272; margin-top:10px; margin-bottom:5px;'></p></td>"
-  	    			resultValue += "</tr>"
+  	    		for(var i=0; i<list.length; i++) {
+  	    			console.log(typeof list[i].CAR_NAME != 'undefined');
+  	    			if(typeof list[i].CAR_NAME != 'undefined') {
+  	    	    			resultValue += "<tr>"
+  	    	  	    			resultValue += "<td rowspan='3'><img width='125px' height='85px' src='" + contextJSPath + "/resources/carinfo_upfile/" + list[i].CAR_MODIFY_NAME + "'></td>"
+  	    	  	    			resultValue += "</tr>"
+  	    	  	    			resultValue += "<tr>"
+  	    	  	    			resultValue += "<td width='70%' class='car-type'>" + list[i].CAR_NAME + "</td>"
+  	    	  	    			resultValue += "<td width='30%' class='car-price'>" + numberFormat(list[i].PRICE) + "원</td>"
+  	    	  	    			resultValue += "</tr>"
+  	    	  	    			resultValue += "<tr>"
+  	    	  	    			resultValue += "<td colspan='2'>"
+  	    	  	    			resultValue += "<span class='ico-gas'><img src='" + contextJSPath + "/resources/images/car/" + list[i].FUEL_IMG + "'></span>"
+  	    	  	    			resultValue += "<div class='ico-people-wrap'>"
+  	    	  	    			resultValue += "<div><img src='" + contextJSPath + "/resources/images/car/ico_people.png'></div>"
+  	    	  	    			resultValue += "<div class='ico-people-text'><p class='ico-people-count'>" + list[i].CAR_RIDE_PEOPLE + "</p></div>"
+  	    	  	    			resultValue += "</div>"					
+  	    	  	    			resultValue += "<div class='btn-reservation' carname='" + list[i].CAR_NAME + "' " 
+  	    	  	    			resultValue += "carimg='" + list[i].CAR_MODIFY_NAME + "' "
+  	    	  	    			resultValue += "carpay='" + list[i].PRICE + "' "
+  	    	  	    			resultValue += "accidentPrice1='" + list[i].ACCIDENT_PRICE_TYPE1 + "' "
+  	    	  	    			resultValue += "accidentPrice2='" + list[i].ACCIDENT_PRICE_TYPE2 + "' "
+  	    	  	    			resultValue += "rentInsuPrice1='" + list[i].RENT_INSU_TYPE1 + "' "
+  	    	  	    			resultValue += "rentInsuPrice2='" + list[i].RENT_INSU_TYPE2 + "' "
+  	    	  	    			resultValue += "exemptionPric='" + list[i].ACCIDENT_EXEMPTION + "' "
+  	    	  	    			resultValue += "option='" + list[i].CAR_OPTION + "' "
+  	    	  	    			resultValue += "carno='" + list[i].CAR_NO + "' onclick='goOptionPage(this);'>예약</div>"				
+  	    	  	    			resultValue += "</td>"				
+  	    	  	    			resultValue += "</tr>"
+  	    	  	    			resultValue += "<tr>"
+  	    	  	    			resultValue += "<td colspan='3'><p style='border-bottom: 1px solid #757272; margin-top:10px; margin-bottom:5px;'></p></td>"
+  	    	  	    			resultValue += "</tr>"
+  	    			}
+
   	    		}
   	  			resultValue += "</table>";
 

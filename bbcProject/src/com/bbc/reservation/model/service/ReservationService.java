@@ -176,7 +176,7 @@ public class ReservationService {
 	}
 
 
-/*	//요한 예약내역조회 
+	//요한 예약내역조회 
 	public ArrayList<Reservation> selectReservationList(int mno){
 			
 			Connection conn = getConnection();
@@ -199,7 +199,7 @@ public class ReservationService {
 			
 			return reservationtotal;
 		
-	}*/
+	}
 	
 	// 차량예약취소
 	public int deletemyReservation(int userno, int rno) {

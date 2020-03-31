@@ -401,7 +401,7 @@ function myFunction() {
           <table id="sep">
             <tbody>
               <tr id="pop">
-                <td id="bor" rowspan="5" style="width: 302px;" ><img src="http://www.cctoday.co.kr/news/photo/201509/925979_306258_1646.jpg" style="width:400px"></td>
+                <td id="bor" rowspan="5" style="width: 302px;" ><img src="<%=request.getContextPath()%>/resources/carinfo_upfile/<%=r.getCarModifyName() %>" style="width:400px"></td>
               	
 							 <tr id="pop">
 							 <td id="bor" >보험료</td>
@@ -480,7 +480,7 @@ function myFunction() {
           
           <!-- 테이블 끝 -->
           
-          <div class="pagination" style="padding-left:250px; margin-top:60px;">
+          <div class="pagination" style=" margin-top:60px;">
                 <a href="#">«</a>
                 <a href="#">&lt;</a>
                 <li><a href="#home">1</a></li>

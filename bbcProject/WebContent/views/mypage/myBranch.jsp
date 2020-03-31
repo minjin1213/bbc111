@@ -75,7 +75,7 @@ hr.garo{
 			<!--나의 지점 등록 -->	     	
             <div class="popup" > 
             <div class="container" style="margin-bottom:7px;margin-left:15px;">
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style="float:right;background: #ffc107;height:20px;font-size:10px;width:90px;padding-top:2px;">지점 등록</button>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style="float:right;background: #ffc107;height:20px;font-size:10px;width:90px;padding-top:2px;float:right;background: #ffc107;height:20px;font-size:10px;width:90px;padding-top:2px;margin-top: -2.5%;">지점 등록</button>
               	
 				  <!-- Modal -->
 				  <div class="modal fade" id="myModal" role="dialog" data-backdrop="false">
@@ -221,9 +221,17 @@ hr.garo{
 
 <script>
 
+
+
 $(".search").click(function(){
 	console.log($(this).prev().val());
-	location.href="deletemb.mb?bno=" + $(this).prev().val();
+	var c = confirm("삭제하시겠습니까?");
+	if(c == true){
+		location.href="deletemb.mb?bno=" + $(this).prev().val();
+	}else{
+		
+	}
+	
 })
 
 	

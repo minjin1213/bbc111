@@ -31,6 +31,25 @@ public class DriverLicense {
 		this.licenseModifyName = licenseModifyName;
 		this.memberNo = memberNo;
 	}
+	public DriverLicense(int driverLicenseNo, String licenseType, String rentNumber1, String rentNumber2,
+			Date licenseIssueDate, Date licenseReturnDate, String licenseModifyName) {
+		super();
+		this.driverLicenseNo = driverLicenseNo;
+		this.licenseType = licenseType;
+		this.rentNumber1 = rentNumber1;
+		this.rentNumber2 = rentNumber2;
+		this.licenseIssueDate = licenseIssueDate;
+		this.licenseReturnDate = licenseReturnDate;
+		this.licenseModifyName = licenseModifyName;
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	public int getDriverLicenseNo() {
 		return driverLicenseNo;
