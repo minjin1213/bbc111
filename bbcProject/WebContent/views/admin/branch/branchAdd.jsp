@@ -137,7 +137,8 @@
 		</form>
 		<!-- 지도 API 연결 부분 -->
 		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9d483cae05a686fa35a6aaef87d12240&libraries=services"></script>
+		<!-- 민기 : appkey=뒷부분부터 &전까지 키값 재발급 받아서 수정하기 -->
+		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fcc36513afe06a8bf8bcaea8a14a0293&libraries=services"></script>
 		<script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	        mapOption = {

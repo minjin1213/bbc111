@@ -1,6 +1,7 @@
 package com.bbc.branchmanagement.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -67,9 +68,9 @@ public class AdminInsertBranchServlet extends HttpServlet {
 		int result = new BranchManagementService().adminInsertBranch(bm);
 		
 		if(result > 0) {
-			HttpSession session = request.getSession();
-			session.setAttribute("insertBranch", "지점 등록이 완료되었습니다.");
-			response.sendRedirect("list.t.br");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('지점등록이 완료되었습니다'); location.href='list.t.br';</script>");
 		}else {
 			request.setAttribute("msg", "지점 등록에 실패했습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

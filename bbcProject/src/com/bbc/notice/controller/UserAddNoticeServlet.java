@@ -108,7 +108,7 @@ public class UserAddNoticeServlet extends HttpServlet {
 			 if(result > 0) {
 				 response.setContentType("text/html; charset=utf-8");
 				 PrintWriter out = response.getWriter();
-				 out.println("<script>alert('공지사항 추가가 완료되었습니다.'); location.href='uList.t.no';<script>");
+				 out.println("<script>alert('공지사항 추가가 완료되었습니다.'); location.href='uList.t.no';</script>");
 			 }else {				 
 				 
 				 //실패한 경우 서버에 업로드된 파일도 같이 삭제해줘야한다.
