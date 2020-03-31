@@ -60,6 +60,7 @@ public class CarInfoDao {
  	            hashMap.put("CAR_TYPE_NO",String.valueOf(rset.getInt("CAR_TYPE_NO")));
  	            hashMap.put("CAR_NO",String.valueOf(rset.getInt("CAR_NO")));
  	            hashMap.put("CAR_TYPE_NAME", rset.getString("CAR_TYPE_NAME"));
+ 	           hashMap.put("CAR_NAME", rset.getString("CAR_NAME"));
  	            hashMap.put("CAR_MODIFY_NAME", rset.getString("CAR_MODIFY_NAME"));
   	            
 				// 연료타입으로 이미지값 변경

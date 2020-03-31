@@ -82,6 +82,7 @@ public class CarOptionServlet extends HttpServlet {
 				
 				// 쿠폰리스트 가져오기
 				Coupon cp = new CouponService().selectListByCoupon(clist.get(i).getCouponNo());
+				System.out.println(cp);
 				if(cp != null) {
 					myclist.add(cp);
 				}
