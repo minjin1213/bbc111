@@ -69,6 +69,7 @@
 			<tr>
 				<th><li>지역</li></th>
 				<td><%=b.getAreaName()%></td>
+				
 			</tr>
 			<tr>
 				<th><li>지점</li></th>

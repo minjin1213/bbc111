@@ -593,7 +593,7 @@ public class NoticeDao {
 				 n.setMemberName(rset.getString("member_name"));
 				 n.setRename(rset.getString("frename"));
 			 }
-			 
+			
 		} catch (SQLException e) {
 			e.printStackTrace(); 
 		} finally {

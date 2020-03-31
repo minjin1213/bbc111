@@ -351,23 +351,23 @@
 
       <div class="pagination">
         	<!-- 맨 처음으로 이동(<<) -->
-            <a href="<%=contextPath%>/list.t.mi"> &lt;&lt; </a>
+            <a href="<%=contextPath%>/uList.t.no.mi"> &lt;&lt; </a>
             <!-- 이전 페이지(<) -->
-            <a href="<%=contextPath%>/list.t.mi?currentPage=<%=currentPage-1%>"> &lt; </a>
+            <a href="<%=contextPath%>/uList.t.no?currentPage=<%=currentPage-1%>"> &lt; </a>
            	
            	<!-- 페이지 목록 -->       
             <% for(int p=startPage; p<=endPage; p++){ %>
             	<% if(currentPage == p){ %>
-            		<li><a><%=p%></a>
+            		<li><a><%=p%></a></li>
             	<% }else { %>
-            		<li><a href="<%=contextPath%>/list.t.bo?currentPage=<%=p%>"><%=p%></a>
+            		<li><a href="<%=contextPath%>/uList.t.no?currentPage=<%=p%>"><%=p%></a>
             	<% } %>
             <% } %>
             
             <!-- 다음 페이지(>) -->
-            <a href="<%=contextPath%>/list.t.mi?currentPage=<%=currentPage+1%>"> &gt; </a>
+            <a href="<%=contextPath%>/uList.t.no?currentPage=<%=currentPage+1%>"> &gt; </a>
             <!-- 맨 끝으로 이동(>>) -->
-            <a href="<%=contextPath%>/list.t.mi?currentPage=<%=maxPage%>"> &gt;&gt; </a>
+            <a href="<%=contextPath%>/uList.t.no?currentPage=<%=maxPage%>"> &gt;&gt; </a>
         </div>
 		
 	</div>

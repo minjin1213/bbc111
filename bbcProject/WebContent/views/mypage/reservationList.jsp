@@ -290,7 +290,7 @@
           <table id="sep">
             <tbody>
               <tr id="pop">
-                <td id="bor" rowspan="5" style="width: 302px;" ><img src="http://www.cctoday.co.kr/news/photo/201509/925979_306258_1646.jpg" style="width:400px"></td>
+                <td id="bor" rowspan="5" style="width: 302px;" ><img src="<%=request.getContextPath()%>/resources/carinfo_upfile/<%=r.getCarModifyName() %>" style="width:400px"></td>
               	
 							 <tr id="pop">
 							 <td id="bor" >보험료</td>
@@ -321,17 +321,7 @@
                 <td id="bor" colspan="2">결제 방식</td>
                 <td style="border:1px solid gray" colspan="2" ><%=r.getPayMethod()%></td>
               </tr>
-  			  <tr id="pop">
-                <td  style="border:1px solid gray" id="bor"colspan="2">환불 여부</td>
-                     <td  colspan="2" style="border:1px solid gray"  > - </td>
-                  
-              </tr>
-               <tr id="pop">    
-                <td style="border:1px solid gray"  colspan="2" id="bor">환불 일시</td>
-                 
-                      <td  colspan="2" style="border:1px solid gray"  > - </td>
-                     
-              </tr>
+  			
       
                       
               
@@ -353,7 +343,7 @@
           
           
           
-             <div class="pagination" style="padding-left:250px; margin-top:60px;">
+             <div class="pagination" style="margin-top:60px;">
                 <a href="#">«</a>
                 <a href="#">&lt;</a>
                 <li><a href="#home">1</a></li>

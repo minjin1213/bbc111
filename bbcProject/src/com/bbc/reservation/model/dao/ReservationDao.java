@@ -386,7 +386,7 @@ public class ReservationDao {
 			reservationlist.add(new Reservation(rset.getInt("RESERVATION_NO"),
 												rset.getDate("RENT_DATE"),
 												rset.getDate("RETURN_DATE"),
-												rset.getString("CAR_TYPE_NAME"),
+												rset.getString("CAR_NAME"),
 												rset.getString("RentBranch"),
 												rset.getString("ReturnBranch"),
 												rset.getString("RESERVATION_STATUS"),
@@ -398,7 +398,8 @@ public class ReservationDao {
 												rset.getInt("PAY_AMOUNT"),
 												rset.getString("PAY_METHOD"),
 												rset.getString("REFUND_STATEMENT"),
-												rset.getDate("REFUND_DATE")
+												rset.getDate("REFUND_DATE"),
+												rset.getString("CAR_MODIFY_NAME")
 												));
 		}
 		System.out.println(reservationlist);
@@ -431,7 +432,7 @@ public class ReservationDao {
 			reservationtotal.add(new Reservation(rset.getInt("RESERVATION_NO"),
 												rset.getDate("RENT_DATE"),
 												rset.getDate("RETURN_DATE"),
-												rset.getString("CAR_TYPE_NAME"),
+												rset.getString("CAR_NAME"),
 												rset.getString("RentBranch"),
 												rset.getString("ReturnBranch"),
 												rset.getString("RESERVATION_STATUS"),
@@ -443,7 +444,8 @@ public class ReservationDao {
 												rset.getInt("PAY_AMOUNT"),
 												rset.getString("PAY_METHOD"),
 												rset.getString("REFUND_STATEMENT"),
-												rset.getDate("REFUND_DATE")
+												rset.getDate("REFUND_DATE"),
+												rset.getString("CAR_MODIFY_NAME")
 												));
 		}
 

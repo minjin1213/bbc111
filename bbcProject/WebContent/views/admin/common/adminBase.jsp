@@ -46,6 +46,12 @@
         width: 580px !important;
 	}
 	.modal-content{height: 440px !important;}
+	
+	/* 로그아웃 모달 */
+	.modal-dialo {
+	    max-width: 500px;
+	    margin: 1.75rem auto;
+	}
   </style>
 
 </head>
@@ -188,11 +194,19 @@
     <!-- Content Row -->
           <div class="h-bar">
 
-          <a href="#" class="logout-bt">
+          <a href="#" class="logout-bt" onclick="logout();">
             <i class="fas fa-sign-out-alt logout-icon">
               log out
             </i>
           </a>
+          
+  <script>
+  	function logout(){
+  		if(confirm("통합관리자 페이지를 로그아웃 하시겠습니까?")){
+	  		location.href = "<%=contextPath%>/logout.ui"  			
+  		}
+  	}
+  </script>
     
     
     

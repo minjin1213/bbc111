@@ -151,10 +151,10 @@ public class BranchManagementDao {
 			pstmt.setString(3, bm.getBranchAddress());
 			pstmt.setString(4, bm.getBranchHrs());
 			pstmt.setString(5, bm.getBranchDir());
-			pstmt.setInt(6, bm.getMemberNo());
-			pstmt.setInt(7, bm.getAreaCode());
-			pstmt.setString(8, bm.getMapX());
-			pstmt.setString(9, bm.getMapY());
+			pstmt.setInt(6, bm.getAreaCode());
+			pstmt.setString(7, bm.getMapX());
+			pstmt.setString(8, bm.getMapY());
+			pstmt.setInt(9, bm.getMemberNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -188,7 +188,7 @@ public class BranchManagementDao {
 				b.setAreaName(rset.getString("mapx"));
 				b.setAreaName(rset.getString("mapy"));				
 			}
-				
+			System.out.println(b.getAreaName());	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

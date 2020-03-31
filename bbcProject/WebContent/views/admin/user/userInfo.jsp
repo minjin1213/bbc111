@@ -216,7 +216,6 @@
 					<hr>      	
 			      	<table id="userInfo-table">
 						<tr>
-							<input type="hidden" class="blackNo" value="<%=u.getMemberNo()%>">
 							<th>이름</th>
 							<td><%=u.getMemberName()%></td>
 						</tr>
@@ -261,7 +260,8 @@
 			      <div style="display:none;"></div>
 			      
 			      <div class="modal-footer">
-			      	<button type="button" class="completeBtn" onclick="blackUser();">정지</button>
+			      	<button type="button" class="completeBtn">정지</button>
+					<input type="text" class="blackNo" value="<%=u.getMemberNo()%>">
 			        <button type="button" class="cancelBtn" data-dismiss="modal">취소</button>
 			      </div>
 			      
@@ -324,17 +324,19 @@
 		        }
 		    }
 		    /* 회원 정지 modal script */
-		    function blackUser(){
-		    	if(confirm("회원을 정지시키겠습니까?")){
-		    		var no = $(".blackNo").val();
-		    		location.href="black.t.ui?no="+no;
-		    	}else{
-		    		alert("취소하셨습니다.");
-		    		//$(".fade").hide();
-		    	}
-		    }
+		    $(function(){
+				$(".completeBtn").click(function(){
+					if(confirm("회원을 정지시키겠습니까?")){
+						$(".show").find('input').each(function(i, e){
+						    var no = $(this).val();
+						    location.href = "black.t.ui?no="+no;
+						});
+					}else{
+						alert("취소하셨습니다.");
+					}
+				});
+			});
 		    
-		
 		</script>
             
             

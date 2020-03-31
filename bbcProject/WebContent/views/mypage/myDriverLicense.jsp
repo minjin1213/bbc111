@@ -258,7 +258,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 				
 				
 				<form action="<%=request.getContextPath()%>/delete.dl" method="post">
-	             <img src="<%=request.getContextPath()%>/resources/driverLicense_upfiles/<%=d.getLicenseModifyName() %>" style="margin-left: 90px;margin-top: 40px;" width="250px" height="170px">
+	             <img src="<%=request.getContextPath()%>/resources/driverlicense_upfile/<%=d.getLicenseModifyName() %>" style="margin-left: 90px;margin-top: 40px;" width="250px" height="170px">
 	                <div id="right" style="margin-bottom: 0px; margin-top: 35px;margin-bottom: 0px;margin-top: -15%;">
        
             		<ul style="margin-right: 70px;margin-top: -38%;margin-bottom: 100px;">

@@ -2,6 +2,7 @@ package com.bbc.notice.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -16,6 +18,7 @@ import com.bbc.attachment.model.vo.Attachment;
 import com.bbc.common.MyFileRenamePolicy;
 import com.bbc.notice.model.service.NoticeService;
 import com.bbc.notice.model.vo.Notice;
+import com.bbc.userInfo.model.vo.UserInfo;
 import com.oreilly.servlet.MultipartRequest;
 
 
@@ -39,6 +42,10 @@ public class UserAddNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 if(ServletFileUpload.isMultipartContent(request)) {
+			 HttpSession session = request.getSession();
+			 UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
+			 int no = loginUser.getMemberNo();	
+			 
 			 // 전송 파일 용량 제한 : 10Mbyte
 			 int maxSize = 1024*1024*10;
 			 
@@ -55,7 +62,6 @@ public class UserAddNoticeServlet extends HttpServlet {
 			 // 객체에 담기
 			 String title = multiRequest.getParameter("notice-title");
 			 String content = multiRequest.getParameter("notice-content");
-			 int memNo = Integer.parseInt(multiRequest.getParameter("memNo"));
 			 String[] noticeV = multiRequest.getParameterValues("noticeV");
 			 String[] check = multiRequest.getParameterValues("importCheck");
 			 int checkNo = Integer.parseInt(check[0]);
@@ -63,7 +69,7 @@ public class UserAddNoticeServlet extends HttpServlet {
 			 Notice n = new Notice();
 			 n.setNoticeTitle(title);
 			 n.setNoticeContent(content);
-			 n.setMemberNo(memNo);
+			 n.setMemberNo(no);
 			 n.setNoticeImport(checkNo);
 			 // nullPoint error 때문에  빈값은 빠지게끔 조건 처리
 			 if(noticeV[0].isEmpty()) {
@@ -100,7 +106,9 @@ public class UserAddNoticeServlet extends HttpServlet {
 			 int result = new NoticeService().adminUserAddNotice(n, list);
 			 
 			 if(result > 0) {
-				 response.sendRedirect("uList.t.no");
+				 response.setContentType("text/html; charset=utf-8");
+				 PrintWriter out = response.getWriter();
+				 out.println("<script>alert('공지사항 추가가 완료되었습니다.'); location.href='uList.t.no';<script>");
 			 }else {				 
 				 
 				 //실패한 경우 서버에 업로드된 파일도 같이 삭제해줘야한다.

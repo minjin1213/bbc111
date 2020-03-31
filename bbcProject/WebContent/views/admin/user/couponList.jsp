@@ -56,6 +56,17 @@
 	    height: 35px;
 	    margin-bottom: 0.75rem;
 	}
+	button.completeBtn2{
+		border-radius: 5px;
+	    outline: 0;
+	    border: 0;
+	    background-color: orange;
+	    color: white;
+	    width: 80px;
+	    height: 35px;
+	    margin-bottom: 0.75rem;
+	}
+	
 	
 	.btnList {
 	    text-align: end;
@@ -276,7 +287,7 @@
 			      <div style="display:none;"></div>
 			      
 			      <div class="modal-footer">
-			        <button type="submit" class="completeBtn">등록하기</button>
+			        <button type="submit" class="completeBtn2">등록하기</button>
 			        <button type="button" class="cancelBtn" data-dismiss="modal">취소</button>
 			      </div>
 			      		      

@@ -67,8 +67,6 @@
 		<br>
 		
 		<form action="<%=contextPath%>/uAddNoitce.t.no" enctype="multipart/form-data" method="post">
-			<!-- 로그인 유저 번호 뽑아와야함 -->
-			<input type="hidden" name="memNo" value="1">
 			<table id="add-table">
 				<tr>
 					<th><li>분류</li></th>

@@ -62,5 +62,100 @@ public class DriverLicenseDao {
 		
 		 return d;
 	}
+	
+	//요한
+	
+
+	public int insertDriverLicense(Connection conn, DriverLicense d) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertDriverLicense");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, d.getLicenseType());
+				pstmt.setString(2, d.getRentNumber1());
+				pstmt.setString(3, d.getRentNumber2());
+				pstmt.setDate(4, d.getLicenseIssueDate());
+				pstmt.setDate(5, d.getLicenseReturnDate());
+				pstmt.setString(6, d.getLicenseModifyName());
+				pstmt.setInt(7, d.getMemberNo());
+				
+			
+				result = pstmt.executeUpdate();
+				System.out.println(result);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+	}
+	
+	public DriverLicense selectDriverLicense(Connection conn, int userno) {
+		
+		
+		DriverLicense d = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("viewMyDriverLicense");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userno);
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+			 d = new DriverLicense(rset.getInt("DRIVER_LICENSE_NO"),
+					 			   rset.getString("LICENSE_TYPE"),
+					 			   rset.getString("RENT_NUMBER1"),
+					 			   rset.getString("RENT_NUMBER2"),
+					 			   rset.getDate("LICENSE_ISSUE_DATE"),
+					 			   rset.getDate("LICENSE_RETURN_DATE"),
+					 			   rset.getString("LICENSE_MODIFY_NAME")
+					 			   );
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+			return d;
+			
+	}
+	
+	public int deletemyDriverLicense(Connection conn, int mno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMyDriverLicense");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, mno);
+				
+				result = pstmt.executeUpdate();
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+	}
+	
 
 }

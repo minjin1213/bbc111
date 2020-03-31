@@ -80,7 +80,7 @@
 								<a class="dropdown-item text-center" onclick="goMyRes();">차량 이용 내역</a>
 								<a class="dropdown-item text-center" onclick="goMyReservation();">예약 내역 조회</a>
 								<a class="dropdown-item text-center" onclick="goCoupon();">쿠폰함 조회</a>
-								<a class="dropdown-item text-center" onclick="goDl();">>운전면허 등록</a>
+								<a class="dropdown-item text-center" onclick="goDl();">운전면허 등록</a>
 								<a class="dropdown-item text-center" href="">나의 문의 내역</a>
 								<a class="dropdown-item text-center" onclick="goMyBranch();">나의 지점 관리</a>
 								<a class="dropdown-item text-center" onclick="goMyInfo();">회원 정보 수정</a>
