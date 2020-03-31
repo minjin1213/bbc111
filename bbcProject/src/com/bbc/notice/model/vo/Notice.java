@@ -73,24 +73,26 @@ public class Notice {
 	}
    
    // 공지사항 전체 조회용 (용환)
-   public Notice(int noticeNo, String noticeTitle, String noticeContent, Date enrollDate, int noticeReadCnt,
+   public Notice(int noticeNo, String noticeTitle, String noticeContent, Date modifyDate, int noticeReadCnt,
 			int noticeField) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
-		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
 		this.noticeReadCnt = noticeReadCnt;
 		this.noticeField = noticeField;
 	}
+   
+   
    //공지사항 전체 조회용2 (용환)
-   public Notice(int noticeNo, String noticeTitle, String noticeContent, Date enrollDate, int noticeReadCnt,
+   public Notice(int noticeNo, String noticeTitle, String noticeContent, Date modifyDate, int noticeReadCnt,
 			int noticeField, int prev, int next) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
-		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
 		this.noticeReadCnt = noticeReadCnt;
 		this.noticeField = noticeField;
 		this.prev = prev;

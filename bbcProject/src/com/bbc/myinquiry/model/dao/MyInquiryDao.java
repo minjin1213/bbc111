@@ -160,33 +160,7 @@ public class MyInquiryDao {
 		return result;
 	}
 	
-	//사용자 총 리스트(용환)
-	public int UserGetListCount(Connection conn) {
-		int listCount = 0;
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("UserGetListCount");
-		
-		try {
-			stmt = conn.createStatement();
-			rset =stmt.executeQuery(sql);
-			
-			if(rset.next()) {
-				listCount = rset.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		return listCount;
-		
-	}
+
 	
 	
 	//사용자 총 리스트(용환)
@@ -220,18 +194,18 @@ public class MyInquiryDao {
 	
 	
 	//사용자  리스트 및 페이징(용환)
-	public ArrayList<MyInquiry> UserselectList(Connection conn, UserPageInfo pi) {
+	public ArrayList<MyInquiry> UserselectList(Connection conn,int memNo1, UserPageInfo pi) {
 		ArrayList<MyInquiry> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("UserSelectList");
 		
-		int memberNo = 1;
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
-			pstmt.setInt(1, memberNo);
+			pstmt.setInt(1, memNo1);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 
@@ -254,18 +228,18 @@ public class MyInquiryDao {
 	}//사용자  리스트 및 페이징(용환) 끝나는부분
 	
 	
-	public ArrayList<UserInfo> userInfoGetList(Connection conn){
+	public ArrayList<UserInfo> userInfoGetList(Connection conn,int memNo1){
 		
 		ArrayList<UserInfo> list = new ArrayList<>();
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("userInfoGetList");
 		try {
-			stmt = conn.createStatement();
-			
-			rset = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo1);
+			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new UserInfo(rset.getInt("member_no"),
@@ -279,7 +253,7 @@ public class MyInquiryDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return list;
 	}
@@ -307,7 +281,7 @@ public class MyInquiryDao {
 		return result;
 	}
 	
-	public MyInquiry UserSelectDetail(Connection conn, int min) {
+	public MyInquiry UserSelectDetail(Connection conn, int min, int memNo1) {
 		MyInquiry m = null;
 		
 		PreparedStatement pstmt = null;
@@ -317,7 +291,7 @@ public class MyInquiryDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, min);
-			
+			pstmt.setInt(2, memNo1);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {

@@ -9,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bbc.myinquiry.model.service.MyInquiryService;
 import com.bbc.myinquiry.model.vo.MyInquiry;
 import com.bbc.myinquiry.model.vo.UserPageInfo;
+import com.bbc.userInfo.model.vo.UserInfo;
 
 /**
  * Servlet implementation class InquiryDetailsServlet
@@ -43,8 +45,14 @@ public class InquiryDetailsServlet extends HttpServlet {
 		int pageLimit;			// 한페이지 하단에 보여질 최대 갯수
 		int boardLimit;			// 한페이지  보여질 최대 갯수
 		
-		int memNo1 = 1;
 		
+	     HttpSession session = request.getSession();
+         
+	     UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
+	      
+	     int memNo1 = loginUser.getMemberNo();
+//	     System.out.println(memNo1);
+	     
 		listCount = new MyInquiryService().UserGetListCount(memNo1);
 						                   
 		currentPage = 1;
@@ -67,7 +75,7 @@ public class InquiryDetailsServlet extends HttpServlet {
 		}
 
 		UserPageInfo pi = new UserPageInfo(listCount,currentPage, startPage, endPage, maxPage, pageLimit, boardLimit);
-		ArrayList<MyInquiry> list = new MyInquiryService().UserselectList(pi);
+		ArrayList<MyInquiry> list = new MyInquiryService().UserselectList(memNo1,pi);
 		
 		request.setAttribute("parentMenu", "마이페이지");
 		request.setAttribute("currentMenu", "나의 문의 내역");

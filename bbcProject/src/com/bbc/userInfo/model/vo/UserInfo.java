@@ -106,6 +106,23 @@ public class UserInfo {
 		this.phone = phone;
 		this.memberZipcode = memberZipcode;
 	}
+	
+	//나의문의내역 정보 불러오기용
+	public UserInfo(int memberNo, String memberName, String phone, String memberEmail) {
+		super();
+		this.memberNo = memberNo;
+		this.memberName = memberName;
+		this.phone = phone;
+		this.memberEmail = memberEmail;
+	}
+
+	public UserInfo(String memberName, String phone, String memberEmail) {
+		super();
+		this.memberName = memberName;
+		this.phone = phone;
+		this.memberEmail = memberEmail;
+	}
+
 	public UserInfo(String memberId) {
 		super();
 		this.memberId = memberId;

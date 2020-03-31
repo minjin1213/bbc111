@@ -167,7 +167,7 @@ hr.garo {
             <tbody>
                 <tr>
                     <th class="center">제목</th>
-                    <td class="pl30"><%=m.getInquiryTitle()%></td>
+                    <td class="pl30">Re:<%=m.getInquiryTitle()%></td>
                 </tr>
                 <tr>
                     <td colspan="4" class="content">

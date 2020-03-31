@@ -150,7 +150,7 @@ int endPage = pi.getEndPage();
                                 <td><%=n.getNoticeTitle()%></td> 
                             </tr>
                             <tr>
-                                <td><%=n.getEnrollDate()%></td> 
+                                <td><%=n.getModifyDate()%></td> 
                             </tr>
                        </tbody>
                     </table>
@@ -174,7 +174,7 @@ int endPage = pi.getEndPage();
                         <tbody> 
                             <tr class="prev"> 
                                 <td>이전</td>
-                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=n.getNext()%>">이전 게시판으로 가기</a></td>
+                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=n.getPrev()%>">이전 게시판으로 가기</a></td>
                                 <td>2020.02.22</td>
                             </tr>
                             <tr class="current"> 
@@ -184,7 +184,7 @@ int endPage = pi.getEndPage();
                             </tr>
                             <tr class="next"> 
                                 <td>다음</td>
-                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=n.getPrev()%>">다음 게시판으로 가기</a></td>
+                                <td class="left"><a href="<%=contextPath%>/CsNodetail.no?nno=<%=n.getNext()%>">다음 게시판으로 가기</a></td>
                                 <td>2019.08.08</td>
                             </tr>
                         </tbody>
