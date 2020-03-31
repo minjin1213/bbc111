@@ -68,15 +68,13 @@ public class ReservationCarSearchServlet extends HttpServlet {
 		// 차량예약시 대여일시/반납일시/대여지점/반납지점.차량유형 선택 후 검색 처리
 		
 		for(int i=0; i<list.size(); i++) {		
-		
 			int car_no = Integer.parseInt(list.get(i).get("CAR_NO"));
 			int result = new ReservationService().selectCarListRv(car_no, rent_date, return_date);
-
 			if(result != 0) {
 				// 이미 예약된 차량인경우 차량정보 삭제
-				list.remove(i);
+				//list.remove(i);
+				list.get(i).clear();
 			}
-
 		}	
 							
 		response.setContentType("application/json; charset=utf-8");

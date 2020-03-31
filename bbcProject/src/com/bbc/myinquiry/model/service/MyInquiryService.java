@@ -88,10 +88,10 @@ public class MyInquiryService {
 		
 	}
 	//사용자 목록 리스트(용환)
-	public ArrayList<MyInquiry> UserselectList(UserPageInfo pi) {
+	public ArrayList<MyInquiry> UserselectList(int memNo1,UserPageInfo pi) {
 		Connection conn = getConnection();
 		
-		ArrayList<MyInquiry> list = new MyInquiryDao().UserselectList(conn, pi);
+		ArrayList<MyInquiry> list = new MyInquiryDao().UserselectList(conn,memNo1, pi);
 		
 		close(conn);
 		
@@ -99,10 +99,10 @@ public class MyInquiryService {
 	}
 	
 	//상세조회에서 유저정보 가져오는거(용환)
-	public ArrayList<UserInfo> userInfoGetList(){
+	public ArrayList<UserInfo> userInfoGetList(int memNo1){
 		Connection conn = getConnection();
 		
-		ArrayList<UserInfo> list = new MyInquiryDao().userInfoGetList(conn);
+		ArrayList<UserInfo> list = new MyInquiryDao().userInfoGetList(conn,memNo1);
 		
 		close(conn);
 		
@@ -126,10 +126,10 @@ public class MyInquiryService {
 	}
 	
 	//사용자(용환)
-	public MyInquiry UserSelectDetail(int min) {
+	public MyInquiry UserSelectDetail(int min,int memNo1) {
 		Connection conn = getConnection();
 		
-		MyInquiry m = new MyInquiryDao().UserSelectDetail(conn, min);
+		MyInquiry m = new MyInquiryDao().UserSelectDetail(conn, min, memNo1);
 		
 		
 		close(conn);

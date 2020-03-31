@@ -247,7 +247,8 @@
                 </div>
   
 		  	<label class="option-right-hr2">개인정보 수집 및 이용 약관</label>
-            <span><input type="checkbox" style="margin-left:5px;">개인정보 수집 및 이용 약관 조항에 동의하기(필수)</span>
+            <span><input type="checkbox" style="margin-left:5px;" value="체크해주세여" required>개인정보 수집 및 이용 약관 조항에 동의하기(필수)</span>
+            
     				
     			
     

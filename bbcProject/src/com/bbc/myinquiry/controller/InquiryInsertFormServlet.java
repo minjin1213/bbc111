@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bbc.myinquiry.model.service.MyInquiryService;
 import com.bbc.userInfo.model.vo.UserInfo;
@@ -33,14 +34,20 @@ public class InquiryInsertFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	     HttpSession session = request.getSession();
+         
+	     UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
+	      
+	     int memNo1 = loginUser.getMemberNo();
+		
 //		String name = request.getParameter("userName");
 //		UserInfo us = new UserInfo();
 //		us.setMemberName(name);	
 //		request.setAttribute("us", us);
-		ArrayList<UserInfo> list = new MyInquiryService().userInfoGetList();
+		ArrayList<UserInfo> list = new MyInquiryService().userInfoGetList(memNo1);
 		
 		request.setAttribute("parentMenu", "마이페이지 / 나의 문의 내역 ");
-		request.setAttribute("currentMenu", "상세조회");
+		request.setAttribute("currentMenu", "작성하기");
 		
 		
 		request.setAttribute("list", list);

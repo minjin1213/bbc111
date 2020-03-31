@@ -30,7 +30,7 @@
 		margin-right:auto;
 	}		
 	.main-title{ /* 한거 */
-		margin-top: 35px; 
+		margin-top: 17px; 
 		font-size: 20px;
 		font-weight: 900;
 	}	
@@ -59,6 +59,7 @@
        text-align: center;
        border: 1px solid lightgray;
        border-left: none ;
+       font-size: 14px;
        border-right: none;
     }
 
@@ -129,7 +130,7 @@
   margin: 20px 0;
   border-radius: 4px;
   margin-left: 260px;
-  margin-top: 15px;
+  margin-top: 60px;
 }
 .userpagination a {
     color: black;
@@ -137,7 +138,6 @@
     padding: 8px 12px;
     text-decoration: none;
     transition: background-color .3s;
-    border: 1px solid #e2e2e2;
     margin: 0 8px 2px 2px;
 }
 .userpagination > li {
@@ -150,10 +150,10 @@
   padding: 6px 12px;
   margin-left: -1px;
   line-height: 1.42857143;
-  color: #337ab7;
+
   text-decoration: none;
   background-color: #fff;
-  border: 1px solid #ddd;
+
 }
 .userpagination > li:first-child > a,
 .userpagination > li:first-child > span {
@@ -279,7 +279,7 @@
                      			<td><%=n.getNoticeNo()%></td>
                      			<td style="text-align: left;"> <%= n.getNoticeTitle() %> </td>
                      			<td> <%= n.getMemberName() %> </td>
-                     			<td> <%= n.getEnrollDate() %> </td>
+                     			<td> <%= n.getModifyDate() %> </td>
                      			<td> <%= n.getNoticeReadCnt() %> </td>
                      		</tr>
                      	<% } %>
@@ -289,20 +289,6 @@
 
             </table>
 			
-            <div id="input-div">
-                <form id="input-form">
-    
-                <select id="list" name="list">
-                <option value="notice-whole" selected>전체 </option>
-                <option value="notice-title">제목 </option>
-                <option value="notice-content">내용 </option>
-                </select>
-    
-                <input type="text" id="notice-keyword">
-    
-                <button id="input-bt">검색</button>
-                </form>
-            </div>
 
             <div class="userpagination">
                 <a href="<%=contextPath%>/CsList.no">«</a>
