@@ -1,6 +1,7 @@
 package com.bbc.cartype.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -72,7 +73,9 @@ public class InsurancePriceServlet2 extends HttpServlet {
 		int result = new CarTypeService().adminInsuranceUpdate2(c1, c2, list2, list2);
 		
 		if(result > 0) {
-			response.sendRedirect("price.t.ct");
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('보험유형2 금액 업데이트가 완료되었습니다.'); location.href='price.t.ct';</script>");
 		}else {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}

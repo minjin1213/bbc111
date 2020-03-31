@@ -2,9 +2,16 @@
     pageEncoding="UTF-8"%>
 
  <%@page import="com.bbc.reservation.model.vo.Reservation" %>
- <%@ page import="java.util.ArrayList" %>
+ <%@ page import="java.util.ArrayList, com.bbc.common.page.vo.PageInfo" %>
  <%
  	ArrayList<Reservation> list = (ArrayList<Reservation>)request.getAttribute("reservationlist");
+ 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
  %>
     
     
@@ -343,17 +350,26 @@
           
           
           
-             <div class="pagination" style="margin-top:60px;">
-                <a href="#">«</a>
-                <a href="#">&lt;</a>
-                <li><a href="#home">1</a></li>
-                <li><a href="#home">2</a></li>
-                <li><a href="#home">3</a></li>
-                <li><a href="#home">4</a></li>
-                <li><a href="#home">5</a></li>
-                <a href="#">&gt;</a>
-                <a href="#">»</a>
-            </div>
+            <div class="pagination">
+        	<!-- 맨 처음으로 이동(<<) -->
+            <a href="<%=contextPath%>/uList.t.no.mi"> &lt;&lt; </a>
+            <!-- 이전 페이지(<) -->
+            <a href="<%=contextPath%>/uList.t.no?currentPage=<%=currentPage-1%>"> &lt; </a>
+           	
+           	<!-- 페이지 목록 -->       
+            <% for(int p=startPage; p<=endPage; p++){ %>
+            	<% if(currentPage == p){ %>
+            		<li><a><%=p%></a></li>
+            	<% }else { %>
+            		<li><a href="<%=contextPath%>/uList.t.no?currentPage=<%=p%>"><%=p%></a>
+            	<% } %>
+            <% } %>
+            
+            <!-- 다음 페이지(>) -->
+            <a href="<%=contextPath%>/uList.t.no?currentPage=<%=currentPage+1%>"> &gt; </a>
+            <!-- 맨 끝으로 이동(>>) -->
+            <a href="<%=contextPath%>/uList.t.no?currentPage=<%=maxPage%>"> &gt;&gt; </a>
+        </div>
             
             
     </div>
