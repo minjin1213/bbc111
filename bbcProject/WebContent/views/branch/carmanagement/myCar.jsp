@@ -31,9 +31,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-	href="<%= request.getContextPath() %>/resources/css/sb-admin-2.css"
-	rel="stylesheet">
+<link href="<%= request.getContextPath() %>/resources/css/sb-admin-2.css" rel="stylesheet">
 </head>
 <body id="page-top">
 
@@ -71,7 +69,8 @@
 						<hr class="tab-divider">
 
 						<div>
-							<h5 id="info-client">보유 차량
+							<h5 id="info-client">
+								보유 차량
 								<div class="bt-div">
 									<a href="#" data-toggle="modal" data-target="#deletecarModal">
 										<button class="bt-style" id="car-delete-bt">차량 삭제</button>
@@ -93,29 +92,28 @@
 									<div class="car-card">
 										<div class="card-image">
 											<table>
-												
+
 												<% for(int j=0; j<trSize; j++) { %>
-												<tr>
-													<% int temp=0; %>
-													<% for(int i=0; i<list.size(); i++) { %>
-														
+													<tr>
+														<% int temp=0; %>
+														<% for(int i=0; i<list.size(); i++) { %>
+	
 														<td>
 															<input type="checkbox" name="chk-car" value="<%= list.get(index).getCarNo() %>" style="margin-right: 230px;">
-															<% if(list.get(index).getCarLunchYear().equals("2020")) { %> 
+															<% if(list.get(index).getCarLunchYear().equals("2020")) { %>
 																<span class="card-notify-year">New</span> 
-															<% } %> 
-															
-															<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= list.get(index).getCarModifyName() %>" style="width:250px; height:150px">
+															<% } %>
+															<img src="<%= request.getContextPath() %>/resources/carinfo_upfile/<%= list.get(index).getCarModifyName() %>" style="width: 250px; height: 150px">
 															<div class="card-body text-center">
 																<div class="ad-title m-auto">
 																	<a href="#" data-toggle="modal" data-target="#carModal"
-																			data-cartypename="<%= list.get(index).getCarTypeName()%>"
-																			data-cartype="<%= list.get(index).getCarType() %>"
-																			data-carnum="<%= list.get(index).getCarNum() %>"
-																			data-carcolor="<%= list.get(index).getCarColor() %>"
-																			data-carfuel="<%= list.get(index).getCarFuel() %>"
-																			data-caryear="<%= list.get(index).getCarLunchYear() %>"
-																			data-caroption="<%= list.get(index).getCarOption() %>">
+																		data-cartypename="<%= list.get(index).getCarTypeName()%>"
+																		data-cartype="<%= list.get(index).getCarType() %>"
+																		data-carnum="<%= list.get(index).getCarNum() %>"
+																		data-carcolor="<%= list.get(index).getCarColor() %>"
+																		data-carfuel="<%= list.get(index).getCarFuel() %>"
+																		data-caryear="<%= list.get(index).getCarLunchYear() %>"
+																		data-caroption="<%= list.get(index).getCarOption() %>">
 																		<h5><%= list.get(index).getCarTypeName() %></h5>
 																	</a>
 																</div>
@@ -126,20 +124,20 @@
 																<span>- 연식 : <%= list.get(index).getCarLunchYear() %></span>
 															</div>
 														</td>
-														<% 
-															temp++;
+														
+														<%  temp++;
 															index++;
 															if(temp == 3) break; 
 														%>
-														
-													<% } %>
-													
-												</tr>
-												
+	
+														<% } %>
+	
+													</tr>
+
 												<% } %>
-												
+
 											</table>
-											
+
 										</div>
 
 									</div>
@@ -152,92 +150,97 @@
 								<div class="input-group">
 
 									<div class="input-group-btn">
-										<button type="button"
-											class="btn btn-search btn-default dropdown-toggle"
-											data-toggle="dropdown">
-											<span class="glyphicon glyphicon-search"></span> <span
-												class="label-icon">전체</span> <span class="caret"></span>
+										<button type="button" class="btn btn-search btn-default dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-search"></span>
+											<span class="label-icon">전체</span>
+											<span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu text-center" role="menu">
-											<li><a href="#"> <span
-													class="glyphicon glyphicon-user"></span> <span
-													class="label-icon">차종</span>
-											</a></li>
-											<li><a href="#"> <span
-													class="glyphicon glyphicon-user"></span> <span
-													class="label-icon">색상</span>
-											</a></li>
-											<li><a href="#"> <span
-													class="glyphicon glyphicon-book"></span> <span
-													class="label-icon">연료</span>
-											</a></li>
-											<li><a href="#"> <span
-													class="glyphicon glyphicon-book"></span> <span
-													class="label-icon">연식</span>
-											</a></li>
+											<li>
+												<a href="#">
+													<span class="glyphicon glyphicon-user"></span>
+													<span class="label-icon">차종</span>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<span class="glyphicon glyphicon-user"></span>
+													<span class="label-icon">색상</span>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<span class="glyphicon glyphicon-book"></span>
+													<span class="label-icon">연료</span>
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<span class="glyphicon glyphicon-book"></span>
+													<span class="label-icon">연식</span>
+												</a>
+											</li>
 										</ul>
 									</div>
 
 									<input type="text" class="form-control">
 
 									<div class="input-group-btn">
-										<button type="button" class="btn btn-search btn-default"
-											id="searching">검색</button>
+										<button type="button" class="btn btn-search btn-default" id="searching">검색</button>
 									</div>
 								</div>
 							</form>
 
 							<!-- 페이징 바 영역 -->
-						<div class="pagination">
-						
-							<!-- (<<) -->
-							<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/carList.b.ci';"> &lt;&lt; </button>
-							
-							<!-- (<) -->
-							<% if(currentPage == 1) { %>
-								<button class="page-bt" disabled> &lt; </button>
-							<% } else { %>
-								<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/carList.b.ci?currentPage=<%= currentPage - 1 %>';"> &lt; </button>
-							<% } %>
-							
-							<% for(int p=startPage; p<=endPage; p++) { %>
-								<% if(currentPage == p) { %>
-									<button class="page-bt" style="background:orange; color:white;" disabled><%= p %></button>
+							<div class="pagination">
+
+								<!-- (<<) -->
+								<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/carList.b.ci';"> &lt;&lt;</button>
+
+								<!-- (<) -->
+								<% if(currentPage == 1) { %>
+									<button class="page-bt" disabled>&lt;</button>
 								<% } else { %>
-									<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/carList.b.ci?currentPage=<%= p %>';"><%= p %></button>
+									<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/carList.b.ci?currentPage=<%= currentPage - 1 %>';"> &lt;</button>
 								<% } %>
-							<% } %>
-							
-							<!-- (>) -->
-							<% if(currentPage == maxPage) { %>
-								<button class="page-bt" disabled> &gt; </button>
-							<% } else { %>
-								<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/carList.b.ci?currentPage=<%= currentPage + 1 %>';"> &gt; </button>
-							<% } %>
-							
-							<!-- (>>) -->
-							<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/carList.b.ci?currentPage=<%= maxPage %>';"> &gt;&gt; </button>
+
+								<% for(int p=startPage; p<=endPage; p++) { %>
+									<% if(currentPage == p) { %>
+										<button class="page-bt" style="background: orange; color: white;" disabled><%= p %></button>
+									<% } else { %>
+										<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/carList.b.ci?currentPage=<%= p %>';"><%= p %></button>
+									<% } %>
+								<% } %>
+
+								<!-- (>) -->
+								<% if(currentPage == maxPage) { %>
+									<button class="page-bt" disabled>&gt;</button>
+								<% } else { %>
+									<button class="page-bt" onclick="location.href='<%= request.getContextPath() %>/carList.b.ci?currentPage=<%= currentPage + 1 %>';"> &gt;</button>
+								<% } %>
+
+								<!-- (>>) -->
+								<button class="page-bt" onclick="location.href='<%= request.getContextPath()%>/carList.b.ci?currentPage=<%= maxPage %>';"> &gt;&gt;</button>
+							</div>
+
+							<!-- 끝 -->
+
+
 						</div>
 
-						<!-- 끝 -->
-
-
 					</div>
+					<!-- End of Main Content -->
 
 				</div>
-				<!-- End of Main Content -->
+				<!-- End of Content Wrapper -->
 
 			</div>
-			<!-- End of Content Wrapper -->
-
+			<!-- End of Page Wrapper -->
 		</div>
-		<!-- End of Page Wrapper -->
 	</div>
-	</div>
-	
+
 	<!-- delete car Modal -->
-	<div class="modal fade" id="deletecarModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="deletecarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -254,13 +257,15 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- car Modal -->
 	<div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document" id="car-modal-dialog">
 			<div class="modal-content" id="car-modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"><label class="cartypename"></label></h5>
+					<h5 class="modal-title" id="exampleModalLabel">
+						<label class="cartypename"></label>
+					</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>

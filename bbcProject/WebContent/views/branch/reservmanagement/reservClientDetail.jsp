@@ -113,7 +113,7 @@
 										<% if(p.getRefundStatus() != "1") { %>
 											<td>환불 완료</td>
 											<td><%= p.getRefundDate() %></td>
-										<% } else { %>
+										<% } else if(p.getRefundStatus() == "1") { %>
 											<td>-</td>
 											<td>-</td>
 										<% } %>
